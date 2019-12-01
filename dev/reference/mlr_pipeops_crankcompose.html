@@ -44,8 +44,7 @@
 
 
 <meta property="og:title" content="PipeOpCrankCompositor — mlr_pipeops_crankcompose" />
-<meta property="og:description" content="Return a continuous ranking from a survival learner PredictionSurv, which
-predicts distr." />
+<meta property="og:description" content="Return a continuous ranking from a distr predicted in a PredictionSurv." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -143,8 +142,7 @@ predicts distr." />
     </div>
 
     <div class="ref-description">
-    <p>Return a continuous ranking from a survival learner <code><a href='PredictionSurv.html'>PredictionSurv</a></code>, which
-predicts <code>distr</code>.</p>
+    <p>Return a continuous ranking from a <code>distr</code> predicted in a <a href='PredictionSurv.html'>PredictionSurv</a>.</p>
     </div>
 
 
@@ -191,10 +189,6 @@ One of <code>median</code> or <code>mean</code> corresponding to the respective 
 survival distribution. Note that for models with a proportional hazards form, the ranking
 implied by <code>mean</code> and <code>median</code> will be identical (but not the value of <code>crank</code> itself).
 Default is <code>mean</code>.</p></li>
-<li><p><code>overwrite</code> :: <code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code> <br />
-If <code>FALSE</code> (default) then if the "input" already has a <code>crank</code>, the compositor does nothing
-and returns the given <a href='PredictionSurv.html'>PredictionSurv</a>. If <code>TRUE</code> then the <code>crank</code> is overwritten with the <code>crank</code>
-composed from <code>distr</code>.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="internals"><a class="anchor" href="#internals"></a>Internals</h2>
@@ -228,7 +222,7 @@ using <a href='https://alan-turing-institute.github.io/distr6/reference/median.D
 
 <span class='co'># Method 1 - Train and predict separately then compose</span>
 <span class='no'>learn</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span>(<span class='st'>"surv.coxph"</span>)$<span class='fu'>train</span>(<span class='no'>task</span>)$<span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span>(<span class='no'>task</span>)
-<span class='no'>poc</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3pipelines.mlr-org.com//reference/po.html'>po</a></span>(<span class='st'>"crankcompose"</span>, <span class='kw'>param_vals</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"mean"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))
+<span class='no'>poc</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3pipelines.mlr-org.com//reference/po.html'>po</a></span>(<span class='st'>"crankcompose"</span>, <span class='kw'>param_vals</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"mean"</span>))
 <span class='no'>poc</span>$<span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>learn</span>))</div><div class='output co'>#&gt; $output
 #&gt; &lt;PredictionSurv&gt; for 300 observations:
 #&gt;     row_id time status     crank                distr         lp
