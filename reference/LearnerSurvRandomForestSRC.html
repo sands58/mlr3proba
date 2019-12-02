@@ -49,7 +49,7 @@ distr is predicted using randomForestSRC::predict.rfsrc()
 crank is predicted as the expectation of the survival distribution, distr.
 
 
-randomForestSRC::predict.rfsrc() returns both cumulative hazard funcion (chf) and survival function (surv)
+randomForestSRC::predict.rfsrc() returns both cumulative hazard function (chf) and survival function (surv)
 but uses different estimators to derive these. chf uses a bootstrapped Nelson-Aalen estimator,
 (Ishwaran, 2008) whereas surv uses a bootstrapped Kaplan-Meier estimator https://kogalur.github.io/randomForestSRC/theory.html.
 The choice of which estimator to use is given by the extra estimator hyper-parameter,
@@ -168,7 +168,7 @@ default is nelson." />
 <li><p><code>crank</code> is predicted as the expectation of the survival distribution, <code>distr</code>.</p></li>
 </ul>
 
-<p><code><a href='https://rdrr.io/pkg/randomForestSRC/man/predict.rfsrc.html'>randomForestSRC::predict.rfsrc()</a></code> returns both cumulative hazard funcion (chf) and survival function (surv)
+<p><code><a href='https://rdrr.io/pkg/randomForestSRC/man/predict.rfsrc.html'>randomForestSRC::predict.rfsrc()</a></code> returns both cumulative hazard function (chf) and survival function (surv)
 but uses different estimators to derive these. <code>chf</code> uses a bootstrapped Nelson-Aalen estimator,
 (Ishwaran, 2008) whereas <code>surv</code> uses a bootstrapped Kaplan-Meier estimator <a href='https://kogalur.github.io/randomForestSRC/theory.html'>https://kogalur.github.io/randomForestSRC/theory.html</a>.
 The choice of which estimator to use is given by the extra <code>estimator</code> hyper-parameter,
@@ -217,8 +217,8 @@ doi: <a href='https://doi.org/10.1023/A:1010933404324'>10.1023/A:1010933404324</
 <code><a href='LearnerSurvCVGlmnet.html'>LearnerSurvCVGlmnet</a></code>,
 <code><a href='LearnerSurvCoxPH.html'>LearnerSurvCoxPH</a></code>,
 <code><a href='LearnerSurvFlexible.html'>LearnerSurvFlexible</a></code>,
+<code><a href='LearnerSurvGBM.html'>LearnerSurvGBM</a></code>,
 <code><a href='LearnerSurvGamboost.html'>LearnerSurvGamboost</a></code>,
-<code><a href='LearnerSurvGbm.html'>LearnerSurvGbm</a></code>,
 <code><a href='LearnerSurvGlmboost.html'>LearnerSurvGlmboost</a></code>,
 <code><a href='LearnerSurvGlmnet.html'>LearnerSurvGlmnet</a></code>,
 <code><a href='LearnerSurvKaplan.html'>LearnerSurvKaplan</a></code>,

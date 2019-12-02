@@ -131,73 +131,171 @@
 <h2 class="hasAnchor">
 <a href="#survival-tasks" class="anchor"></a>Survival Tasks</h2>
 <p>Unlike <code>TaskClassif</code> and <code>TaskRegr</code> which have a single ‘target’ argument, <code>TaskSurv</code> mimics the <code><a href="https://rdrr.io/pkg/survival/man/Surv.html">survival::Surv</a></code> object and has three-four target arguments (dependent on censoring type)</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># type = "right" is default</span></a>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(mlr3proba); <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(mlr3); <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(survival)</a>
 <a class="sourceLine" id="cb1-2" title="2"></a>
-<a class="sourceLine" id="cb1-3" title="3">TaskSurv<span class="op">$</span><span class="kw">new</span>(<span class="dt">id =</span> <span class="st">"right_censored"</span>, <span class="dt">backend =</span> survival<span class="op">::</span>rats,</a>
-<a class="sourceLine" id="cb1-4" title="4">             <span class="dt">time =</span> <span class="st">"time"</span>, <span class="dt">event =</span> <span class="st">"status"</span>, <span class="dt">type =</span> <span class="st">"right"</span>)</a>
-<a class="sourceLine" id="cb1-5" title="5"><span class="co">#&gt; &lt;TaskSurv:right_censored&gt; (300 x 5)</span></a>
-<a class="sourceLine" id="cb1-6" title="6"><span class="co">#&gt; * Target: time, status</span></a>
-<a class="sourceLine" id="cb1-7" title="7"><span class="co">#&gt; * Properties: -</span></a>
-<a class="sourceLine" id="cb1-8" title="8"><span class="co">#&gt; * Features (3):</span></a>
-<a class="sourceLine" id="cb1-9" title="9"><span class="co">#&gt;   - int (1): litter</span></a>
-<a class="sourceLine" id="cb1-10" title="10"><span class="co">#&gt;   - dbl (1): rx</span></a>
-<a class="sourceLine" id="cb1-11" title="11"><span class="co">#&gt;   - chr (1): sex</span></a>
-<a class="sourceLine" id="cb1-12" title="12"></a>
-<a class="sourceLine" id="cb1-13" title="13">task =<span class="st"> </span>TaskSurv<span class="op">$</span><span class="kw">new</span>(<span class="dt">id =</span> <span class="st">"interval_censored"</span>, <span class="dt">backend =</span> survival<span class="op">::</span>bladder2[,<span class="op">-</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">7</span>)],</a>
-<a class="sourceLine" id="cb1-14" title="14">                    <span class="dt">time =</span> <span class="st">"start"</span>, <span class="dt">time2 =</span> <span class="st">"stop"</span>, <span class="dt">type =</span> <span class="st">"interval2"</span>)</a>
-<a class="sourceLine" id="cb1-15" title="15">task</a>
-<a class="sourceLine" id="cb1-16" title="16"><span class="co">#&gt; &lt;TaskSurv:interval_censored&gt; (178 x 6)</span></a>
-<a class="sourceLine" id="cb1-17" title="17"><span class="co">#&gt; * Target: start, stop</span></a>
-<a class="sourceLine" id="cb1-18" title="18"><span class="co">#&gt; * Properties: -</span></a>
-<a class="sourceLine" id="cb1-19" title="19"><span class="co">#&gt; * Features (4):</span></a>
-<a class="sourceLine" id="cb1-20" title="20"><span class="co">#&gt;   - dbl (2): enum, rx</span></a>
-<a class="sourceLine" id="cb1-21" title="21"><span class="co">#&gt;   - int (2): number, size</span></a>
-<a class="sourceLine" id="cb1-22" title="22">task<span class="op">$</span><span class="kw">truth</span>()[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</a>
-<a class="sourceLine" id="cb1-23" title="23"><span class="co">#&gt;  [1] [0,  1] [0,  4] [0,  7] [0, 10] [0,  6] [6, 10] [0, 14] [0, 18] [0,  5]</span></a>
-<a class="sourceLine" id="cb1-24" title="24"><span class="co">#&gt; [10] [5, 18]</span></a></code></pre></div>
+<a class="sourceLine" id="cb1-3" title="3"><span class="co"># type = "right" is default</span></a>
+<a class="sourceLine" id="cb1-4" title="4"></a>
+<a class="sourceLine" id="cb1-5" title="5">TaskSurv<span class="op">$</span><span class="kw">new</span>(<span class="dt">id =</span> <span class="st">"right_censored"</span>, <span class="dt">backend =</span> survival<span class="op">::</span>rats,</a>
+<a class="sourceLine" id="cb1-6" title="6">             <span class="dt">time =</span> <span class="st">"time"</span>, <span class="dt">event =</span> <span class="st">"status"</span>, <span class="dt">type =</span> <span class="st">"right"</span>)</a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="co">#&gt; &lt;TaskSurv:right_censored&gt; (300 x 5)</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="co">#&gt; * Target: time, status</span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="co">#&gt; * Properties: -</span></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="co">#&gt; * Features (3):</span></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="co">#&gt;   - int (1): litter</span></a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="co">#&gt;   - dbl (1): rx</span></a>
+<a class="sourceLine" id="cb1-13" title="13"><span class="co">#&gt;   - chr (1): sex</span></a>
+<a class="sourceLine" id="cb1-14" title="14"></a>
+<a class="sourceLine" id="cb1-15" title="15">task =<span class="st"> </span>TaskSurv<span class="op">$</span><span class="kw">new</span>(<span class="dt">id =</span> <span class="st">"interval_censored"</span>, <span class="dt">backend =</span> survival<span class="op">::</span>bladder2[,<span class="op">-</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">7</span>)],</a>
+<a class="sourceLine" id="cb1-16" title="16">                    <span class="dt">time =</span> <span class="st">"start"</span>, <span class="dt">time2 =</span> <span class="st">"stop"</span>, <span class="dt">type =</span> <span class="st">"interval2"</span>)</a>
+<a class="sourceLine" id="cb1-17" title="17">task</a>
+<a class="sourceLine" id="cb1-18" title="18"><span class="co">#&gt; &lt;TaskSurv:interval_censored&gt; (178 x 6)</span></a>
+<a class="sourceLine" id="cb1-19" title="19"><span class="co">#&gt; * Target: start, stop</span></a>
+<a class="sourceLine" id="cb1-20" title="20"><span class="co">#&gt; * Properties: -</span></a>
+<a class="sourceLine" id="cb1-21" title="21"><span class="co">#&gt; * Features (4):</span></a>
+<a class="sourceLine" id="cb1-22" title="22"><span class="co">#&gt;   - dbl (2): enum, rx</span></a>
+<a class="sourceLine" id="cb1-23" title="23"><span class="co">#&gt;   - int (2): number, size</span></a>
+<a class="sourceLine" id="cb1-24" title="24">task<span class="op">$</span><span class="kw">truth</span>()[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</a>
+<a class="sourceLine" id="cb1-25" title="25"><span class="co">#&gt;  [1] [0,  1] [0,  4] [0,  7] [0, 10] [0,  6] [6, 10] [0, 14] [0, 18] [0,  5]</span></a>
+<a class="sourceLine" id="cb1-26" title="26"><span class="co">#&gt; [10] [5, 18]</span></a></code></pre></div>
+</div>
+<div id="train-and-predict" class="section level2">
+<h2 class="hasAnchor">
+<a href="#train-and-predict" class="anchor"></a>Train and Predict</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="co"># create task and learner</span></a>
+<a class="sourceLine" id="cb2-3" title="3"></a>
+<a class="sourceLine" id="cb2-4" title="4">veteran =<span class="st"> </span>mlr3misc<span class="op">::</span><span class="kw"><a href="https://mlr3misc.mlr-org.com/reference/load_dataset.html">load_dataset</a></span>(<span class="st">"veteran"</span>, <span class="dt">package =</span> <span class="st">"survival"</span>)</a>
+<a class="sourceLine" id="cb2-5" title="5">task_veteran =<span class="st"> </span>TaskSurv<span class="op">$</span><span class="kw">new</span>(<span class="dt">id =</span> <span class="st">"veteran"</span>, <span class="dt">backend =</span> veteran, <span class="dt">time =</span> <span class="st">"time"</span>, <span class="dt">event =</span> <span class="st">"status"</span>)</a>
+<a class="sourceLine" id="cb2-6" title="6">learner =<span class="st"> </span><span class="kw"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">lrn</a></span>(<span class="st">"surv.coxph"</span>)</a>
+<a class="sourceLine" id="cb2-7" title="7"></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="co"># train/test split </span></a>
+<a class="sourceLine" id="cb2-9" title="9"></a>
+<a class="sourceLine" id="cb2-10" title="10">train_set =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(task_veteran<span class="op">$</span>nrow, <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span>task_veteran<span class="op">$</span>nrow)</a>
+<a class="sourceLine" id="cb2-11" title="11">test_set =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/sets.html">setdiff</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(task_veteran<span class="op">$</span>nrow), train_set)</a>
+<a class="sourceLine" id="cb2-12" title="12"></a>
+<a class="sourceLine" id="cb2-13" title="13"><span class="co"># fit Cox PH and inspect model</span></a>
+<a class="sourceLine" id="cb2-14" title="14"></a>
+<a class="sourceLine" id="cb2-15" title="15">learner<span class="op">$</span><span class="kw">train</span>(task_veteran, <span class="dt">row_ids =</span> train_set)</a>
+<a class="sourceLine" id="cb2-16" title="16">learner<span class="op">$</span>model</a>
+<a class="sourceLine" id="cb2-17" title="17"><span class="co">#&gt; Call:</span></a>
+<a class="sourceLine" id="cb2-18" title="18"><span class="co">#&gt; survival::coxph(formula = task$formula(), data = task$data(), </span></a>
+<a class="sourceLine" id="cb2-19" title="19"><span class="co">#&gt;     x = TRUE)</span></a>
+<a class="sourceLine" id="cb2-20" title="20"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb2-21" title="21"><span class="co">#&gt;                        coef exp(coef)  se(coef)      z        p</span></a>
+<a class="sourceLine" id="cb2-22" title="22"><span class="co">#&gt; age               -0.007685  0.992345  0.011751 -0.654 0.513130</span></a>
+<a class="sourceLine" id="cb2-23" title="23"><span class="co">#&gt; celltypesmallcell  0.976473  2.655076  0.317421  3.076 0.002096</span></a>
+<a class="sourceLine" id="cb2-24" title="24"><span class="co">#&gt; celltypeadeno      1.173923  3.234657  0.354138  3.315 0.000917</span></a>
+<a class="sourceLine" id="cb2-25" title="25"><span class="co">#&gt; celltypelarge      0.460501  1.584868  0.334837  1.375 0.169039</span></a>
+<a class="sourceLine" id="cb2-26" title="26"><span class="co">#&gt; diagtime           0.001186  1.001187  0.009848  0.120 0.904155</span></a>
+<a class="sourceLine" id="cb2-27" title="27"><span class="co">#&gt; karno             -0.029826  0.970614  0.006497 -4.590 4.42e-06</span></a>
+<a class="sourceLine" id="cb2-28" title="28"><span class="co">#&gt; prior              0.010400  1.010454  0.026531  0.392 0.695071</span></a>
+<a class="sourceLine" id="cb2-29" title="29"><span class="co">#&gt; trt                0.225305  1.252705  0.247522  0.910 0.362695</span></a>
+<a class="sourceLine" id="cb2-30" title="30"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb2-31" title="31"><span class="co">#&gt; Likelihood ratio test=47.36  on 8 df, p=1.307e-07</span></a>
+<a class="sourceLine" id="cb2-32" title="32"><span class="co">#&gt; n= 109, number of events= 100</span></a>
+<a class="sourceLine" id="cb2-33" title="33"></a>
+<a class="sourceLine" id="cb2-34" title="34"><span class="co"># make predictions for new data</span></a>
+<a class="sourceLine" id="cb2-35" title="35"></a>
+<a class="sourceLine" id="cb2-36" title="36">prediction =<span class="st"> </span>learner<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(task_veteran, <span class="dt">row_ids =</span> test_set)</a>
+<a class="sourceLine" id="cb2-37" title="37">prediction</a>
+<a class="sourceLine" id="cb2-38" title="38"><span class="co">#&gt; &lt;PredictionSurv&gt; for 28 observations:</span></a>
+<a class="sourceLine" id="cb2-39" title="39"><span class="co">#&gt;     row_id time status      crank                distr         lp</span></a>
+<a class="sourceLine" id="cb2-40" title="40"><span class="co">#&gt;          3  228   TRUE -0.6936862 &lt;VectorDistribution&gt; -0.6936862</span></a>
+<a class="sourceLine" id="cb2-41" title="41"><span class="co">#&gt;          4  126   TRUE -0.7746938 &lt;VectorDistribution&gt; -0.7746938</span></a>
+<a class="sourceLine" id="cb2-42" title="42"><span class="co">#&gt;          8  110   TRUE -1.4899216 &lt;VectorDistribution&gt; -1.4899216</span></a>
+<a class="sourceLine" id="cb2-43" title="43"><span class="co">#&gt; ---                                                              </span></a>
+<a class="sourceLine" id="cb2-44" title="44"><span class="co">#&gt;        119    7   TRUE  1.1495552 &lt;VectorDistribution&gt;  1.1495552</span></a>
+<a class="sourceLine" id="cb2-45" title="45"><span class="co">#&gt;        128   19   TRUE  0.9844033 &lt;VectorDistribution&gt;  0.9844033</span></a>
+<a class="sourceLine" id="cb2-46" title="46"><span class="co">#&gt;        137   49   TRUE  0.8945899 &lt;VectorDistribution&gt;  0.8945899</span></a></code></pre></div>
+</div>
+<div id="evaluate---crank-lp-and-distr" class="section level2">
+<h2 class="hasAnchor">
+<a href="#evaluate---crank-lp-and-distr" class="anchor"></a>Evaluate - crank, lp, and distr</h2>
+<p>Every <code>PredictionSurv</code> object can predict one or more of:</p>
+<ul>
+<li>
+<code>lp</code> - Linear predictor calculated as the fitted coefficients multiplied by the test data.</li>
+<li>
+<code>distr</code> - Predicted survival distribution, either discrete or continuous. Implemented in <strong><a href="https://cran.r-project.org/web/packages/distr6/">distr6</a></strong>.</li>
+<li>
+<code>crank</code> - Continuous ranking. This is either the same as <code>lp</code> or the expectation of <code>distr</code>.</li>
+</ul>
+<p><code>lp</code> and <code>crank</code> can be used with measures of discrimination such as the concordance index. Whilst <code>lp</code> is a specific mathematical prediction, <code>crank</code> is any continuous ranking that identifies who is more or less likely to experience the event. So far, the only implemented learner that only returns a continuous ranking is <code>surv.svm</code>. If a <code>PredictionSurv</code> returns an <code>lp</code> then the <code>crank</code> is identical to this. Otherwise <code>crank</code> is calculated as the expectation of the predicted survival distribution. Note that for linear proportional hazards models, the ranking (but not necessarily the <code>crank</code> score itself) given by <code>lp</code> and the expected <code>distr</code>, is identical.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># In the previous example, Cox model predicts `lp` so `crank` is identical</span></a>
+<a class="sourceLine" id="cb3-2" title="2"></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="kw"><a href="https://rdrr.io/r/base/all.html">all</a></span>(prediction<span class="op">$</span>lp <span class="op">==</span><span class="st"> </span>prediction<span class="op">$</span>crank)</a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="co">#&gt; [1] TRUE</span></a>
+<a class="sourceLine" id="cb3-5" title="5">prediction<span class="op">$</span>lp[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="co">#&gt;  [1] -0.69368619 -0.77469379 -1.48992162 -1.02294630  0.10603704  0.35349280</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="co">#&gt;  [7]  0.19769846 -0.24070498  1.61950353  0.02121054</span></a>
+<a class="sourceLine" id="cb3-8" title="8"></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="co"># These are evaluated with measures of discrimination and calibration.</span></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="co"># As all PredictionSurv objects will return crank, Harrell's C is the default measure.</span></a>
+<a class="sourceLine" id="cb3-11" title="11"></a>
+<a class="sourceLine" id="cb3-12" title="12">prediction<span class="op">$</span><span class="kw">score</span>()</a>
+<a class="sourceLine" id="cb3-13" title="13"><span class="co">#&gt; surv.harrellC </span></a>
+<a class="sourceLine" id="cb3-14" title="14"><span class="co">#&gt;     0.7526596</span></a>
+<a class="sourceLine" id="cb3-15" title="15"></a>
+<a class="sourceLine" id="cb3-16" title="16"><span class="co"># distr is evaluated with probabilistic scoring rules.</span></a>
+<a class="sourceLine" id="cb3-17" title="17"></a>
+<a class="sourceLine" id="cb3-18" title="18">measure =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"surv.graf"</span>, <span class="st">"surv.grafSE"</span>, <span class="st">"surv.intlogloss"</span>, <span class="st">"surv.intloglossSE"</span>,</a>
+<a class="sourceLine" id="cb3-19" title="19">                   <span class="st">"surv.logloss"</span>, <span class="st">"surv.loglossSE"</span>), msr)</a>
+<a class="sourceLine" id="cb3-20" title="20">prediction<span class="op">$</span><span class="kw">score</span>(measure)</a>
+<a class="sourceLine" id="cb3-21" title="21"><span class="co">#&gt;         surv.graf       surv.grafSE   surv.intlogloss surv.intloglossSE </span></a>
+<a class="sourceLine" id="cb3-22" title="22"><span class="co">#&gt;         0.1249958         0.0129813         0.3917054         0.0326058 </span></a>
+<a class="sourceLine" id="cb3-23" title="23"><span class="co">#&gt;      surv.logloss    surv.loglossSE </span></a>
+<a class="sourceLine" id="cb3-24" title="24"><span class="co">#&gt;        22.5096384         2.8787520</span></a>
+<a class="sourceLine" id="cb3-25" title="25"></a>
+<a class="sourceLine" id="cb3-26" title="26"><span class="co"># Often measures can be integrated over mutliple time-points, or return</span></a>
+<a class="sourceLine" id="cb3-27" title="27"><span class="co"># predictions for single time-points</span></a>
+<a class="sourceLine" id="cb3-28" title="28"></a>
+<a class="sourceLine" id="cb3-29" title="29">measure =<span class="st"> </span><span class="kw"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">msr</a></span>(<span class="st">"surv.graf"</span>, <span class="dt">times =</span> <span class="dv">60</span>)</a>
+<a class="sourceLine" id="cb3-30" title="30">prediction<span class="op">$</span><span class="kw">score</span>(measure)</a>
+<a class="sourceLine" id="cb3-31" title="31"><span class="co">#&gt; surv.graf </span></a>
+<a class="sourceLine" id="cb3-32" title="32"><span class="co">#&gt; 0.1457346</span></a></code></pre></div>
 <div id="probability-distributions-with-distr6" class="section level3">
 <h3 class="hasAnchor">
 <a href="#probability-distributions-with-distr6" class="anchor"></a>Probability distributions with distr6</h3>
 <p>Predicted distributions are implemented in <strong><a href="https://cran.r-project.org/web/packages/distr6/">distr6</a></strong>, which contains functionality for plotting and further analysis of probability distributions. See <a href="https://alan-turing-institute.github.io/distr6/">here</a> for full tutorials. Briefly we will go over the most important parts for <strong>mlr3proba</strong>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">task =<span class="st"> </span><span class="kw">tsk</span>(<span class="st">"rats"</span>)</a>
-<a class="sourceLine" id="cb2-2" title="2">learner =<span class="st"> </span><span class="kw">lrn</span>(<span class="st">"surv.coxph"</span>)</a>
-<a class="sourceLine" id="cb2-3" title="3"></a>
-<a class="sourceLine" id="cb2-4" title="4"><span class="co"># In general it is not advised to train/predict on same data</span></a>
-<a class="sourceLine" id="cb2-5" title="5"></a>
-<a class="sourceLine" id="cb2-6" title="6">prediction =<span class="st"> </span>learner<span class="op">$</span><span class="kw">train</span>(task)<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(task)</a>
-<a class="sourceLine" id="cb2-7" title="7"></a>
-<a class="sourceLine" id="cb2-8" title="8"><span class="co"># The predicted `distr` is a VectorDistribution consisting of 300 separate distributions</span></a>
-<a class="sourceLine" id="cb2-9" title="9"></a>
-<a class="sourceLine" id="cb2-10" title="10">prediction<span class="op">$</span>distr</a>
-<a class="sourceLine" id="cb2-11" title="11"><span class="co">#&gt; WeightDisc1 WeightDisc2 ... WeightDisc299 WeightDisc300</span></a>
-<a class="sourceLine" id="cb2-12" title="12"></a>
-<a class="sourceLine" id="cb2-13" title="13"><span class="co"># These can be extracted and queried</span></a>
-<a class="sourceLine" id="cb2-14" title="14"><span class="co"># Either invidually</span></a>
-<a class="sourceLine" id="cb2-15" title="15"></a>
-<a class="sourceLine" id="cb2-16" title="16">prediction<span class="op">$</span>distr[<span class="dv">1</span>]<span class="op">$</span><span class="kw">survival</span>(<span class="dv">60</span><span class="op">:</span><span class="dv">70</span>)</a>
-<a class="sourceLine" id="cb2-17" title="17"><span class="co">#&gt;  [1] 0.9477634 0.9477634 0.9477634 0.9477634 0.9410540 0.9410540 0.9343536</span></a>
-<a class="sourceLine" id="cb2-18" title="18"><span class="co">#&gt;  [8] 0.9276584 0.9209361 0.9209361 0.9141730</span></a>
-<a class="sourceLine" id="cb2-19" title="19">prediction<span class="op">$</span>distr[<span class="dv">1</span>]<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>()</a>
-<a class="sourceLine" id="cb2-20" title="20"><span class="co">#&gt; [1] 27.72981</span></a>
-<a class="sourceLine" id="cb2-21" title="21"></a>
-<a class="sourceLine" id="cb2-22" title="22"><span class="co"># Or together</span></a>
-<a class="sourceLine" id="cb2-23" title="23"></a>
-<a class="sourceLine" id="cb2-24" title="24">prediction<span class="op">$</span>distr<span class="op">$</span><span class="kw">cdf</span>(<span class="dv">60</span>)[,<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</a>
-<a class="sourceLine" id="cb2-25" title="25"><span class="co">#&gt;    WeightDisc1 WeightDisc2 WeightDisc3 WeightDisc4 WeightDisc5 WeightDisc6</span></a>
-<a class="sourceLine" id="cb2-26" title="26"><span class="co">#&gt; 1:  0.05223663  0.02369413  0.02369413 0.002470926  0.00110515  0.00110515</span></a>
-<a class="sourceLine" id="cb2-27" title="27"><span class="co">#&gt;    WeightDisc7 WeightDisc8 WeightDisc9 WeightDisc10</span></a>
-<a class="sourceLine" id="cb2-28" title="28"><span class="co">#&gt; 1:  0.05310445  0.02409379  0.02409379  0.002513064</span></a>
-<a class="sourceLine" id="cb2-29" title="29">prediction<span class="op">$</span>distr<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>()[,<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</a>
-<a class="sourceLine" id="cb2-30" title="30"><span class="co">#&gt;    WeightDisc1 WeightDisc2 WeightDisc3 WeightDisc4 WeightDisc5 WeightDisc6</span></a>
-<a class="sourceLine" id="cb2-31" title="31"><span class="co">#&gt; 1:    27.72981    14.04936    14.04936    1.591479   0.7156143   0.7156143</span></a>
-<a class="sourceLine" id="cb2-32" title="32"><span class="co">#&gt;    WeightDisc7 WeightDisc8 WeightDisc9 WeightDisc10</span></a>
-<a class="sourceLine" id="cb2-33" title="33"><span class="co">#&gt; 1:     28.0962    14.26415    14.26415     1.618352</span></a>
-<a class="sourceLine" id="cb2-34" title="34"></a>
-<a class="sourceLine" id="cb2-35" title="35"><span class="co"># As well as plotted</span></a>
-<a class="sourceLine" id="cb2-36" title="36"></a>
-<a class="sourceLine" id="cb2-37" title="37"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(prediction<span class="op">$</span>distr[<span class="dv">1</span>], <span class="st">"survival"</span>, <span class="dt">main =</span> <span class="st">"First 2 Survival Curves"</span>)</a>
-<a class="sourceLine" id="cb2-38" title="38"><span class="kw"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span>(prediction<span class="op">$</span>distr[<span class="dv">2</span>], <span class="st">"survival"</span>, <span class="dt">col =</span> <span class="dv">2</span>)</a></code></pre></div>
-<p><img src="survival_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">task =<span class="st"> </span><span class="kw"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">tsk</a></span>(<span class="st">"rats"</span>)</a>
+<a class="sourceLine" id="cb4-2" title="2">learner =<span class="st"> </span><span class="kw"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">lrn</a></span>(<span class="st">"surv.coxph"</span>)</a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="co"># In general it is not advised to train/predict on same data</span></a>
+<a class="sourceLine" id="cb4-5" title="5"></a>
+<a class="sourceLine" id="cb4-6" title="6">prediction =<span class="st"> </span>learner<span class="op">$</span><span class="kw">train</span>(task)<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(task)</a>
+<a class="sourceLine" id="cb4-7" title="7"></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="co"># The predicted `distr` is a VectorDistribution consisting of 300 separate distributions</span></a>
+<a class="sourceLine" id="cb4-9" title="9"></a>
+<a class="sourceLine" id="cb4-10" title="10">prediction<span class="op">$</span>distr</a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="co">#&gt; WeightDisc1 WeightDisc2 ... WeightDisc299 WeightDisc300</span></a>
+<a class="sourceLine" id="cb4-12" title="12"></a>
+<a class="sourceLine" id="cb4-13" title="13"><span class="co"># These can be extracted and queried</span></a>
+<a class="sourceLine" id="cb4-14" title="14"><span class="co"># Either invidually</span></a>
+<a class="sourceLine" id="cb4-15" title="15"></a>
+<a class="sourceLine" id="cb4-16" title="16">prediction<span class="op">$</span>distr[<span class="dv">1</span>]<span class="op">$</span><span class="kw">survival</span>(<span class="dv">60</span><span class="op">:</span><span class="dv">70</span>)</a>
+<a class="sourceLine" id="cb4-17" title="17"><span class="co">#&gt;  [1] 0.9477634 0.9477634 0.9477634 0.9477634 0.9410540 0.9410540 0.9343536</span></a>
+<a class="sourceLine" id="cb4-18" title="18"><span class="co">#&gt;  [8] 0.9276584 0.9209361 0.9209361 0.9141730</span></a>
+<a class="sourceLine" id="cb4-19" title="19">prediction<span class="op">$</span>distr[<span class="dv">1</span>]<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>()</a>
+<a class="sourceLine" id="cb4-20" title="20"><span class="co">#&gt; [1] 27.72981</span></a>
+<a class="sourceLine" id="cb4-21" title="21"></a>
+<a class="sourceLine" id="cb4-22" title="22"><span class="co"># Or together</span></a>
+<a class="sourceLine" id="cb4-23" title="23"></a>
+<a class="sourceLine" id="cb4-24" title="24">prediction<span class="op">$</span>distr<span class="op">$</span><span class="kw">cdf</span>(<span class="dv">60</span>)[,<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</a>
+<a class="sourceLine" id="cb4-25" title="25"><span class="co">#&gt;    WeightDisc1 WeightDisc2 WeightDisc3 WeightDisc4 WeightDisc5 WeightDisc6</span></a>
+<a class="sourceLine" id="cb4-26" title="26"><span class="co">#&gt; 1:  0.05223663  0.02369413  0.02369413 0.002470926  0.00110515  0.00110515</span></a>
+<a class="sourceLine" id="cb4-27" title="27"><span class="co">#&gt;    WeightDisc7 WeightDisc8 WeightDisc9 WeightDisc10</span></a>
+<a class="sourceLine" id="cb4-28" title="28"><span class="co">#&gt; 1:  0.05310445  0.02409379  0.02409379  0.002513064</span></a>
+<a class="sourceLine" id="cb4-29" title="29">prediction<span class="op">$</span>distr<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>()[,<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</a>
+<a class="sourceLine" id="cb4-30" title="30"><span class="co">#&gt;    WeightDisc1 WeightDisc2 WeightDisc3 WeightDisc4 WeightDisc5 WeightDisc6</span></a>
+<a class="sourceLine" id="cb4-31" title="31"><span class="co">#&gt; 1:    27.72981    14.04936    14.04936    1.591479   0.7156143   0.7156143</span></a>
+<a class="sourceLine" id="cb4-32" title="32"><span class="co">#&gt;    WeightDisc7 WeightDisc8 WeightDisc9 WeightDisc10</span></a>
+<a class="sourceLine" id="cb4-33" title="33"><span class="co">#&gt; 1:     28.0962    14.26415    14.26415     1.618352</span></a>
+<a class="sourceLine" id="cb4-34" title="34"></a>
+<a class="sourceLine" id="cb4-35" title="35"><span class="co"># As well as plotted</span></a>
+<a class="sourceLine" id="cb4-36" title="36"></a>
+<a class="sourceLine" id="cb4-37" title="37"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(prediction<span class="op">$</span>distr[<span class="dv">1</span>], <span class="st">"survival"</span>, <span class="dt">main =</span> <span class="st">"First 2 Survival Curves"</span>)</a>
+<a class="sourceLine" id="cb4-38" title="38"><span class="kw"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span>(prediction<span class="op">$</span>distr[<span class="dv">2</span>], <span class="st">"survival"</span>, <span class="dt">col =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="survival_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 </div>
 </div>
 <div id="composition" class="section level2">
@@ -207,126 +305,126 @@
 <div id="pipeopdistrcompositor" class="section level3">
 <h3 class="hasAnchor">
 <a href="#pipeopdistrcompositor" class="anchor"></a>PipeOpDistrCompositor</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(mlr3pipelines)</a>
-<a class="sourceLine" id="cb3-2" title="2"></a>
-<a class="sourceLine" id="cb3-3" title="3"><span class="co"># PipeOpDistrCompositor - Train one model with a baseline distribution,</span></a>
-<a class="sourceLine" id="cb3-4" title="4"><span class="co"># (Kaplan-Meier or Nelson-Aalen), and another with a predicted linear predictor.</span></a>
-<a class="sourceLine" id="cb3-5" title="5"></a>
-<a class="sourceLine" id="cb3-6" title="6">leaner_lp =<span class="st"> </span><span class="kw">lrn</span>(<span class="st">"surv.glmnet"</span>)</a>
-<a class="sourceLine" id="cb3-7" title="7">leaner_distr =<span class="st"> </span><span class="kw">lrn</span>(<span class="st">"surv.kaplan"</span>)</a>
-<a class="sourceLine" id="cb3-8" title="8">task =<span class="st"> </span><span class="kw">tsk</span>(<span class="st">"rats"</span>)</a>
-<a class="sourceLine" id="cb3-9" title="9">prediction_lp =<span class="st"> </span>leaner_lp<span class="op">$</span><span class="kw">train</span>(task)<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(task)</a>
-<a class="sourceLine" id="cb3-10" title="10">prediction_distr =<span class="st"> </span>leaner_distr<span class="op">$</span><span class="kw">train</span>(task)<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(task)</a>
-<a class="sourceLine" id="cb3-11" title="11">prediction_lp<span class="op">$</span>distr</a>
-<a class="sourceLine" id="cb3-12" title="12"><span class="co">#&gt; NULL</span></a>
-<a class="sourceLine" id="cb3-13" title="13"></a>
-<a class="sourceLine" id="cb3-14" title="14"><span class="co"># Doesn't need training. Base = baseline distribution. ph = Proportional hazards.</span></a>
-<a class="sourceLine" id="cb3-15" title="15"></a>
-<a class="sourceLine" id="cb3-16" title="16">pod =<span class="st"> </span><span class="kw"><a href="https://mlr3pipelines.mlr-org.com//reference/po.html">po</a></span>(<span class="st">"distrcompose"</span>, <span class="dt">param_vals =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">form =</span> <span class="st">"ph"</span>, <span class="dt">overwrite =</span> <span class="ot">FALSE</span>))</a>
-<a class="sourceLine" id="cb3-17" title="17">prediction =<span class="st"> </span>pod<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">base =</span> prediction_distr, <span class="dt">pred =</span> prediction_lp))<span class="op">$</span>output</a>
-<a class="sourceLine" id="cb3-18" title="18"></a>
-<a class="sourceLine" id="cb3-19" title="19"><span class="co"># Now we have a predicted distr!</span></a>
-<a class="sourceLine" id="cb3-20" title="20"></a>
-<a class="sourceLine" id="cb3-21" title="21">prediction<span class="op">$</span>distr</a>
-<a class="sourceLine" id="cb3-22" title="22"><span class="co">#&gt; WeightDisc1 WeightDisc2 ... WeightDisc299 WeightDisc300</span></a>
-<a class="sourceLine" id="cb3-23" title="23"></a>
-<a class="sourceLine" id="cb3-24" title="24"><span class="co"># This can all be simplified by using the distrcompose wrapper</span></a>
-<a class="sourceLine" id="cb3-25" title="25"></a>
-<a class="sourceLine" id="cb3-26" title="26">cvglm.distr =<span class="st"> </span><span class="kw"><a href="../reference/distrcompositor.html">distrcompositor</a></span>(<span class="dt">learner =</span> <span class="kw">lrn</span>(<span class="st">"surv.cvglmnet"</span>),</a>
-<a class="sourceLine" id="cb3-27" title="27">                             <span class="dt">estimator =</span> <span class="st">"kaplan"</span>,</a>
-<a class="sourceLine" id="cb3-28" title="28">                             <span class="dt">form =</span> <span class="st">"aft"</span>,</a>
-<a class="sourceLine" id="cb3-29" title="29">                             <span class="dt">overwrite =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb3-30" title="30">cvglm.distr<span class="op">$</span><span class="kw">train</span>(task)<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(task)</a>
-<a class="sourceLine" id="cb3-31" title="31"><span class="co">#&gt; &lt;PredictionSurv&gt; for 300 observations:</span></a>
-<a class="sourceLine" id="cb3-32" title="32"><span class="co">#&gt;     row_id time status      crank                distr         lp</span></a>
-<a class="sourceLine" id="cb3-33" title="33"><span class="co">#&gt;          1  101  FALSE  0.0000000 &lt;VectorDistribution&gt;  0.0000000</span></a>
-<a class="sourceLine" id="cb3-34" title="34"><span class="co">#&gt;          2   49   TRUE  0.0000000 &lt;VectorDistribution&gt;  0.0000000</span></a>
-<a class="sourceLine" id="cb3-35" title="35"><span class="co">#&gt;          3  104  FALSE  0.0000000 &lt;VectorDistribution&gt;  0.0000000</span></a>
-<a class="sourceLine" id="cb3-36" title="36"><span class="co">#&gt; ---                                                              </span></a>
-<a class="sourceLine" id="cb3-37" title="37"><span class="co">#&gt;        298   92  FALSE -0.8301477 &lt;VectorDistribution&gt; -0.8301477</span></a>
-<a class="sourceLine" id="cb3-38" title="38"><span class="co">#&gt;        299  104  FALSE -0.8301477 &lt;VectorDistribution&gt; -0.8301477</span></a>
-<a class="sourceLine" id="cb3-39" title="39"><span class="co">#&gt;        300  102  FALSE -0.8301477 &lt;VectorDistribution&gt; -0.8301477</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(mlr3pipelines)</a>
+<a class="sourceLine" id="cb5-2" title="2"></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="co"># PipeOpDistrCompositor - Train one model with a baseline distribution,</span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="co"># (Kaplan-Meier or Nelson-Aalen), and another with a predicted linear predictor.</span></a>
+<a class="sourceLine" id="cb5-5" title="5"></a>
+<a class="sourceLine" id="cb5-6" title="6">leaner_lp =<span class="st"> </span><span class="kw"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">lrn</a></span>(<span class="st">"surv.glmnet"</span>)</a>
+<a class="sourceLine" id="cb5-7" title="7">leaner_distr =<span class="st"> </span><span class="kw"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">lrn</a></span>(<span class="st">"surv.kaplan"</span>)</a>
+<a class="sourceLine" id="cb5-8" title="8">task =<span class="st"> </span><span class="kw"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">tsk</a></span>(<span class="st">"rats"</span>)</a>
+<a class="sourceLine" id="cb5-9" title="9">prediction_lp =<span class="st"> </span>leaner_lp<span class="op">$</span><span class="kw">train</span>(task)<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(task)</a>
+<a class="sourceLine" id="cb5-10" title="10">prediction_distr =<span class="st"> </span>leaner_distr<span class="op">$</span><span class="kw">train</span>(task)<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(task)</a>
+<a class="sourceLine" id="cb5-11" title="11">prediction_lp<span class="op">$</span>distr</a>
+<a class="sourceLine" id="cb5-12" title="12"><span class="co">#&gt; NULL</span></a>
+<a class="sourceLine" id="cb5-13" title="13"></a>
+<a class="sourceLine" id="cb5-14" title="14"><span class="co"># Doesn't need training. Base = baseline distribution. ph = Proportional hazards.</span></a>
+<a class="sourceLine" id="cb5-15" title="15"></a>
+<a class="sourceLine" id="cb5-16" title="16">pod =<span class="st"> </span><span class="kw"><a href="https://mlr3pipelines.mlr-org.com//reference/po.html">po</a></span>(<span class="st">"distrcompose"</span>, <span class="dt">param_vals =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">form =</span> <span class="st">"ph"</span>, <span class="dt">overwrite =</span> <span class="ot">FALSE</span>))</a>
+<a class="sourceLine" id="cb5-17" title="17">prediction =<span class="st"> </span>pod<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">base =</span> prediction_distr, <span class="dt">pred =</span> prediction_lp))<span class="op">$</span>output</a>
+<a class="sourceLine" id="cb5-18" title="18"></a>
+<a class="sourceLine" id="cb5-19" title="19"><span class="co"># Now we have a predicted distr!</span></a>
+<a class="sourceLine" id="cb5-20" title="20"></a>
+<a class="sourceLine" id="cb5-21" title="21">prediction<span class="op">$</span>distr</a>
+<a class="sourceLine" id="cb5-22" title="22"><span class="co">#&gt; WeightDisc1 WeightDisc2 ... WeightDisc299 WeightDisc300</span></a>
+<a class="sourceLine" id="cb5-23" title="23"></a>
+<a class="sourceLine" id="cb5-24" title="24"><span class="co"># This can all be simplified by using the distrcompose wrapper</span></a>
+<a class="sourceLine" id="cb5-25" title="25"></a>
+<a class="sourceLine" id="cb5-26" title="26">cvglm.distr =<span class="st"> </span><span class="kw"><a href="../reference/distrcompositor.html">distrcompositor</a></span>(<span class="dt">learner =</span> <span class="kw"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">lrn</a></span>(<span class="st">"surv.cvglmnet"</span>),</a>
+<a class="sourceLine" id="cb5-27" title="27">                             <span class="dt">estimator =</span> <span class="st">"kaplan"</span>,</a>
+<a class="sourceLine" id="cb5-28" title="28">                             <span class="dt">form =</span> <span class="st">"aft"</span>,</a>
+<a class="sourceLine" id="cb5-29" title="29">                             <span class="dt">overwrite =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb5-30" title="30">cvglm.distr<span class="op">$</span><span class="kw">train</span>(task)<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(task)</a>
+<a class="sourceLine" id="cb5-31" title="31"><span class="co">#&gt; &lt;PredictionSurv&gt; for 300 observations:</span></a>
+<a class="sourceLine" id="cb5-32" title="32"><span class="co">#&gt;     row_id time status     crank                distr        lp</span></a>
+<a class="sourceLine" id="cb5-33" title="33"><span class="co">#&gt;          1  101  FALSE  0.000000 &lt;VectorDistribution&gt;  0.000000</span></a>
+<a class="sourceLine" id="cb5-34" title="34"><span class="co">#&gt;          2   49   TRUE  0.000000 &lt;VectorDistribution&gt;  0.000000</span></a>
+<a class="sourceLine" id="cb5-35" title="35"><span class="co">#&gt;          3  104  FALSE  0.000000 &lt;VectorDistribution&gt;  0.000000</span></a>
+<a class="sourceLine" id="cb5-36" title="36"><span class="co">#&gt; ---                                                            </span></a>
+<a class="sourceLine" id="cb5-37" title="37"><span class="co">#&gt;        298   92  FALSE -1.150775 &lt;VectorDistribution&gt; -1.150775</span></a>
+<a class="sourceLine" id="cb5-38" title="38"><span class="co">#&gt;        299  104  FALSE -1.150775 &lt;VectorDistribution&gt; -1.150775</span></a>
+<a class="sourceLine" id="cb5-39" title="39"><span class="co">#&gt;        300  102  FALSE -1.150775 &lt;VectorDistribution&gt; -1.150775</span></a></code></pre></div>
 </div>
 <div id="pipeopcrankcompositor" class="section level3">
 <h3 class="hasAnchor">
 <a href="#pipeopcrankcompositor" class="anchor"></a>PipeOpCrankCompositor</h3>
 <p>Note that a <code>PredictionSurv</code> will always return <code>crank</code>, but this may either be the same as the <code>lp</code> or the expectation of <code>distr</code>. This compositor allows you to change the estimation method.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># PipeOpCrankCompositor - Only one model required.</span></a>
-<a class="sourceLine" id="cb4-2" title="2"></a>
-<a class="sourceLine" id="cb4-3" title="3">leaner =<span class="st"> </span><span class="kw">lrn</span>(<span class="st">"surv.coxph"</span>)</a>
-<a class="sourceLine" id="cb4-4" title="4">prediction =<span class="st"> </span>leaner<span class="op">$</span><span class="kw">train</span>(task)<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(task)</a>
-<a class="sourceLine" id="cb4-5" title="5"></a>
-<a class="sourceLine" id="cb4-6" title="6"><span class="co"># Doesn't need training - Note: no `overwrite` option as `crank` is always</span></a>
-<a class="sourceLine" id="cb4-7" title="7"><span class="co"># present so the compositor if used will always overwrite.</span></a>
-<a class="sourceLine" id="cb4-8" title="8"></a>
-<a class="sourceLine" id="cb4-9" title="9">poc =<span class="st"> </span><span class="kw"><a href="https://mlr3pipelines.mlr-org.com//reference/po.html">po</a></span>(<span class="st">"crankcompose"</span>, <span class="dt">param_vals =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">method =</span> <span class="st">"mean"</span>))</a>
-<a class="sourceLine" id="cb4-10" title="10">composed_prediction =<span class="st"> </span>poc<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(prediction))<span class="op">$</span>output</a>
-<a class="sourceLine" id="cb4-11" title="11"></a>
-<a class="sourceLine" id="cb4-12" title="12"><span class="co"># Note that whilst the actual values of `lp` and `crank` are different,</span></a>
-<a class="sourceLine" id="cb4-13" title="13"><span class="co"># the rankings are the same, so discrimination measures are unchanged.</span></a>
-<a class="sourceLine" id="cb4-14" title="14"></a>
-<a class="sourceLine" id="cb4-15" title="15">prediction<span class="op">$</span>crank[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</a>
-<a class="sourceLine" id="cb4-16" title="16"><span class="co">#&gt;  [1]  1.6603932  0.8550971  0.8550971 -1.4162662 -2.2215623 -2.2215623</span></a>
-<a class="sourceLine" id="cb4-17" title="17"><span class="co">#&gt;  [7]  1.6773239  0.8720277  0.8720277 -1.3993355</span></a>
-<a class="sourceLine" id="cb4-18" title="18">composed_prediction<span class="op">$</span>crank[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</a>
-<a class="sourceLine" id="cb4-19" title="19"><span class="co">#&gt;  [1] 27.7298076 14.0493649 14.0493649  1.5914788  0.7156143  0.7156143</span></a>
-<a class="sourceLine" id="cb4-20" title="20"><span class="co">#&gt;  [7] 28.0961954 14.2641535 14.2641535  1.6183524</span></a>
-<a class="sourceLine" id="cb4-21" title="21"><span class="kw"><a href="https://rdrr.io/r/base/all.html">all</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/order.html">order</a></span>(prediction<span class="op">$</span>crank) <span class="op">==</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/order.html">order</a></span>(composed_prediction<span class="op">$</span>crank))</a>
-<a class="sourceLine" id="cb4-22" title="22"><span class="co">#&gt; [1] TRUE</span></a>
-<a class="sourceLine" id="cb4-23" title="23"><span class="kw"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span>(<span class="dt">Original =</span> prediction<span class="op">$</span><span class="kw">score</span>(), <span class="dt">Composed =</span> composed_prediction<span class="op">$</span><span class="kw">score</span>())</a>
-<a class="sourceLine" id="cb4-24" title="24"><span class="co">#&gt;                Original  Composed</span></a>
-<a class="sourceLine" id="cb4-25" title="25"><span class="co">#&gt; surv.harrellC 0.7780967 0.7780967</span></a>
-<a class="sourceLine" id="cb4-26" title="26"></a>
-<a class="sourceLine" id="cb4-27" title="27"><span class="co"># Again a wrapper can be used to simplify this</span></a>
-<a class="sourceLine" id="cb4-28" title="28"><span class="kw"><a href="../reference/crankcompositor.html">crankcompositor</a></span>(<span class="kw">lrn</span>(<span class="st">"surv.coxph"</span>), <span class="dt">method =</span> <span class="st">"mean"</span>)<span class="op">$</span><span class="kw">train</span>(task)<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(task)</a>
-<a class="sourceLine" id="cb4-29" title="29"><span class="co">#&gt; &lt;PredictionSurv&gt; for 300 observations:</span></a>
-<a class="sourceLine" id="cb4-30" title="30"><span class="co">#&gt;     row_id time status     crank                distr         lp</span></a>
-<a class="sourceLine" id="cb4-31" title="31"><span class="co">#&gt;          1  101  FALSE 27.729808 &lt;VectorDistribution&gt;  1.6603932</span></a>
-<a class="sourceLine" id="cb4-32" title="32"><span class="co">#&gt;          2   49   TRUE 14.049365 &lt;VectorDistribution&gt;  0.8550971</span></a>
-<a class="sourceLine" id="cb4-33" title="33"><span class="co">#&gt;          3  104  FALSE 14.049365 &lt;VectorDistribution&gt;  0.8550971</span></a>
-<a class="sourceLine" id="cb4-34" title="34"><span class="co">#&gt; ---                                                             </span></a>
-<a class="sourceLine" id="cb4-35" title="35"><span class="co">#&gt;        298   92  FALSE  3.597482 &lt;VectorDistribution&gt; -0.5866651</span></a>
-<a class="sourceLine" id="cb4-36" title="36"><span class="co">#&gt;        299  104  FALSE  1.630197 &lt;VectorDistribution&gt; -1.3919612</span></a>
-<a class="sourceLine" id="cb4-37" title="37"><span class="co">#&gt;        300  102  FALSE  1.630197 &lt;VectorDistribution&gt; -1.3919612</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># PipeOpCrankCompositor - Only one model required.</span></a>
+<a class="sourceLine" id="cb6-2" title="2"></a>
+<a class="sourceLine" id="cb6-3" title="3">leaner =<span class="st"> </span><span class="kw"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">lrn</a></span>(<span class="st">"surv.coxph"</span>)</a>
+<a class="sourceLine" id="cb6-4" title="4">prediction =<span class="st"> </span>leaner<span class="op">$</span><span class="kw">train</span>(task)<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(task)</a>
+<a class="sourceLine" id="cb6-5" title="5"></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="co"># Doesn't need training - Note: no `overwrite` option as `crank` is always</span></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="co"># present so the compositor if used will always overwrite.</span></a>
+<a class="sourceLine" id="cb6-8" title="8"></a>
+<a class="sourceLine" id="cb6-9" title="9">poc =<span class="st"> </span><span class="kw"><a href="https://mlr3pipelines.mlr-org.com//reference/po.html">po</a></span>(<span class="st">"crankcompose"</span>, <span class="dt">param_vals =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">method =</span> <span class="st">"mean"</span>))</a>
+<a class="sourceLine" id="cb6-10" title="10">composed_prediction =<span class="st"> </span>poc<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(prediction))<span class="op">$</span>output</a>
+<a class="sourceLine" id="cb6-11" title="11"></a>
+<a class="sourceLine" id="cb6-12" title="12"><span class="co"># Note that whilst the actual values of `lp` and `crank` are different,</span></a>
+<a class="sourceLine" id="cb6-13" title="13"><span class="co"># the rankings are the same, so discrimination measures are unchanged.</span></a>
+<a class="sourceLine" id="cb6-14" title="14"></a>
+<a class="sourceLine" id="cb6-15" title="15">prediction<span class="op">$</span>crank[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</a>
+<a class="sourceLine" id="cb6-16" title="16"><span class="co">#&gt;  [1]  1.6603932  0.8550971  0.8550971 -1.4162662 -2.2215623 -2.2215623</span></a>
+<a class="sourceLine" id="cb6-17" title="17"><span class="co">#&gt;  [7]  1.6773239  0.8720277  0.8720277 -1.3993355</span></a>
+<a class="sourceLine" id="cb6-18" title="18">composed_prediction<span class="op">$</span>crank[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</a>
+<a class="sourceLine" id="cb6-19" title="19"><span class="co">#&gt;  [1] 27.7298076 14.0493649 14.0493649  1.5914788  0.7156143  0.7156143</span></a>
+<a class="sourceLine" id="cb6-20" title="20"><span class="co">#&gt;  [7] 28.0961954 14.2641535 14.2641535  1.6183524</span></a>
+<a class="sourceLine" id="cb6-21" title="21"><span class="kw"><a href="https://rdrr.io/r/base/all.html">all</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/order.html">order</a></span>(prediction<span class="op">$</span>crank) <span class="op">==</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/order.html">order</a></span>(composed_prediction<span class="op">$</span>crank))</a>
+<a class="sourceLine" id="cb6-22" title="22"><span class="co">#&gt; [1] TRUE</span></a>
+<a class="sourceLine" id="cb6-23" title="23"><span class="kw"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span>(<span class="dt">Original =</span> prediction<span class="op">$</span><span class="kw">score</span>(), <span class="dt">Composed =</span> composed_prediction<span class="op">$</span><span class="kw">score</span>())</a>
+<a class="sourceLine" id="cb6-24" title="24"><span class="co">#&gt;                Original  Composed</span></a>
+<a class="sourceLine" id="cb6-25" title="25"><span class="co">#&gt; surv.harrellC 0.7780967 0.7780967</span></a>
+<a class="sourceLine" id="cb6-26" title="26"></a>
+<a class="sourceLine" id="cb6-27" title="27"><span class="co"># Again a wrapper can be used to simplify this</span></a>
+<a class="sourceLine" id="cb6-28" title="28"><span class="kw"><a href="../reference/crankcompositor.html">crankcompositor</a></span>(<span class="kw"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">lrn</a></span>(<span class="st">"surv.coxph"</span>), <span class="dt">method =</span> <span class="st">"mean"</span>)<span class="op">$</span><span class="kw">train</span>(task)<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(task)</a>
+<a class="sourceLine" id="cb6-29" title="29"><span class="co">#&gt; &lt;PredictionSurv&gt; for 300 observations:</span></a>
+<a class="sourceLine" id="cb6-30" title="30"><span class="co">#&gt;     row_id time status     crank                distr         lp</span></a>
+<a class="sourceLine" id="cb6-31" title="31"><span class="co">#&gt;          1  101  FALSE 27.729808 &lt;VectorDistribution&gt;  1.6603932</span></a>
+<a class="sourceLine" id="cb6-32" title="32"><span class="co">#&gt;          2   49   TRUE 14.049365 &lt;VectorDistribution&gt;  0.8550971</span></a>
+<a class="sourceLine" id="cb6-33" title="33"><span class="co">#&gt;          3  104  FALSE 14.049365 &lt;VectorDistribution&gt;  0.8550971</span></a>
+<a class="sourceLine" id="cb6-34" title="34"><span class="co">#&gt; ---                                                             </span></a>
+<a class="sourceLine" id="cb6-35" title="35"><span class="co">#&gt;        298   92  FALSE  3.597482 &lt;VectorDistribution&gt; -0.5866651</span></a>
+<a class="sourceLine" id="cb6-36" title="36"><span class="co">#&gt;        299  104  FALSE  1.630197 &lt;VectorDistribution&gt; -1.3919612</span></a>
+<a class="sourceLine" id="cb6-37" title="37"><span class="co">#&gt;        300  102  FALSE  1.630197 &lt;VectorDistribution&gt; -1.3919612</span></a></code></pre></div>
 </div>
 </div>
 <div id="all-together" class="section level2">
 <h2 class="hasAnchor">
 <a href="#all-together" class="anchor"></a>All Together</h2>
 <p>Putting all of this together we can perform a benchmark experiment to find the best learner for making predictions on a simulated dataset.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(mlr3pipelines); <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(mlr3); <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(mlr3tuning); <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(paradox)</a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="dv">42</span>)</a>
-<a class="sourceLine" id="cb5-3" title="3"></a>
-<a class="sourceLine" id="cb5-4" title="4">task =<span class="st"> </span>TaskSurv<span class="op">$</span><span class="kw">new</span>(<span class="st">"brcancer"</span>, <span class="dt">backend =</span> mlr3misc<span class="op">::</span><span class="kw"><a href="https://mlr3misc.mlr-org.com/reference/load_dataset.html">load_dataset</a></span>(<span class="st">"brcancer"</span>,<span class="st">"simsurv"</span>),</a>
-<a class="sourceLine" id="cb5-5" title="5">                    <span class="dt">time =</span> <span class="st">"rectime"</span>, <span class="dt">event =</span> <span class="st">"censrec"</span>)</a>
-<a class="sourceLine" id="cb5-6" title="6"></a>
-<a class="sourceLine" id="cb5-7" title="7">composed_lrn_glm =<span class="st"> </span><span class="kw"><a href="../reference/distrcompositor.html">distrcompositor</a></span>(<span class="kw"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">lrn</a></span>(<span class="st">"surv.glmnet"</span>), <span class="st">"kaplan"</span>, <span class="st">"ph"</span>)</a>
-<a class="sourceLine" id="cb5-8" title="8"></a>
-<a class="sourceLine" id="cb5-9" title="9">lrns =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"surv."</span>, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"kaplan"</span>, <span class="st">"coxph"</span>, <span class="st">"parametric"</span>)), lrn)</a>
-<a class="sourceLine" id="cb5-10" title="10">lrns[[<span class="dv">3</span>]]<span class="op">$</span>param_set<span class="op">$</span>values =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">dist =</span> <span class="st">"weibull"</span>, <span class="dt">type =</span> <span class="st">"ph"</span>)</a>
-<a class="sourceLine" id="cb5-11" title="11"></a>
-<a class="sourceLine" id="cb5-12" title="12">tuned_lrn_rf =<span class="st"> </span>AutoTuner<span class="op">$</span><span class="kw">new</span>(<span class="dt">learner =</span> <span class="kw"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">lrn</a></span>(<span class="st">"surv.ranger"</span>),</a>
-<a class="sourceLine" id="cb5-13" title="13">                             <span class="dt">resampling =</span> <span class="kw"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">rsmp</a></span>(<span class="st">"holdout"</span>),</a>
-<a class="sourceLine" id="cb5-14" title="14">                             <span class="dt">measures =</span> <span class="kw"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">msr</a></span>(<span class="st">"surv.graf"</span>),</a>
-<a class="sourceLine" id="cb5-15" title="15">                             <span class="dt">tune_ps =</span> ParamSet<span class="op">$</span><span class="kw">new</span>(<span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(</a>
-<a class="sourceLine" id="cb5-16" title="16">                               ParamDbl<span class="op">$</span><span class="kw">new</span>(<span class="st">"num.trees"</span>, <span class="dt">lower =</span> <span class="dv">100</span>, <span class="dt">upper =</span> <span class="dv">1000</span>)</a>
-<a class="sourceLine" id="cb5-17" title="17">                             )),</a>
-<a class="sourceLine" id="cb5-18" title="18">                             <span class="dt">terminator =</span> <span class="kw"><a href="https://mlr3tuning.mlr-org.com/reference/tnr.html">term</a></span>(<span class="st">"evals"</span>, <span class="dt">n_evals =</span> <span class="dv">3</span>),</a>
-<a class="sourceLine" id="cb5-19" title="19">                             <span class="dt">tuner =</span> <span class="kw"><a href="https://mlr3tuning.mlr-org.com/reference/tnr.html">tnr</a></span>(<span class="st">"grid_search"</span>)</a>
-<a class="sourceLine" id="cb5-20" title="20">)</a>
-<a class="sourceLine" id="cb5-21" title="21"></a>
-<a class="sourceLine" id="cb5-22" title="22">design =<span class="st"> </span><span class="kw"><a href="https://mlr3.mlr-org.com/reference/benchmark_grid.html">benchmark_grid</a></span>(<span class="dt">tasks =</span> task, <span class="dt">learners =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(lrns, <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(composed_lrn_glm),</a>
-<a class="sourceLine" id="cb5-23" title="23">                                                   <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(tuned_lrn_rf)),</a>
-<a class="sourceLine" id="cb5-24" title="24">                        <span class="dt">resamplings =</span> <span class="kw"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">rsmp</a></span>(<span class="st">"cv"</span>, <span class="dt">folds =</span> <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb5-25" title="25"></a>
-<a class="sourceLine" id="cb5-26" title="26">bm =<span class="st"> </span><span class="kw"><a href="https://mlr3.mlr-org.com/reference/benchmark.html">benchmark</a></span>(design)</a>
-<a class="sourceLine" id="cb5-27" title="27">bm<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"surv.harrellC"</span>,<span class="st">"surv.graf"</span>,<span class="st">"surv.grafSE"</span>), msr))[,<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">4</span>, <span class="dv">7</span><span class="op">:</span><span class="dv">9</span>)]</a>
-<a class="sourceLine" id="cb5-28" title="28"><span class="co">#&gt;                              learner_id surv.harrellC surv.graf surv.grafSE</span></a>
-<a class="sourceLine" id="cb5-29" title="29"><span class="co">#&gt; 1:                          surv.kaplan     0.5000000 0.1931783 0.008731959</span></a>
-<a class="sourceLine" id="cb5-30" title="30"><span class="co">#&gt; 2:                           surv.coxph     0.5554489 0.1912178 0.008851813</span></a>
-<a class="sourceLine" id="cb5-31" title="31"><span class="co">#&gt; 3:                      surv.parametric     0.4445511 0.2119920 0.010975050</span></a>
-<a class="sourceLine" id="cb5-32" title="32"><span class="co">#&gt; 4: surv.kaplan.surv.glmnet.distrcompose     0.5554489 0.1993391 0.010248961</span></a>
-<a class="sourceLine" id="cb5-33" title="33"><span class="co">#&gt; 5:                    surv.ranger.tuned     0.5137451 0.2153741 0.011615711</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(mlr3pipelines); <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(mlr3); <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(mlr3tuning); <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(paradox)</a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb7-3" title="3"></a>
+<a class="sourceLine" id="cb7-4" title="4">task =<span class="st"> </span>TaskSurv<span class="op">$</span><span class="kw">new</span>(<span class="st">"brcancer"</span>, <span class="dt">backend =</span> mlr3misc<span class="op">::</span><span class="kw"><a href="https://mlr3misc.mlr-org.com/reference/load_dataset.html">load_dataset</a></span>(<span class="st">"brcancer"</span>,<span class="st">"simsurv"</span>),</a>
+<a class="sourceLine" id="cb7-5" title="5">                    <span class="dt">time =</span> <span class="st">"rectime"</span>, <span class="dt">event =</span> <span class="st">"censrec"</span>)</a>
+<a class="sourceLine" id="cb7-6" title="6"></a>
+<a class="sourceLine" id="cb7-7" title="7">composed_lrn_glm =<span class="st"> </span><span class="kw"><a href="../reference/distrcompositor.html">distrcompositor</a></span>(<span class="kw"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">lrn</a></span>(<span class="st">"surv.glmnet"</span>), <span class="st">"kaplan"</span>, <span class="st">"ph"</span>)</a>
+<a class="sourceLine" id="cb7-8" title="8"></a>
+<a class="sourceLine" id="cb7-9" title="9">lrns =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"surv."</span>, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"kaplan"</span>, <span class="st">"coxph"</span>, <span class="st">"parametric"</span>)), lrn)</a>
+<a class="sourceLine" id="cb7-10" title="10">lrns[[<span class="dv">3</span>]]<span class="op">$</span>param_set<span class="op">$</span>values =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">dist =</span> <span class="st">"weibull"</span>, <span class="dt">type =</span> <span class="st">"ph"</span>)</a>
+<a class="sourceLine" id="cb7-11" title="11"></a>
+<a class="sourceLine" id="cb7-12" title="12">tuned_lrn_rf =<span class="st"> </span>AutoTuner<span class="op">$</span><span class="kw">new</span>(<span class="dt">learner =</span> <span class="kw"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">lrn</a></span>(<span class="st">"surv.ranger"</span>),</a>
+<a class="sourceLine" id="cb7-13" title="13">                             <span class="dt">resampling =</span> <span class="kw"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">rsmp</a></span>(<span class="st">"holdout"</span>),</a>
+<a class="sourceLine" id="cb7-14" title="14">                             <span class="dt">measures =</span> <span class="kw"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">msr</a></span>(<span class="st">"surv.graf"</span>),</a>
+<a class="sourceLine" id="cb7-15" title="15">                             <span class="dt">tune_ps =</span> ParamSet<span class="op">$</span><span class="kw">new</span>(<span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(</a>
+<a class="sourceLine" id="cb7-16" title="16">                               ParamDbl<span class="op">$</span><span class="kw">new</span>(<span class="st">"num.trees"</span>, <span class="dt">lower =</span> <span class="dv">100</span>, <span class="dt">upper =</span> <span class="dv">1000</span>)</a>
+<a class="sourceLine" id="cb7-17" title="17">                             )),</a>
+<a class="sourceLine" id="cb7-18" title="18">                             <span class="dt">terminator =</span> <span class="kw"><a href="https://mlr3tuning.mlr-org.com/reference/tnr.html">term</a></span>(<span class="st">"evals"</span>, <span class="dt">n_evals =</span> <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb7-19" title="19">                             <span class="dt">tuner =</span> <span class="kw"><a href="https://mlr3tuning.mlr-org.com/reference/tnr.html">tnr</a></span>(<span class="st">"grid_search"</span>)</a>
+<a class="sourceLine" id="cb7-20" title="20">)</a>
+<a class="sourceLine" id="cb7-21" title="21"></a>
+<a class="sourceLine" id="cb7-22" title="22">design =<span class="st"> </span><span class="kw"><a href="https://mlr3.mlr-org.com/reference/benchmark_grid.html">benchmark_grid</a></span>(<span class="dt">tasks =</span> task, <span class="dt">learners =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(lrns, <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(composed_lrn_glm),</a>
+<a class="sourceLine" id="cb7-23" title="23">                                                   <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(tuned_lrn_rf)),</a>
+<a class="sourceLine" id="cb7-24" title="24">                        <span class="dt">resamplings =</span> <span class="kw"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">rsmp</a></span>(<span class="st">"cv"</span>, <span class="dt">folds =</span> <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb7-25" title="25"></a>
+<a class="sourceLine" id="cb7-26" title="26">bm =<span class="st"> </span><span class="kw"><a href="https://mlr3.mlr-org.com/reference/benchmark.html">benchmark</a></span>(design)</a>
+<a class="sourceLine" id="cb7-27" title="27">bm<span class="op">$</span><span class="kw"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"surv.harrellC"</span>,<span class="st">"surv.graf"</span>,<span class="st">"surv.grafSE"</span>), msr))[,<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">4</span>, <span class="dv">7</span><span class="op">:</span><span class="dv">9</span>)]</a>
+<a class="sourceLine" id="cb7-28" title="28"><span class="co">#&gt;                              learner_id surv.harrellC surv.graf surv.grafSE</span></a>
+<a class="sourceLine" id="cb7-29" title="29"><span class="co">#&gt; 1:                          surv.kaplan     0.5000000 0.1931783 0.008731959</span></a>
+<a class="sourceLine" id="cb7-30" title="30"><span class="co">#&gt; 2:                           surv.coxph     0.5554489 0.1912178 0.008851813</span></a>
+<a class="sourceLine" id="cb7-31" title="31"><span class="co">#&gt; 3:                      surv.parametric     0.4445511 0.2119920 0.010975050</span></a>
+<a class="sourceLine" id="cb7-32" title="32"><span class="co">#&gt; 4: surv.kaplan.surv.glmnet.distrcompose     0.5554489 0.1993391 0.010248961</span></a>
+<a class="sourceLine" id="cb7-33" title="33"><span class="co">#&gt; 5:                    surv.ranger.tuned     0.5137451 0.2153741 0.011615711</span></a></code></pre></div>
 </div>
   </div>
 
@@ -337,8 +435,10 @@
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#a-very-quick-introduction-to-survival-analysis">A very quick introduction to survival analysis</a></li>
+      <li><a href="#survival-tasks">Survival Tasks</a></li>
+      <li><a href="#train-and-predict">Train and Predict</a></li>
       <li>
-<a href="#survival-tasks">Survival Tasks</a><ul class="nav nav-pills nav-stacked">
+<a href="#evaluate---crank-lp-and-distr">Evaluate - crank, lp, and distr</a><ul class="nav nav-pills nav-stacked">
 <li><a href="#probability-distributions-with-distr6">Probability distributions with distr6</a></li>
       </ul>
 </li>
