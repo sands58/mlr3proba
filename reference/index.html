@@ -83,12 +83,20 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li>
-  <a href="../reference/index.html">
-    <span class="fa fa fa fa-file-alt"></span>
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Vignettes
      
-    Reference
+    <span class="caret"></span>
   </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/survival.html">Survival Analysis</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -99,18 +107,6 @@
      
     mlr3book
   </a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/survival.html">Survival Analysis in mlr3proba</a>
-    </li>
-  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -165,7 +161,53 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+          <h2 id="section-package" class="hasAnchor"><a href="#section-package" class="anchor"></a>Package</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="mlr3proba-package.html">mlr3proba-package</a></code> </p>
+        </td>
+        <td><p>mlr3proba: Probabilistic Supervised Learning for mlr3</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-building-blocks" class="hasAnchor"><a href="#section-building-blocks" class="anchor"></a>Building Blocks</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="TaskSurv.html">TaskSurv</a></code> </p>
+        </td>
+        <td><p>Survival Task</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="LearnerSurv.html">LearnerSurv</a></code> </p>
+        </td>
+        <td><p>Survival Learner</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="PredictionSurv.html">PredictionSurv</a></code> </p>
+        </td>
+        <td><p>Prediction Object for Survival</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="MeasureSurv.html">MeasureSurv</a></code> </p>
+        </td>
+        <td><p>Survival Measure</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-survival-learners" class="hasAnchor"><a href="#section-survival-learners" class="anchor"></a>Survival Learners</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -482,6 +524,384 @@
         </td>
         <td><p>Unemployment Duration Task</p></td>
       </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-survival-measures" class="hasAnchor"><a href="#section-survival-measures" class="anchor"></a>Survival Measures</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="LearnerSurv.html">LearnerSurv</a></code> </p>
+        </td>
+        <td><p>Survival Learner</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="LearnerSurvBlackboost.html">LearnerSurvBlackboost</a></code> </p>
+        </td>
+        <td><p>Gradient Boosting with Regression Trees Survival Learner</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="LearnerSurvCVGlmnet.html">LearnerSurvCVGlmnet</a></code> </p>
+        </td>
+        <td><p>Cross-Validated GLM with Elastic Net Regularization Survival Learner</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="LearnerSurvCoxPH.html">LearnerSurvCoxPH</a></code> </p>
+        </td>
+        <td><p>Cox Proportional Hazards Survival Learner</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="LearnerSurvFlexible.html">LearnerSurvFlexible</a></code> </p>
+        </td>
+        <td><p>Flexible Parametric Spline Survival Learner</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="LearnerSurvGamboost.html">LearnerSurvGamboost</a></code> </p>
+        </td>
+        <td><p>Gradient Boosting for Additive Models Survival Learner</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="LearnerSurvGbm.html">LearnerSurvGbm</a></code> </p>
+        </td>
+        <td><p>Generalized Boosting Regression Modeling Survival Learner</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="LearnerSurvGlmboost.html">LearnerSurvGlmboost</a></code> </p>
+        </td>
+        <td><p>Gradient Boosting with Component-wise Linear Models Survival Learner</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="LearnerSurvGlmnet.html">LearnerSurvGlmnet</a></code> </p>
+        </td>
+        <td><p>GLM with Elastic Net Regularization Survival Learner</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="LearnerSurvKaplan.html">LearnerSurvKaplan</a></code> </p>
+        </td>
+        <td><p>Kaplan Meier Estimator Survival Learner</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="LearnerSurvMboost.html">LearnerSurvMboost</a></code> </p>
+        </td>
+        <td><p>Gradient Boosting for Generalized Additive Models Survival Learner</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="LearnerSurvNelson.html">LearnerSurvNelson</a></code> </p>
+        </td>
+        <td><p>Nelson Aalen Estimator Survival Learner</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="LearnerSurvParametric.html">LearnerSurvParametric</a></code> </p>
+        </td>
+        <td><p>Fully Parametric Survival Learner</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="LearnerSurvPenalized.html">LearnerSurvPenalized</a></code> </p>
+        </td>
+        <td><p>L1 and L2 Penalized Estimation in GLMs Survival Learner</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="LearnerSurvRandomForestSRC.html">LearnerSurvRandomForestSRC</a></code> </p>
+        </td>
+        <td><p>RandomForestSRC Survival Forest Survival Learner</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="LearnerSurvRanger.html">LearnerSurvRanger</a></code> </p>
+        </td>
+        <td><p>Ranger Survival Forest Survival Learner</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="LearnerSurvRpart.html">LearnerSurvRpart</a></code> </p>
+        </td>
+        <td><p>Rpart Survival Forest Survival Learner</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="LearnerSurvSVM.html">LearnerSurvSVM</a></code> </p>
+        </td>
+        <td><p>Regression, Ranking and Hybrid Support Vector Machines Survival Learner</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="MeasureSurv.html">MeasureSurv</a></code> </p>
+        </td>
+        <td><p>Survival Measure</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="MeasureSurvBeggC.html">MeasureSurvBeggC</a></code> </p>
+        </td>
+        <td><p>Begg's C-Index Survival Measure</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="MeasureSurvChamblessAUC.html">MeasureSurvChamblessAUC</a></code> </p>
+        </td>
+        <td><p>Chambless and Diao's AUC Survival Measure</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="MeasureSurvGonenC.html">MeasureSurvGonenC</a></code> </p>
+        </td>
+        <td><p>Gonen and Heller's C-Index Survival Measure</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="MeasureSurvGraf.html">MeasureSurvGraf</a></code> </p>
+        </td>
+        <td><p>Integrated Graf Score Survival Measure</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="MeasureSurvGrafSE.html">MeasureSurvGrafSE</a></code> </p>
+        </td>
+        <td><p>Standard Error of Integrated Graf Score Survival Measure</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="MeasureSurvHarrellC.html">MeasureSurvHarrellC</a></code> </p>
+        </td>
+        <td><p>Harrell's C-Index Survival Measure</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="MeasureSurvHungAUC.html">MeasureSurvHungAUC</a></code> </p>
+        </td>
+        <td><p>Hung and Chiang's AUC Survival Measure</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="MeasureSurvIntLogloss.html">MeasureSurvIntLogloss</a></code> </p>
+        </td>
+        <td><p>Integrated Log loss Survival Measure</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="MeasureSurvIntLoglossSE.html">MeasureSurvIntLoglossSE</a></code> </p>
+        </td>
+        <td><p>Standard Error of Integrated Log loss Survival Measure</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="MeasureSurvIntegrated.html">MeasureSurvIntegrated</a></code> </p>
+        </td>
+        <td><p>Abstract Class for Integrated Survival Measures</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="MeasureSurvLogloss.html">MeasureSurvLogloss</a></code> </p>
+        </td>
+        <td><p>Log loss Survival Measure</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="MeasureSurvLoglossSE.html">MeasureSurvLoglossSE</a></code> </p>
+        </td>
+        <td><p>Standard Error of Log loss Survival Measure</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="MeasureSurvNagelkR2.html">MeasureSurvNagelkR2</a></code> </p>
+        </td>
+        <td><p>Nagelkerke's R2 Survival Measure</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="MeasureSurvOQuigleyR2.html">MeasureSurvOQuigleyR2</a></code> </p>
+        </td>
+        <td><p>O'Quigley, Xu, and Stare's R2 Survival Measure</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="MeasureSurvSongAUC.html">MeasureSurvSongAUC</a></code> </p>
+        </td>
+        <td><p>Song and Zhou's AUC Survival Measure</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="MeasureSurvSongTNR.html">MeasureSurvSongTNR</a></code> </p>
+        </td>
+        <td><p>Song and Zhou's TNR Survival Measure</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="MeasureSurvSongTPR.html">MeasureSurvSongTPR</a></code> </p>
+        </td>
+        <td><p>Song and Zhou's TPR Survival Measure</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="MeasureSurvUnoAUC.html">MeasureSurvUnoAUC</a></code> </p>
+        </td>
+        <td><p>Uno's AUC Survival Measure</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="MeasureSurvUnoC.html">MeasureSurvUnoC</a></code> </p>
+        </td>
+        <td><p>Uno's C-Index Survival Measure</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="MeasureSurvUnoTNR.html">MeasureSurvUnoTNR</a></code> </p>
+        </td>
+        <td><p>Uno's TNR Survival Measure</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="MeasureSurvUnoTPR.html">MeasureSurvUnoTPR</a></code> </p>
+        </td>
+        <td><p>Uno's TPR Survival Measure</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="MeasureSurvXuR2.html">MeasureSurvXuR2</a></code> </p>
+        </td>
+        <td><p>Xu and O'Quigley's R2 Survival Measure</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="PredictionSurv.html">PredictionSurv</a></code> </p>
+        </td>
+        <td><p>Prediction Object for Survival</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="TaskGeneratorSimsurv.html">TaskGeneratorSimsurv</a></code> </p>
+        </td>
+        <td><p>Survival Task Generator for Package 'simsurv'</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="TaskSurv.html">TaskSurv</a></code> </p>
+        </td>
+        <td><p>Survival Task</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="crankcompositor.html">crankcompositor()</a></code> </p>
+        </td>
+        <td><p>Compose a Crank Predict Type for Survival Learners</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="distrcompositor.html">distrcompositor()</a></code> </p>
+        </td>
+        <td><p>Compose a Distr Predict Type for Survival Learners</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="mlr3proba-package.html">mlr3proba-package</a></code> </p>
+        </td>
+        <td><p>mlr3proba: Probabilistic Supervised Learning for mlr3</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="mlr_pipeops_crankcompose.html">mlr_pipeops_crankcompose</a></code> </p>
+        </td>
+        <td><p>PipeOpCrankCompositor</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="mlr_pipeops_distrcompose.html">mlr_pipeops_distrcompose</a></code> </p>
+        </td>
+        <td><p>PipeOpDistrCompositor</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="mlr_tasks_lung.html">mlr_tasks_lung</a></code> </p>
+        </td>
+        <td><p>Lung Cancer Survival Task</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="mlr_tasks_rats.html">mlr_tasks_rats</a></code> </p>
+        </td>
+        <td><p>Rats Survival Task</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="mlr_tasks_unemployment.html">mlr_tasks_unemployment</a></code> </p>
+        </td>
+        <td><p>Unemployment Duration Task</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-survival-tasks" class="hasAnchor"><a href="#section-survival-tasks" class="anchor"></a>Survival Tasks</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="mlr_tasks_lung.html">mlr_tasks_lung</a></code> </p>
+        </td>
+        <td><p>Lung Cancer Survival Task</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="mlr_tasks_rats.html">mlr_tasks_rats</a></code> </p>
+        </td>
+        <td><p>Rats Survival Task</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="mlr_tasks_unemployment.html">mlr_tasks_unemployment</a></code> </p>
+        </td>
+        <td><p>Unemployment Duration Task</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-survival-pipeops" class="hasAnchor"><a href="#section-survival-pipeops" class="anchor"></a>Survival PipeOps</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="mlr_pipeops_crankcompose.html">mlr_pipeops_crankcompose</a></code> </p>
+        </td>
+        <td><p>PipeOpCrankCompositor</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="mlr_pipeops_distrcompose.html">mlr_pipeops_distrcompose</a></code> </p>
+        </td>
+        <td><p>PipeOpDistrCompositor</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="crankcompositor.html">crankcompositor()</a></code> </p>
+        </td>
+        <td><p>Compose a Crank Predict Type for Survival Learners</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="distrcompositor.html">distrcompositor()</a></code> </p>
+        </td>
+        <td><p>Compose a Distr Predict Type for Survival Learners</p></td>
+      </tr>
     </tbody>
     </table>
   </div>
@@ -489,7 +909,12 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-package">Package</a></li>
+      <li><a href="#section-building-blocks">Building Blocks</a></li>
+      <li><a href="#section-survival-learners">Survival Learners</a></li>
+      <li><a href="#section-survival-measures">Survival Measures</a></li>
+      <li><a href="#section-survival-tasks">Survival Tasks</a></li>
+      <li><a href="#section-survival-pipeops">Survival PipeOps</a></li>
     </ul>
   </div>
 </div>
