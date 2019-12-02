@@ -187,8 +187,10 @@ this is likely to have more optimal results, and has more options for tuning.</p
     <p>The <code>distr</code> prediction is estimated using the fitted custom distributions from <code><a href='https://rdrr.io/pkg/flexsurv/man/flexsurvspline.html'>flexsurv::flexsurvspline()</a></code>
 and the estimated coefficients.</p>
 <p>As flexible spline models estimate the hazard as the intercept, the linear predictor, <code>lp</code>, can be
-calculated as in the classical setting. i.e. For fitted coefficients, \(\beta = (\beta0,...,\betaP)\),
-and covariates \(X^T = (X0,...,XP)^T\), where \(X0\) is a column of \(1\)s: \(lp = \betaX\).</p>
+calculated as in the classical setting. i.e. For fitted coefficients,
+\(\beta = (\beta_0,...,\beta_P)\),
+and covariates \(X^T = (X_0,...,X_P)^T\), where \(X_0\) is a column
+of \(1\)s: \(lp = \beta X\).</p>
     <h2 class="hasAnchor" id="construction"><a class="anchor" href="#construction"></a>Construction</h2>
 
     
