@@ -49,6 +49,7 @@
 
 Calls survAUC::OXS().
 Assumes Cox PH model specification." />
+<meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -81,14 +82,40 @@ Assumes Cox PH model specification." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mlr3proba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Development version">0.1.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Version">0.1.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../reference/index.html">
+    <span class="fa fa fa fa-file-alt"></span>
+     
+    Reference
+  </a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
+<li>
+  <a href="https://mlr3book.mlr-org.com">
+    <span class="fa fa fa fa-link"></span>
+     
+    mlr3book
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/survival.html">Survival Analysis in mlr3proba</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -147,6 +174,11 @@ Assumes Cox PH model specification." />
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
     <p><code><a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6::R6Class()</a></code> inheriting from <a href='MeasureSurv.html'>MeasureSurv</a>.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>All measures implemented from <a href='https://CRAN.R-project.org/package=survAUC'><span class="pkg">survAUC</span></a> should be used with care, we are aware
+of problems in implementation that sometimes cause fatal errors in R. In future updates these
+measures will all be re-written and implemented directly in <code>mlr3proba</code>.</p>
     <h2 class="hasAnchor" id="construction"><a class="anchor" href="#construction"></a>Construction</h2>
 
     
@@ -209,6 +241,7 @@ Statistics in Medicine 24, 479–489.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#format">Format</a></li>
+      <li><a href="#details">Details</a></li>
       <li><a href="#construction">Construction</a></li>
       <li><a href="#meta-information">Meta Information</a></li>
       <li><a href="#fields">Fields</a></li>

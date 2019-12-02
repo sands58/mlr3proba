@@ -44,8 +44,7 @@
 
 
 <meta property="og:title" content="PipeOpDistrCompositor — mlr_pipeops_distrcompose" />
-<meta property="og:description" content="Predict a survival distribution from a survival learner PredictionSurv, which
-predicts lp or crank.
+<meta property="og:description" content="Estimate a survival distribution from an lp or crank predicted in a PredictionSurv.
 Note:
 This compositor is only sensible if assuming a linear model form, which may not always be the case.
 Currently only discrete estimators, Kaplan-Meier and Nelson-Aalen, are implemented. Resulting in a
@@ -53,6 +52,7 @@ predicted [distr6::WeightedDiscrete] distribution for each individual, in the fu
 extend this to allow continuous estimators.
 
 " />
+<meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -85,14 +85,40 @@ extend this to allow continuous estimators.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mlr3proba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Development version">0.1.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Version">0.1.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../reference/index.html">
+    <span class="fa fa fa fa-file-alt"></span>
+     
+    Reference
+  </a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
+<li>
+  <a href="https://mlr3book.mlr-org.com">
+    <span class="fa fa fa fa-link"></span>
+     
+    mlr3book
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/survival.html">Survival Analysis in mlr3proba</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -139,8 +165,7 @@ extend this to allow continuous estimators.
     </div>
 
     <div class="ref-description">
-    <p>Predict a survival distribution from a survival learner <code><a href='PredictionSurv.html'>PredictionSurv</a></code>, which
-predicts <code>lp</code> or <code>crank</code>.</p>
+    <p>Estimate a survival distribution from an <code>lp</code> or <code>crank</code> predicted in a <a href='PredictionSurv.html'>PredictionSurv</a>.</p>
 <p>Note:</p><ul>
 <li><p>This compositor is only sensible if assuming a linear model form, which may not always be the case.</p></li>
 <li><p>Currently only discrete estimators, Kaplan-Meier and Nelson-Aalen, are implemented. Resulting in a
