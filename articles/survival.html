@@ -216,7 +216,7 @@
 <li>
 <code>lp</code> - Linear predictor calculated as the fitted coefficients multiplied by the test data.</li>
 <li>
-<code>distr</code> - Predicted survival distribution, either discrete or continuous. Implemented in <strong><a href="https://cran.r-project.org/web/packages/distr6/">distr6</a></strong>.</li>
+<code>distr</code> - Predicted survival distribution, either discrete or continuous. Implemented in <strong><a href="https://CRAN.R-project.org/package=distr6">distr6</a></strong>.</li>
 <li>
 <code>crank</code> - Continuous risk ranking.</li>
 </ul>
@@ -256,7 +256,7 @@
 <div id="probability-distributions-with-distr6" class="section level3">
 <h3 class="hasAnchor">
 <a href="#probability-distributions-with-distr6" class="anchor"></a>Probability distributions with distr6</h3>
-<p>Predicted distributions are implemented in <strong><a href="https://cran.r-project.org/web/packages/distr6/">distr6</a></strong>, which contains functionality for plotting and further analysis of probability distributions. See <a href="https://alan-turing-institute.github.io/distr6/">here</a> for full tutorials. Briefly we will go over the most important parts for <strong>mlr3proba</strong>.</p>
+<p>Predicted distributions are implemented in <strong><a href="https://CRAN.R-project.org/package=distr6">distr6</a></strong>, which contains functionality for plotting and further analysis of probability distributions. See <a href="https://alan-turing-institute.github.io/distr6/">here</a> for full tutorials. Briefly we will go over the most important parts for <strong>mlr3proba</strong>.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">task =<span class="st"> </span><span class="kw"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">tsk</a></span>(<span class="st">"rats"</span>)</a>
 <a class="sourceLine" id="cb4-2" title="2">learner =<span class="st"> </span><span class="kw"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">lrn</a></span>(<span class="st">"surv.coxph"</span>)</a>
 <a class="sourceLine" id="cb4-3" title="3"></a>
