@@ -169,7 +169,7 @@ Assumes random censoring." />
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p><code><a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6::R6Class()</a></code> inheriting from <a href='MeasureSurvIntegrated.html'>MeasureSurvIntegrated</a>/<a href='MeasureSurv.html'>MeasureSurv</a>.</p>
+    <p><code><a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6::R6Class()</a></code> inheriting from <code>MeasureSurvAUC</code>/<a href='MeasureSurv.html'>MeasureSurv</a>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>All measures implemented from <a href='https://CRAN.R-project.org/package=survAUC'><span class="pkg">survAUC</span></a> should be used with care, we are aware
@@ -183,8 +183,8 @@ mlr_measures$get("surv.unoAUC")
 msr("surv.unoAUC")
 </pre>
 <ul>
-<li><p><code>integrated</code> :: <code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code> <br /> If <code>TRUE</code> (default), returns the integrated score, otherwise not integrated. <br /></p></li>
-<li><p><code>times</code> :: <code><a href='https://rdrr.io/r/base/vector.html'>vector()</a></code> <br /> If <code>integrate == TRUE</code> then a vector of time-points over which to integrate the score, or a single time point at which to return the score. <br /></p></li>
+<li><p><code>integrated</code> :: <code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code> <br /> If <code>TRUE</code> (default), returns the integrated score; otherwise, not integrated. <br /></p></li>
+<li><p><code>times</code> :: <code><a href='https://rdrr.io/r/base/vector.html'>vector()</a></code> <br /> If <code>integrate == TRUE</code> then a vector of time-points over which to integrate the score. If <code>integrate == FALSE</code> then a single time point at which to return the score. <br /></p></li>
 </ul>
 
     <h2 class="hasAnchor" id="meta-information"><a class="anchor" href="#meta-information"></a>Meta Information</h2>
@@ -202,8 +202,7 @@ msr("surv.unoAUC")
 
     
 
-
-<p>See <a href='MeasureSurv.html'>MeasureSurv</a> and <a href='MeasureSurvIntegrated.html'>MeasureSurvIntegrated</a></p>
+<p>See <a href='MeasureSurv.html'>MeasureSurv</a>, as well as all variables passed to the constructor.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Uno, H., T. Cai, L. Tian, and L. J. Wei (2007).<br />

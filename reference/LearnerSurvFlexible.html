@@ -47,7 +47,7 @@
 <meta property="og:description" content="Calls flexsurv::flexsurvspline().
 lp is predicted by using an internally defined predict method, see details
 distr is predicted by using an internally defined predict method, see details
-crank is identical to lp.
+crank is identical to lp
 
 
 Parameter k is changed to 1 and scale is changed to odds, as these are more in line with
@@ -167,7 +167,7 @@ this is likely to have more optimal results, and has more options for tuning." /
     <p>Calls <code><a href='https://rdrr.io/pkg/flexsurv/man/flexsurvspline.html'>flexsurv::flexsurvspline()</a></code>.</p><ul>
 <li><p>lp is predicted by using an internally defined <code>predict</code> method, see details</p></li>
 <li><p>distr is predicted by using an internally defined <code>predict</code> method, see details</p></li>
-<li><p><code>crank</code> is identical to <code>lp</code>.</p></li>
+<li><p><code>crank</code> is identical to <code>lp</code></p></li>
 </ul>
 
 <p>Parameter <code>k</code> is changed to <code>1</code> and <code>scale</code> is changed to <code>odds</code>, as these are more in line with
@@ -184,10 +184,10 @@ this is likely to have more optimal results, and has more options for tuning.</p
     <p><code><a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6::R6Class()</a></code> inheriting from <a href='LearnerSurv.html'>LearnerSurv</a>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The <code>distr</code> prediction is estimated using the fitted custom distributions from <code><a href='https://rdrr.io/pkg/flexsurv/man/flexsurvspline.html'>flexsurv::flexsurvspline()</a></code>
-and the estimated coefficients.</p>
-<p>As flexible spline models estimate the hazard as the intercept, the linear predictor, <code>lp</code>, can be
-calculated as in the classical setting. i.e. For fitted coefficients,
+    <p>The <code>distr</code> prediction is estimated using the fitted custom distributions
+from <code><a href='https://rdrr.io/pkg/flexsurv/man/flexsurvspline.html'>flexsurv::flexsurvspline()</a></code> and the estimated coefficients.</p>
+<p>As flexible spline models estimate the baseline hazard as the intercept, the linear predictor,
+<code>lp</code>, can be calculated as in the classical setting. i.e. For fitted coefficients,
 \(\beta = (\beta_0,...,\beta_P)\),
 and covariates \(X^T = (X_0,...,X_P)^T\), where \(X_0\) is a column
 of \(1\)s: \(lp = \beta X\).</p>

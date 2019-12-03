@@ -47,7 +47,7 @@
 <meta property="og:description" content="Calls survival::survreg().
 lp is predicted by using an internally defined predict method, see details
 distr is predicted by using an internally defined predict method, see details
-crank is identical to lp.
+crank is identical to lp
 
 
 Currently six parameterisations can be assumed for the baseline, see survival::survreg(). These
@@ -165,7 +165,7 @@ custom distributions in the future." />
     <p>Calls <code><a href='https://rdrr.io/pkg/survival/man/survreg.html'>survival::survreg()</a></code>.</p><ul>
 <li><p>lp is predicted by using an internally defined <code>predict</code> method, see details</p></li>
 <li><p>distr is predicted by using an internally defined <code>predict</code> method, see details</p></li>
-<li><p><code>crank</code> is identical to <code>lp</code>.</p></li>
+<li><p><code>crank</code> is identical to <code>lp</code></p></li>
 </ul>
 
 <p>Currently six parameterisations can be assumed for the baseline, see <code><a href='https://rdrr.io/pkg/survival/man/survreg.html'>survival::survreg()</a></code>. These
@@ -185,14 +185,14 @@ composition to distributions than <code><a href='https://rdrr.io/pkg/survival/ma
 <p><code>lp</code> is predicted using the formula \(lp = X\beta\) where \(X\) are the variables in the test
 data set and \(\beta\) are the fitted coefficients.</p>
 <p>The distribution <code>distr</code> is composed using the <code>lp</code> and specifying a model form in the
-<code>type</code> hyper-parameter. These are as follows, with respective hazard functions,</p><ul>
-<li><p>Proportional Hazards (<code>ph</code>) $$h(t) = h_0(t)exp(lp)$$</p></li>
-<li><p>Accelerated Failure Time (<code>aft</code>) $$h(t) = exp(-lp)h_0(\frac{t}{exp(lp)})$$</p></li>
-<li><p>Proportional Odds (<code>po</code>) $$\frac{h(t)}{h_0(t)} = {1 + (exp(lp) - 1)S_0(t)}^{-1}$$</p></li>
+<code>type</code> hyper-parameter. These are as follows, with respective survival functions,</p><ul>
+<li><p>Accelerated Failure Time (<code>aft</code>) $$S(t) = S_0(\frac{t}{exp(lp)})$$</p></li>
+<li><p>Proportional Hazards (<code>ph</code>) $$S(t) = S_0(t)^{exp(lp)}$$</p></li>
+<li><p>Proportional Odds (<code>po</code>) $$S(t) = \frac{S_0(t)}{exp(-lp) + (1-exp(-lp)) S_0(t)}$$</p></li>
 </ul>
 
-<p>Where \(h_0\) and \(S_0\) are the estimated baseline hazard/survival respectively
-(in this case with a given parametric form), and \(lp\) is the predicted linear predictor <code>lp</code>.</p>
+<p>where \(S_0\) is the estimated baseline survival distribution (in this case
+with a given parametric form), and \(lp\) is the predicted linear predictor.</p>
     <h2 class="hasAnchor" id="construction"><a class="anchor" href="#construction"></a>Construction</h2>
 
     

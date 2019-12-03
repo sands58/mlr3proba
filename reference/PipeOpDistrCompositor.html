@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PipeOpDistrCompositor — mlr_pipeops_distrcompose • mlr3proba</title>
+<title>PipeOpDistrCompositor — PipeOpDistrCompositor • mlr3proba</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -43,15 +43,17 @@
 
 
 
-<meta property="og:title" content="PipeOpDistrCompositor — mlr_pipeops_distrcompose" />
-<meta property="og:description" content="Estimate a survival distribution from an lp or crank predicted in a PredictionSurv.
-Note:
-This compositor is only sensible if assuming a linear model form, which may not always be the case.
-Currently only discrete estimators, Kaplan-Meier and Nelson-Aalen, are implemented. Resulting in a
-predicted [distr6::WeightedDiscrete] distribution for each individual, in the future we plan to
-extend this to allow continuous estimators.
+<meta property="og:title" content="PipeOpDistrCompositor — PipeOpDistrCompositor" />
+<meta property="og:description" content="Estimates (or 'composes') a survival distribution from a predicted baseline distr and a
+crank or lp from two PredictionSurvs.
+Compositor Assumptions:
+The baseline distr is a discrete estimator, i.e. LearnerSurvKaplan or LearnerSurvNelson
+The composed distr is of a linear form
+If lp is missing then crank is equivalent
 
-" />
+
+These assumptions are strong and may not be reasonable. Future updates will upgrade this
+compositor to be more flexible." />
 <meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -157,18 +159,20 @@ extend this to allow continuous estimators.
     <div class="page-header">
     <h1>PipeOpDistrCompositor</h1>
     <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3proba/blob/master/R/PipeOpDistrCompositor.R'><code>R/PipeOpDistrCompositor.R</code></a></small>
-    <div class="hidden name"><code>mlr_pipeops_distrcompose.Rd</code></div>
+    <div class="hidden name"><code>PipeOpDistrCompositor.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Estimate a survival distribution from an <code>lp</code> or <code>crank</code> predicted in a <a href='PredictionSurv.html'>PredictionSurv</a>.</p>
-<p>Note:</p><ul>
-<li><p>This compositor is only sensible if assuming a linear model form, which may not always be the case.</p></li>
-<li><p>Currently only discrete estimators, Kaplan-Meier and Nelson-Aalen, are implemented. Resulting in a
-predicted <code>[distr6::WeightedDiscrete]</code> distribution for each individual, in the future we plan to
-extend this to allow continuous estimators.</p></li>
+    <p>Estimates (or 'composes') a survival distribution from a predicted baseline <code>distr</code> and a
+<code>crank</code> or <code>lp</code> from two <a href='PredictionSurv.html'>PredictionSurv</a>s.</p>
+<p>Compositor Assumptions:</p><ul>
+<li><p>The baseline <code>distr</code> is a discrete estimator, i.e. <a href='LearnerSurvKaplan.html'>LearnerSurvKaplan</a> or <a href='LearnerSurvNelson.html'>LearnerSurvNelson</a></p></li>
+<li><p>The composed <code>distr</code> is of a linear form</p></li>
+<li><p>If <code>lp</code> is missing then <code>crank</code> is equivalent</p></li>
 </ul>
 
+<p>These assumptions are strong and may not be reasonable. Future updates will upgrade this
+compositor to be more flexible.</p>
     </div>
 
 
@@ -225,10 +229,10 @@ form to another.</p></li>
     
 
 <p>The respective <code>form</code>s above have respective survival distributions:
-$$aft: S(t) = S0(t/exp(lp))$$
-$$ph: S(t) = S0(t)^exp(lp)$$
-$$po: S(t) = S0 * [exp(-lp) + (1-exp(-lp))*S0(t)]^-1$$
-where \(S0\) is the estimated baseline survival distribution, and <code>lp</code> is the predicted
+$$aft: S(t) = S_0(\frac{t}{exp(lp)})$$
+$$ph: S(t) = S_0(t)^{exp(lp)}$$
+$$po: S(t) = \frac{S_0(t)}{exp(-lp) + (1-exp(-lp)) S_0(t)}$$
+where \(S_0\) is the estimated baseline survival distribution, and \(lp\) is the predicted
 linear predictor. If the input model does not predict a linear predictor then <code>crank</code> is
 assumed to be the <code>lp</code> - <strong>this may be a strong and unreasonable assumption.</strong></p>
     <h2 class="hasAnchor" id="fields"><a class="anchor" href="#fields"></a>Fields</h2>
@@ -245,7 +249,7 @@ assumed to be the <code>lp</code> - <strong>this may be a strong and unreasonabl
 
     <div class='dont-index'><p><a href='https://mlr3pipelines.mlr-org.com//reference/PipeOp.html'>mlr3pipelines::PipeOp</a> and <a href='distrcompositor.html'>distrcompositor</a></p>
 <p>Other survival compositors: 
-<code><a href='mlr_pipeops_crankcompose.html'>mlr_pipeops_crankcompose</a></code></p></div>
+<code><a href='PipeOpCrankCompositor.html'>PipeOpCrankCompositor</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"mlr3"</span>)

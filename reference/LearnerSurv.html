@@ -45,7 +45,6 @@
 
 <meta property="og:title" content="Survival Learner — LearnerSurv" />
 <meta property="og:description" content="This Learner specializes mlr3::Learner for survival problems.
-The slot task_type is set to &quot;surv&quot;.
 Predefined learners can be found in the mlr3misc::Dictionary mlr3::mlr_learners." />
 <meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -157,7 +156,6 @@ Predefined learners can be found in the mlr3misc::Dictionary mlr3::mlr_learners.
 
     <div class="ref-description">
     <p>This Learner specializes <a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a> for survival problems.
-The slot <code>task_type</code> is set to <code>"surv"</code>.
 Predefined learners can be found in the <a href='https://mlr3misc.mlr-org.com/reference/Dictionary.html'>mlr3misc::Dictionary</a> <a href='https://mlr3.mlr-org.com/reference/mlr_learners.html'>mlr3::mlr_learners</a>.</p>
     </div>
 
@@ -169,13 +167,15 @@ Predefined learners can be found in the <a href='https://mlr3misc.mlr-org.com/re
     <h2 class="hasAnchor" id="construction"><a class="anchor" href="#construction"></a>Construction</h2>
 
     
-<pre>l = LearnerSurv$new(id, param_set = ParamSet$new(), predict_types = character(),
-     feature_types = character(), properties = character(), packages = character())
+<pre>LearnerSurv$new(id, param_set = ParamSet$new(),
+     predict_types = character(),
+     feature_types = character(), properties = character(),
+     packages = character())
 </pre>
 
 <p>For a description of the arguments, see <a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a>.
 <code>task_type</code> is set to <code>"surv"</code>.
-Possible values for <code>predict_type</code> are <code>"distr"</code> and <code>"crank"</code>.</p>
+Possible values for <code>predict_type</code> are <code>"distr"</code>, <code>"lp"</code>, and <code>"crank"</code>.</p>
     <h2 class="hasAnchor" id="fields"><a class="anchor" href="#fields"></a>Fields</h2>
 
     
@@ -190,8 +190,7 @@ Possible values for <code>predict_type</code> are <code>"distr"</code> and <code
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mlr3</span>)
 <span class='no'>ids</span> <span class='kw'>=</span> <span class='no'>mlr_learners</span>$<span class='fu'>keys</span>(<span class='st'>"^surv"</span>)
-<span class='no'>lrns</span> <span class='kw'>=</span> <span class='no'>mlr_learners</span>$<span class='fu'><a href='https://rdrr.io/r/base/get.html'>mget</a></span>(<span class='no'>ids</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>lrns</span>)</div><div class='output co'>#&gt;  [1] "surv.blackboost"      "surv.coxph"           "surv.cvglmnet"       
+<span class='no'>ids</span></div><div class='output co'>#&gt;  [1] "surv.blackboost"      "surv.coxph"           "surv.cvglmnet"       
 #&gt;  [4] "surv.flexible"        "surv.gamboost"        "surv.gbm"            
 #&gt;  [7] "surv.glmboost"        "surv.glmnet"          "surv.kaplan"         
 #&gt; [10] "surv.mboost"          "surv.nelson"          "surv.parametric"     

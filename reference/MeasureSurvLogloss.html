@@ -51,7 +51,7 @@ Calculates the cross-entropy, or logarithmic (log), loss.
 The logloss, in the context of probabilistic predictions, is defined as the negative log probability
 density function, \(f\), evaluated at the observation time, \(t\),
 $$L(f, t) = -log(f(t))$$
-Censored observations in the test set are removed." />
+Censored observations in the test set are ignored." />
 <meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -168,7 +168,7 @@ Censored observations in the test set are removed." />
 <p>The logloss, in the context of probabilistic predictions, is defined as the negative log probability
 density function, \(f\), evaluated at the observation time, \(t\),
 $$L(f, t) = -log(f(t))$$</p>
-<p>Censored observations in the test set are removed.</p>
+<p>Censored observations in the test set are ignored.</p>
     </div>
 
 
@@ -202,8 +202,7 @@ msr("surv.logloss")
 
     
 
-
-<p>See <a href='MeasureSurv.html'>MeasureSurv</a></p>
+<p>See <a href='MeasureSurv.html'>MeasureSurv</a>, as well as all variables passed to the constructor.</p>
 
 <p>As well as</p><ul>
 <li><p>eps :: numeric(1) <br />

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PipeOpCrankCompositor — mlr_pipeops_crankcompose • mlr3proba</title>
+<title>PipeOpCrankCompositor — PipeOpCrankCompositor • mlr3proba</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -43,8 +43,8 @@
 
 
 
-<meta property="og:title" content="PipeOpCrankCompositor — mlr_pipeops_crankcompose" />
-<meta property="og:description" content="Return a continuous ranking from a distr predicted in a PredictionSurv." />
+<meta property="og:title" content="PipeOpCrankCompositor — PipeOpCrankCompositor" />
+<meta property="og:description" content="Uses a predicted distr in a PredictionSurv to estimate (or 'compose') a crank prediction." />
 <meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -150,11 +150,11 @@
     <div class="page-header">
     <h1>PipeOpCrankCompositor</h1>
     <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3proba/blob/master/R/PipeOpCrankCompositor.R'><code>R/PipeOpCrankCompositor.R</code></a></small>
-    <div class="hidden name"><code>mlr_pipeops_crankcompose.Rd</code></div>
+    <div class="hidden name"><code>PipeOpCrankCompositor.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Return a continuous ranking from a <code>distr</code> predicted in a <a href='PredictionSurv.html'>PredictionSurv</a>.</p>
+    <p>Uses a predicted <code>distr</code> in a <a href='PredictionSurv.html'>PredictionSurv</a> to estimate (or 'compose') a <code>crank</code> prediction.</p>
     </div>
 
 
@@ -178,13 +178,12 @@ List of hyperparameter settings, overwriting the hyperparameter settings that wo
 
     
 
-<p>PipeOpCrankCompositor has one input channels named "input", which takes
+<p>PipeOpCrankCompositor has one input channel named "input", which takes
 <code>NULL</code> during training and <a href='PredictionSurv.html'>PredictionSurv</a> during prediction.</p>
 <p>PipeOpCrankCompositor has one output channel named "output", producing <code>NULL</code> during training
 and a <a href='PredictionSurv.html'>PredictionSurv</a> during prediction.</p>
-<p>The output during prediction is the <a href='PredictionSurv.html'>PredictionSurv</a> from the "pred" input but with an extra (or overwritten)
-column for <code>crank</code> predict type; which is composed from the <code>distr</code> predict type in the <a href='PredictionSurv.html'>PredictionSurv</a>
-object.</p>
+<p>The output during prediction is the <a href='PredictionSurv.html'>PredictionSurv</a> from the "pred" input but with the <code>crank</code>
+predict type overwritten by the given estimation method.</p>
     <h2 class="hasAnchor" id="state"><a class="anchor" href="#state"></a>State</h2>
 
     
@@ -194,7 +193,7 @@ object.</p>
 
     
 
-<p>The parameters are:</p><ul>
+<ul>
 <li><p><code>method</code> :: <code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code> <br />
 Determines what method should be used to produce a continuous ranking from the distribution.
 One of <code>median</code> or <code>mean</code> corresponding to the respective functions in the predicted
@@ -223,7 +222,7 @@ using <a href='https://alan-turing-institute.github.io/distr6/reference/median.D
 
     <div class='dont-index'><p><a href='https://mlr3pipelines.mlr-org.com//reference/PipeOp.html'>mlr3pipelines::PipeOp</a> and <a href='crankcompositor.html'>crankcompositor</a></p>
 <p>Other survival compositors: 
-<code><a href='mlr_pipeops_distrcompose.html'>mlr_pipeops_distrcompose</a></code></p></div>
+<code><a href='PipeOpDistrCompositor.html'>PipeOpDistrCompositor</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"mlr3"</span>)

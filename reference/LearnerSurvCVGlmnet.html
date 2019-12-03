@@ -46,14 +46,13 @@
 <meta property="og:title" content="Cross-Validated GLM with Elastic Net Regularization Survival Learner — LearnerSurvCVGlmnet" />
 <meta property="og:description" content="Calls glmnet::cv.glmnet().
 lp is predicted by glmnet::predict.cv.glmnet()
-crank is identical to lp.
+crank is identical to lp
 
 
-Use LearnerSurvGlmnet and LearnerSurvCVGlmnet for the glmnets implemented in
-glmnet::glmnet()/glmnet::cv.glmnet() without and with internal cross-validation, respectively.
-Tuning using the internal optimizer in glmnet::cv.glmnet() may be more efficient when tuning
-lambda only. However, for tuning multiple hyperparameters, mlr3tuning and LearnerSurvGlmnet will
-likely give better results." />
+Use LearnerSurvGlmnet and LearnerSurvCVGlmnet for glmnets without and with internal
+cross-validation, respectively. Tuning using the internal optimizer in LearnerSurvCVGlmnet
+may be more efficient when tuning lambda only. However, for tuning multiple hyperparameters,
+mlr3tuning and LearnerSurvGlmnet will likely give better results." />
 <meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -165,14 +164,13 @@ likely give better results." />
     <div class="ref-description">
     <p>Calls <code><a href='https://rdrr.io/pkg/glmnet/man/cv.glmnet.html'>glmnet::cv.glmnet()</a></code>.</p><ul>
 <li><p>lp is predicted by <code><a href='https://rdrr.io/pkg/glmnet/man/predict.cv.glmnet.html'>glmnet::predict.cv.glmnet()</a></code></p></li>
-<li><p><code>crank</code> is identical to <code>lp</code>.</p></li>
+<li><p><code>crank</code> is identical to <code>lp</code></p></li>
 </ul>
 
-<p>Use <a href='LearnerSurvGlmnet.html'>LearnerSurvGlmnet</a> and LearnerSurvCVGlmnet for the glmnets implemented in
-<code><a href='https://rdrr.io/pkg/glmnet/man/glmnet.html'>glmnet::glmnet()</a></code>/<code><a href='https://rdrr.io/pkg/glmnet/man/cv.glmnet.html'>glmnet::cv.glmnet()</a></code> without and with internal cross-validation, respectively.
-Tuning using the internal optimizer in <code><a href='https://rdrr.io/pkg/glmnet/man/cv.glmnet.html'>glmnet::cv.glmnet()</a></code> may be more efficient when tuning
-lambda only. However, for tuning multiple hyperparameters, <a href='https://CRAN.R-project.org/package=mlr3tuning'><span class="pkg">mlr3tuning</span></a> and <a href='LearnerSurvGlmnet.html'>LearnerSurvGlmnet</a> will
-likely give better results.</p>
+<p>Use <a href='LearnerSurvGlmnet.html'>LearnerSurvGlmnet</a> and LearnerSurvCVGlmnet for glmnets without and with internal
+cross-validation, respectively. Tuning using the internal optimizer in LearnerSurvCVGlmnet
+may be more efficient when tuning lambda only. However, for tuning multiple hyperparameters,
+<a href='https://CRAN.R-project.org/package=mlr3tuning'><span class="pkg">mlr3tuning</span></a> and <a href='LearnerSurvGlmnet.html'>LearnerSurvGlmnet</a> will likely give better results.</p>
     </div>
 
 

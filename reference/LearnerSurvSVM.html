@@ -45,12 +45,12 @@
 
 <meta property="og:title" content="Regression, Ranking and Hybrid Support Vector Machines Survival Learner — LearnerSurvSVM" />
 <meta property="og:description" content="Calls survivalsvm::survivalsvm().
-crank is predicted by survivalsvm::predict.survivalsvm
+crank is predicted by survivalsvm::predict.survivalsvm()
 
 
 Four possible SVMs can be implemented, dependent on the type parameter. These correspond
-to predicting the survival time via regression (regression), predicting the PI by
-imposing a ranking constraint (vanbelle1, vanbelle2), a hybrid of the two (hybrid).
+to predicting the survival time via regression (regression), predicting a continuous rank
+(vanbelle1, vanbelle2), or a hybrid of the two (hybrid).
 Whichever type is chosen determines how the crank predict type is calculated,
 but in any case all can be considered a valid continuous ranking.
 To be in line with the Van Belle papers and to prevent the learner crashing without
@@ -165,12 +165,12 @@ user-set parameters, the default diff.meth is set to diffmeth3 with gamma.mu equ
 
     <div class="ref-description">
     <p>Calls <code><a href='https://rdrr.io/pkg/survivalsvm/man/survivalsvm.html'>survivalsvm::survivalsvm()</a></code>.</p><ul>
-<li><p>crank is predicted by <a href='https://rdrr.io/pkg/survivalsvm/man/predict.survivalsvm.html'>survivalsvm::predict.survivalsvm</a></p></li>
+<li><p>crank is predicted by <code><a href='https://rdrr.io/pkg/survivalsvm/man/predict.survivalsvm.html'>survivalsvm::predict.survivalsvm()</a></code></p></li>
 </ul>
 
 <p>Four possible SVMs can be implemented, dependent on the <code>type</code> parameter. These correspond
-to predicting the survival time via regression (<code>regression</code>), predicting the PI by
-imposing a ranking constraint (<code>vanbelle1</code>, <code>vanbelle2</code>), a hybrid of the two (<code>hybrid</code>).
+to predicting the survival time via regression (<code>regression</code>), predicting a continuous rank
+(<code>vanbelle1</code>, <code>vanbelle2</code>), or a hybrid of the two (<code>hybrid</code>).
 Whichever <code>type</code> is chosen determines how the <code>crank</code> predict type is calculated,
 but in any case all can be considered a valid continuous ranking.</p>
 <p>To be in line with the Van Belle papers and to prevent the learner crashing without

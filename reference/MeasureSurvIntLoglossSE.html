@@ -179,7 +179,7 @@ where \(\Sigma_{i, j}\) is the sample covariance matrix over \(M\) distinct time
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p><code><a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6::R6Class()</a></code> inheriting from <a href='MeasureSurvIntegrated.html'>MeasureSurvIntegrated</a>/<a href='MeasureSurv.html'>MeasureSurv</a>.</p>
+    <p><code><a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6::R6Class()</a></code> inheriting from <code>MeasureSurvIntegrated</code>/<a href='MeasureSurv.html'>MeasureSurv</a>.</p>
     <h2 class="hasAnchor" id="construction"><a class="anchor" href="#construction"></a>Construction</h2>
 
     
@@ -188,8 +188,8 @@ mlr_measures$get("surv.intloglossSE")
 msr("surv.intloglossSE")
 </pre>
 <ul>
-<li><p><code>integrated</code> :: <code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code> <br /> If <code>TRUE</code> (default), returns the integrated score, otherwise not integrated. <br /></p></li>
-<li><p><code>times</code> :: <code><a href='https://rdrr.io/r/base/vector.html'>vector()</a></code> <br /> If <code>integrate == TRUE</code> then a vector of time-points over which to integrate the score, or a single time point at which to return the score. <br /></p></li>
+<li><p><code>integrated</code> :: <code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code> <br /> If <code>TRUE</code> (default), returns the integrated score; otherwise, not integrated. <br /></p></li>
+<li><p><code>times</code> :: <code><a href='https://rdrr.io/r/base/vector.html'>vector()</a></code> <br /> If <code>integrate == TRUE</code> then a vector of time-points over which to integrate the score. If <code>integrate == FALSE</code> then a single time point at which to return the score. <br /></p></li>
 <li><p><code>eps</code> :: <code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code> <br /> Very small number to set zero-valued predicted probabilities to, in order to prevent errors in log(0) calculation. <br /></p></li>
 </ul>
 
@@ -208,9 +208,7 @@ msr("surv.intloglossSE")
 
     
 
-
-<p>See <a href='MeasureSurv.html'>MeasureSurv</a>
-and <a href='MeasureSurvIntegrated.html'>MeasureSurvIntegrated</a></p>
+<p>See <a href='MeasureSurv.html'>MeasureSurv</a>, as well as all variables passed to the constructor.</p>
 
 <p>As well as</p><ul>
 <li><p>eps :: numeric(1) <br />

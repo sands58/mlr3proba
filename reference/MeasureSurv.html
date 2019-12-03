@@ -45,8 +45,7 @@
 
 <meta property="og:title" content="Survival Measure — MeasureSurv" />
 <meta property="og:description" content="This measure specializes mlr3::Measure for survival problems.
-Predefined measures can be found in the mlr3misc::Dictionary mlr3::mlr_measures.
-The task_type is set to &quot;surv&quot;." />
+Predefined measures can be found in the mlr3misc::Dictionary mlr3::mlr_measures." />
 <meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -158,7 +157,6 @@ The task_type is set to &quot;surv&quot;." />
     <div class="ref-description">
     <p>This measure specializes <a href='https://mlr3.mlr-org.com/reference/Measure.html'>mlr3::Measure</a> for survival problems.
 Predefined measures can be found in the <a href='https://mlr3misc.mlr-org.com/reference/Dictionary.html'>mlr3misc::Dictionary</a> <a href='https://mlr3.mlr-org.com/reference/mlr_measures.html'>mlr3::mlr_measures</a>.</p>
-<p>The <code>task_type</code> is set to <code>"surv"</code>.</p>
     </div>
 
 
@@ -169,13 +167,14 @@ Predefined measures can be found in the <a href='https://mlr3misc.mlr-org.com/re
     <h2 class="hasAnchor" id="construction"><a class="anchor" href="#construction"></a>Construction</h2>
 
     
-<pre>m = MeasureSurv$new(id, range, minimize, aggregator = NULL, properties = character(), predict_type = "distr",
-     task_properties = character(), packages = character())
+<pre>MeasureSurv$new(id, range, minimize, aggregator = NULL,
+                properties = character(), predict_type = "distr",
+                task_properties = character(), packages = character())
 </pre>
 
 <p>For a description of the arguments, see <a href='https://mlr3.mlr-org.com/reference/Measure.html'>mlr3::Measure</a>.
 The <code>task_type</code> is set to <code>"surv"</code>.
-Possible values for <code>predict_type</code> are <code>"distr"</code> and <code>"crank"</code>.</p>
+Possible values for <code>predict_type</code> are <code>"distr"</code>, <code>"lp"</code>, and <code>"crank"</code>.</p>
     <h2 class="hasAnchor" id="fields"><a class="anchor" href="#fields"></a>Fields</h2>
 
     
@@ -188,7 +187,8 @@ Possible values for <code>predict_type</code> are <code>"distr"</code> and <code
 <p>See Measure.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Example survival measures: <code><a href='MeasureSurvGraf.html'>surv.graf</a></code>.</p></div>
+    <div class='dont-index'><p>Example survival measures: <code><a href='MeasureSurvGraf.html'>surv.graf</a></code>,
+<code><a href='MeasureSurvHarrellC.html'>surv.harrellC</a></code>.</p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

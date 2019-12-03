@@ -51,7 +51,7 @@ Calculates the standard error of MeasureSurvLogloss.
 The standard error of the Logloss, L, is approximated via,
 $$se(L) = sd(L)/\sqrt{N}$$
 where \(N\) are the number of observations in the test set, and \(sd\) is the standard deviation.
-Censored observations in the test set are removed." />
+Censored observations in the test set are ignored." />
 <meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -168,7 +168,7 @@ Censored observations in the test set are removed." />
 <p>The standard error of the Logloss, L, is approximated via,
 $$se(L) = sd(L)/\sqrt{N}$$
 where \(N\) are the number of observations in the test set, and \(sd\) is the standard deviation.</p>
-<p>Censored observations in the test set are removed.</p>
+<p>Censored observations in the test set are ignored.</p>
     </div>
 
 
@@ -202,9 +202,7 @@ msr("surv.loglossSE")
 
     
 
-
-<p>See <a href='MeasureSurv.html'>MeasureSurv</a>
-and <a href='MeasureSurvLogloss.html'>MeasureSurvLogloss</a></p>
+<p>See <a href='MeasureSurv.html'>MeasureSurv</a>, as well as all variables passed to the constructor.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other survival measures: 

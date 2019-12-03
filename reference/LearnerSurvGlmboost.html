@@ -47,13 +47,13 @@
 <meta property="og:description" content="Calls mboost::glmboost().
 lp is predicted by mboost::predict.mboost()
 distr is predicted by mboost::survFit() which assumes a PH fit with a Breslow estimator
-crank is identical to lp.
+crank is identical to lp
 
 
 The dist parameter is specified slightly differently than in mboost. Whereas the latter
 takes in objects, in this learner instead a string is specified in order to identify which distribution
 to use. As the default in mboost is the Gaussian family, which is not compatible with
-survival models, instead we have by default &quot;coxph&quot; for dist.
+survival models, instead we have by default &quot;coxph&quot;.
 If the value given to the Family parameter is &quot;custom.family&quot; then an object of class
 mboost::Family() needs to be passed to the custom.family parameter." />
 <meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
@@ -168,13 +168,13 @@ mboost::Family() needs to be passed to the custom.family parameter." />
     <p>Calls <code><a href='https://rdrr.io/pkg/mboost/man/glmboost.html'>mboost::glmboost()</a></code>.</p><ul>
 <li><p>lp is predicted by <code><a href='https://rdrr.io/pkg/mboost/man/methods.html'>mboost::predict.mboost()</a></code></p></li>
 <li><p>distr is predicted by <code><a href='https://rdrr.io/pkg/mboost/man/survFit.html'>mboost::survFit()</a></code> which assumes a PH fit with a Breslow estimator</p></li>
-<li><p><code>crank</code> is identical to <code>lp</code>.</p></li>
+<li><p><code>crank</code> is identical to <code>lp</code></p></li>
 </ul>
 
 <p>The <code>dist</code> parameter is specified slightly differently than in mboost. Whereas the latter
 takes in objects, in this learner instead a string is specified in order to identify which distribution
 to use. As the default in mboost is the Gaussian family, which is not compatible with
-survival models, instead we have by default <code>"coxph"</code> for <code>dist</code>.</p>
+survival models, instead we have by default <code>"coxph"</code>.</p>
 <p>If the value given to the <code>Family</code> parameter is "custom.family" then an object of class
 <code><a href='https://rdrr.io/pkg/mboost/man/Family.html'>mboost::Family()</a></code> needs to be passed to the <code>custom.family</code> parameter.</p>
     </div>

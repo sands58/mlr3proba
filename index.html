@@ -19,7 +19,7 @@
 <link href="extra.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Probabilistic Supervised Learning for mlr3">
 <meta property="og:description" content="Provides extensions for probabilistic supervised
-    learning for mlr3.  This includes extending the regression task to
+    learning for `mlr3`.  This includes extending the regression task to
     probabilistic and interval regression, adding a survival task, and
     other specialized models, predictions, and measures.">
 <meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png">
@@ -259,7 +259,7 @@
 </tr>
 <tr class="odd">
 <td align="left"><a href="https://mlr3proba.mlr-org.com/reference/MeasureSurvGonenC.html">surv.gonenC</a></td>
-<td align="left">Gonen and Heller’s AUC</td>
+<td align="left">Gonen and Heller’s C-Index</td>
 <td align="left"><a href="https://cran.r-project.org/web/packages/survAUC">survAUC</a></td>
 </tr>
 <tr class="even">
@@ -359,7 +359,7 @@
 <div id="feature-overview-and-lifecycle" class="section level2">
 <h2 class="hasAnchor">
 <a href="#feature-overview-and-lifecycle" class="anchor"></a>Feature Overview and Lifecycle</h2>
-<p>The vision of <strong>mlr3proba</strong> is to be the first complete probabilistic machine learning package in R. This encompasses survival analysis, probabilistic regression (not just via MCMC!), and unsupervised density estimation. The first release of <strong>mlr3proba</strong> is focused entirely on survival analysis and introduces <code>TaskSurv</code>. Later releases will include <code>TaskDensity</code> and will extend <code>TaskRegr</code> to have probabilistic predict types. The lifecycle of the survival task and features are considered <code>maturing</code> and any major changes are unlikely. The density and probabilistic regression tasks are currently in the early stages of development. The current main features of <strong>mlr3proba</strong> are:</p>
+<p>The vision of <strong>mlr3proba</strong> is to be the first complete probabilistic machine learning package in R. This encompasses survival analysis, probabilistic regression, and unsupervised density estimation. The first release of <strong>mlr3proba</strong> is focused entirely on survival analysis and introduces <code>TaskSurv</code>. Later releases will include <code>TaskDensity</code> and will extend <code>TaskRegr</code> to have probabilistic predict types. The lifecycle of the survival task and features are considered <code>maturing</code> and any major changes are unlikely. The density and probabilistic regression tasks are currently in the early stages of development. The current main features of <strong>mlr3proba</strong> are:</p>
 <ul>
 <li>The added <code>TaskSurv</code>, <code>LearnerSurv</code>, <code>PredictionSurv</code> for survival analysis</li>
 <li>17 survival learners, and 21 survival measures, including efficient implementations of censoring-adjusted probabilistic measures, such as the Integrated Graf (or Brier) Score.</li>

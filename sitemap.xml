@@ -88,9 +88,6 @@
     <loc>https://mlr3proba.mlr-org.com/reference/MeasureSurvIntLoglossSE.html</loc>
   </url>
   <url>
-    <loc>https://mlr3proba.mlr-org.com/reference/MeasureSurvIntegrated.html</loc>
-  </url>
-  <url>
     <loc>https://mlr3proba.mlr-org.com/reference/MeasureSurvLogloss.html</loc>
   </url>
   <url>
@@ -127,6 +124,12 @@
     <loc>https://mlr3proba.mlr-org.com/reference/MeasureSurvXuR2.html</loc>
   </url>
   <url>
+    <loc>https://mlr3proba.mlr-org.com/reference/PipeOpCrankCompositor.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3proba.mlr-org.com/reference/PipeOpDistrCompositor.html</loc>
+  </url>
+  <url>
     <loc>https://mlr3proba.mlr-org.com/reference/PredictionSurv.html</loc>
   </url>
   <url>
@@ -143,12 +146,6 @@
   </url>
   <url>
     <loc>https://mlr3proba.mlr-org.com/reference/mlr3proba-package.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3proba.mlr-org.com/reference/mlr_pipeops_crankcompose.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3proba.mlr-org.com/reference/mlr_pipeops_distrcompose.html</loc>
   </url>
   <url>
     <loc>https://mlr3proba.mlr-org.com/reference/mlr_tasks_lung.html</loc>
