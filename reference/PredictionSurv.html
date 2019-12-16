@@ -202,16 +202,16 @@ Used in discrimination measures like <a href='MeasureSurvHarrellC.html'>surv.har
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mlr3</span>)
-<span class='no'>task</span> <span class='kw'>=</span> <span class='no'>mlr_tasks</span>$<span class='fu'><a href='https://rdrr.io/r/base/get.html'>get</a></span>(<span class='st'>"lung"</span>)
+<span class='no'>task</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tgen</a></span>(<span class='st'>"simsurv"</span>)$<span class='fu'>generate</span>(<span class='fl'>20</span>)
 <span class='no'>learner</span> <span class='kw'>=</span> <span class='no'>mlr_learners</span>$<span class='fu'><a href='https://rdrr.io/r/base/get.html'>get</a></span>(<span class='st'>"surv.rpart"</span>)
 <span class='no'>p</span> <span class='kw'>=</span> <span class='no'>learner</span>$<span class='fu'>train</span>(<span class='no'>task</span>)$<span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span>(<span class='no'>task</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'><a href='https://mlr3.mlr-org.com/reference/as.data.table.html'>as.data.table</a></span>(<span class='no'>p</span>))</div><div class='output co'>#&gt;    row_id time status    crank                distr
-#&gt; 1:      1  306   TRUE 230.8428 &lt;VectorDistribution&gt;
-#&gt; 2:      2  455   TRUE 230.8428 &lt;VectorDistribution&gt;
-#&gt; 3:      3 1010  FALSE 523.5201 &lt;VectorDistribution&gt;
-#&gt; 4:      4  210   TRUE 199.3333 &lt;VectorDistribution&gt;
-#&gt; 5:      5  883   TRUE 523.5201 &lt;VectorDistribution&gt;
-#&gt; 6:      6 1022  FALSE 336.9518 &lt;VectorDistribution&gt;</div></pre>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'><a href='https://mlr3.mlr-org.com/reference/as.data.table.html'>as.data.table</a></span>(<span class='no'>p</span>))</div><div class='output co'>#&gt;    row_id     time status    crank                distr
+#&gt; 1:      1 4.272501   TRUE 1.989096 &lt;VectorDistribution&gt;
+#&gt; 2:      2 5.000000  FALSE 1.095800 &lt;VectorDistribution&gt;
+#&gt; 3:      3 1.930479   TRUE 1.095800 &lt;VectorDistribution&gt;
+#&gt; 4:      4 2.768952   TRUE 1.989096 &lt;VectorDistribution&gt;
+#&gt; 5:      5 3.523663   TRUE 1.095800 &lt;VectorDistribution&gt;
+#&gt; 6:      6 1.577877   TRUE 1.095800 &lt;VectorDistribution&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

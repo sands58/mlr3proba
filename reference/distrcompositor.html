@@ -209,31 +209,32 @@ which may be required for changing the prediction <code>distr</code> from one mo
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"mlr3"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"mlr3pipelines"</span>)
 
+<span class='no'>task</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tgen</a></span>(<span class='st'>"simsurv"</span>)$<span class='fu'>generate</span>(<span class='fl'>20</span>)
 <span class='no'>cvglm.distr</span> <span class='kw'>=</span> <span class='fu'>distrcompositor</span>(<span class='kw'>learner</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span>(<span class='st'>"surv.cvglmnet"</span>),
                             <span class='kw'>estimator</span> <span class='kw'>=</span> <span class='st'>"kaplan"</span>,
                             <span class='kw'>form</span> <span class='kw'>=</span> <span class='st'>"aft"</span>)
-<span class='fu'><a href='https://mlr3.mlr-org.com/reference/resample.html'>resample</a></span>(<span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span>(<span class='st'>"rats"</span>), <span class='no'>cvglm.distr</span>,
+<span class='fu'><a href='https://mlr3.mlr-org.com/reference/resample.html'>resample</a></span>(<span class='no'>task</span>, <span class='no'>cvglm.distr</span>,
         <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span>(<span class='st'>"cv"</span>, <span class='kw'>folds</span> <span class='kw'>=</span> <span class='fl'>2</span>))$<span class='fu'>predictions</span>()</div><div class='output co'>#&gt; [[1]]
-#&gt; &lt;PredictionSurv&gt; for 150 observations:
-#&gt;     row_id time status      crank                distr         lp
-#&gt;          1  101  FALSE  0.0000000 &lt;VectorDistribution&gt;  0.0000000
-#&gt;          2   49   TRUE  0.0000000 &lt;VectorDistribution&gt;  0.0000000
-#&gt;          3  104  FALSE  0.0000000 &lt;VectorDistribution&gt;  0.0000000
-#&gt; ---                                                              
-#&gt;        295  104  FALSE  0.0000000 &lt;VectorDistribution&gt;  0.0000000
-#&gt;        297   79   TRUE  0.0000000 &lt;VectorDistribution&gt;  0.0000000
-#&gt;        298   92  FALSE -0.5661577 &lt;VectorDistribution&gt; -0.5661577
+#&gt; &lt;PredictionSurv&gt; for 10 observations:
+#&gt;     row_id     time status     crank                distr        lp
+#&gt;          1 5.000000  FALSE -3.562780 &lt;VectorDistribution&gt; -3.562780
+#&gt;          2 5.000000  FALSE -2.532081 &lt;VectorDistribution&gt; -2.532081
+#&gt;          4 5.000000  FALSE -3.411464 &lt;VectorDistribution&gt; -3.411464
+#&gt; ---                                                                
+#&gt;         12 5.000000  FALSE -2.507915 &lt;VectorDistribution&gt; -2.507915
+#&gt;         17 3.139458   TRUE -3.028849 &lt;VectorDistribution&gt; -3.028849
+#&gt;         19 1.645720   TRUE -2.544916 &lt;VectorDistribution&gt; -2.544916
 #&gt; 
 #&gt; [[2]]
-#&gt; &lt;PredictionSurv&gt; for 150 observations:
-#&gt;     row_id time status      crank                distr         lp
-#&gt;          7  104  FALSE  0.0000000 &lt;VectorDistribution&gt;  0.0000000
-#&gt;          8  102  FALSE  0.0000000 &lt;VectorDistribution&gt;  0.0000000
-#&gt;          9  104  FALSE  0.0000000 &lt;VectorDistribution&gt;  0.0000000
-#&gt; ---                                                              
-#&gt;        296  104  FALSE  0.0000000 &lt;VectorDistribution&gt;  0.0000000
-#&gt;        299  104  FALSE -0.4747725 &lt;VectorDistribution&gt; -0.4747725
-#&gt;        300  102  FALSE -0.4747725 &lt;VectorDistribution&gt; -0.4747725
+#&gt; &lt;PredictionSurv&gt; for 10 observations:
+#&gt;     row_id      time status         crank                distr            lp
+#&gt;          3 2.9711146   TRUE -5.238021e-06 &lt;VectorDistribution&gt; -5.238021e-06
+#&gt;          6 0.5168292   TRUE -5.275918e-06 &lt;VectorDistribution&gt; -5.275918e-06
+#&gt;          9 5.0000000  FALSE -5.319039e-06 &lt;VectorDistribution&gt; -5.319039e-06
+#&gt; ---                                                                         
+#&gt;         16 4.8813723   TRUE -5.288955e-06 &lt;VectorDistribution&gt; -5.288955e-06
+#&gt;         18 5.0000000  FALSE -5.460378e-06 &lt;VectorDistribution&gt; -5.460378e-06
+#&gt;         20 5.0000000  FALSE -6.029435e-06 &lt;VectorDistribution&gt; -6.029435e-06
 #&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
