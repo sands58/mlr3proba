@@ -5,10 +5,9 @@ LearnerDensityHist <- R6::R6Class("LearnerDensityHist", inherit = LearnerDensity
                       id = "density.Hist",
                       param_set = ParamSet$new(
                                   params = list(
-                                  ParamDbl$new(id = "numbin", lower = 0, tags = "train"),
+                                  ParamInt$new(id = "numbin", lower = 0, tags = "train"),
                                   ParamDbl$new(id = "binwidth", tags = "train"),
-                                  ParamDbl$new(id = "origin", tags = lower= 0, "train"),
-                                  ParamDBl$new(id = "binwidth", lower = 0, tags = predict)
+                                  ParamInt$new(id = "origin", lower= 0, tags= "train")
                                   )),
                       feature_types =  c("logical", "integer", "numeric", "character", "factor", "ordered"),
                       predict_types = "prob",
@@ -22,7 +21,7 @@ LearnerDensityHist <- R6::R6Class("LearnerDensityHist", inherit = LearnerDensity
 
                       #this is called self$model
                       #using histogram1.R
-                      invoke(histogram, traindata = data, .args = pars)
+                      invoke(.thihistogram, traindata = data, .args = pars)
                       }
 
                       predict_internal = function(task){
@@ -37,8 +36,8 @@ LearnerDensityHist <- R6::R6Class("LearnerDensityHist", inherit = LearnerDensity
 
                       }
 
-                  ##?   support = Interval$new(1, 10)
-                      U =  Distribution$new(name= "Histogram", short_name = "hist", pdf = pdf, paramaters = pars, support = support)
+                      support = Interval$new(min(truth), max(truth))
+                      pdf =  Distribution$new(name= "Histogram", short_name = "hist", pdf = pdf, paramaters = pars, support = support)
 
                       }
                        ))

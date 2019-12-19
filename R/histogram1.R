@@ -25,9 +25,10 @@
 
 
 #Example:
-# set.seed(5202)
-# traindata <- rnorm(10, mean = 2, sd = 3)
-# histogram(data = traindata, numbin = 5, binwidth = 1, origin = 2)
+
+data <- c(1,1,2,3,4,5,6,6,7,8)
+newdata <- c(1, 4.5, 6)
+histogram(data = data, numbin =5,binwidth = NULL, origin = 2)
 
 
 require(pkgcond)
@@ -35,26 +36,20 @@ library(pkgcond)
 
 histogram <- function(data, numbin=NULL, binwidth=NULL, origin=NULL){
 
-  X <-  traindata
+  X <-  data
   # sort the data
   XSort <-  sort(X, decreasing = F)
   Xmin <-  min(XSort)
   Xmax <-  max(XSort)
   # find the difference between maximum and minimum
   XDif <- ifelse(is.null(origin),  Xmax- Xmin, Xmax - origin)
-  #find the binwidth
-  #  NumBin <- ifelse(is.null(numbin), round(XDif/binwidth), numbin)
-  p <- 0
-  if(is.null(c(binwidth, numbin))){
-    NumBin <- ceiling(log(length(X), 2) +1)
-  }   else if(!is.null(binwidth & numbin)){
-        print("Either binwidth or numbin, not both")
-        p <- 1
-  } else if(is.null(numbin)){
-    NumBin <- ceiling(XDif/binwidth)
-  }  else(NumBin <- numbin)
 
-  if(p == 0){
+  if(is.null(c(binwidth, numbin))){
+             NumBin <- ceiling(log(length(X), 2) +1)
+  }  else if(is.null(numbin)){
+             NumBin <- ceiling(XDif/binwidth)
+    } else (NumBin <- numbin)
+
   BinWidth <- ifelse(is.null(binwidth), XDif/NumBin, binwidth)
 
   IndexNumBin <- c(1:NumBin)
@@ -68,18 +63,14 @@ histogram <- function(data, numbin=NULL, binwidth=NULL, origin=NULL){
   Bin <- table(cut(XSort, XInterval, include.lowest = T))
   ProbBin <- Bin/(length(XSort)*BinWidth)
 
-  newtraindata <- ifelse(traindata %!in% XSort, 0, traindata)
+  newtraindata <- ifelse(data %!in% XSort, 0, data)
   TrainIntervals <- findInterval(newtraindata, XInterval, rightmost.closed = T)
 
   Pdf <- ifelse(TrainIntervals != 0, ProbBin[TrainIntervals[]], 0)
-  } else{Pdf = NULL
-  ProbBin = NULL
-  XInterval = NULL}
 
-  return(list(pdf = Pdf, binPdf = ProbBin, Intervals = XInterval))
+
+  return(list(pdf = Pdf, binPdf = ProbBin, Intervals = XInterval, Binwidth = BinWidth))
 }
-
-
 
 
 
