@@ -33,10 +33,6 @@
 # origin <- 2
 # a <- histogram(data = data,  binwidth = 1, origin = 2)
 
-
-require(pkgcond)
-library(pkgcond)
-
 histogram <- function(data, numbin= NULL, binwidth=NULL, origin=NULL){
 
   X <-  data
@@ -94,10 +90,4 @@ histogram <- function(data, numbin= NULL, binwidth=NULL, origin=NULL){
               Binwidth = BinWidth, numBin = numBin))
 }
 
-
-newdata_Intervals = as.numeric(findInterval(newdata, a$Intervals,
-                                           rightmost.closed= TRUE, left.open = F))
-num_zero <- length(which(newdata_Intervals %in% !a$numBin))
-ifelse(newdata_Intervals %in% a$numBin, c(rep(0, num_zero),a$binPdf[newdata_Intervals]),
-       rep(0, length(newdata_Intervals)))
 
