@@ -81,7 +81,7 @@ The task_type is set to &quot;surv&quot;." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mlr3proba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Version">0.1.1</span>
       </span>
     </div>
 
@@ -171,8 +171,8 @@ Predefined tasks are stored in <a href='https://mlr3.mlr-org.com/reference/mlr_t
     <h2 class="hasAnchor" id="construction"><a class="anchor" href="#construction"></a>Construction</h2>
 
     
-<pre>TaskSurv$new(id, backend, time, time2,
-  event = c("right","left", "counting","interval","interval2","mstate"))
+<pre>TaskSurv$new(id, backend, time, event, time2,
+   type = c("right","left","counting","interval","interval2","mstate"))
 </pre>
 <ul>
 <li><p><code>id</code> :: <code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code><br />
@@ -180,14 +180,14 @@ Name of the task.</p></li>
 <li><p><code>backend</code> :: <a href='https://mlr3.mlr-org.com/reference/DataBackend.html'>DataBackend</a></p></li>
 <li><p><code>time</code> :: <code><a href='https://rdrr.io/r/base/numeric.html'>numeric()</a></code><br />
 Event time if data is right censored. Starting time if interval censored.</p></li>
-<li><p><code>time2</code> :: <code><a href='https://rdrr.io/r/base/numeric.html'>numeric()</a></code><br />
-Ending time for interval censored data. Ignored otherwise.</p></li>
 <li><p><code>event</code> :: <code><a href='https://rdrr.io/r/base/integer.html'>integer()</a></code> | <code><a href='https://rdrr.io/r/base/logical.html'>logical()</a></code><br />
 Event indicator.
 If data is right censored then "0"/<code>FALSE</code> means alive (no event),
 "1"/<code>TRUE</code> means dead (event). If <code>type</code> is <code>"interval"</code> then "0" means right censored,
 "1" means dead (event), "2" means left censored, and "3" means interval censored. If <code>type</code> is
 <code>"interval2"</code> then <code>event</code> is ignored.</p></li>
+<li><p><code>time2</code> :: <code><a href='https://rdrr.io/r/base/numeric.html'>numeric()</a></code><br />
+Ending time for interval censored data. Ignored otherwise.</p></li>
 <li><p><code>type</code> :: character()<br />
 Type of censoring. Default is 'right' censoring.</p></li>
 </ul>

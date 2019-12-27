@@ -86,7 +86,7 @@ see examples." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mlr3proba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Version">0.1.1</span>
       </span>
     </div>
 
@@ -239,9 +239,9 @@ doi: <a href='https://doi.org/10.1002/bimj.200900028'>10.1002/bimj.200900028</a>
 <span class='no'>task</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tgen</a></span>(<span class='st'>"simsurv"</span>)$<span class='fu'>generate</span>(<span class='fl'>20</span>)
 <span class='no'>learner</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span>(<span class='st'>"surv.penalized"</span>, <span class='kw'>unpenalized</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"height"</span>))
 <span class='no'>learner</span>$<span class='fu'>train</span>(<span class='no'>task</span>)
-<span class='no'>learner</span>$<span class='no'>model</span>@<span class='kw'>penalized</span></div><div class='output co'>#&gt;   treatment      weight 
-#&gt; -0.11849775  0.03986686 </div><div class='input'><span class='no'>learner</span>$<span class='no'>model</span>@<span class='kw'>unpenalized</span></div><div class='output co'>#&gt;      height 
-#&gt; -0.02224867 </div></pre>
+<span class='no'>learner</span>$<span class='no'>model</span>@<span class='kw'>penalized</span></div><div class='output co'>#&gt;  treatment     weight 
+#&gt; 0.97867392 0.02127612 </div><div class='input'><span class='no'>learner</span>$<span class='no'>model</span>@<span class='kw'>unpenalized</span></div><div class='output co'>#&gt;      height 
+#&gt; 0.008976014 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

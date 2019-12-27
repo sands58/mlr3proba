@@ -93,7 +93,7 @@ $$L(S) = \frac{1}{NT} \sum_{i=1}^N \sum_{j=1}^T L(S_i,t_i|t^*_j)$$" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mlr3proba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Version">0.1.1</span>
       </span>
     </div>
 
@@ -195,7 +195,7 @@ $$L(S) = \frac{1}{NT} \sum_{i=1}^N \sum_{j=1}^T L(S_i,t_i|t^*_j)$$</p>
     <h2 class="hasAnchor" id="construction"><a class="anchor" href="#construction"></a>Construction</h2>
 
     
-<pre>MeasureSurvIntLogloss$new(integrated = TRUE, times, eps = 1e-15)
+<pre>MeasureSurvIntLogloss$new(integrated = TRUE, times, eps = 1e-15, method = 2)
 mlr_measures$get("surv.intlogloss")
 msr("surv.intlogloss")
 </pre>

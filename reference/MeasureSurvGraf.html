@@ -52,6 +52,10 @@ For an individual who dies at time \(t\), with predicted Survival function, \(S\
 Graf Score at time \(t^*\) is given by
 $$L(S,t|t^*) = [(S(t^*)^2)I(t \le t^*, \delta = 1)(1/G(t))] + [((1 - S(t^*))^2)I(t &amp;gt; t^*)(1/G(t^*))]$$
 where \(G\) is the Kaplan-Meier estimate of the censoring distribution.
+Note: If comparing the integrated graf score to other packages, e.g. pec::pec(), then
+method = 2 should be used, however the results may still be very slightly different as
+this package uses survfit to estimate the censoring distribution, in line with the Graf 1999 paper.
+Whereas some other packages use prodlim with reverse = TRUE (meaning Kaplan-Meier is not used).
 If integrated == FALSE then the sample mean is taken for the single specified times, \(t^*\), and the returned
 score is given by
 $$L(S,t|t^*) = \frac{1}{N} \sum_{i=1}^N L(S_i,t_i|t^*)$$
@@ -93,7 +97,7 @@ $$L(S) = \frac{1}{NT} \sum_{i=1}^N \sum_{j=1}^T L(S_i,t_i|t^*_j)$$" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mlr3proba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Version">0.1.1</span>
       </span>
     </div>
 
@@ -177,6 +181,10 @@ $$L(S) = \frac{1}{NT} \sum_{i=1}^N \sum_{j=1}^T L(S_i,t_i|t^*_j)$$" />
 Graf Score at time \(t^*\) is given by
 $$L(S,t|t^*) = [(S(t^*)^2)I(t \le t^*, \delta = 1)(1/G(t))] + [((1 - S(t^*))^2)I(t &gt; t^*)(1/G(t^*))]$$
 where \(G\) is the Kaplan-Meier estimate of the censoring distribution.</p>
+<p>Note: If comparing the integrated graf score to other packages, e.g. <code><a href='https://rdrr.io/pkg/pec/man/pec.html'>pec::pec()</a></code>, then
+<code>method = 2</code> should be used, however the results may still be very slightly different as
+this package uses <code>survfit</code> to estimate the censoring distribution, in line with the Graf 1999 paper.
+Whereas some other packages use <code>prodlim</code> with <code>reverse = TRUE</code> (meaning Kaplan-Meier is not used).</p>
 <p>If <code>integrated == FALSE</code> then the sample mean is taken for the single specified <code>times</code>, \(t^*\), and the returned
 score is given by
 $$L(S,t|t^*) = \frac{1}{N} \sum_{i=1}^N L(S_i,t_i|t^*)$$
@@ -195,7 +203,7 @@ $$L(S) = \frac{1}{NT} \sum_{i=1}^N \sum_{j=1}^T L(S_i,t_i|t^*_j)$$</p>
     <h2 class="hasAnchor" id="construction"><a class="anchor" href="#construction"></a>Construction</h2>
 
     
-<pre>MeasureSurvGraf$new(integrated = TRUE, times)
+<pre>MeasureSurvGraf$new(integrated = TRUE, times, method = 2)
 mlr_measures$get("surv.graf")
 msr("surv.graf")
 </pre>
