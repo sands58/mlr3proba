@@ -19,17 +19,15 @@ LearnerDensityHist <- R6::R6Class("LearnerDensityHist", inherit = LearnerDensity
 
                       data = as.vector(task$data(cols = task$feature_names))
 
-                      #this is called self$model
-                      #using histogram1.R
+                      # this is called self$model
+                      # using histogram1.R
+                      # change later histogram function name in histogram file = > .histogram
                       invoke(.histogram, traindata = data, .args = pars)
                       }
 
                       predict_internal = function(task){
 
                       pars = self$param_set$get_values(tags = "predict")
-
-                      newdata_Intervals = as.numeric(findInterval(newdata, a$Intervals,
-                                                                  rightmost.closed= TRUE, left.open = F))
 
                       newdata_Intervals = as.vector(findInterval(newdata, self$XIntervals,
                                                     rightmost.closed= TRUE))
