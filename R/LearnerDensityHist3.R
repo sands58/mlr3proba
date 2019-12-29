@@ -18,9 +18,10 @@ LearnerDensityHist <- R6::R6Class("LearnerDensityHist", inherit = LearnerDensity
                       pars = self$param_set$get_values(tag="train")
 
                       data = as.vector(task$data(cols = task$feature_names))
-
                       #this is called self$model
                       #using histogram1.R
+                      # change later histogram function name in histogram file = > .histogram
+                      #invoke in packge purr
                       invoke(.histogram, traindata = data, .args = pars)
                       }
 
@@ -32,8 +33,6 @@ LearnerDensityHist <- R6::R6Class("LearnerDensityHist", inherit = LearnerDensity
 
                       newdata_Intervals = as.numeric(findInterval(x1, self$model$Intervals,
                                                                     rightmost.closed= TRUE, left.open = F))
-
-
                       num_zero <- length(which(newdata_Intervals %in% !self$model$numBin))
 
                       pdf_hist <- ifelse(newdata_Intervals %in% self$model$numBin,
@@ -44,8 +43,22 @@ LearnerDensityHist <- R6::R6Class("LearnerDensityHist", inherit = LearnerDensity
 
                       }
 
+
+                      cdf <- function(pdf, upper_limit){
+
+                        length_upper_limit <- length(which(a$Intervals <= 6.5))
+                        area <- rep()
+                        for(i in 1:(length_upper_limit - 1)){
+
+                          area[i] <- (model$Intervals[i+1] - model$Intervals[i]) * model$binPdf[i]
+                        }
+                        return(sum(area))
+
+                      }
+
                       support = Interval$new(min(truth), max(truth))
-                      pdf =  Distribution$new(name= "Histogram", short_name = "hist", pdf = pdf, paramaters = pars, support = support)
+                      pdf =  Distribution$new(name= "Histogram", short_name = "hist", pdf = pdf, cdf = cdf,
+                                              paramaters = pars, support = support)
 
                       }
                        ))

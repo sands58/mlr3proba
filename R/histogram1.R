@@ -26,12 +26,12 @@
 
 #Example:
 
-# data <- c(1,1,2.5,3.5,6.5,6.3,7.4,8.3)
-# newdata <- c(1, 2.3, 6)
+# data <- c(1.5,1.5,2.5,3.5,6.5,6.3,7.4,8.3)
+# newdata <- c(1.5, 2.3, 5.5)
 # binwidth <-NULL
 # numbin <- NULL
 # origin <- 2
-# a <- histogram(data = data,  binwidth = 1, origin = 2)
+# a <- histogram(data = data,  binwidth = 1, origin = 1)
 
 histogram <- function(data, numbin= NULL, binwidth=NULL, origin=NULL){
 
@@ -84,9 +84,10 @@ histogram <- function(data, numbin= NULL, binwidth=NULL, origin=NULL){
   } else{Pdf = NULL
          ProbBin = NULL
          XInterval = NULL
-         BinWidth = cat(paste("only provide binwidth OR numbin"))}
+         BinWidth = cat(paste("only provide binwidth OR numbin"))
+         numBin = NULL}
 
-  return(list(pdf_data = Pdf, binPdf = ProbBin, Intervals = XInterval,
+  return(list(pdfdata = Pdf, binPdf = ProbBin, Intervals = XInterval,
               Binwidth = BinWidth, numBin = numBin))
 }
 
