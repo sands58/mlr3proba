@@ -233,16 +233,6 @@ doi: <a href='https://doi.org/10.1016/j.artmed.2011.06.006'>10.1016/j.artmed.201
 <code><a href='LearnerSurvRanger.html'>LearnerSurvRanger</a></code>,
 <code><a href='LearnerSurvRpart.html'>LearnerSurvRpart</a></code></p></div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mlr3</span>)
-<span class='no'>task</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tgen</a></span>(<span class='st'>"simsurv"</span>)$<span class='fu'>generate</span>(<span class='fl'>20</span>)
-<span class='no'>learner</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span>(<span class='st'>"surv.svm"</span>)
-<span class='no'>resampling</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span>(<span class='st'>"cv"</span>, <span class='kw'>folds</span> <span class='kw'>=</span> <span class='fl'>2</span>)
-<span class='fu'><a href='https://mlr3.mlr-org.com/reference/resample.html'>resample</a></span>(<span class='no'>task</span>, <span class='no'>learner</span>, <span class='no'>resampling</span>)</div><div class='output co'>#&gt; &lt;ResampleResult&gt; of 2 iterations
-#&gt; * Task: simsurv
-#&gt; * Learner: surv.svm
-#&gt; * Warnings: 0 in 0 iterations
-#&gt; * Errors: 0 in 0 iterations</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -252,7 +242,6 @@ doi: <a href='https://doi.org/10.1016/j.artmed.2011.06.006'>10.1016/j.artmed.201
       <li><a href="#meta-information">Meta Information</a></li>
       <li><a href="#references">References</a></li>
       <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
