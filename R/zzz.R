@@ -31,6 +31,21 @@ register_mlr3 = function() {
     x$default_measures$surv = "surv.harrellsc"
   }
 
+  if (!grepl("density", x$task_types[,"type"])) {
+     x = utils::getFromNamespace("mlr_reflections", ns = "mlr3")
+     x$task_types = setkeyv(rbind(x$task_types, rowwise_table(
+        ~type,  ~package,       ~task,      ~learner,      ~prediction,      ~measure,
+        "density", "mlr3proba", "TaskDensity", "LearnerDensity", "PredictionDensity", "MeasureDensity"
+     )), "type")
+     x$task_col_roles$density = c("feature", "target", "label", "order", "group", "weight")
+     x$task_properties$density = c("weights", "groups")
+     x$learner_properties$density = x$learner_properties$regr
+     x$measure_properties$density = x$measure_properties$regr
+     x$learner_predict_types$density = list(pdf = c("pdf","cdf"),
+                                         cdf = c("pdf","cdf"))
+     x$default_measures$density = "density.logloss"
+  }
+
   # tasks
    x = utils::getFromNamespace("mlr_tasks", ns = "mlr3")
    x$add("precip", load_task_precip)

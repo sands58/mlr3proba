@@ -1,4 +1,4 @@
-TaskDensity <- R6::R6Class("TaskDensity", inherit = TaskUnsupervised)
+TaskDensity <- R6::R6Class("TaskDensity", inherit = TaskSupervised)
 
 TaskDensity$set("public","initialize", function(id, backend, target) {
                        #libraray::function_name()

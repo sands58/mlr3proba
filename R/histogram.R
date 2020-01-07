@@ -1,22 +1,12 @@
 #Histogram function
 
-#Description: Finding the pdf using histogram
+#Description: Finding the pdf using histogram using the hist function in R
 
 #Usage: histogram(traindata, binwidth, origin, numbin)
 
 #Arguments
-#1. traindata is the data that you want to find its density by histogram
-#2. numbin: the size of each bins. If not given by users, a default
-#           number is used using Sturge rule. If binwidth is given, then
-#           the numbin is calculated using binwidth
-#3. binwidth: the size of each bin, if not passed then is calculated by
-#             using the numbin. If both numbin and binwidth is not given,
-#             numbin that is calculated by Sturge rule is used to find the
-#             binwidth.
-#4. origin: the starting point of the historam. By default, it will start from
-#           the minimum data.
-
-#Details: require(pkgcond)
+#1. data to estimate the density
+#2. numbin: the size of each bins. Can be a single numberr, vector, a function (see hist)
 
 #values: a list that output
 #1. density of the training data
@@ -27,67 +17,13 @@
 #Example:
 
 # data <- c(1.5,1.5,2.5,3.5,6.5,6.3,7.4,8.3)
-# newdata <- c(1.5, 2.3, 5.5)
-# binwidth <-NULL
 # numbin <- NULL
-# origin <- 2
-# a <- histogram(data = data,  binwidth = 1, origin = 1)
+# a <- .histogram(data = data,  numbin = numbin)
 
-histogram <- function(data, numbin= NULL, binwidth=NULL, origin=0){
+.histogram <- function(data, numbin){
 
-  X <-  data
-  # sort the data
-  XSort <-  sort(X, decreasing = F)
-  Xmin <-  min(XSort)
-  Xmax <-  max(XSort)
-  # find the difference between maximum and minimum
-  XDif <- ifelse(is.null(origin),  Xmax- Xmin, Xmax - origin)
-
-  origin <- ifelse(origin == 0, 0, origin)
-
-  p <- ifelse(is.null(binwidth) == is.null(numbin), 0,
-            ifelse(!is.null(binwidth) == !is.null(numbin), 2, 1))
-  # p=0,if both numbin = binwidth = NULL
-  # p= 1, if either binwidth= NUll  OR numbin = NULL
-  # p=2, if numbin != Null and binwidth  !=NULL (not NULL)
-
-
-  if(p == 0){
-       NumBin <- ceiling(log(length(X), 2) +1)
-       # if both numbin and binwidth are null, then use the function to calculate NumBin
-   } else if(p == 1){
-         if(is.null(numbin)){
-           #if numbin= NULL, then use binwith to calculate NumBin
-               NumBin <- ceiling(XDif/binwidth)
-         } else{NumBin <- numbin}
-          # if numbin is not NULL (binwidth is null in this case), then NumBin = numbin (input)
-   } else {NumBin <- ceiling(log(length(X), 2) +1)}
-          # if both numbin and binwidth are given, use the numbin
-
-  BinWidth <-  XDif/NumBin
-  # when binwidth is not null and numbin is null (p = 1), this will give back the input
-
-  IndexNumBin <- c(1:NumBin)
-  # find the interval of the bin
-  XSort <- if(is.null(origin)){XSort} else(XSort[which(XSort >= origin)])
-
-  Interval <- as.vector(sapply(BinWidth, function(x, y) origin + y*x, y = IndexNumBin))
-  XInterval <- c(origin, Interval)
-
-  #Count the number of training data in each interval
-  Bin <- table(cut(XSort, XInterval, include.lowest = T))
-  ProbBin <- as.vector(Bin/(length(XSort)*BinWidth))
-  numBin <- as.vector(c(1:length(ProbBin)))
-  newtraindata <- ifelse(data %in% XSort, data, 0)
-  TrainIntervals <- as.numeric(findInterval(newtraindata, XInterval,
-                                    rightmost.closed = T,left.open = F))
-  num_zero <- length(which(TrainIntervals %in% !numBin))
-  Pdf <- ifelse(TrainIntervals %in% numBin,
-                        c(rep(0, num_zero),ProbBin[TrainIntervals]),
-                        rep(0, length(TrainIntervals)))
-
-
-  return(list(binPdf = ProbBin, Intervals = XInterval))
+  a <- hist(data, breaks = numbin, plot = FALSE)
+  data.table::data.table(Intervals = a$breaks, binPdf = a$density)
 
 }
 
