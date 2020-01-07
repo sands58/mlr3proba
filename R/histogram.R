@@ -21,9 +21,9 @@
 # numbin <- 2
 # a <- .histogram(data = data,  numbin = numbin)
 
-.histogram <- function(data, breaks, include.lowest = TRUE, freq= FALSE, right = TRUE ){
+.histogram <- function(data, breaks, include.lowest = TRUE, right = TRUE ){
 
-  a <- hist(data, breaks = breaks, include.lowest = TRUE, plot = FALSE, freq= FALSE, right = TRUE)
+  a <- hist(data, breaks = breaks, include.lowest = TRUE, plot = FALSE, right = TRUE)
   data.table::data.table(Intervals = a$breaks[-1], binPdf = a$density)
   # remove the first point of breaks
   #
@@ -31,6 +31,5 @@
 }
 
 
-# Histogram CDF
-#---------------
+
 
