@@ -33,7 +33,7 @@
 # origin <- 2
 # a <- histogram(data = data,  binwidth = 1, origin = 1)
 
-histogram <- function(data, numbin= NULL, binwidth=NULL, origin=NULL){
+.histogram <- function(data, numbin= NULL, binwidth=NULL, origin=NULL){
 
   X <-  data
   # sort the data
