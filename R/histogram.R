@@ -31,7 +31,7 @@
 # binwidth <-NULL
 # numbin <- NULL
 # origin <- 2
-# a <- histogram(data = data,  binwidth = 1, origin = 1)
+# a <- .histogram(data = data,  binwidth = 1, origin = 1)
 
 .histogram <- function(data, numbin= NULL, binwidth=NULL, origin=NULL){
 
@@ -87,8 +87,7 @@
          BinWidth = cat(paste("only provide binwidth OR numbin"))
          numBin = NULL}
 
-  return(list(pdfdata = Pdf, binPdf = ProbBin, Intervals = XInterval,
-              Binwidth = BinWidth, numBin = numBin))
+  data.table::data.table(Intervals = XInterval, binPdf = ProbBin)
 }
 
 
