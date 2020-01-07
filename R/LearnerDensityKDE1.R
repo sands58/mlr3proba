@@ -16,6 +16,7 @@ LearnerDensityKDE$set("public", "initialize", function(id = "density.KDE") {
 
 LearnerDensityKDE$set("public", "train_internal", function(task){
 
+  # dif = obs - validation (validation is the point to estimate density at)
   pdf <- function(dif){}
   body(pdf) <- substitute({
     dif <- sapply(test, function(x, y) (x-y)/bw,  y = train)

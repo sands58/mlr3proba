@@ -52,16 +52,20 @@ histogram <- function(data, numbin= NULL, binwidth=NULL, origin=0){
   # p=2, if numbin != Null and binwidth  !=NULL (not NULL)
 
 
-  if(p == 2){
+  if(p == 0){
        NumBin <- ceiling(log(length(X), 2) +1)
+       # if both numbin and binwidth are null, then use the function to calculate NumBin
    } else if(p == 1){
          if(is.null(numbin)){
+           #if numbin= NULL, then use binwith to calculate NumBin
                NumBin <- ceiling(XDif/binwidth)
-        } else{NumBin <- numbin}
-   } else {NumBin <- NULL}
+         } else{NumBin <- numbin}
+          # if numbin is not NULL (binwidth is null in this case), then NumBin = numbin (input)
+   } else {NumBin <- ceiling(log(length(X), 2) +1)}
+          # if both numbin and binwidth are given, use the numbin
 
-  if(p %in% c(1,2)){
   BinWidth <-  XDif/NumBin
+  # when binwidth is not null and numbin is null (p = 1), this will give back the input
 
   IndexNumBin <- c(1:NumBin)
   # find the interval of the bin
@@ -81,14 +85,10 @@ histogram <- function(data, numbin= NULL, binwidth=NULL, origin=0){
   Pdf <- ifelse(TrainIntervals %in% numBin,
                         c(rep(0, num_zero),ProbBin[TrainIntervals]),
                         rep(0, length(TrainIntervals)))
-  } else{Pdf = NULL
-         ProbBin = NULL
-         XInterval = NULL
-         BinWidth = cat(paste("only provide binwidth OR numbin"))
-         numBin = NULL}
 
-  return(list(pdfdata = Pdf, binPdf = ProbBin, Intervals = XInterval,
-              Binwidth = BinWidth, numBin = numBin))
+
+  return(list(binPdf = ProbBin, Intervals = XInterval))
+
 }
 
 
