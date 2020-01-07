@@ -1,4 +1,5 @@
 #Histogram function
+#-------------------
 
 #Description: Finding the pdf using histogram using the hist function in R
 
@@ -17,14 +18,19 @@
 #Example:
 
 # data <- c(1.5,1.5,2.5,3.5,6.5,6.3,7.4,8.3)
-# numbin <- NULL
+# numbin <- 2
 # a <- .histogram(data = data,  numbin = numbin)
 
-.histogram <- function(data, numbin){
+.histogram <- function(data, breaks, include.lowest = TRUE, freq= FALSE, right = TRUE ){
 
-  a <- hist(data, breaks = numbin, plot = FALSE)
-  data.table::data.table(Intervals = a$breaks, binPdf = a$density)
+  a <- hist(data, breaks = breaks, include.lowest = TRUE, plot = FALSE, freq= FALSE, right = TRUE)
+  data.table::data.table(Intervals = a$breaks[-1], binPdf = a$density)
+  # remove the first point of breaks
+  #
 
 }
 
+
+# Histogram CDF
+#---------------
 
