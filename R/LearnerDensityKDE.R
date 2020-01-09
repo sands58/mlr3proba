@@ -15,9 +15,11 @@ LearnerDensityKDE$set("public", "initialize", function(id = "density.KDE") {
 })
 LearnerDensityKDE$set("public", "train_internal", function(task){
   pdf <- function(x1){}
+  #x1 is new data
   body(pdf) <- substitute({
     x1 <- matrix(x1, nrow = length(x1), ncol = rows)
     tru_mat <- matrix(truth, nrow = nrow(x1), ncol = rows, byrow = TRUE)
+    #tru_mat data from task
     if(nrow(x1) == 1)
       return(1/(rows * bw) * sum(kernel$pdf((x1 - tru_mat)/bw)))
     else
@@ -30,7 +32,7 @@ LearnerDensityKDE$set("public", "train_internal", function(task){
           truth = task$truth()))
 
   distribution = distr6::Distribution$new(name = "KDE Gaussian Estimate", short_name = "KDEGauss", pdf = pdf)
-  set_class(list(distribution = distribution, features = task$feature_names), "density.KDE_model")
+
 
 })
 LearnerDensityKDE$set("public", "predict_internal", function(task){
