@@ -21,9 +21,9 @@
 # numbin <- 2
 # a <- .histogram(data = data,  numbin = numbin)
 
-.histogram <- function(data, breaks, include.lowest = TRUE, right = TRUE ){
+.histogram <- function(data, bins){
 
-  a <- hist(data, breaks = breaks, include.lowest = include.lowest, plot = FALSE, right = right)
+  a <- hist(x = data, breaks = bins, include.lowest = TRUE, plot = FALSE, right = TRUE)
   Intervals <- a$breaks[-1]
   Pdf <- a$density
   data.table::data.table(Intervals = Intervals, binPdf = a$Pdf)

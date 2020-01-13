@@ -4,7 +4,7 @@ LearnerDensityHist <- R6::R6Class("LearnerDensityHist", inherit = LearnerDensity
       id = id,
       param_set = ParamSet$new(
         params = list(
-          ParamInt$new(id = "breaks", lower = 0, tags = "train"),
+          ParamUty$new(id = "bins", default = 5, tags = "train"),
           ParamLgl$new(id = "include.lowest", default = TRUE, tags = "train"),
           ParamLgl$new(id = "right", default = TRUE, tags = "train"),
           ParamLgl$new(id = "freq", default = TRUE, tags = "train")
@@ -17,7 +17,7 @@ LearnerDensityHist <- R6::R6Class("LearnerDensityHist", inherit = LearnerDensity
 
       pars = self$param_set$get_values(tag="train")
 
-      data = as.vector(task$data())
+      data = as.numeric(unlist(task$data(cols = task$target_names)))
 
       #this is called self$model
       #using histogram1.R
