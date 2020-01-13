@@ -7,7 +7,7 @@ LearnerDensityKDE$set("public", "initialize", function(id = "density.KDE") {
                                                                select="ShortName")[[1]],
                                                tags = "train"),
                                   ParamDbl$new("bandwidth", lower = 0, tags = "train"))),
-    predict_types = "prob",
+    predict_types = c("pdf", "cdf"),
     feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
     properties = "missings",
     packages = "distr6"

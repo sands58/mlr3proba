@@ -1,7 +1,7 @@
 LearnerDensityHist <- R6::R6Class("LearnerDensityHist", inherit = LearnerDensity,
-  public = list(initialize = function(){
+  public = list(initialize = function(id = "density.Hist"){
     super$initialize(
-      id = "density.Hist",
+      id = id,
       param_set = ParamSet$new(
         params = list(
           ParamInt$new(id = "breaks", lower = 0, tags = "train"),
