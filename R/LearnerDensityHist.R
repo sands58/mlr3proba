@@ -4,10 +4,9 @@ LearnerDensityHist <- R6::R6Class("LearnerDensityHist", inherit = LearnerDensity
       id = id,
       param_set = ParamSet$new(
         params = list(
-          ParamInt$new(id = "breaks", lower = 0, tags = "train"),
+          ParamUty$new(id = "breaks", default = "Sturges", tags = "train"),
           ParamLgl$new(id = "include.lowest", default = TRUE, tags = "train"),
           ParamLgl$new(id = "right", default = TRUE, tags = "train"),
-          ParamLgl$new(id = "freq", default = TRUE, tags = "train")
         )),
       feature_types =  c("logical", "integer", "numeric", "character", "factor", "ordered"),
       predict_types = c("pdf","cdf"),
