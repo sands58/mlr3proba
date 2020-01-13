@@ -4,10 +4,9 @@ LearnerDensityHist <- R6::R6Class("LearnerDensityHist", inherit = LearnerDensity
       id = id,
       param_set = ParamSet$new(
         params = list(
-          ParamUty$new(id = "bins", default = 5, tags = "train"),
+        ParamUty$new(id = "breaks", default = "Sturges", tags = "train"),
           ParamLgl$new(id = "include.lowest", default = TRUE, tags = "train"),
-          ParamLgl$new(id = "right", default = TRUE, tags = "train"),
-          ParamLgl$new(id = "freq", default = TRUE, tags = "train")
+          ParamLgl$new(id = "right", default = TRUE, tags = "train")
         )),
       feature_types =  c("logical", "integer", "numeric", "character", "factor", "ordered"),
       predict_types = c("pdf","cdf"),
@@ -22,33 +21,34 @@ LearnerDensityHist <- R6::R6Class("LearnerDensityHist", inherit = LearnerDensity
       #this is called self$model
       #using histogram1.R
       # change later histogram function name in histogram file = > .histogram
-      #invoke in packge purr
+      #invoke in packge mlr3misc
       dt = invoke(.histogram, data = data, .args = pars)
       pdf = function(x1){}
       body(pdf) = substitute({
         as.numeric(unlist(data[findInterval(x1, data$Intervals), 2]))
       }, list(data = dt))
 
-      cdf = function(val){}
+      cdf = function(x1){}
       body(cdf) = substitute({
 
-        length_val <- length(which(data$Intervals <= val))
+        length_val <- length(which(data$Intervals <= x1))
         area <- rep()
         for(i in 1:(length_val - 1)){
 
           area[i] <- (data$Intervals[i+1] - data$Intervals[i]) * data$binPdf[i]
         }
+        return(area)
       }, list(data = dt))
 
       distr6::Distribution$new(name = "Histogram Estimator",
                                short_name = "Histogram",
                                pdf = pdf, cdf = cdf,
-                               support = Interval$new(min(truth), max(truth)))
+                               support = distr6::Interval$new(min(data), max(data)))
 
     },
 
     predict_internal = function(task){
-      newdata = task$data()
+      newdata = as.numeric(unlist(task$data(cols = task$target_names)))
       PredictionDensity$new(task = task, pdf = self$model$pdf(newdata),
                             cdf = self$model$cdf(newdata))
     }

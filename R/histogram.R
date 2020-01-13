@@ -21,14 +21,9 @@
 # numbin <- 2
 # a <- .histogram(data = data,  numbin = numbin)
 
-.histogram <- function(data, bins){
-
-  a <- hist(x = data, breaks = bins, include.lowest = TRUE, plot = FALSE, right = TRUE)
-  Intervals <- a$breaks[-1]
-  Pdf <- a$density
-  data.table::data.table(Intervals = Intervals, binPdf = a$Pdf)
-  # remove the first point of breaks
-  #
+.histogram <- function(data, breaks = "Sturges", include.lowest = TRUE, right = TRUE){
+  a <- hist(data, breaks = breaks, include.lowest = include.lowest, plot = FALSE, right = right)
+  data.table::data.table(Intervals = a$breaks[-1], binPdf = a$density)
 
 }
 
