@@ -1,19 +1,25 @@
 PredictionDensity = R6::R6Class("PredictionDensity", inherit = Prediction, cloneable = FALSE)
 PredictionDensity$set("public", "initialize", function(task = NULL, row_ids = task$row_ids, truth = task$truth(),
-                                                       prob = NULL) {
+                                                       pdf = NULL, cdf = NULL) {
   self$data$row_ids = assert_row_ids(row_ids)
   n = length(row_ids)
   self$data$truth = checkmate::assert_numeric(truth, len = n, null.ok = TRUE)
-  self$data$prob = checkmate::assert_numeric(prob, len = n, any.missing = FALSE, null.ok = TRUE)
+  self$data$pdf = checkmate::assert_numeric(pdf, len = n, any.missing = FALSE, null.ok = TRUE)
+  self$data$cdf = checkmate::assert_numeric(cdf, len = n, any.missing = FALSE, null.ok = TRUE)
   self$task_type = "density"
 })
-PredictionDensity$set("active","prob",function(){
-  self$data$prob %??% rep(NA_real_, length(self$data$row_ids))
+PredictionDensity$set("active","pdf",function(){
+  self$data$pdf %??% rep(NA_real_, length(self$data$row_ids))
+})
+PredictionDensity$set("active","cdf",function(){
+  self$data$cdf %??% rep(NA_real_, length(self$data$row_ids))
 })
 PredictionDensity$set("active","missing",function(){
   miss = logical(length(self$data$row_ids))
-  if (!is.null(self$data$prob))
-    miss = miss | is.na(self$data$prob)
+  if (!is.null(self$data$pdf))
+    miss = miss | is.na(self$data$pdf)
+  if (!is.null(self$data$cdf))
+    miss = miss | is.na(self$data$cdf)
 
   self$data$row_ids[miss]
 })
@@ -24,7 +30,7 @@ as.data.table.PredictionDensity = function(x, ...) {
   if (is.null(data$row_ids)) {
     return(data.table::data.table())
   }
-  data.table::data.table(row_id = data$row_ids, truth = data$truth, prob = data$prob)
+  data.table::data.table(row_id = data$row_ids, truth = data$truth, pdf = data$pdf, cdf = data$cdf)
 }
 
 
@@ -36,7 +42,7 @@ c.PredictionDensity = function(..., keep_duplicates = TRUE) {
   assert_flag(keep_duplicates)
 
   x = map_dtr(dots, function(p) {
-    list(row_ids = p$data$row_ids, truth = p$data$truth, prob = p$data$prob)
+    list(row_ids = p$data$row_ids, truth = p$data$truth, pdf = p$data$pdf, cdf = p$data$cdf)
   }, .fill = FALSE)
 
   if (!keep_duplicates) {
@@ -44,5 +50,5 @@ c.PredictionDensity = function(..., keep_duplicates = TRUE) {
     x = x[keep]
   }
 
-  PredictionDensity$new(row_ids = x$row_ids, truth = x$truth, prob = x$prob)
+  PredictionDensity$new(row_ids = x$row_ids, truth = x$truth, pdf = x$pdf, cdf = x$cdf)
 }
