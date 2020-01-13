@@ -22,7 +22,7 @@
 # a <- .histogram(data = data,  numbin = numbin)
 
 .histogram <- function(data, breaks = "Sturges", include.lowest = TRUE, right = TRUE){
-  a <- hist(data, breaks = breaks, include.lowest = include.lowest, plot = FALSE, right = right)
+  a <- hist(x= data, breaks = breaks, include.lowest = include.lowest, plot = FALSE, right = right)
   data.table::data.table(Intervals = a$breaks[-1], binPdf = a$density)
 
 }
