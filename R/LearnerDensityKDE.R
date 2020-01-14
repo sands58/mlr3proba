@@ -31,7 +31,8 @@ LearnerDensityKDE$set("public", "train_internal", function(task){
                                            ClassName)))$new(),
           truth = task$truth()))
 
-  distribution = distr6::Distribution$new(name = "KDE Gaussian Estimate", short_name = "KDEGauss", pdf = pdf)
+  distribution = distr6::Distribution$new(name = paste("Kernel", self$param_set$values$kernel),
+                                          short_name = paste0("KDE",self$param_set$values$kernel), pdf = pdf)
 
 
 })

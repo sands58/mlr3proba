@@ -6,8 +6,10 @@ LearnerDensityHist <- R6::R6Class("LearnerDensityHist", inherit = LearnerDensity
         params = list(
         ParamUty$new(id = "breaks", default = "Sturges", tags = "train"),
           ParamLgl$new(id = "include.lowest", default = TRUE, tags = "train"),
-          ParamLgl$new(id = "right", default = TRUE, tags = "train")
-        )),
+          ParamLgl$new(id = "right", default = TRUE, tags = "train"),
+          ParamDbl$new(id = "Intervals", tag = "train"),
+        ParamDbl$new(id = "pdf", tag = "train")
+                  )),
       feature_types =  c("logical", "integer", "numeric", "character", "factor", "ordered"),
       predict_types = c("pdf","cdf"),
       packages = "distr6")},
@@ -31,14 +33,10 @@ LearnerDensityHist <- R6::R6Class("LearnerDensityHist", inherit = LearnerDensity
       cdf = function(x1){}
       body(cdf) = substitute({
 
-        length_val <- length(which(data$Intervals <= x1))
-        area <- rep()
-        for(i in 1:(length_val - 1)){
+      as.numeric(sapply(x1, function(x) .histogram_cdf(val = x, Intervals = data$Intervals,
+                                pdf = data$binPdf)))
 
-          area[i] <- (data$Intervals[i+1] - data$Intervals[i]) * data$binPdf[i]
-        }
-        return(area)
-      }, list(data = dt))
+         }, list(data = dt))
 
       distr6::Distribution$new(name = "Histogram Estimator",
                                short_name = "Histogram",

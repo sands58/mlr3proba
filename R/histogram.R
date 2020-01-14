@@ -19,14 +19,35 @@
 
 # data <- c(1.5,1.5,2.5,3.5,6.5,6.3,7.4,8.3)
 # numbin <- 2
-# a <- .histogram(data = data,  numbin = numbin)
+# a <- .histogram(data = data,  breaks = 5)
 
 .histogram <- function(data, breaks = "Sturges", include.lowest = TRUE, right = TRUE){
   a <- hist(x= data, breaks = breaks, include.lowest = include.lowest, plot = FALSE, right = right)
-  data.table::data.table(Intervals = a$breaks[-1], binPdf = a$density)
-
+  Interval <- head(a$breaks,-1)
+  bin <- a$density
+  data.table::data.table(Intervals = Interval, binPdf = bin)
 }
 
+# function: .histogram_cdf
 
+# Description: Compute the cdf of a histogram using the density and the
+#              relative intervals. The lower limit of the cdf must
+#              always be the lowest limit of the histogram. To find the
+#              cdf of a histogram between the values must compute cdf twice
+#              and substract.
 
+# Arguments:
+# 1. val: component of Intervval which the upper limit belong to
+# 2. Intervals: The intervals/break of the histogram. A vector
+# 3. Pdf: pdf for each interval. a vector
 
+.histogram_cdf <- function(val, Intervals, pdf){
+
+  length_val <- findInterval(val, Intervals, rightmost.closed = F , left.open = T)
+  # findInterval
+  area <-  0
+  for(i in 1:(length_val)){
+    area <- area + ((pdf[i]) * (Intervals[i+1] - Intervals[i]))
+  }
+  data.table::data.table(CDF = area)
+}
