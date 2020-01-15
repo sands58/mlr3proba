@@ -15,7 +15,7 @@ Uses a predicted \code{distr} in a \link{PredictionSurv} to estimate (or 'compos
 \item \code{id} :: \code{character(1)} \cr
 Identifier of the resulting  object, default \code{"crankcompose"}.
 \item \code{param_vals} :: named \code{list} \cr
-List of hyperparameter settings, overwriting the hyperparameter settings that would otherwise be set during construction. Default \code{list()}.
+List of hyperparameter settings, overwriting the hyperparameter settings that would otherwise be set during construction. Default \code{list(method = "mean")}.
 }
 }
 
@@ -41,7 +41,7 @@ The \verb{$state} is left empty (\code{list()}).
 \itemize{
 \item \code{method} :: \code{character(1)} \cr
 Determines what method should be used to produce a continuous ranking from the distribution.
-One of \code{median} or \code{mean} corresponding to the respective functions in the predicted
+One of \code{median}, \code{mode}, or \code{mean} corresponding to the respective functions in the predicted
 survival distribution. Note that for models with a proportional hazards form, the ranking
 implied by \code{mean} and \code{median} will be identical (but not the value of \code{crank} itself).
 Default is \code{mean}.
@@ -50,8 +50,8 @@ Default is \code{mean}.
 
 \section{Internals}{
 
-The \code{median} or \code{mean} will use analytical expressions if possible but if not they are calculated
-using \link[distr6:median.Distribution]{distr6::median.Distribution} or \link[distr6:mean.Distribution]{distr6::mean.Distribution} respectively.
+The \code{median}, \code{mode}, or \code{mean} will use analytical expressions if possible but if not they are calculated
+using \link[distr6:median.Distribution]{distr6::median.Distribution}, \link[distr6:mode]{distr6::mode}, or \link[distr6:mean.Distribution]{distr6::mean.Distribution} respectively.
 }
 
 \section{Fields}{
@@ -95,5 +95,8 @@ resample(task, ranger.crank, rsmp("cv", folds = 2))$predictions()
 }
 \seealso{
 \link[mlr3pipelines:PipeOp]{mlr3pipelines::PipeOp} and \link{crankcompositor}
+
+Other survival compositors: 
+\code{\link{PipeOpDistrCompositor}}
 }
 \concept{survival compositors}

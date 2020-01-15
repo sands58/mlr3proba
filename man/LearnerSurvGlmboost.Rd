@@ -6,15 +6,17 @@
 \title{Gradient Boosting with Component-wise Linear Models Survival Learner}
 \format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link{LearnerSurv}.}
 \description{
-Gradient boosting for optimizing arbitrary loss functions where component-wise linear models are
-utilized as base-learners.
-Calls \code{\link[mboost:glmboost]{mboost::glmboost()}} from package \CRANpkg{mboost}.
+Calls \code{\link[mboost:glmboost]{mboost::glmboost()}}.
+\itemize{
+\item lp is predicted by \code{\link[mboost:predict.mboost]{mboost::predict.mboost()}}
+\item distr is predicted by \code{\link[mboost:survFit]{mboost::survFit()}} which assumes a PH fit with a Breslow estimator
+\item \code{crank} is identical to \code{lp}
 }
-\details{
-The \code{distr} return type is composed by using\code{\link[mboost:survFit]{mboost::survFit()}} which assumes a PH fit with
-a Breslow estimator.
-The \code{crank} return type is defined by the expectation of the survival distribution. \cr
-The \code{lp} return type is given by \code{\link[mboost:predict.mboost]{mboost::predict.mboost()}}.
+
+The \code{dist} parameter is specified slightly differently than in \link{mboost}. Whereas the latter
+takes in objects, in this learner instead a string is specified in order to identify which distribution
+to use. As the default in \link{mboost} is the Gaussian family, which is not compatible with
+survival models, instead we have by default \code{"coxph"}.
 
 If the value given to the \code{Family} parameter is "custom.family" then an object of class
 \code{\link[mboost:Family]{mboost::Family()}} needs to be passed to the \code{custom.family} parameter.
@@ -26,29 +28,51 @@ lrn("surv.glmboost")
 }
 }
 
+\section{Meta Information}{
+
+\itemize{
+\item Type: "surv"
+\item Predict Types: \verb{distr, crank, lp}
+\item Feature Types: \verb{integer, numeric, factor, logical}
+\item Packages: \CRANpkg{mboost} \CRANpkg{distr6} \CRANpkg{survival}
+}
+}
+
 \examples{
 library(mlr3)
-task = tgen("simsurv")$generate(200)
+task = tgen("simsurv")$generate(20)
 learner = lrn("surv.glmboost")
 resampling = rsmp("cv", folds = 3)
 resample(task, learner, resampling)
 }
 \references{
-Peter Buehlmann and Bin Yu (2003), Boosting with the L2 loss: regression and classification.
-Journal of the American Statistical Association, 98, 324–339.
+\cite{mlr3proba}{buehlmann_2003}
 
-Peter Buehlmann (2006), Boosting for high-dimensional linear models. The Annals of
-Statistics, 34(2), 559–583.
+\cite{mlr3proba}{buehlmann_2006}
 
-Peter Buehlmann and Torsten Hothorn (2007), Boosting algorithms: regularization,
-prediction and model fitting. Statistical Science, 22(4), 477–505.
+\cite{mlr3proba}{buehlmann_2007}
 
-Torsten Hothorn, Peter Buehlmann, Thomas Kneib, Mattthias Schmid and Benjamin Hofner
-(2010), Model-based Boosting 2.0. Journal of Machine Learning Research, 11, 2109–2113.
+\cite{mlr3proba}{hothorn_2010}
 
-Benjamin Hofner, Andreas Mayr, Nikolay Robinzonov and Matthias Schmid (2014). Model-based Boosting in R: A Hands-on Tutorial Using the R Package mboost. Computational Statistics, 29, 3–35.
-\doi{10.1007/s00180-012-0382-5}.
+\cite{mlr3proba}{hofner_2012}
 }
 \seealso{
-\link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
+Other survival learners: 
+\code{\link{LearnerSurvBlackboost}},
+\code{\link{LearnerSurvCVGlmnet}},
+\code{\link{LearnerSurvCoxPH}},
+\code{\link{LearnerSurvFlexible}},
+\code{\link{LearnerSurvGBM}},
+\code{\link{LearnerSurvGamboost}},
+\code{\link{LearnerSurvGlmnet}},
+\code{\link{LearnerSurvKaplan}},
+\code{\link{LearnerSurvMboost}},
+\code{\link{LearnerSurvNelson}},
+\code{\link{LearnerSurvParametric}},
+\code{\link{LearnerSurvPenalized}},
+\code{\link{LearnerSurvRandomForestSRC}},
+\code{\link{LearnerSurvRanger}},
+\code{\link{LearnerSurvRpart}},
+\code{\link{LearnerSurvSVM}}
 }
+\concept{survival learners}

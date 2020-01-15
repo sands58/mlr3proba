@@ -1,6 +1,6 @@
 #' @template surv_measure
 #' @templateVar title Hung and Chiang's AUC
-#' @templateVar inherit [MeasureSurvIntegrated]/[MeasureSurv]
+#' @templateVar inherit `MeasureSurvAUC`/[MeasureSurv]
 #' @templateVar fullname MeasureSurvHungAUC
 #' @templateVar shortname surv.hungAUC
 #' @templateVar pars integrated = TRUE, times
@@ -15,9 +15,7 @@
 #' @template measure_survAUC
 #'
 #' @references
-#' Hung, H. and C.-T. Chiang (2010).\cr
-#' Estimation methods for time-dependent AUC models with survival data.\cr
-#' Canadian Journal of Statistics 38, 8–26.
+#' \cite{mlr3proba}{hung_2010}
 #'
 #' @family AUC survival measures
 #' @export

@@ -1,81 +1,58 @@
-#' @title Gradient Boosting with Component-wise Linear Models Survival Learner
+#' @template surv_learner
+#' @templateVar title Gradient Boosting with Component-wise Linear Models
+#' @templateVar fullname LearnerSurvGlmboost
+#' @templateVar caller [mboost::glmboost()]
+#' @templateVar distr by [mboost::survFit()] which assumes a PH fit with a Breslow estimator
+#' @templateVar lp by [mboost::predict.mboost()]
 #'
-#' @usage NULL
-#' @aliases mlr_learners_surv.glmboost
-#' @format [R6::R6Class()] inheriting from [LearnerSurv].
-#' @include LearnerSurv.R
-#'
-#' @section Construction:
-#' ```
-#' LearnerSurvGlmboost$new()
-#' mlr_learners$get("surv.glmboost")
-#' lrn("surv.glmboost")
-#' ```
-#'
-#' @description
-#' Gradient boosting for optimizing arbitrary loss functions where component-wise linear models are
-#' utilized as base-learners.
-#' Calls [mboost::glmboost()] from package \CRANpkg{mboost}.
-#'
-#' @details
-#' The \code{distr} return type is composed by using[mboost::survFit()] which assumes a PH fit with
-#' a Breslow estimator.
-#' The \code{crank} return type is defined by the expectation of the survival distribution. \cr
-#' The \code{lp} return type is given by [mboost::predict.mboost()].
-#'
-#' If the value given to the \code{Family} parameter is "custom.family" then an object of class
-#' [mboost::Family()] needs to be passed to the \code{custom.family} parameter.
+#' @template learner_boost
 #'
 #' @references
-#' Peter Buehlmann and Bin Yu (2003), Boosting with the L2 loss: regression and classification.
-#' Journal of the American Statistical Association, 98, 324–339.
+#' \cite{mlr3proba}{buehlmann_2003}
 #'
-#' Peter Buehlmann (2006), Boosting for high-dimensional linear models. The Annals of
-#' Statistics, 34(2), 559–583.
+#' \cite{mlr3proba}{buehlmann_2006}
 #'
-#' Peter Buehlmann and Torsten Hothorn (2007), Boosting algorithms: regularization,
-#' prediction and model fitting. Statistical Science, 22(4), 477–505.
+#' \cite{mlr3proba}{buehlmann_2007}
 #'
-#' Torsten Hothorn, Peter Buehlmann, Thomas Kneib, Mattthias Schmid and Benjamin Hofner
-#' (2010), Model-based Boosting 2.0. Journal of Machine Learning Research, 11, 2109–2113.
+#' \cite{mlr3proba}{hothorn_2010}
 #'
-#' Benjamin Hofner, Andreas Mayr, Nikolay Robinzonov and Matthias Schmid (2014). Model-based Boosting in R: A Hands-on Tutorial Using the R Package mboost. Computational Statistics, 29, 3–35.
-#' \doi{10.1007/s00180-012-0382-5}.
+#' \cite{mlr3proba}{hofner_2012}
 #'
 #' @export
-#' @template seealso_learner
 #' @examples
 #' library(mlr3)
-#' task = tgen("simsurv")$generate(200)
+#' task = tgen("simsurv")$generate(20)
 #' learner = lrn("surv.glmboost")
 #' resampling = rsmp("cv", folds = 3)
 #' resample(task, learner, resampling)
 LearnerSurvGlmboost = R6Class("LearnerSurvGlmboost", inherit = LearnerSurv,
     public = list(
       initialize = function() {
+        ps = ParamSet$new(
+          params = list(
+            ParamFct$new(id = "family", default = "coxph",
+                         levels = c("coxph", "weibull", "loglog", "lognormal", "gehan",
+                                    "custom"), tags = "train"),
+            ParamUty$new(id = "nuirange", default = c(0, 100), tags = "train"),
+            ParamUty$new(id = "custom.family", tags = "train"),
+            ParamLgl$new(id = "center", default = TRUE, tags = "train"),
+            ParamInt$new(id = "mstop", default = 100L, lower = 0L, tags = "train"),
+            ParamDbl$new(id = "nu", default = 0.1, lower = 0, upper = 1, tags = "train"),
+            ParamFct$new(id = "risk", levels = c("inbag", "oobag", "none"), tags = "train"),
+            ParamLgl$new(id = "stopintern", default = FALSE, tags = "train"),
+            ParamLgl$new(id = "trace", default = FALSE, tags = "train")
+          )
+        )
+
+        ps$values = list(family = "coxph")
+
         super$initialize(
           id = "surv.glmboost",
-          param_set = ParamSet$new(
-            params = list(
-              ParamFct$new(id = "family", default = "coxph",
-                           levels = c("coxph", "weibull", "loglog", "lognormal", "gehan",
-                                      "custom"), tags = "train"),
-              ParamUty$new(id = "nuirange", default = c(0, 100), tags = "train"),
-              ParamUty$new(id = "custom.family", tags = "train"),
-              ParamLgl$new(id = "center", default = TRUE, tags = "train"),
-              ParamInt$new(id = "mstop", default = 100L, lower = 0L, tags = "train"),
-              ParamDbl$new(id = "nu", default = 0.1, lower = 0, upper = 1, tags = "train"),
-              ParamFct$new(id = "risk", levels = c("inbag", "oobag", "none"), tags = "train"),
-              ParamLgl$new(id = "stopintern", default = FALSE, tags = "train"),
-              ParamLgl$new(id = "trace", default = FALSE, tags = "train")
-              )
-            ),
+          param_set = ps,
           feature_types = c("integer", "numeric", "factor", "logical"),
           predict_types = c("distr","crank","lp"),
           packages = c("mboost","distr6","survival")
           )
-        self$param_set$add_dep("nuirange", "family", CondAnyOf$new(c("weibull", "loglog", "lognormal")))
-        self$param_set$add_dep("custom.family", "family", CondAnyOf$new(c("custom")))
         },
 
       train_internal = function(task) {
@@ -84,11 +61,6 @@ LearnerSurvGlmboost = R6Class("LearnerSurvGlmboost", inherit = LearnerSurv,
 
         # convert data to model matrix
         x = model.matrix(~., as.data.frame(task$data(cols = task$feature_names)))
-
-        if(length(pars$family) == 0)
-          pars$family = "coxph"
-        if(length(pars$nuirange) == 0)
-          pars$nuirange = c(0, 100)
 
         family = switch(pars$family,
                         coxph = mboost::CoxPH(),
@@ -124,9 +96,7 @@ LearnerSurvGlmboost = R6Class("LearnerSurvGlmboost", inherit = LearnerSurv,
       distr = distr6::VectorDistribution$new(distribution = "WeightedDiscrete", params = x,
                                              decorators = c("CoreStatistics", "ExoticStatistics"))
 
-      crank = as.numeric(sapply(x, function(y) sum(y[,1] * c(y[,2][1], diff(y[,2])))))
-
-      PredictionSurv$new(task = task, crank = crank, distr = distr, lp = lp)
+      PredictionSurv$new(task = task, crank = lp, distr = distr, lp = lp)
       }
   )
 )

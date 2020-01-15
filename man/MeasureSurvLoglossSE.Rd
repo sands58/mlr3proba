@@ -2,19 +2,74 @@
 % Please edit documentation in R/MeasureSurvLoglossSE.R
 \name{MeasureSurvLoglossSE}
 \alias{MeasureSurvLoglossSE}
-\alias{mlr_measures_surv.logloss_se_se}
-\title{Standard Error of Logloss}
-\format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link{MeasureSurv}.}
+\alias{mlr_measures_surv.loglossSE}
+\title{Standard Error of Log loss Survival Measure}
+\format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link{MeasureSurvLogloss}/\link{MeasureSurv}.}
 \description{
-Calculates the standard error of the cross-entropy, or logarithmic, loss.
+
+
+Calculates the standard error of \link{MeasureSurvLogloss}.
+
+The standard error of the Logloss, L, is approximated via,
+\deqn{se(L) = sd(L)/\sqrt{N}}{se(L) = sd(L)/\sqrt N}
+where \eqn{N} are the number of observations in the test set, and \eqn{sd} is the standard deviation.
+
+Censored observations in the test set are ignored.
 }
 \section{Construction}{
-\preformatted{MeasureSurvLoglossSESE$new()
-mlr_measures$get("surv.logloss_se")
-msr("surv.logloss_se")
+\preformatted{MeasureSurvLoglossSE$new(eps = 1e-15)
+mlr_measures$get("surv.loglossSE")
+msr("surv.loglossSE")
+}
+\itemize{
+\item \code{eps} :: \code{numeric(1)} \cr Very small number to set zero-valued predicted probabilities to, in order to prevent errors in log(0) calculation. \cr
 }
 }
 
-\seealso{
-\link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Measure]{Measures}: \link[mlr3:mlr_measures]{mlr3::mlr_measures}
+\section{Meta Information}{
+
+\itemize{
+\item Type: \code{"surv"}
+\item Range: \eqn{[0, \infty)}{[0, Inf)}
+\item Minimize: \code{TRUE}
+\item Required prediction: \code{distr}
 }
+}
+
+\section{Fields}{
+
+See \link{MeasureSurv}, as well as all variables passed to the constructor.
+}
+
+\seealso{
+Other survival measures: 
+\code{\link{MeasureSurvBeggC}},
+\code{\link{MeasureSurvChamblessAUC}},
+\code{\link{MeasureSurvGonenC}},
+\code{\link{MeasureSurvGrafSE}},
+\code{\link{MeasureSurvGraf}},
+\code{\link{MeasureSurvHarrellC}},
+\code{\link{MeasureSurvHungAUC}},
+\code{\link{MeasureSurvIntLoglossSE}},
+\code{\link{MeasureSurvIntLogloss}},
+\code{\link{MeasureSurvLogloss}},
+\code{\link{MeasureSurvNagelkR2}},
+\code{\link{MeasureSurvOQuigleyR2}},
+\code{\link{MeasureSurvSongAUC}},
+\code{\link{MeasureSurvSongTNR}},
+\code{\link{MeasureSurvSongTPR}},
+\code{\link{MeasureSurvUnoAUC}},
+\code{\link{MeasureSurvUnoC}},
+\code{\link{MeasureSurvUnoTNR}},
+\code{\link{MeasureSurvUnoTPR}},
+\code{\link{MeasureSurvXuR2}}
+
+Other Probabilistic survival measures: 
+\code{\link{MeasureSurvGrafSE}},
+\code{\link{MeasureSurvGraf}},
+\code{\link{MeasureSurvIntLoglossSE}},
+\code{\link{MeasureSurvIntLogloss}},
+\code{\link{MeasureSurvLogloss}}
+}
+\concept{Probabilistic survival measures}
+\concept{survival measures}

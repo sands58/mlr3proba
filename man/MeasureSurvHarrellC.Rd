@@ -45,6 +45,8 @@ Other survival measures:
 \code{\link{MeasureSurvHungAUC}},
 \code{\link{MeasureSurvIntLoglossSE}},
 \code{\link{MeasureSurvIntLogloss}},
+\code{\link{MeasureSurvLoglossSE}},
+\code{\link{MeasureSurvLogloss}},
 \code{\link{MeasureSurvNagelkR2}},
 \code{\link{MeasureSurvOQuigleyR2}},
 \code{\link{MeasureSurvSongAUC}},

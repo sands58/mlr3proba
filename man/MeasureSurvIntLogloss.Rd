@@ -72,6 +72,8 @@ Other survival measures:
 \code{\link{MeasureSurvHarrellC}},
 \code{\link{MeasureSurvHungAUC}},
 \code{\link{MeasureSurvIntLoglossSE}},
+\code{\link{MeasureSurvLoglossSE}},
+\code{\link{MeasureSurvLogloss}},
 \code{\link{MeasureSurvNagelkR2}},
 \code{\link{MeasureSurvOQuigleyR2}},
 \code{\link{MeasureSurvSongAUC}},
@@ -86,7 +88,9 @@ Other survival measures:
 Other Probabilistic survival measures: 
 \code{\link{MeasureSurvGrafSE}},
 \code{\link{MeasureSurvGraf}},
-\code{\link{MeasureSurvIntLoglossSE}}
+\code{\link{MeasureSurvIntLoglossSE}},
+\code{\link{MeasureSurvLoglossSE}},
+\code{\link{MeasureSurvLogloss}}
 }
 \concept{Probabilistic survival measures}
 \concept{survival measures}

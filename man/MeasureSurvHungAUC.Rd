@@ -4,7 +4,7 @@
 \alias{MeasureSurvHungAUC}
 \alias{mlr_measures_surv.hungAUC}
 \title{Hung and Chiang's AUC Survival Measure}
-\format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \link{MeasureSurvIntegrated}/\link{MeasureSurv}.}
+\format{\code{\link[R6:R6Class]{R6::R6Class()}} inheriting from \code{MeasureSurvAUC}/\link{MeasureSurv}.}
 \description{
 
 
@@ -44,9 +44,7 @@ See \link{MeasureSurv}, as well as all variables passed to the constructor.
 }
 
 \references{
-Hung, H. and C.-T. Chiang (2010).\cr
-Estimation methods for time-dependent AUC models with survival data.\cr
-Canadian Journal of Statistics 38, 8–26.
+\cite{mlr3proba}{hung_2010}
 }
 \seealso{
 Other survival measures: 
@@ -58,6 +56,8 @@ Other survival measures:
 \code{\link{MeasureSurvHarrellC}},
 \code{\link{MeasureSurvIntLoglossSE}},
 \code{\link{MeasureSurvIntLogloss}},
+\code{\link{MeasureSurvLoglossSE}},
+\code{\link{MeasureSurvLogloss}},
 \code{\link{MeasureSurvNagelkR2}},
 \code{\link{MeasureSurvOQuigleyR2}},
 \code{\link{MeasureSurvSongAUC}},

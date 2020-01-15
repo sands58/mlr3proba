@@ -1,34 +1,13 @@
-#' @title Cox Proportional Hazard Learner
-#'
-#' @usage NULL
-#' @aliases mlr_learners_surv.coxph
-#' @format [R6::R6Class] inheriting from [LearnerSurv].
-#' @include LearnerSurv.R
-#'
-#' @section Construction:
-#' ```
-#' LearnerSurvCoxPH$new()
-#' mlr_learners$get("surv.coxph")
-#' lrn("surv.coxph")
-#' ```
-#'
-#' @description
-#' A [LearnerSurv] for a Cox PH model implemented in [survival::coxph()] in package \CRANpkg{survival}.
-#'
-#' @details
-#' The \code{distr} return type is given natively by predicting the survival function in [survival::survfit.coxph()],
-#' the method used for estimating the baseline hazard depends on the \code{type} hyper-parameter.\cr
-#' The \code{crank} return type is defined by the expectation of the survival distribution.\cr
-#' The \code{lp} return type is given natively by [survival::predict.coxph()].
-#' The ranking given by \code{crank} and \code{lp} is identical.
+#' @template surv_learner
+#' @templateVar title Cox Proportional Hazards
+#' @templateVar fullname LearnerSurvCoxPH
+#' @templateVar caller [survival::coxph()]
+#' @templateVar distr by [survival::survfit.coxph()]
+#' @templateVar lp by [survival::predict.coxph()]
 #'
 #' @references
-#' Cox, David R. (1972).
-#' Regression models and life‐tables.
-#' Journal of the Royal Statistical Society: Series B (Methodological) 34.2 (1972): 187-202.
-#' \doi{10.1111/j.2517-6161.1972.tb00899.x}.
+#' \cite{mlr3proba}{cox_1972}
 #'
-#' @template seealso_learner
 #' @export
 LearnerSurvCoxPH = R6Class("LearnerSurvCoxPH", inherit = LearnerSurv,
   public = list(
@@ -39,22 +18,24 @@ LearnerSurvCoxPH = R6Class("LearnerSurvCoxPH", inherit = LearnerSurv,
           params = list(
             ParamFct$new(id = "ties", default = "efron", levels = c("efron", "breslow", "exact"), tags = "train"),
             ParamLgl$new(id = "singular.ok", default = TRUE, tags = "train"),
-            ParamFct$new(id = "type", default = "efron", levels = c("efron", "aalen", "kalbfleisch-prentice"), tags = "predict")
+            ParamFct$new(id = "type", default = "efron", levels = c("efron", "aalen", "kalbfleisch-prentice"), tags = "predict"),
+            ParamInt$new(id = "stype", default = 2L, lower = 1L, upper = 2L, tags = "predict")
           )
         ),
         predict_types = c("distr","crank","lp"),
         feature_types = c("logical", "integer", "numeric", "factor"),
-        properties = c("weights","importance"),
+        properties = c("importance"),
         packages = c("survival", "distr6")
       )
     },
 
     train_internal = function(task) {
+
       pv = self$param_set$get_values(tags = "train")
 
-      if ("weights" %in% task$properties) {
-        pv$weights = task$weights$weight
-      }
+      # if ("weights" %in% task$properties) {
+      #   pv$weights = as.numeric(task$weights$weight)
+      # }
 
       invoke(survival::coxph, formula = task$formula(), data = task$data(), .args = pv, x = TRUE)
     },
@@ -67,7 +48,8 @@ LearnerSurvCoxPH = R6Class("LearnerSurvCoxPH", inherit = LearnerSurv,
       # distribution object cannot be create (initialization of distr6 objects does not handle NAs)
       if(any(is.na(data.frame(task$data(cols = task$feature_names)))))
         stop(sprintf("Learner %s on task %s failed to predict: Missing values in new data (line(s) %s)\n",
-                     self$id, task$id, which(is.na(data.frame(task$data(cols = task$feature_names))))))
+                     self$id, task$id,
+                     paste0(which(is.na(data.frame(task$data(cols = task$feature_names)))), collapse = ", ")))
 
       pv = self$param_set$get_values(tags = "predict")
 
@@ -82,11 +64,10 @@ LearnerSurvCoxPH = R6Class("LearnerSurvCoxPH", inherit = LearnerSurv,
       distr = distr6::VectorDistribution$new(distribution = "WeightedDiscrete", params = x,
                                              decorators = c("CoreStatistics", "ExoticStatistics"))
 
-      crank = as.numeric(sapply(x, function(y) sum(y[,1] * c(y[,2][1], diff(y[,2])))))
+      lp = predict(self$model, type = "lp", newdata = newdata)
 
       # note the ranking of lp and crank is identical
-      PredictionSurv$new(task = task, crank = crank, distr = distr,
-                         lp = predict(self$model, type = "lp", newdata = newdata))
+      PredictionSurv$new(task = task, crank = lp, distr = distr, lp = lp)
     },
 
     importance = function() {

@@ -1,37 +1,32 @@
-#' @title L1 and L2 Penalized Estiamtion in GLMs Survival Learner
+#' @template surv_learner
+#' @templateVar title L1 and L2 Penalized Estimation in GLMs
+#' @templateVar fullname LearnerSurvPenalized
+#' @templateVar caller [penalized::penalized()]
+#' @templateVar distr using [penalized::predict()]
 #'
-#' @usage NULL
-#' @aliases mlr_learners_surv.penalized
-#' @format [R6::R6Class()] inheriting from [LearnerSurv].
-#' @include LearnerSurv.R
-#'
-#' @section Construction:
-#' ```
-#' LearnerSurvPenalized$new()
-#' mlr_learners$get("surv.penalized")
-#' lrn("surv.penalized")
-#' ```
-#'
-#' @description
-#' Generalized linear models with elastic net regularization.
-#' Calls [penalized::penalized()] from package \CRANpkg{penalized}.
-#'
-#' @details
-#' The \code{distr} return type is given natively by predicting the survival function in [penalized::predict()].\cr
-#' The \code{crank} return type is defined by the expectation of the survival distribution.
+#' @description The `penalized` and `unpenalized` arguments in the learner are implemented slightly
+#' differently than in [penalized::penalized()]. Here, there is no parameter for `penalized` but
+#' instead it is assumed that every variable is penalized unless stated in the `unpenalized` parameter,
+#' see examples.
 #'
 #' @references
-#' Goeman, J. J., L1 penalized estimation in the Cox proportional hazards model.
-#' Biometrical Journal 52(1), 70{84}.
+#' \cite{mlr3proba}{goeman_2009}
 #'
 #' @export
 #' @template seealso_learner
 #' @examples
 #' library(mlr3)
-#' task = tgen("simsurv")$generate(200)
+#' task = tgen("simsurv")$generate(20)
 #' learner = lrn("surv.penalized")
-#' resampling = rsmp("cv", folds = 3)
+#' resampling = rsmp("cv", folds = 2)
 #' resample(task, learner, resampling)
+#'
+#' # specifying penalized and unpenalized variables
+#' task = tgen("simsurv")$generate(20)
+#' learner = lrn("surv.penalized", unpenalized = c("height"))
+#' learner$train(task)
+#' learner$model@penalized
+#' learner$model@unpenalized
 LearnerSurvPenalized = R6Class("LearnerSurvPenalized", inherit = LearnerSurv,
   public = list(
     initialize = function() {
@@ -77,8 +72,8 @@ LearnerSurvPenalized = R6Class("LearnerSurvPenalized", inherit = LearnerSurv,
         pars$unpenalized = formulate(rhs = pars$unpenalized)
       }
 
-      suppressAll(invoke(penalized::penalized, response = task$truth(), penalized = penalized,
-             data = task$data(cols = task$feature_names), model = "cox", .args = pars))
+      suppressWarnings(suppressMessages((invoke(penalized::penalized, response = task$truth(), penalized = penalized,
+             data = task$data(cols = task$feature_names), model = "cox", .args = pars))))
       },
 
     predict_internal = function(task) {
@@ -105,7 +100,7 @@ LearnerSurvPenalized = R6Class("LearnerSurvPenalized", inherit = LearnerSurv,
 
       crank = as.numeric(sapply(x, function(y) sum(y[,1] * c(y[,2][1], diff(y[,2])))))
 
-      PredictionSurv$new(task = task, crank = crank, distr = distr)
+      PredictionSurv$new(task = task, distr = distr, crank = crank)
       },
 
     importance = function() {

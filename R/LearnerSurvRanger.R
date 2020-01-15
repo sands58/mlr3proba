@@ -1,36 +1,14 @@
-#' @title Survival Ranger Learner
-#'
-#' @usage NULL
-#' @aliases mlr_learners_surv.ranger
-#' @format [R6::R6Class()] inheriting from [LearnerSurv].
-#' @include LearnerSurv.R
-#'
-#' @section Construction:
-#' ```
-#' LearnerSurvRanger$new()
-#' mlr_learners$get("surv.ranger")
-#' lrn("surv.ranger")
-#' ```
-#'
-#' @description
-#' A [LearnerSurv] for a survival random forest implemented in [ranger::ranger()] in package \CRANpkg{ranger}.
-#'
-#' @details
-#' The \code{distr} return type is given natively by predicting the survival function in [ranger::predict.ranger()].\cr
-#' The \code{crank} return type is defined by the expectation of the survival distribution.
+#' @template surv_learner
+#' @templateVar title Ranger Survival Forest
+#' @templateVar fullname LearnerSurvRanger
+#' @templateVar caller [ranger::ranger()]
+#' @templateVar distr using [ranger::predict.ranger()]
 #'
 #' @references
-#' Marvin N. Wright and Andreas Ziegler (2017).
-#' ranger: A Fast Implementation of Random Forests for High Dimensional Data in C++ and R.
-#' Journal of Statistical Software, 77(1), 1-17.
-#' \doi{10.18637/jss.v077.i01}.
+#' \cite{mlr3proba}{wright_2017}
 #'
-#' Breiman, L. (2001).
-#' Random Forests.
-#' Machine Learning 45(1).
-#' \doi{10.1023/A:1010933404324}.
+#' \cite{mlr3proba}{breiman_2001}
 #'
-#' @template seealso_learner
 #' @export
 LearnerSurvRanger = R6Class("LearnerSurvRanger", inherit = LearnerSurv,
   public = list(
@@ -47,7 +25,7 @@ LearnerSurvRanger = R6Class("LearnerSurvRanger", inherit = LearnerSurv,
             ParamLgl$new(id = "replace", default = TRUE, tags = "train"),
             ParamDbl$new(id = "sample.fraction", lower = 0L, upper = 1L, tags = "train"), # for replace == FALSE, def = 0.632
             # ParamDbl$new(id = "class.weights", defaul = NULL, tags = "train"), #
-            ParamFct$new(id = "splitrule", levels = c("variance", "extratrees", "maxstat"), default = "variance", tags = "train"),
+            ParamFct$new(id = "splitrule", levels = c("logrank","extratrees","C","maxstat"), default = "logrank", tags = "train"),
             ParamInt$new(id = "num.random.splits", lower = 1L, default = 1L, tags = "train"), # requires = quote(splitrule == "extratrees")
             ParamDbl$new(id = "split.select.weights", lower = 0, upper = 1, tags = "train"),
             ParamUty$new(id = "always.split.variables", tags = "train"),
@@ -61,7 +39,7 @@ LearnerSurvRanger = R6Class("LearnerSurvRanger", inherit = LearnerSurv,
             ParamLgl$new(id = "oob.error", default = TRUE, tags = "train")
           )
         ),
-        predict_types = c("crank","distr"),
+        predict_types = c("distr","crank"),
         feature_types = c("logical", "integer", "numeric", "character", "factor", "ordered"),
         properties = c("weights", "importance", "oob_error"),
         packages = c("ranger", "distr6")
@@ -96,8 +74,7 @@ LearnerSurvRanger = R6Class("LearnerSurvRanger", inherit = LearnerSurv,
 
       crank = as.numeric(sapply(x, function(y) sum(y[,1] * c(y[,2][1], diff(y[,2])))))
 
-      # note the ranking of lp and crank is identical
-      PredictionSurv$new(task = task, crank = crank, distr = distr)
+      PredictionSurv$new(task = task, distr = distr, crank = crank)
     },
 
     importance = function() {
