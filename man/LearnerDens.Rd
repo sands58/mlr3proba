@@ -16,7 +16,7 @@ packages = character())
 For a description of the arguments, see \link{Learner}.
 \code{task_type} is set to \code{"dens"}.
 
-Possible values for \code{predict_types} are passed to and converted by \link{PredictionDensity}:
+Possible values for \code{predict_types} are passed to and converted by \link{PredictionDens}:
 \itemize{
 \item \code{"pdf"}: Evaluates the estimated probability density function for each value in the test set.
 \item \code{"cdf"}: Evaluates the estimated cumulative distribution function for each value in the test set.

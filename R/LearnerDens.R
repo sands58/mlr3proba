@@ -15,7 +15,7 @@
 #' For a description of the arguments, see [Learner].
 #' `task_type` is set to `"dens"`.
 #'
-#' Possible values for `predict_types` are passed to and converted by [PredictionDensity]:
+#' Possible values for `predict_types` are passed to and converted by [PredictionDens]:
 #' * `"pdf"`: Evaluates the estimated probability density function for each value in the test set.
 #' * `"cdf"`: Evaluates the estimated cumulative distribution function for each value in the test set.
 #'
