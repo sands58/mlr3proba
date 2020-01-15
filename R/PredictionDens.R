@@ -4,17 +4,17 @@
 #' @format [R6::R6Class] object inheriting from [mlr3::Prediction].
 #'
 #' @description
-#' This object stores the predictions returned by a learner of class [LearnerDensity].
+#' This object stores the predictions returned by a learner of class [LearnerDens].
 #'
-#' The `task_type` is set to `"density"`.
+#' The `task_type` is set to `"dens"`.
 #'
 #' @section Construction:
 #' ```
-#' p = PredictionDensity$new(task = NULL, row_ids = task$row_ids, truth = task$truth(),
+#' p = PredictionDens$new(task = NULL, row_ids = task$row_ids, truth = task$truth(),
 #' pdf = pdf, cdf = cdf)
 #' ```
 #'
-#' * `task` :: [TaskDensity]\cr
+#' * `task` :: [TaskDens]\cr
 #'   Task, used to extract defaults for `row_ids` and `truth`.
 #'
 #' * `row_ids` :: (`integer()` | `character()`)\cr
@@ -32,24 +32,24 @@
 #' @section Fields:
 #' See [mlr3::Prediction].
 #'
-#' The field `task_type` is set to `"density"`.
+#' The field `task_type` is set to `"dens"`.
 #'
 #' @family Prediction
 #' @export
 #' @examples
 #' library(mlr3)
 #' task = mlr_tasks$get("precip")
-#' learner = mlr_learners$get("density.hist")
+#' learner = mlr_learners$get("dens.hist")
 #' p = learner$train(task)$predict(task)
 #' head(as.data.table(p))
-PredictionDensity = R6Class("PredictionDensity", inherit = Prediction,
+PredictionDens = R6Class("PredictionDens", inherit = Prediction,
   public = list(
     initialize = function(task = NULL, row_ids = task$row_ids, truth = task$truth(),
                           pdf = pdf, cdf = cdf) {
       assert_row_ids(row_ids)
       n = length(row_ids)
 
-      self$task_type = "density"
+      self$task_type = "dens"
 
       # Check returned predict types have correct names and add to data.table
       self$predict_types = c("pdf","cdf")[c(!is.null(pdf),!is.null(cdf))]
@@ -95,14 +95,14 @@ PredictionDensity = R6Class("PredictionDensity", inherit = Prediction,
 
 
 #' @export
-as.data.table.PredictionDensity = function(x, ...) {
+as.data.table.PredictionDens = function(x, ...) {
   copy(x$data$tab)
 }
 
 #' @export
-c.PredictionDensity = function(..., keep_duplicates = TRUE) {
+c.PredictionDens = function(..., keep_duplicates = TRUE) {
   dots = list(...)
-  assert_list(dots, "PredictionDensity")
+  assert_list(dots, "PredictionDens")
   assert_flag(keep_duplicates)
   if (length(dots) == 1L) {
     return(dots[[1L]])
@@ -119,7 +119,7 @@ c.PredictionDensity = function(..., keep_duplicates = TRUE) {
     tab = unique(tab, by = "row_id", fromLast = TRUE)
   }
 
-  PredictionDensity$new(row_ids = tab$row_id, truth = tab$truth, pdf = tab$pdf, cdf = tab$cdf)
+  PredictionDens$new(row_ids = tab$row_id, truth = tab$truth, pdf = tab$pdf, cdf = tab$cdf)
 }
 
 

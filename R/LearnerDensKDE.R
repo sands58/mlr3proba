@@ -1,5 +1,5 @@
-LearnerDensityKDE = R6::R6Class("LearnerDensityKDE", inherit = LearnerDensity)
-LearnerDensityKDE$set("public", "initialize", function(id = "density.KDE") {
+LearnerDensKDE = R6::R6Class("LearnerDensKDE", inherit = LearnerDens)
+LearnerDensKDE$set("public", "initialize", function(id = "dens.KDE") {
   super$initialize(
     id = id,
     param_set = ParamSet$new(list(ParamFct$new("kernel",
@@ -13,7 +13,7 @@ LearnerDensityKDE$set("public", "initialize", function(id = "density.KDE") {
     packages = "distr6"
   )
 })
-LearnerDensityKDE$set("public", "train_internal", function(task){
+LearnerDensKDE$set("public", "train_internal", function(task){
   pdf <- function(x1){}
   #x1 is new data
   body(pdf) <- substitute({
@@ -36,8 +36,8 @@ LearnerDensityKDE$set("public", "train_internal", function(task){
 
 
 })
-LearnerDensityKDE$set("public", "predict_internal", function(task){
+LearnerDensKDE$set("public", "predict_internal", function(task){
   newdata = task$truth()
   prob = self$model$distribution$pdf(newdata)
-  PredictionDensity$new(task = task, prob = prob)
+  PredictionDens$new(task = task, prob = prob)
 })

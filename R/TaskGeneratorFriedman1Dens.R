@@ -14,7 +14,7 @@ TaskGeneratorFriedman1Dens = R6::R6Class("TaskGeneratorFriedman1Dens",
                                      data = invoke(mlbench::mlbench.friedman1, n = n, .args = self$param_set$values)
                                      colnames(data$x) = c(sprintf("important%i", 1:5), sprintf("unimportant%i", 1:5))
                                      data = insert_named(as.data.table(data$x), list(y = data$y))
-                                     TaskDensity$new(sprintf("%s_%i", self$id, n), as.data.frame(data), target = "y")
+                                     TaskDens$new(sprintf("%s_%i", self$id, n), as.data.frame(data), target = "y")
                                    }
                                  )
 )

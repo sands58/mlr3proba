@@ -1,9 +1,9 @@
-MeasureDensityLogloss = R6::R6Class("MeasureDensityLogloss",
-                            inherit = MeasureDensity,
+MeasureDensLogloss = R6::R6Class("MeasureDensLogloss",
+                            inherit = MeasureDens,
                             public = list(
                               initialize = function() {
                                 super$initialize(
-                                  id = "density.logloss",
+                                  id = "dens.logloss",
                                   range = c(0, Inf),
                                   minimize = TRUE,
                                   predict_type = "prob"

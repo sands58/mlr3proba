@@ -1,5 +1,5 @@
-LearnerDensityHistogram <- R6::R6Class("LearnerDensityHistogram", inherit = LearnerDensity,
-  public = list(initialize = function(id = "density.hist"){
+LearnerDensHistogram <- R6::R6Class("LearnerDensHistogram", inherit = LearnerDens,
+  public = list(initialize = function(id = "dens.hist"){
     super$initialize(
       id = id,
       param_set = ParamSet$new(
@@ -25,7 +25,7 @@ LearnerDensityHistogram <- R6::R6Class("LearnerDensityHistogram", inherit = Lear
 
     predict_internal = function(task){
       newdata = as.numeric(unlist(task$data(cols = task$target_names)))
-      PredictionDensity$new(task = task, pdf = self$model$pdf(newdata),
+      PredictionDens$new(task = task, pdf = self$model$pdf(newdata),
                             cdf = self$model$cdf(newdata))
     }
   ))

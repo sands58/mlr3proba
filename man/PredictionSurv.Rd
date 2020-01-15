@@ -53,6 +53,6 @@ head(as.data.table(p))
 }
 \seealso{
 Other Prediction: 
-\code{\link{PredictionDensity}}
+\code{\link{PredictionDens}}
 }
 \concept{Prediction}

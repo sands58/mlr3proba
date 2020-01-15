@@ -35,19 +35,19 @@ register_mlr3 = function() {
     x$default_measures$surv = "surv.harrellC"
   }
 
-  if (!grepl("density", x$task_types[,"type"])) {
+  if (!grepl("dens", x$task_types[,"type"])) {
      x = utils::getFromNamespace("mlr_reflections", ns = "mlr3")
      x$task_types = setkeyv(rbind(x$task_types, rowwise_table(
         ~type,     ~package,    ~task,         ~learner,         ~prediction,         ~measure,
-        "density", "mlr3proba", "TaskDensity", "LearnerDensity", "PredictionDensity", "MeasureDensity"
+        "dens", "mlr3proba", "TaskDens", "LearnerDens", "PredictionDens", "MeasureDens"
      )), "type")
-     x$task_col_roles$density = c("feature", "target", "label", "order", "group", "weight")
-     x$task_properties$density = c("weights", "groups")
-     x$learner_properties$density = x$learner_properties$regr
-     x$measure_properties$density = x$measure_properties$regr
-     x$learner_predict_types$density = list(pdf = c("pdf","cdf"),
+     x$task_col_roles$dens = c("feature", "target", "label", "order", "group", "weight")
+     x$task_properties$dens = c("weights", "groups")
+     x$learner_properties$dens = x$learner_properties$regr
+     x$measure_properties$dens = x$measure_properties$regr
+     x$learner_predict_types$dens = list(pdf = c("pdf","cdf"),
                                          cdf = c("cdf"))
-     x$default_measures$density = "density.logloss"
+     x$default_measures$dens = "dens.logloss"
   }
 
   # tasks
@@ -64,7 +64,7 @@ register_mlr3 = function() {
 
   # learners
    x = utils::getFromNamespace("mlr_learners", ns = "mlr3")
-   x$add("density.hist", LearnerDensityHistogram)
+   x$add("dens.hist", LearnerDensHistogram)
 
    # x$add("probreg.gaussian", LearnerProbregGaussian)
 
@@ -88,7 +88,7 @@ register_mlr3 = function() {
 
   # measures
    x = utils::getFromNamespace("mlr_measures", ns = "mlr3")
-   # x$add("density.logloss", MeasureDensityLogloss)
+   # x$add("dens.logloss", MeasureDensityLogloss)
    # x$add("regr.logloss", MeasureRegrLogloss)
    x$add("surv.graf", MeasureSurvGraf)
    x$add("surv.grafSE", MeasureSurvGrafSE)
