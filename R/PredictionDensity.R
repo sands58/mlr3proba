@@ -1,54 +1,125 @@
-PredictionDensity = R6::R6Class("PredictionDensity", inherit = Prediction, cloneable = FALSE)
-PredictionDensity$set("public", "initialize", function(task = NULL, row_ids = task$row_ids, truth = task$truth(),
-                                                       pdf = NULL, cdf = NULL) {
-  self$data$row_ids = assert_row_ids(row_ids)
-  n = length(row_ids)
-  self$data$truth = checkmate::assert_numeric(truth, len = n, null.ok = TRUE)
-  self$data$pdf = checkmate::assert_numeric(pdf, len = n, any.missing = FALSE, null.ok = TRUE)
-  self$data$cdf = checkmate::assert_numeric(cdf, len = n, any.missing = FALSE, null.ok = TRUE)
-  self$task_type = "density"
-})
-PredictionDensity$set("active","pdf",function(){
-  self$data$pdf %??% rep(NA_real_, length(self$data$row_ids))
-})
-PredictionDensity$set("active","cdf",function(){
-  self$data$cdf %??% rep(NA_real_, length(self$data$row_ids))
-})
-PredictionDensity$set("active","missing",function(){
-  miss = logical(length(self$data$row_ids))
-  if (!is.null(self$data$pdf))
-    miss = miss | is.na(self$data$pdf)
-  if (!is.null(self$data$cdf))
-    miss = miss | is.na(self$data$cdf)
+#' @title Prediction Object for Density
+#'
+#' @usage NULL
+#' @format [R6::R6Class] object inheriting from [mlr3::Prediction].
+#'
+#' @description
+#' This object stores the predictions returned by a learner of class [LearnerDensity].
+#'
+#' The `task_type` is set to `"density"`.
+#'
+#' @section Construction:
+#' ```
+#' p = PredictionDensity$new(task = NULL, row_ids = task$row_ids, truth = task$truth(),
+#' pdf = pdf, cdf = cdf)
+#' ```
+#'
+#' * `task` :: [TaskDensity]\cr
+#'   Task, used to extract defaults for `row_ids` and `truth`.
+#'
+#' * `row_ids` :: (`integer()` | `character()`)\cr
+#'   Row ids of the task. Per default, these are extracted from the `task`.
+#'
+#' * `truth` :: `numeric()`\cr
+#'   Observed sample. Per default, these are extracted from the `task`.
+#'
+#' * `pdf` :: `numeric()`\cr
+#'   Probability density function evaluated at the given points in the test set.
+#'
+#' * `cdf` :: `numeric()`\cr
+#'   Cumulative distribution function evaluated at the given points in the test set.
+#'
+#' @section Fields:
+#' See [mlr3::Prediction].
+#'
+#' The field `task_type` is set to `"density"`.
+#'
+#' @family Prediction
+#' @export
+#' @examples
+#' library(mlr3)
+#' task = mlr_tasks$get("precip")
+#' learner = mlr_learners$get("density.hist")
+#' p = learner$train(task)$predict(task)
+#' head(as.data.table(p))
+PredictionDensity = R6Class("PredictionDensity", inherit = Prediction,
+  public = list(
+    initialize = function(task = NULL, row_ids = task$row_ids, truth = task$truth(),
+                          pdf = pdf, cdf = cdf) {
+      assert_row_ids(row_ids)
+      n = length(row_ids)
 
-  self$data$row_ids[miss]
-})
+      self$task_type = "density"
+
+      # Check returned predict types have correct names and add to data.table
+      self$predict_types = c("pdf","cdf")[c(!is.null(pdf),!is.null(cdf))]
+      self$data$tab = data.table(
+        row_id = row_ids,
+        truth = assert_numeric(truth, len = n, null.ok = TRUE)
+      )
+
+      if (!is.null(pdf)) {
+        self$data$tab$pdf = assert_numeric(pdf, len = n, any.missing = FALSE)
+      }
+
+      if (!is.null(cdf)) {
+        self$data$tab$cdf = assert_numeric(cdf, len = n, any.missing = FALSE)
+      }
+    }
+  ),
+
+  active = list(
+    pdf = function() {
+      self$data$tab$pdf %??% rep(NA_real_, length(self$data$row_ids))
+    },
+
+    cdf = function() {
+      self$data$tab$cdf %??% rep(NA_real_, length(self$data$row_ids))
+    },
+
+    missing = function() {
+      miss = logical(nrow(self$data$tab))
+
+      if ("pdf" %in% self$predict_types) {
+        miss = is.na(self$data$tab$pdf)
+      }
+
+      if ("cdf" %in% self$predict_types) {
+        miss = miss | is.na(self$data$tab$cdf)
+      }
+
+      self$data$tab$row_id[miss]
+    }
+  )
+)
+
 
 #' @export
 as.data.table.PredictionDensity = function(x, ...) {
-  data = x$data
-  if (is.null(data$row_ids)) {
-    return(data.table::data.table())
-  }
-  data.table::data.table(row_id = data$row_ids, truth = data$truth, pdf = data$pdf, cdf = data$cdf)
+  copy(x$data$tab)
 }
-
 
 #' @export
 c.PredictionDensity = function(..., keep_duplicates = TRUE) {
-
   dots = list(...)
   assert_list(dots, "PredictionDensity")
   assert_flag(keep_duplicates)
-
-  x = map_dtr(dots, function(p) {
-    list(row_ids = p$data$row_ids, truth = p$data$truth, pdf = p$data$pdf, cdf = p$data$cdf)
-  }, .fill = FALSE)
-
-  if (!keep_duplicates) {
-    keep = !duplicated(x$row_ids, fromLast = TRUE)
-    x = x[keep]
+  if (length(dots) == 1L) {
+    return(dots[[1L]])
   }
 
-  PredictionDensity$new(row_ids = x$row_ids, truth = x$truth, pdf = x$pdf, cdf = x$cdf)
+  predict_types = map(dots, "predict_types")
+  if (!every(predict_types[-1L], setequal, y = predict_types[[1L]])) {
+    stopf("Cannot rbind predictions: Different predict_types.")
+  }
+
+  tab = map_dtr(dots, function(p) p$data$tab, .fill = FALSE)
+
+  if (!keep_duplicates) {
+    tab = unique(tab, by = "row_id", fromLast = TRUE)
+  }
+
+  PredictionDensity$new(row_ids = tab$row_id, truth = tab$truth, pdf = tab$pdf, cdf = tab$cdf)
 }
+
+

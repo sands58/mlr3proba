@@ -1,5 +1,5 @@
 LearnerDensityHist <- R6::R6Class("LearnerDensityHist", inherit = LearnerDensity,
-  public = list(initialize = function(id = "density.Hist"){
+  public = list(initialize = function(id = "density.hist"){
     super$initialize(
       id = id,
       param_set = ParamSet$new(
@@ -32,11 +32,8 @@ LearnerDensityHist <- R6::R6Class("LearnerDensityHist", inherit = LearnerDensity
 
       cdf = function(x1){}
       body(cdf) = substitute({
-
-      as.numeric(sapply(x1, function(x) .histogram_cdf(val = x, Intervals = data$Intervals,
-                                pdf = data$binPdf)))
-
-         }, list(data = dt))
+        .histogram_cdf(val = x1, Intervals = data$Intervals, pdf = data$binPdf)
+      }, list(data = dt))
 
       distr6::Distribution$new(name = "Histogram Estimator",
                                short_name = "Histogram",

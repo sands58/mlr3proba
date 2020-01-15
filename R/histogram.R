@@ -42,12 +42,10 @@
 # 3. Pdf: pdf for each interval. a vector
 
 .histogram_cdf <- function(val, Intervals, pdf){
-
   length_val <- findInterval(val, Intervals, rightmost.closed = F , left.open = T)
-  # findInterval
-  area <-  0
-  for(i in 1:(length_val)){
-    area <- area + ((pdf[i]) * (Intervals[i+1] - Intervals[i]))
-  }
-  data.table::data.table(CDF = area)
+  area = sapply(length_val, function(x) sum(pdf[1:x] * (Intervals[2:(x+1)] - Intervals[1:x])))
+  # only equals NA if on the max support boundary
+  area[is.na(area)] = 1
+
+  area
 }
