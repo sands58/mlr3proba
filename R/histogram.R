@@ -22,13 +22,26 @@
 # a <- .histogram(data = data,  breaks = 5)
 
 .histogram <- function(data, breaks = "Sturges", include.lowest = TRUE, right = TRUE){
-  a <- hist(x= data, breaks = breaks, include.lowest = include.lowest, plot = FALSE, right = right)
+  a <- graphics::hist(x = data, breaks = breaks, include.lowest = include.lowest, plot = FALSE, right = right)
   Interval <- head(a$breaks,-1)
   bin <- a$density
-  data.table::data.table(Intervals = Interval, binPdf = bin)
-}
+  dt = data.table::data.table(Intervals = Interval, binPdf = bin)
 
-# function: .histogram_cdf
+  pdf = function(x1){}
+  body(pdf) = substitute({
+    as.numeric(unlist(data[findInterval(x1, data$Intervals), 2]))
+  }, list(data = dt))
+
+  cdf = function(x1){}
+  body(cdf) = substitute({
+    .histogram_cdf(val = x1, Intervals = data$Intervals, pdf = data$binPdf)
+  }, list(data = dt))
+
+  distr6::Distribution$new(name = "Histogram Estimator",
+                           short_name = "Histogram",
+                           pdf = pdf, cdf = cdf,
+                           support = distr6::Interval$new(min(data), max(data)))
+}
 
 # Description: Compute the cdf of a histogram using the density and the
 #              relative intervals. The lower limit of the cdf must

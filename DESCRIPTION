@@ -47,6 +47,7 @@ Suggests:
     flexsurv,
     gbm,
     glmnet,
+    graphics,
     knitr,
     lgr,
     mlr3tuning,
@@ -73,7 +74,7 @@ RoxygenNote: 7.0.2
 RdMacros: mlr3misc
 Collate:
     'LearnerDensity.R'
-    'LearnerDensityHist.R'
+    'LearnerDensityHistogram.R'
     'LearnerDensityKDE.R'
     'LearnerProbreg.R'
     'LearnerProbregGaussian.R'

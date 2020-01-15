@@ -1,4 +1,4 @@
-LearnerDensityHist <- R6::R6Class("LearnerDensityHist", inherit = LearnerDensity,
+LearnerDensityHistogram <- R6::R6Class("LearnerDensityHistogram", inherit = LearnerDensity,
   public = list(initialize = function(id = "density.hist"){
     super$initialize(
       id = id,
@@ -12,7 +12,7 @@ LearnerDensityHist <- R6::R6Class("LearnerDensityHist", inherit = LearnerDensity
                   )),
       feature_types =  c("logical", "integer", "numeric", "character", "factor", "ordered"),
       predict_types = c("pdf","cdf"),
-      packages = "distr6")},
+      packages = c("graphics", "distr6"))},
 
     train_internal = function(task){
 
@@ -20,26 +20,7 @@ LearnerDensityHist <- R6::R6Class("LearnerDensityHist", inherit = LearnerDensity
 
       data = as.numeric(unlist(task$data(cols = task$target_names)))
 
-      #this is called self$model
-      #using histogram1.R
-      # change later histogram function name in histogram file = > .histogram
-      #invoke in packge mlr3misc
-      dt = invoke(.histogram, data = data, .args = pars)
-      pdf = function(x1){}
-      body(pdf) = substitute({
-        as.numeric(unlist(data[findInterval(x1, data$Intervals), 2]))
-      }, list(data = dt))
-
-      cdf = function(x1){}
-      body(cdf) = substitute({
-        .histogram_cdf(val = x1, Intervals = data$Intervals, pdf = data$binPdf)
-      }, list(data = dt))
-
-      distr6::Distribution$new(name = "Histogram Estimator",
-                               short_name = "Histogram",
-                               pdf = pdf, cdf = cdf,
-                               support = distr6::Interval$new(min(data), max(data)))
-
+      invoke(.histogram, data = data, .args = pars)
     },
 
     predict_internal = function(task){
