@@ -88,8 +88,11 @@ register_mlr3 = function() {
 
   # measures
    x = utils::getFromNamespace("mlr_measures", ns = "mlr3")
-   # x$add("dens.logloss", MeasureDensityLogloss)
+
+   x$add("dens.logloss", MeasureDensLogloss)
+
    # x$add("regr.logloss", MeasureRegrLogloss)
+   #
    x$add("surv.graf", MeasureSurvGraf)
    x$add("surv.grafSE", MeasureSurvGrafSE)
    x$add("surv.logloss", MeasureSurvLogloss)

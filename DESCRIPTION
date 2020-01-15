@@ -147,7 +147,6 @@ Collate:
     'distrcompositor.R'
     'helpers.R'
     'histogram.R'
-    'histogram_logloss.R'
     'integrated_scores.R'
     'predict.flexsurvreg.R'
     'surv_logloss.R'
