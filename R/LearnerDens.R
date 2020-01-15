@@ -28,6 +28,7 @@
 #' @family Learner
 #' @export
 #' @examples
+#' library(mlr3)
 #' # get all density learners from mlr_learners:
 #' lrns = mlr_learners$mget(mlr_learners$keys("^dens"))
 #' names(lrns)

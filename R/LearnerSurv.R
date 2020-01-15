@@ -28,12 +28,13 @@
 #' @export
 #' @examples
 #' library(mlr3)
-#' ids = mlr_learners$keys("^surv")
-#' ids
+#' # get all survival learners from mlr_learners:
+#' lrns = mlr_learners$mget(mlr_learners$keys("^surv"))
+#' names(lrns)
 #'
 #' # get a specific learner from mlr_learners:
-#' lrn = mlr_learners$get("surv.rpart")
-#' print(lrn)
+#' mlr_learners$get("surv.kaplan")
+#' lrn("surv.kaplan")
 LearnerSurv = R6Class("LearnerSurv", inherit = Learner,
                       public = list(
                         initialize = function(id, param_set = ParamSet$new(), predict_types = "distr", feature_types = character(), properties = character(), packages = character()) {

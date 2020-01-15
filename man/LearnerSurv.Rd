@@ -32,12 +32,13 @@ See \link[mlr3:Learner]{mlr3::Learner}.
 
 \examples{
 library(mlr3)
-ids = mlr_learners$keys("^surv")
-ids
+# get all survival learners from mlr_learners:
+lrns = mlr_learners$mget(mlr_learners$keys("^surv"))
+names(lrns)
 
 # get a specific learner from mlr_learners:
-lrn = mlr_learners$get("surv.rpart")
-print(lrn)
+mlr_learners$get("surv.kaplan")
+lrn("surv.kaplan")
 }
 \seealso{
 Other Learner: 
