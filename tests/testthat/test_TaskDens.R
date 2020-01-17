@@ -22,9 +22,4 @@ test_that("TaskDens: 0 feature task", {
   expect_task_supervised(task)
   expect_task_dens(task)
   expect_data_table(task$data(), ncols = 1L)
-
-  # lrn = lrn("dens.kde")
-  # p = lrn$train(task)$predict(task)
-  # expect_prediction(p)
-  # expect_number(e$performance)
 })
