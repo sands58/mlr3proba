@@ -1,6 +1,7 @@
 context("dens.hist")
 
 test_that("autotest", {
+  set.seed(1)
   learner = lrn("dens.hist")
   expect_learner(learner)
   result = run_autotest(learner)
