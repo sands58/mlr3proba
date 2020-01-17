@@ -46,7 +46,7 @@ register_mlr3 = function() {
      x$learner_properties$dens = x$learner_properties$regr
      x$measure_properties$dens = x$measure_properties$regr
      x$learner_predict_types$dens = list(pdf = c("pdf","cdf"),
-                                         cdf = c("cdf"))
+                                         cdf = c("pdf","cdf"))
      x$default_measures$dens = "dens.logloss"
   }
 
@@ -59,7 +59,7 @@ register_mlr3 = function() {
 
   # generators
    x = utils::getFromNamespace("mlr_task_generators", ns = "mlr3")
-   x$add("friedman1dens", TaskGeneratorFriedman1Dens)
+   x$add("simdens", TaskGeneratorSimdens)
    x$add("simsurv", TaskGeneratorSimsurv)
 
   # learners

@@ -1,4 +1,4 @@
-context("mlr_measures")
+context("mlr_measures_surv")
 
 task = TaskGeneratorSimsurv$new()$generate(20)
 
