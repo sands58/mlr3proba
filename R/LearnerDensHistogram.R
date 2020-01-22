@@ -4,15 +4,14 @@ LearnerDensHistogram <- R6::R6Class("LearnerDensHistogram", inherit = LearnerDen
       id = id,
       param_set = ParamSet$new(
         params = list(
-        ParamUty$new(id = "breaks", default = "Sturges", tags = "train"),
-          ParamLgl$new(id = "include.lowest", default = TRUE, tags = "train"),
-          ParamLgl$new(id = "right", default = TRUE, tags = "train"),
-          ParamDbl$new(id = "Intervals", tag = "train"),
-        ParamDbl$new(id = "pdf", tag = "train")
-                  )),
+          ParamUty$new(id = "breaks", default = "Sturges", tags = "train"),
+          ParamLgl$new(id = "include.lowest", default = TRUE, tags = "train")
+        )),
       feature_types =  c("logical", "integer", "numeric", "character", "factor", "ordered"),
       predict_types = c("pdf","cdf"),
-      packages = c("graphics", "distr6"))},
+      packages = c("graphics", "distr6")
+      )
+    },
 
     train_internal = function(task){
 

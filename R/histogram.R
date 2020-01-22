@@ -21,11 +21,9 @@
 # numbin <- 2
 # a <- .histogram(data = data,  breaks = 5)
 
-.histogram <- function(data, breaks = "Sturges", include.lowest = TRUE, right = TRUE){
-  a <- graphics::hist(x = data, breaks = breaks, include.lowest = include.lowest, plot = FALSE, right = right)
-  Interval <- head(a$breaks,-1)
-  bin <- a$density
-  dt = data.table::data.table(Intervals = Interval, binPdf = bin)
+.histogram <- function(data, breaks = "Sturges", include.lowest = TRUE){
+  a <- graphics::hist(x = data, breaks = breaks, include.lowest = include.lowest, plot = FALSE)
+  dt <- data.table::data.table(Intervals = head(a$breaks,-1), binPdf = a$density)
 
   pdf = function(x1){}
   body(pdf) = substitute({
