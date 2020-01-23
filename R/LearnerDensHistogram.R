@@ -19,7 +19,7 @@ LearnerDensHistogram <- R6::R6Class("LearnerDensHistogram", inherit = LearnerDen
 
       data = as.numeric(unlist(task$data(cols = task$target_names)))
 
-      invoke(.histogram, data = data, .args = pars)
+      invoke(.histogram, dat = data, .args = pars)
     },
 
     predict_internal = function(task){

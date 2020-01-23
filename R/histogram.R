@@ -23,16 +23,16 @@
 
 .histogram <- function(dat, breaks = "Sturges", include.lowest = TRUE){
   a <- graphics::hist(x = dat, breaks = breaks, include.lowest = include.lowest, plot = FALSE)
-  dt <- data.table::data.table(Intervals = head(a$breaks,-1), binPdf = a$density)
-
+  dt <- data.table::data.table(Intervals = a$breaks[-length(a$breaks)], binPdf =  a$density)
+  # a$breaks[-length(a$breaks)]: remove the last breaks
   pdf = function(x1){}
   body(pdf) = substitute({
-    as.numeric(unlist(data[findInterval(x1, data$Intervals, rightmost.closed = FALSE), 2]))
+   .histogram_pdf(val = x1, Intervals = data$Intervals, pdf = data$binPdf)
   }, list(data = dt))
 
   cdf = function(x1){}
   body(cdf) = substitute({
-    .histogram_cdf(val = x1, Intervals = data$Intervals, pdf = data$binPdf)
+    .histogram_cdf(val = x1, Intervals = data$Intervals[-length(data$A)], pdf = data$binPdf)
   }, list(data = dt))
 
   distr6::Distribution$new(name = "Histogram Estimator",
@@ -61,4 +61,13 @@
   area[is.na(area)] = 1
 
   area
+}
+
+
+.histogram_pdf <- function(val, Intervals, pdf){
+
+  Pdf = ifelse(val >  Intervals[1] & val < Intervals[2], 0,
+         as.numeric(pdf[findInterval(val, Intervals, rightmost.closed= TRUE, left.open = TRUE)]))
+  Pdf
+
 }
