@@ -21,13 +21,13 @@
 # numbin <- 2
 # a <- .histogram(data = data,  breaks = 5)
 
-.histogram <- function(data, breaks = "Sturges", include.lowest = TRUE){
-  a <- graphics::hist(x = data, breaks = breaks, include.lowest = include.lowest, plot = FALSE)
+.histogram <- function(dat, breaks = "Sturges", include.lowest = TRUE){
+  a <- graphics::hist(x = dat, breaks = breaks, include.lowest = include.lowest, plot = FALSE)
   dt <- data.table::data.table(Intervals = head(a$breaks,-1), binPdf = a$density)
 
   pdf = function(x1){}
   body(pdf) = substitute({
-    as.numeric(unlist(data[findInterval(x1, data$Intervals, left.open = FALSE, rightmost.closed = TRUE), 2]))
+    as.numeric(unlist(data[findInterval(x1, data$Intervals, rightmost.closed = FALSE), 2]))
   }, list(data = dt))
 
   cdf = function(x1){}
