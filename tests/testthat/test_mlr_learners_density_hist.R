@@ -23,3 +23,15 @@ test_that("autotest", {
 #   expect_equal(dist$cdf(0.1), 0)
 #   expect_equal(dist$cdf(0.1), 1)
 # })
+
+
+data = data.frame("A" = as.numeric(c(0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.5)))
+task = TaskDens$new(id = "a", data, target = "A")
+lrn = lrn("dens.hist", breaks =5,  include.lowest = FALSE)
+p = lrn$train(task)
+dist = p$model
+test_that("pdf", {
+  expect_equal(dist$pdf(1.2), 0.5)
+  expect_equal(dist$pdf(0.1), 0.5)
+})
+
