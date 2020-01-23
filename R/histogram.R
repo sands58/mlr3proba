@@ -27,7 +27,7 @@
 
   pdf = function(x1){}
   body(pdf) = substitute({
-                  as.numeric(unlist(data[findInterval(x1, data$Intervals, left.open = FALSE, rightmost.closed = TRUE), 2]))
+    as.numeric(unlist(data[findInterval(x1, data$Intervals, left.open = FALSE, rightmost.closed = TRUE), 2]))
   }, list(data = dt))
 
   cdf = function(x1){}

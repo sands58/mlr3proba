@@ -25,7 +25,7 @@ test_that("autotest", {
 # })
 
 
-data = data.frame("A" = as.numeric(c(0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.5)))
+data = data.frame("A" = as.numeric(c(0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6)))
 task = TaskDens$new(id = "a", data, target = "A")
 lrn = lrn("dens.hist", breaks =5,  include.lowest = FALSE)
 p = lrn$train(task)
