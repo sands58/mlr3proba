@@ -38,8 +38,18 @@
   distr6::Distribution$new(name = "Histogram Estimator",
                            short_name = "Histogram",
                            pdf = pdf, cdf = cdf,
-                           support = distr6::Interval$new(min(data), max(data)))
+                           support = distr6::Interval$new(min(dat), max(dat)))
 }
+
+.histogram <- function(x1, data, breaks = "Sturges", include.lowest = TRUE){
+  a <- graphics::hist(x = data, breaks = breaks, include.lowest = include.lowest, plot = FALSE)
+  dt <- data.table::data.table(Intervals = head(a$breaks,-1), binPdf = a$density)
+
+  pdf <-  as.numeric(unlist(dt[findInterval(x1, dt$Intervals, rightmost.closed = FALSE), 2]))
+
+  return(pdf)
+}
+
 
 # Description: Compute the cdf of a histogram using the density and the
 #              relative intervals. The lower limit of the cdf must
