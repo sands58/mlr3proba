@@ -25,20 +25,24 @@
   a <- graphics::hist(x = dat, breaks = breaks, include.lowest = include.lowest, plot = FALSE)
   dt <- data.table::data.table(Intervals = a$breaks[-length(a$breaks)], binPdf =  a$density)
   # a$breaks[-length(a$breaks)]: remove the last breaks
+
   pdf = function(x1){}
   body(pdf) = substitute({
-   .histogram_pdf(val = x1, Intervals = data$Intervals, pdf = data$binPdf)
+    ifelse(data$Intervals[1] == x1, 0,
+           ifelse(x1 > max(a$breaks) || x1 < data$Intervals[1], 0,
+                  as.numeric(data[findInterval(x1, data$Intervals, rightmost.closed = TRUE,
+                                              left.open = TRUE),2])))
   }, list(data = dt))
 
   cdf = function(x1){}
   body(cdf) = substitute({
-    .histogram_cdf(val = x1, Intervals = data$Intervals[-length(data$A)], pdf = data$binPdf)
+    .histogram_cdf(val = x1, Intervals = data$Intervals, pdf = data$binPdf)
   }, list(data = dt))
 
   distr6::Distribution$new(name = "Histogram Estimator",
                            short_name = "Histogram",
                            pdf = pdf, cdf = cdf,
-                           support = distr6::Interval$new(min(dat), max(dat)))
+                           support = distr6::Interval$new(-Inf, Inf))
 }
 
 
@@ -64,10 +68,4 @@
 }
 
 
-.histogram_pdf <- function(val, Intervals, pdf){
 
-  Pdf = ifelse(val >  Intervals[1] & val < Intervals[2], 0,
-         as.numeric(pdf[findInterval(val, Intervals, rightmost.closed= TRUE, left.open = TRUE)]))
-  Pdf
-
-}
