@@ -30,15 +30,16 @@
     as.numeric(unlist(data[findInterval(x1, data$Intervals, left.open = FALSE, rightmost.closed = TRUE), 2]))
    }, list(data = dt))
 
-  cdf = function(x1){}
-  body(cdf) = substitute({
-    .histogram_cdf(val = x1, Intervals = data$Intervals, pdf = data$binPdf)
-  }, list(data = dt))
+  # cdf = function(x1){}
+  # body(cdf) = substitute({
+  #   .histogram_cdf(val = x1, Intervals = data$Intervals, pdf = data$binPdf)
+  # }, list(data = dt))
 
-  distr6::Distribution$new(name = "Histogram Estimator",
+  list(distr = distr6::Distribution$new(name = "Histogram Estimator",
                            short_name = "Histogram",
-                           pdf = pdf, cdf = cdf,
-                           support = distr6::Interval$new(min(dt$Intervals), max(dt$Intervals)))
+                           pdf = pdf, # cdf = cdf,
+                           support = distr6::Interval$new(min(dt$Intervals), max(dt$Intervals))),
+       hist = a)
 }
 
 
