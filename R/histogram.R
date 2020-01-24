@@ -28,8 +28,8 @@
 
   pdf = function(x1){}
   body(pdf) = substitute({
-  ifelse(x1 == data$Intervals[1] || x1 > max(a$breaks) || x1 < data$Intervals[1], 0,
-    as.numeric(unlist(data[findInterval(x1, data$Intervals, left.open = TRUE, rightmost.closed = TRUE), 2])))
+  ifelse(x1 > max(a$breaks) || x1 < data$Intervals[1], 0,
+    as.numeric(unlist(data[findInterval(x1, data$Intervals, left.open =TRUE, rightmost.closed = TRUE), 2])))
     }, list(data = dt))
 
   cdf = function(x1){}
@@ -57,7 +57,7 @@
 # 3. Pdf: pdf for each interval. a vector
 
 .histogram_cdf <- function(val, Intervals, pdf){
-  length_val <- findInterval(val, Intervals, rightmost.closed = F , left.open = T)
+  length_val <- findInterval(val, Intervals, rightmost.closed = TRUE , left.open = TRUE)
   area = sapply(length_val, function(x) sum(pdf[1:x] * (Intervals[2:(x+1)] - Intervals[1:x])))
   # only equals NA if on the max support boundary
   area[is.na(area)] = 1
