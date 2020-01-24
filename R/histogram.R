@@ -28,11 +28,9 @@
 
   pdf = function(x1){}
   body(pdf) = substitute({
-    ifelse(data$Intervals[1] == x1, 0,
-           ifelse(x1 > max(a$breaks) || x1 < data$Intervals[1], 0,
-                  as.numeric(data[findInterval(x1, data$Intervals, rightmost.closed = TRUE,
-                                              left.open = TRUE),2])))
-  }, list(data = dt))
+  ifelse(x1 == data$Intervals[1] || x1 > max(a$breaks) || x1 < data$Intervals[1], 0,
+    as.numeric(unlist(data[findInterval(x1, data$Intervals, left.open = TRUE, rightmost.closed = TRUE), 2])))
+    }, list(data = dt))
 
   cdf = function(x1){}
   body(cdf) = substitute({
