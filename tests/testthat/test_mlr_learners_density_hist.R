@@ -24,7 +24,6 @@ test_that("autotest", {
 #   expect_equal(dist$cdf(0.1), 1)
 # })
 
-
 #  data = data.frame("A" = as.numeric(c(0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6)))
 #  task = TaskDens$new(id = "a", data, target = "A")
 #  lrn = lrn("dens.hist", breaks =5)
@@ -51,5 +50,3 @@ test_that("autotest", {
 #   expect_equal(dist$cdf(1.5), 0.875)
 #   expect_equal(dist$cdf(1.6), 1)
 # })
-
-
