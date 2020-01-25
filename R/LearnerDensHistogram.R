@@ -7,7 +7,7 @@ LearnerDensHistogram <- R6::R6Class("LearnerDensHistogram", inherit = LearnerDen
           ParamUty$new(id = "breaks", default = "Sturges", tags = "train")
         )),
       feature_types =  c("logical", "integer", "numeric", "character", "factor", "ordered"),
-      predict_types = c("pdf"),
+      predict_types = c("pdf","cdf"),
       packages = c("graphics", "distr6")
       )
     },
@@ -25,8 +25,7 @@ LearnerDensHistogram <- R6::R6Class("LearnerDensHistogram", inherit = LearnerDen
 
     predict_internal = function(task){
       newdata = as.numeric(unlist(task$data(cols = task$target_names)))
-      PredictionDens$new(task = task, pdf = self$model$distr$pdf(newdata))
-                      #      cdf = self$model$distr$cdf(newdata))
+      PredictionDens$new(task = task, pdf = self$model$distr$pdf(newdata), cdf = self$model$distr$cdf(newdata))
     }
   ))
 

@@ -22,24 +22,23 @@
  # a <- .histogram(dat = data)
 
 .histogram <- function(dat, breaks = "Sturges"){
-  a <- graphics::hist(x = dat, breaks = breaks, include.lowest = TRUE, plot = FALSE, right = FALSE)
-  dt <- data.table::data.table(Intervals = a$breaks, binPdf =  c(a$density, a$density[length(a$density)]))
+  fit <- graphics::hist(x = dat, breaks = breaks, include.lowest = TRUE, plot = FALSE, right = FALSE)
 
   pdf = function(x1){}
   body(pdf) = substitute({
-    as.numeric(unlist(data[findInterval(x1, data$Intervals, left.open = FALSE, rightmost.closed = TRUE), 2]))
-   }, list(data = dt))
+    f[findInterval(x1, Intervals, left.open = F, rightmost.closed = T)]
+   }, list(f = fit$density, Intervals = fit$breaks))
 
-  # cdf = function(x1){}
-  # body(cdf) = substitute({
-  #   .histogram_cdf(val = x1, Intervals = data$Intervals, pdf = data$binPdf)
-  # }, list(data = dt))
+  cdf = function(x1){}
+  body(cdf) = substitute({
+    ccounts[findInterval(x1, Intervals, left.open = F, rightmost.closed = T)]/total
+  }, list(ccounts = cumsum(fit$counts), Intervals = fit$breaks, total = sum(fit$counts)))
 
   list(distr = distr6::Distribution$new(name = "Histogram Estimator",
                            short_name = "Histogram",
-                           pdf = pdf, # cdf = cdf,
-                           support = distr6::Interval$new(min(dt$Intervals), max(dt$Intervals))),
-       hist = a)
+                           pdf = pdf, cdf = cdf,
+                           support = distr6::Interval$new(min(fit$breaks), max(fit$breaks))),
+       hist = fit)
 }
 
 
@@ -55,10 +54,10 @@
 # 2. Intervals: The intervals/break of the histogram. A vector
 # 3. Pdf: pdf for each interval. a vector
 
-.histogram_cdf <- function(val, Intervals, pdf){
-  sapply(findInterval(val, Intervals, rightmost.closed = TRUE, left.open = FALSE),
-         function(x) sum(pdf[1:x] * (Intervals[2:(x+1)] - Intervals[1:x])))
-}
+# .histogram_cdf <- function(val, Intervals, pdf){
+#   sapply(findInterval(val, Intervals, rightmost.closed = TRUE, left.open = FALSE),
+#          function(x) sum(pdf[1:x] * (Intervals[2:(x+1)] - Intervals[1:x])))
+# }
 
 
 
