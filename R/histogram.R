@@ -1,25 +1,12 @@
 #Histogram function
 #-------------------
 
-#Description: Finding the pdf using histogram using the hist function in R
-
-#Usage: histogram(traindata, binwidth, origin, numbin)
+#Description: Finding the pdf and cdf using histogram using the hist function in R
 
 #Arguments
 #1. data to estimate the density
 #2. numbin: the size of each bins. Can be a single numberr, vector, a function (see hist)
 
-#values: a list that output
-#1. density of the training data
-#2. the bin and with its respective density
-#3. the x-axis of the histogram
-
-
-#Example:
-
- # data <- c(1.5,1.5,2.5,3.5,6.5,6.3,7.4,8.3)
- # numbin <- 2
- # a <- .histogram(dat = data)
 
 .histogram <- function(dat, breaks = "Sturges"){
   fit <- graphics::hist(x = dat, breaks = breaks, include.lowest = TRUE, plot = FALSE, right = FALSE)
