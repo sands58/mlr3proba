@@ -9,7 +9,7 @@ test_that("autotest", {
 })
 
 data = data.frame("A" = c(0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6))
-a <- graphics::hist(x = data$A, include.lowest = TRUE, plot = FALSE, right = FALSE)
+a <- graphics::hist(x = data$A, include.lowest = TRUE, plot = TRUE, right = FALSE, probability = T)
 
 task = TaskDens$new(id = "a", data, target = "A")
 lrn = lrn("dens.hist", breaks =5)
@@ -27,10 +27,10 @@ test_that("pdf", {
 })
 
 test_that("cdf", {
-  expect_equal(dist$cdf(0), 0.25)
-  expect_equal(dist$cdf(0.5), 0.5)
-  expect_equal(dist$cdf(1.0), 0.875)
-  expect_equal(dist$cdf(1.5), 1)
+  expect_equal(dist$cdf(0), 0)
+  expect_equal(dist$cdf(0.5), 0.25)
+  expect_equal(dist$cdf(1.0), 0.5)
+  expect_equal(dist$cdf(1.5), 0.875)
   expect_equal(dist$cdf(2.0), 1)
   expect_equal(dist$cdf(-1), 0)
   expect_equal(dist$cdf(3), 1)

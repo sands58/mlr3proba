@@ -31,8 +31,8 @@
 
   cdf = function(x1){}
   body(cdf) = substitute({
-    ccounts[findInterval(x1, Intervals, left.open = F, rightmost.closed = T)]/total
-  }, list(ccounts = cumsum(fit$counts), Intervals = fit$breaks, total = sum(fit$counts)))
+      sapply(x1, function(x) .histogram_cdf(val = x, Intervals = Intervals, pdf = pdf, counts = counts))
+  }, list(counts = fit$counts, pdf = fit$density, Intervals = fit$breaks))
 
   list(distr = distr6::Distribution$new(name = "Histogram Estimator",
                            short_name = "Histogram",
@@ -58,6 +58,34 @@
 #   sapply(findInterval(val, Intervals, rightmost.closed = TRUE, left.open = FALSE),
 #          function(x) sum(pdf[1:x] * (Intervals[2:(x+1)] - Intervals[1:x])))
 # }
+#
+
+.histogram_cdf <- function(val, Intervals, pdf, counts){
+
+  ind <- findInterval(val, Intervals, left.open = F, rightmost.closed = T)
+  #finding the index of the breaks for val
+  part_cdf <- cumsum(counts)/sum(counts)
+  # find the area of the bin up to LHS val
+  total_cdf <-
+    if(val == Intervals[1]) 0 else
+      # if val is equal to the LHS of left most bin then cdf is 0
+      if(ind == 1) (val - Intervals[ind])*pdf[ind] else
+        # if ind == 1, it means that its the first Interval,
+        if(val >= tail(Intervals, n=1)) 1 else
+          # if val is greater than the last Interval
+          part_cdf[ind-1] + (val - Intervals[ind])*pdf[ind]
+  # when val is in the middle
+  return(total_cdf)
+
+}
 
 
 
+
+
+#ifelse(val <= Intervals[1],0,
+#                       ifelse(ind == 1, (val - Intervals[ind])*pdf[ind],
+#                                part_cdf[ind-1] + (val - Intervals[ind])*pdf[ind]))
+#   return(total_cdf)
+#
+# }
