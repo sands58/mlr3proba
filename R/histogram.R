@@ -53,26 +53,10 @@
   #finding the index of the breaks for val
   part_cdf <- cumsum(counts)/sum(counts)
   # find the area of the bin up to LHS val
-  total_cdf <-
-    if(val == Intervals[1]) 0 else
-      # if val is equal to the LHS of left most bin then cdf is 0
-      if(ind == 1) (val - Intervals[ind])*pdf[ind] else
-        # if ind == 1, it means that its the first Interval,
-        if(val >= tail(Intervals, n=1)) 1 else
-          # if val is greater than the last Interval
-          part_cdf[ind-1] + (val - Intervals[ind])*pdf[ind]
-  # when val is in the middle
-  return(total_cdf)
 
+  # if ind == 1, it means that its the first Interval,
+  if(ind == 1)
+    return((val - Intervals[ind])*pdf[ind])
+  else
+    return(part_cdf[ind-1] + (val - Intervals[ind])*pdf[ind])
 }
-
-
-
-
-
-#ifelse(val <= Intervals[1],0,
-#                       ifelse(ind == 1, (val - Intervals[ind])*pdf[ind],
-#                                part_cdf[ind-1] + (val - Intervals[ind])*pdf[ind]))
-#   return(total_cdf)
-#
-# }
