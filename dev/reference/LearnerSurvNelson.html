@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Nelson Aalen Estimator Survival Learner — LearnerSurvNelson • mlr3proba</title>
+<title>Nelson-Aalen Estimator Survival Learner — LearnerSurvNelson • mlr3proba</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -43,12 +43,13 @@
 
 
 
-<meta property="og:title" content="Nelson Aalen Estimator Survival Learner — LearnerSurvNelson" />
+<meta property="og:title" content="Nelson-Aalen Estimator Survival Learner — LearnerSurvNelson" />
 <meta property="og:description" content="Calls survival::survfit().
 distr is predicted by estimating the cumulative hazard function with survival::survfit()
-crank is predicted as the expectation of the survival distribution, distr.
+crank is predicted as the expectation of the survival distribution, distr
 
 " />
+<meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -79,20 +80,31 @@ crank is predicted as the expectation of the survival distribution, distr.
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">mlr3proba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Version">0.1.0.9001</span>
-      </span>
-    </div>
 
+      <div class="navbar-brand-container">
+        <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org" /></a>
+        <a class="navbar-brand" href="../index.html">mlr3proba <small>v0.1.3.9001</small></a>
+      </div>
+    </div>
     <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li>
-  <a href="../reference/index.html">
-    <span class="fa fa fa fa-file-alt"></span>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Vignettes
      
-    Reference
+    <span class="caret"></span>
   </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/survival.html">Survival Analysis</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
 <li>
   <a href="https://mlr3book.mlr-org.com">
@@ -101,8 +113,6 @@ crank is predicted as the expectation of the survival distribution, distr.
     mlr3book
   </a>
 </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/mlr-org/mlr3proba">
     <span class="fab fa fab fa-github fa-lg"></span>
@@ -140,7 +150,7 @@ crank is predicted as the expectation of the survival distribution, distr.
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Nelson Aalen Estimator Survival Learner</h1>
+    <h1>Nelson-Aalen Estimator Survival Learner</h1>
     <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3proba/blob/master/R/LearnerSurvNelson.R'><code>R/LearnerSurvNelson.R</code></a></small>
     <div class="hidden name"><code>LearnerSurvNelson.Rd</code></div>
     </div>
@@ -148,7 +158,7 @@ crank is predicted as the expectation of the survival distribution, distr.
     <div class="ref-description">
     <p>Calls <code><a href='https://rdrr.io/pkg/survival/man/survfit.html'>survival::survfit()</a></code>.</p><ul>
 <li><p>distr is predicted by estimating the cumulative hazard function with <code><a href='https://rdrr.io/pkg/survival/man/survfit.html'>survival::survfit()</a></code></p></li>
-<li><p><code>crank</code> is predicted as the expectation of the survival distribution, <code>distr</code>.</p></li>
+<li><p><code>crank</code> is predicted as the expectation of the survival distribution, <code>distr</code></p></li>
 </ul>
 
     </div>
@@ -179,19 +189,20 @@ lrn("surv.nelson")
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Nelson, W. (1969).
-Hazard plotting for incomplete failure data.
-Journal of Quality Technology, 1, 27–52.
+    <p>Nelson W (1969).
+&#8220;Hazard Plotting for Incomplete Failure Data.&#8221;
+<em>Journal of Quality Technology</em>, <b>1</b>(1), 27--52.
 doi: <a href='https://doi.org/10.1080/00224065.1969.11980344'>10.1080/00224065.1969.11980344</a>
 .</p>
-<p>Nelson, W. (1972).
-Theory and applications of hazard plotting for censored failure data.
-Technometrics, 14, 945–965.
+<p>Nelson W (1972).
+&#8220;Theory and Applications of Hazard Plotting for Censored Failure Data.&#8221;
+<em>Technometrics</em>, <b>14</b>(4), 945--966.
 doi: <a href='https://doi.org/10.1080/00401706.1972.10488991'>10.1080/00401706.1972.10488991</a>
 .</p>
-<p>Aalen, Odd (1978).
-Nonparametric inference for a family of counting processes.
-Annals of Statistics, 6(4), 701–726.</p>
+<p>Aalen O (1978).
+&#8220;Nonparametric Inference for a Family of Counting Processes.&#8221;
+<em>The Annals of Statistics</em>, <b>6</b>(4), 701--726.
+<a href='http://www.jstor.org/stable/2958850'>http://www.jstor.org/stable/2958850</a>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other survival learners: 
@@ -199,12 +210,13 @@ Annals of Statistics, 6(4), 701–726.</p>
 <code><a href='LearnerSurvCVGlmnet.html'>LearnerSurvCVGlmnet</a></code>,
 <code><a href='LearnerSurvCoxPH.html'>LearnerSurvCoxPH</a></code>,
 <code><a href='LearnerSurvFlexible.html'>LearnerSurvFlexible</a></code>,
+<code><a href='LearnerSurvGBM.html'>LearnerSurvGBM</a></code>,
 <code><a href='LearnerSurvGamboost.html'>LearnerSurvGamboost</a></code>,
-<code><a href='LearnerSurvGbm.html'>LearnerSurvGbm</a></code>,
 <code><a href='LearnerSurvGlmboost.html'>LearnerSurvGlmboost</a></code>,
 <code><a href='LearnerSurvGlmnet.html'>LearnerSurvGlmnet</a></code>,
 <code><a href='LearnerSurvKaplan.html'>LearnerSurvKaplan</a></code>,
 <code><a href='LearnerSurvMboost.html'>LearnerSurvMboost</a></code>,
+<code><a href='LearnerSurvObliqueRSF.html'>LearnerSurvObliqueRSF</a></code>,
 <code><a href='LearnerSurvParametric.html'>LearnerSurvParametric</a></code>,
 <code><a href='LearnerSurvPenalized.html'>LearnerSurvPenalized</a></code>,
 <code><a href='LearnerSurvRandomForestSRC.html'>LearnerSurvRandomForestSRC</a></code>,

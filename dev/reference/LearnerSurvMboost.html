@@ -47,19 +47,20 @@
 <meta property="og:description" content="Calls mboost::mboost().
 lp is predicted by mboost::predict.mboost()
 distr is predicted by mboost::survFit() which assumes a PH fit with a Breslow estimator
-crank is identical to lp.
+crank is identical to lp
 
 
 The dist parameter is specified slightly differently than in mboost. Whereas the latter
 takes in objects, in this learner instead a string is specified in order to identify which distribution
 to use. As the default in mboost is the Gaussian family, which is not compatible with
-survival models, instead we have by default &quot;coxph&quot; for dist.
+survival models, instead we have by default &quot;coxph&quot;.
 If the value given to the Family parameter is &quot;custom.family&quot; then an object of class
 mboost::Family() needs to be passed to the custom.family parameter.
 The only difference between LearnerSurvGamboost and LearnerSurvMboost is that the latter function
 allows one to specify default degrees of freedom for smooth effects specified via
 baselearner = &quot;bbs&quot;. In all other cases, degrees of freedom need to be set manually via a
 specific definition of the corresponding base-learner." />
+<meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -90,20 +91,31 @@ specific definition of the corresponding base-learner." />
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">mlr3proba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Version">0.1.0.9001</span>
-      </span>
-    </div>
 
+      <div class="navbar-brand-container">
+        <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org" /></a>
+        <a class="navbar-brand" href="../index.html">mlr3proba <small>v0.1.3.9001</small></a>
+      </div>
+    </div>
     <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li>
-  <a href="../reference/index.html">
-    <span class="fa fa fa fa-file-alt"></span>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Vignettes
      
-    Reference
+    <span class="caret"></span>
   </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/survival.html">Survival Analysis</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
 <li>
   <a href="https://mlr3book.mlr-org.com">
@@ -112,8 +124,6 @@ specific definition of the corresponding base-learner." />
     mlr3book
   </a>
 </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/mlr-org/mlr3proba">
     <span class="fab fa fab fa-github fa-lg"></span>
@@ -160,13 +170,13 @@ specific definition of the corresponding base-learner." />
     <p>Calls <code><a href='https://rdrr.io/pkg/mboost/man/gamboost.html'>mboost::mboost()</a></code>.</p><ul>
 <li><p>lp is predicted by <code><a href='https://rdrr.io/pkg/mboost/man/methods.html'>mboost::predict.mboost()</a></code></p></li>
 <li><p>distr is predicted by <code><a href='https://rdrr.io/pkg/mboost/man/survFit.html'>mboost::survFit()</a></code> which assumes a PH fit with a Breslow estimator</p></li>
-<li><p><code>crank</code> is identical to <code>lp</code>.</p></li>
+<li><p><code>crank</code> is identical to <code>lp</code></p></li>
 </ul>
 
-<p>The <code>dist</code> parameter is specified slightly differently than in mboost. Whereas the latter
+<p>The <code>dist</code> parameter is specified slightly differently than in <a href='https://CRAN.R-project.org/package=mboost'><span class="pkg">mboost</span></a>. Whereas the latter
 takes in objects, in this learner instead a string is specified in order to identify which distribution
-to use. As the default in mboost is the Gaussian family, which is not compatible with
-survival models, instead we have by default <code>"coxph"</code> for <code>dist</code>.</p>
+to use. As the default in <a href='https://CRAN.R-project.org/package=mboost'><span class="pkg">mboost</span></a> is the Gaussian family, which is not compatible with
+survival models, instead we have by default <code>"coxph"</code>.</p>
 <p>If the value given to the <code>Family</code> parameter is "custom.family" then an object of class
 <code><a href='https://rdrr.io/pkg/mboost/man/Family.html'>mboost::Family()</a></code> needs to be passed to the <code>custom.family</code> parameter.</p>
 <p>The only difference between <a href='LearnerSurvGamboost.html'>LearnerSurvGamboost</a> and LearnerSurvMboost is that the latter function
@@ -201,23 +211,40 @@ lrn("surv.mboost")
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Peter Buehlmann and Bin Yu (2003), Boosting with the L2 loss: regression and classification.
-Journal of the American Statistical Association, 98, 324–339.</p>
-<p>Peter Buehlmann and Torsten Hothorn (2007),
-Boosting algorithms: regularization, prediction and model fitting.
-Statistical Science, 22(4), 477–505.</p>
-<p>Thomas Kneib, Torsten Hothorn and Gerhard Tutz (2009),
-Variable selection and model choice in geoadditive regression models,
-Biometrics, 65(2), 626–634.</p>
-<p>Matthias Schmid and Torsten Hothorn (2008),
-Boosting additive models using component-wise P-splines as base-learners.
-Computational Statistics \&amp; Data Analysis, 53(2), 298–311.</p>
-<p>Torsten Hothorn, Peter Buehlmann, Thomas Kneib, Mattthias Schmid and Benjamin Hofner (2010),
-Model-based Boosting 2.0. Journal of Machine Learning Research, 11, 2109 – 2113.</p>
-<p>Benjamin Hofner, Andreas Mayr, Nikolay Robinzonov and Matthias Schmid (2014).
-Model-based Boosting in R: A Hands-on Tutorial Using the R Package mboost.
-Computational Statistics, 29, 3–35.
-doi: <a href='https://doi.org/10.1007/s00180-012-0382-5'>10.1007/s00180-012-0382-5</a></p>
+    <p>Bühlmann P, Yu B (2003).
+&#8220;Boosting With the L2 Loss.&#8221;
+<em>Journal of the American Statistical Association</em>, <b>98</b>(462), 324--339.
+doi: <a href='https://doi.org/10.1198/016214503000125'>10.1198/016214503000125</a>
+.</p>
+<p>Bühlmann P, Hothorn T (2007).
+&#8220;Boosting Algorithms: Regularization,  Prediction and Model Fitting.&#8221;
+<em>Statistical Science</em>, <b>22</b>(4), 477--505.
+doi: <a href='https://doi.org/10.1214/07-sts242'>10.1214/07-sts242</a>
+.</p>
+<p>Bühlmann P, Hothorn T (2007).
+&#8220;Boosting Algorithms: Regularization,  Prediction and Model Fitting.&#8221;
+<em>Statistical Science</em>, <b>22</b>(4), 477--505.
+doi: <a href='https://doi.org/10.1214/07-sts242'>10.1214/07-sts242</a>
+.</p>
+<p>Kneib T, Hothorn T, Tutz G (2008).
+&#8220;Variable Selection and Model Choice in Geoadditive Regression Models.&#8221;
+<em>Biometrics</em>, <b>65</b>(2), 626--634.
+doi: <a href='https://doi.org/10.1111/j.1541-0420.2008.01112.x'>10.1111/j.1541-0420.2008.01112.x</a>
+.</p>
+<p>Schmid M, Hothorn T (2008).
+&#8220;Boosting additive models using component-wise P-Splines.&#8221;
+<em>Computational Statistics &amp; Data Analysis</em>, <b>53</b>(2), 298--311.
+doi: <a href='https://doi.org/10.1016/j.csda.2008.09.009'>10.1016/j.csda.2008.09.009</a>
+.</p>
+<p>Hothorn T, Bühlmann P, Kneib T, Schmid M, Hofner B (2010).
+&#8220;Model-based boosting 2.0.&#8221;
+<em>Journal of Machine Learning Research</em>, <b>11</b>(Aug), 2109--2113.
+<a href='http://www.jmlr.org/papers/v11/hothorn10a.html'>http://www.jmlr.org/papers/v11/hothorn10a.html</a>.</p>
+<p>Hofner B, Mayr A, Robinzonov N, Schmid M (2012).
+&#8220;Model-based boosting in R: a hands-on tutorial using the R package mboost.&#8221;
+<em>Computational Statistics</em>, <b>29</b>(1-2), 3--35.
+doi: <a href='https://doi.org/10.1007/s00180-012-0382-5'>10.1007/s00180-012-0382-5</a>
+.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other survival learners: 
@@ -225,12 +252,13 @@ doi: <a href='https://doi.org/10.1007/s00180-012-0382-5'>10.1007/s00180-012-0382
 <code><a href='LearnerSurvCVGlmnet.html'>LearnerSurvCVGlmnet</a></code>,
 <code><a href='LearnerSurvCoxPH.html'>LearnerSurvCoxPH</a></code>,
 <code><a href='LearnerSurvFlexible.html'>LearnerSurvFlexible</a></code>,
+<code><a href='LearnerSurvGBM.html'>LearnerSurvGBM</a></code>,
 <code><a href='LearnerSurvGamboost.html'>LearnerSurvGamboost</a></code>,
-<code><a href='LearnerSurvGbm.html'>LearnerSurvGbm</a></code>,
 <code><a href='LearnerSurvGlmboost.html'>LearnerSurvGlmboost</a></code>,
 <code><a href='LearnerSurvGlmnet.html'>LearnerSurvGlmnet</a></code>,
 <code><a href='LearnerSurvKaplan.html'>LearnerSurvKaplan</a></code>,
 <code><a href='LearnerSurvNelson.html'>LearnerSurvNelson</a></code>,
+<code><a href='LearnerSurvObliqueRSF.html'>LearnerSurvObliqueRSF</a></code>,
 <code><a href='LearnerSurvParametric.html'>LearnerSurvParametric</a></code>,
 <code><a href='LearnerSurvPenalized.html'>LearnerSurvPenalized</a></code>,
 <code><a href='LearnerSurvRandomForestSRC.html'>LearnerSurvRandomForestSRC</a></code>,
@@ -240,13 +268,13 @@ doi: <a href='https://doi.org/10.1007/s00180-012-0382-5'>10.1007/s00180-012-0382
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mlr3</span>)
-<span class='no'>task</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span>(<span class='st'>"rats"</span>)
+<span class='no'>task</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tgen</a></span>(<span class='st'>"simsurv"</span>)$<span class='fu'>generate</span>(<span class='fl'>20</span>)
 <span class='no'>learner</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span>(<span class='st'>"surv.mboost"</span>)
 <span class='no'>learner</span>$<span class='no'>param_set</span>$<span class='no'>values</span> <span class='kw'>=</span> <span class='kw pkg'>mlr3misc</span><span class='kw ns'>::</span><span class='fu'><a href='https://mlr3misc.mlr-org.com/reference/insert_named.html'>insert_named</a></span>(<span class='no'>learner</span>$<span class='no'>param_set</span>$<span class='no'>values</span>,
     <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>baselearner</span> <span class='kw'>=</span> <span class='st'>"bols"</span>))
-<span class='no'>resampling</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span>(<span class='st'>"cv"</span>, <span class='kw'>folds</span> <span class='kw'>=</span> <span class='fl'>3</span>)
-<span class='fu'><a href='https://mlr3.mlr-org.com/reference/resample.html'>resample</a></span>(<span class='no'>task</span>, <span class='no'>learner</span>, <span class='no'>resampling</span>)</div><div class='output co'>#&gt; &lt;ResampleResult&gt; of 3 iterations
-#&gt; * Task: rats
+<span class='no'>resampling</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span>(<span class='st'>"cv"</span>, <span class='kw'>folds</span> <span class='kw'>=</span> <span class='fl'>2</span>)
+<span class='fu'><a href='https://mlr3.mlr-org.com/reference/resample.html'>resample</a></span>(<span class='no'>task</span>, <span class='no'>learner</span>, <span class='no'>resampling</span>)</div><div class='output co'>#&gt; &lt;ResampleResult&gt; of 2 iterations
+#&gt; * Task: simsurv
 #&gt; * Learner: surv.mboost
 #&gt; * Warnings: 0 in 0 iterations
 #&gt; * Errors: 0 in 0 iterations</div></pre>

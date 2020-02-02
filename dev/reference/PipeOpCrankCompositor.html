@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PipeOpCrankCompositor — mlr_pipeops_crankcompose • mlr3proba</title>
+<title>PipeOpCrankCompositor — PipeOpCrankCompositor • mlr3proba</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -43,8 +43,9 @@
 
 
 
-<meta property="og:title" content="PipeOpCrankCompositor — mlr_pipeops_crankcompose" />
-<meta property="og:description" content="Return a continuous ranking from a distr predicted in a PredictionSurv." />
+<meta property="og:title" content="PipeOpCrankCompositor — PipeOpCrankCompositor" />
+<meta property="og:description" content="Uses a predicted distr in a PredictionSurv to estimate (or 'compose') a crank prediction." />
+<meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -75,20 +76,31 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">mlr3proba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Version">0.1.0.9001</span>
-      </span>
-    </div>
 
+      <div class="navbar-brand-container">
+        <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org" /></a>
+        <a class="navbar-brand" href="../index.html">mlr3proba <small>v0.1.3.9001</small></a>
+      </div>
+    </div>
     <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li>
-  <a href="../reference/index.html">
-    <span class="fa fa fa fa-file-alt"></span>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Vignettes
      
-    Reference
+    <span class="caret"></span>
   </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/survival.html">Survival Analysis</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
 <li>
   <a href="https://mlr3book.mlr-org.com">
@@ -97,8 +109,6 @@
     mlr3book
   </a>
 </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/mlr-org/mlr3proba">
     <span class="fab fa fab fa-github fa-lg"></span>
@@ -138,11 +148,11 @@
     <div class="page-header">
     <h1>PipeOpCrankCompositor</h1>
     <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3proba/blob/master/R/PipeOpCrankCompositor.R'><code>R/PipeOpCrankCompositor.R</code></a></small>
-    <div class="hidden name"><code>mlr_pipeops_crankcompose.Rd</code></div>
+    <div class="hidden name"><code>PipeOpCrankCompositor.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Return a continuous ranking from a <code>distr</code> predicted in a <a href='PredictionSurv.html'>PredictionSurv</a>.</p>
+    <p>Uses a predicted <code>distr</code> in a <a href='PredictionSurv.html'>PredictionSurv</a> to estimate (or 'compose') a <code>crank</code> prediction.</p>
     </div>
 
 
@@ -153,26 +163,25 @@
     <h2 class="hasAnchor" id="construction"><a class="anchor" href="#construction"></a>Construction</h2>
 
     
-<pre>PipeOpCrankCompositor$new(id = "crankcompose", param_vals = list())
+<pre>PipeOpCrankCompositor$new(id = "crankcompose", param_vals = list(method = "mean"))
 </pre>
 <ul>
 <li><p><code>id</code> :: <code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code> <br />
 Identifier of the resulting  object, default <code>"crankcompose"</code>.</p></li>
 <li><p><code>param_vals</code> :: named <code>list</code> <br />
-List of hyperparameter settings, overwriting the hyperparameter settings that would otherwise be set during construction. Default <code><a href='https://rdrr.io/r/base/list.html'>list()</a></code>.</p></li>
+List of hyperparameter settings, overwriting the hyperparameter settings that would otherwise be set during construction. Default <code><a href='https://rdrr.io/r/base/list.html'>list(method = "mean")</a></code>.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="input-and-output-channels"><a class="anchor" href="#input-and-output-channels"></a>Input and Output Channels</h2>
 
     
 
-<p>PipeOpCrankCompositor has one input channels named "input", which takes
+<p>PipeOpCrankCompositor has one input channel named "input", which takes
 <code>NULL</code> during training and <a href='PredictionSurv.html'>PredictionSurv</a> during prediction.</p>
 <p>PipeOpCrankCompositor has one output channel named "output", producing <code>NULL</code> during training
 and a <a href='PredictionSurv.html'>PredictionSurv</a> during prediction.</p>
-<p>The output during prediction is the <a href='PredictionSurv.html'>PredictionSurv</a> from the "pred" input but with an extra (or overwritten)
-column for <code>crank</code> predict type; which is composed from the <code>distr</code> predict type in the <a href='PredictionSurv.html'>PredictionSurv</a>
-object.</p>
+<p>The output during prediction is the <a href='PredictionSurv.html'>PredictionSurv</a> from the "pred" input but with the <code>crank</code>
+predict type overwritten by the given estimation method.</p>
     <h2 class="hasAnchor" id="state"><a class="anchor" href="#state"></a>State</h2>
 
     
@@ -182,10 +191,10 @@ object.</p>
 
     
 
-<p>The parameters are:</p><ul>
+<ul>
 <li><p><code>method</code> :: <code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code> <br />
 Determines what method should be used to produce a continuous ranking from the distribution.
-One of <code>median</code> or <code>mean</code> corresponding to the respective functions in the predicted
+One of <code>median</code>, <code>mode</code>, or <code>mean</code> corresponding to the respective functions in the predicted
 survival distribution. Note that for models with a proportional hazards form, the ranking
 implied by <code>mean</code> and <code>median</code> will be identical (but not the value of <code>crank</code> itself).
 Default is <code>mean</code>.</p></li>
@@ -195,8 +204,8 @@ Default is <code>mean</code>.</p></li>
 
     
 
-<p>The <code>median</code> or <code>mean</code> will use analytical expressions if possible but if not they are calculated
-using <a href='https://alan-turing-institute.github.io/distr6/reference/median.Distribution.html'>distr6::median.Distribution</a> or <a href='https://alan-turing-institute.github.io/distr6/reference/mean.Distribution.html'>distr6::mean.Distribution</a> respectively.</p>
+<p>The <code>median</code>, <code>mode</code>, or <code>mean</code> will use analytical expressions if possible but if not they are calculated
+using <a href='https://alan-turing-institute.github.io/distr6/reference/median.Distribution.html'>distr6::median.Distribution</a>, <a href='https://alan-turing-institute.github.io/distr6/reference/mode.html'>distr6::mode</a>, or <a href='https://alan-turing-institute.github.io/distr6/reference/mean.Distribution.html'>distr6::mean.Distribution</a> respectively.</p>
     <h2 class="hasAnchor" id="fields"><a class="anchor" href="#fields"></a>Fields</h2>
 
     
@@ -211,30 +220,31 @@ using <a href='https://alan-turing-institute.github.io/distr6/reference/median.D
 
     <div class='dont-index'><p><a href='https://mlr3pipelines.mlr-org.com//reference/PipeOp.html'>mlr3pipelines::PipeOp</a> and <a href='crankcompositor.html'>crankcompositor</a></p>
 <p>Other survival compositors: 
-<code><a href='mlr_pipeops_distrcompose.html'>mlr_pipeops_distrcompose</a></code></p></div>
+<code><a href='PipeOpDistrCompositor.html'>PipeOpDistrCompositor</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"mlr3"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"mlr3pipelines"</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mlr3</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mlr3pipelines</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>1</span>)
 
 <span class='co'># Three methods to predict a `crank` from `surv.rpart`</span>
-<span class='no'>task</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span>(<span class='st'>"rats"</span>)
+<span class='no'>task</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tgen</a></span>(<span class='st'>"simsurv"</span>)$<span class='fu'>generate</span>(<span class='fl'>30</span>)
 
 <span class='co'># Method 1 - Train and predict separately then compose</span>
 <span class='no'>learn</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span>(<span class='st'>"surv.coxph"</span>)$<span class='fu'>train</span>(<span class='no'>task</span>)$<span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span>(<span class='no'>task</span>)
 <span class='no'>poc</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3pipelines.mlr-org.com//reference/po.html'>po</a></span>(<span class='st'>"crankcompose"</span>, <span class='kw'>param_vals</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"mean"</span>))
 <span class='no'>poc</span>$<span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>learn</span>))</div><div class='output co'>#&gt; $output
-#&gt; &lt;PredictionSurv&gt; for 300 observations:
-#&gt;     row_id time status     crank                distr         lp
-#&gt;          1  101  FALSE 27.729808 &lt;VectorDistribution&gt;  1.6603932
-#&gt;          2   49   TRUE 14.049365 &lt;VectorDistribution&gt;  0.8550971
-#&gt;          3  104  FALSE 14.049365 &lt;VectorDistribution&gt;  0.8550971
-#&gt; ---                                                             
-#&gt;        298   92  FALSE  3.597482 &lt;VectorDistribution&gt; -0.5866651
-#&gt;        299  104  FALSE  1.630197 &lt;VectorDistribution&gt; -1.3919612
-#&gt;        300  102  FALSE  1.630197 &lt;VectorDistribution&gt; -1.3919612
+#&gt; &lt;PredictionSurv&gt; for 30 observations:
+#&gt;     row_id      time status     crank                distr          lp
+#&gt;          1 5.0000000  FALSE 1.4326828 &lt;VectorDistribution&gt;  0.01031299
+#&gt;          2 0.8433684   TRUE 1.6398177 &lt;VectorDistribution&gt;  0.26069368
+#&gt;          3 0.8070400   TRUE 1.0110342 &lt;VectorDistribution&gt; -0.50690465
+#&gt; ---                                                                   
+#&gt;         28 5.0000000  FALSE 1.3719301 &lt;VectorDistribution&gt; -0.06157584
+#&gt;         29 5.0000000  FALSE 0.8572003 &lt;VectorDistribution&gt; -0.72098848
+#&gt;         30 4.1997027   TRUE 1.6078754 &lt;VectorDistribution&gt;  0.22093276
 #&gt; </div><div class='input'>
-<span class='co'># Examples not run due to long run-time.</span>
+<span class='co'># Examples not run to save run-time.</span>
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># Method 2 - Create a graph manually</span>
 <span class='no'>gr</span> <span class='kw'>=</span> <span class='no'>Graph</span>$<span class='fu'>new</span>()$

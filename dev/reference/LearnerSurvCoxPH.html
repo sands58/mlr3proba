@@ -47,9 +47,10 @@
 <meta property="og:description" content="Calls survival::coxph().
 lp is predicted by survival::predict.coxph()
 distr is predicted by survival::survfit.coxph()
-crank is identical to lp.
+crank is identical to lp
 
 " />
+<meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -80,20 +81,31 @@ crank is identical to lp.
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">mlr3proba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Version">0.1.0.9001</span>
-      </span>
-    </div>
 
+      <div class="navbar-brand-container">
+        <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org" /></a>
+        <a class="navbar-brand" href="../index.html">mlr3proba <small>v0.1.3.9001</small></a>
+      </div>
+    </div>
     <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li>
-  <a href="../reference/index.html">
-    <span class="fa fa fa fa-file-alt"></span>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Vignettes
      
-    Reference
+    <span class="caret"></span>
   </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/survival.html">Survival Analysis</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
 <li>
   <a href="https://mlr3book.mlr-org.com">
@@ -102,8 +114,6 @@ crank is identical to lp.
     mlr3book
   </a>
 </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/mlr-org/mlr3proba">
     <span class="fab fa fab fa-github fa-lg"></span>
@@ -150,7 +160,7 @@ crank is identical to lp.
     <p>Calls <code><a href='https://rdrr.io/pkg/survival/man/coxph.html'>survival::coxph()</a></code>.</p><ul>
 <li><p>lp is predicted by <code><a href='https://rdrr.io/pkg/survival/man/predict.coxph.html'>survival::predict.coxph()</a></code></p></li>
 <li><p>distr is predicted by <code><a href='https://rdrr.io/pkg/survival/man/survfit.coxph.html'>survival::survfit.coxph()</a></code></p></li>
-<li><p><code>crank</code> is identical to <code>lp</code>.</p></li>
+<li><p><code>crank</code> is identical to <code>lp</code></p></li>
 </ul>
 
     </div>
@@ -181,9 +191,9 @@ lrn("surv.coxph")
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Cox, David R. (1972).
-Regression models and life‐tables.
-Journal of the Royal Statistical Society: Series B (Methodological) 34.2 (1972): 187-202.
+    <p>Cox DR (1972).
+&#8220;Regression Models and Life-Tables.&#8221;
+<em>Journal of the Royal Statistical Society: Series B (Methodological)</em>, <b>34</b>(2), 187--202.
 doi: <a href='https://doi.org/10.1111/j.2517-6161.1972.tb00899.x'>10.1111/j.2517-6161.1972.tb00899.x</a>
 .</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -192,13 +202,14 @@ doi: <a href='https://doi.org/10.1111/j.2517-6161.1972.tb00899.x'>10.1111/j.2517
 <code><a href='LearnerSurvBlackboost.html'>LearnerSurvBlackboost</a></code>,
 <code><a href='LearnerSurvCVGlmnet.html'>LearnerSurvCVGlmnet</a></code>,
 <code><a href='LearnerSurvFlexible.html'>LearnerSurvFlexible</a></code>,
+<code><a href='LearnerSurvGBM.html'>LearnerSurvGBM</a></code>,
 <code><a href='LearnerSurvGamboost.html'>LearnerSurvGamboost</a></code>,
-<code><a href='LearnerSurvGbm.html'>LearnerSurvGbm</a></code>,
 <code><a href='LearnerSurvGlmboost.html'>LearnerSurvGlmboost</a></code>,
 <code><a href='LearnerSurvGlmnet.html'>LearnerSurvGlmnet</a></code>,
 <code><a href='LearnerSurvKaplan.html'>LearnerSurvKaplan</a></code>,
 <code><a href='LearnerSurvMboost.html'>LearnerSurvMboost</a></code>,
 <code><a href='LearnerSurvNelson.html'>LearnerSurvNelson</a></code>,
+<code><a href='LearnerSurvObliqueRSF.html'>LearnerSurvObliqueRSF</a></code>,
 <code><a href='LearnerSurvParametric.html'>LearnerSurvParametric</a></code>,
 <code><a href='LearnerSurvPenalized.html'>LearnerSurvPenalized</a></code>,
 <code><a href='LearnerSurvRandomForestSRC.html'>LearnerSurvRandomForestSRC</a></code>,

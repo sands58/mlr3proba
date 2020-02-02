@@ -51,7 +51,8 @@ Calculates the cross-entropy, or logarithmic (log), loss.
 The logloss, in the context of probabilistic predictions, is defined as the negative log probability
 density function, \(f\), evaluated at the observation time, \(t\),
 $$L(f, t) = -log(f(t))$$
-Censored observations in the test set are removed." />
+Censored observations in the test set are ignored." />
+<meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -82,20 +83,31 @@ Censored observations in the test set are removed." />
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">mlr3proba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Version">0.1.0.9001</span>
-      </span>
-    </div>
 
+      <div class="navbar-brand-container">
+        <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org" /></a>
+        <a class="navbar-brand" href="../index.html">mlr3proba <small>v0.1.3.9001</small></a>
+      </div>
+    </div>
     <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li>
-  <a href="../reference/index.html">
-    <span class="fa fa fa fa-file-alt"></span>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Vignettes
      
-    Reference
+    <span class="caret"></span>
   </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/survival.html">Survival Analysis</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
 <li>
   <a href="https://mlr3book.mlr-org.com">
@@ -104,8 +116,6 @@ Censored observations in the test set are removed." />
     mlr3book
   </a>
 </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/mlr-org/mlr3proba">
     <span class="fab fa fab fa-github fa-lg"></span>
@@ -156,7 +166,7 @@ Censored observations in the test set are removed." />
 <p>The logloss, in the context of probabilistic predictions, is defined as the negative log probability
 density function, \(f\), evaluated at the observation time, \(t\),
 $$L(f, t) = -log(f(t))$$</p>
-<p>Censored observations in the test set are removed.</p>
+<p>Censored observations in the test set are ignored.</p>
     </div>
 
 
@@ -190,8 +200,7 @@ msr("surv.logloss")
 
     
 
-
-<p>See <a href='MeasureSurv.html'>MeasureSurv</a></p>
+<p>See <a href='MeasureSurv.html'>MeasureSurv</a>, as well as all variables passed to the constructor.</p>
 
 <p>As well as</p><ul>
 <li><p>eps :: numeric(1) <br />

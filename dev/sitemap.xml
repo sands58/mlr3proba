@@ -19,10 +19,10 @@
     <loc>https://mlr3proba.mlr-org.com/reference/LearnerSurvFlexible.html</loc>
   </url>
   <url>
-    <loc>https://mlr3proba.mlr-org.com/reference/LearnerSurvGamboost.html</loc>
+    <loc>https://mlr3proba.mlr-org.com/reference/LearnerSurvGBM.html</loc>
   </url>
   <url>
-    <loc>https://mlr3proba.mlr-org.com/reference/LearnerSurvGbm.html</loc>
+    <loc>https://mlr3proba.mlr-org.com/reference/LearnerSurvGamboost.html</loc>
   </url>
   <url>
     <loc>https://mlr3proba.mlr-org.com/reference/LearnerSurvGlmboost.html</loc>
@@ -38,6 +38,9 @@
   </url>
   <url>
     <loc>https://mlr3proba.mlr-org.com/reference/LearnerSurvNelson.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3proba.mlr-org.com/reference/LearnerSurvObliqueRSF.html</loc>
   </url>
   <url>
     <loc>https://mlr3proba.mlr-org.com/reference/LearnerSurvParametric.html</loc>
@@ -88,9 +91,6 @@
     <loc>https://mlr3proba.mlr-org.com/reference/MeasureSurvIntLoglossSE.html</loc>
   </url>
   <url>
-    <loc>https://mlr3proba.mlr-org.com/reference/MeasureSurvIntegrated.html</loc>
-  </url>
-  <url>
     <loc>https://mlr3proba.mlr-org.com/reference/MeasureSurvLogloss.html</loc>
   </url>
   <url>
@@ -127,6 +127,12 @@
     <loc>https://mlr3proba.mlr-org.com/reference/MeasureSurvXuR2.html</loc>
   </url>
   <url>
+    <loc>https://mlr3proba.mlr-org.com/reference/PipeOpCrankCompositor.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3proba.mlr-org.com/reference/PipeOpDistrCompositor.html</loc>
+  </url>
+  <url>
     <loc>https://mlr3proba.mlr-org.com/reference/PredictionSurv.html</loc>
   </url>
   <url>
@@ -145,12 +151,6 @@
     <loc>https://mlr3proba.mlr-org.com/reference/mlr3proba-package.html</loc>
   </url>
   <url>
-    <loc>https://mlr3proba.mlr-org.com/reference/mlr_pipeops_crankcompose.html</loc>
-  </url>
-  <url>
-    <loc>https://mlr3proba.mlr-org.com/reference/mlr_pipeops_distrcompose.html</loc>
-  </url>
-  <url>
     <loc>https://mlr3proba.mlr-org.com/reference/mlr_tasks_lung.html</loc>
   </url>
   <url>
@@ -158,5 +158,8 @@
   </url>
   <url>
     <loc>https://mlr3proba.mlr-org.com/reference/mlr_tasks_unemployment.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3proba.mlr-org.com/articles/survival.html</loc>
   </url>
 </urlset>

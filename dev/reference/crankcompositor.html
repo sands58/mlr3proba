@@ -44,8 +44,9 @@
 
 
 <meta property="og:title" content="Compose a Crank Predict Type for Survival Learners — crankcompositor" />
-<meta property="og:description" content="This is a wrapper around the mlr_pipeops_crankcompose pipe operation, which
+<meta property="og:description" content="This is a wrapper around the PipeOpCrankCompositor pipe operation, which
 simplifies graph creation." />
+<meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -76,20 +77,31 @@ simplifies graph creation." />
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">mlr3proba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Version">0.1.0.9001</span>
-      </span>
-    </div>
 
+      <div class="navbar-brand-container">
+        <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org" /></a>
+        <a class="navbar-brand" href="../index.html">mlr3proba <small>v0.1.3.9001</small></a>
+      </div>
+    </div>
     <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li>
-  <a href="../reference/index.html">
-    <span class="fa fa fa fa-file-alt"></span>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Vignettes
      
-    Reference
+    <span class="caret"></span>
   </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/survival.html">Survival Analysis</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
 <li>
   <a href="https://mlr3book.mlr-org.com">
@@ -98,8 +110,6 @@ simplifies graph creation." />
     mlr3book
   </a>
 </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/mlr-org/mlr3proba">
     <span class="fab fa fab fa-github fa-lg"></span>
@@ -143,11 +153,15 @@ simplifies graph creation." />
     </div>
 
     <div class="ref-description">
-    <p>This is a wrapper around the <a href='mlr_pipeops_crankcompose.html'>mlr_pipeops_crankcompose</a> pipe operation, which
+    <p>This is a wrapper around the <a href='PipeOpCrankCompositor.html'>PipeOpCrankCompositor</a> pipe operation, which
 simplifies graph creation.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>crankcompositor</span>(<span class='no'>learner</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"mean"</span>, <span class='kw'>param_vals</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>())</pre>
+    <pre class="usage"><span class='fu'>crankcompositor</span>(
+  <span class='no'>learner</span>,
+  <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"mean"</span>, <span class='st'>"median"</span>, <span class='st'>"mode"</span>),
+  <span class='kw'>param_vals</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>()
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -158,8 +172,8 @@ simplifies graph creation.</p>
     </tr>
     <tr>
       <th>method</th>
-      <td><p>One of <code>mean</code> or <code>median</code>. Used to determine how <code>crank</code> is estimated from the
-predicted <code>distr</code>.</p></td>
+      <td><p>One of <code>mean</code>, <code>mode</code>, or <code>median</code>; abbreviations allowed. Used to determine
+how <code>crank</code> is estimated from the predicted <code>distr</code>. Default is <code>mean</code>.</p></td>
     </tr>
     <tr>
       <th>param_vals</th>
@@ -169,38 +183,39 @@ predicted <code>distr</code>.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><a href='https://mlr3pipelines.mlr-org.com//reference/Graph.html'>Graph</a></p>
+    <p><a href='https://mlr3pipelines.mlr-org.com//reference/mlr_learners_graph.html'>mlr3pipelines::GraphLearner</a></p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>For full details see <a href='mlr_pipeops_crankcompose.html'>PipeOpCrankCompositor</a>.</p>
+    <p>For full details see <a href='PipeOpCrankCompositor.html'>PipeOpCrankCompositor</a>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"mlr3"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"mlr3pipelines"</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mlr3</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mlr3pipelines</span>)
 
-<span class='no'>ranger.crank</span> <span class='kw'>=</span> <span class='fu'>crankcompositor</span>(<span class='kw'>learner</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span>(<span class='st'>"surv.ranger"</span>),
+<span class='no'>task</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tgen</a></span>(<span class='st'>"simsurv"</span>)$<span class='fu'>generate</span>(<span class='fl'>20</span>)
+<span class='no'>ranger.crank</span> <span class='kw'>=</span> <span class='fu'>crankcompositor</span>(<span class='kw'>learner</span> <span class='kw'>=</span> <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn</a></span>(<span class='st'>"surv.coxph"</span>),
                             <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"median"</span>)
-<span class='fu'><a href='https://mlr3.mlr-org.com/reference/resample.html'>resample</a></span>(<span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>tsk</a></span>(<span class='st'>"rats"</span>), <span class='no'>ranger.crank</span>, <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span>(<span class='st'>"cv"</span>, <span class='kw'>folds</span> <span class='kw'>=</span> <span class='fl'>2</span>))$<span class='fu'>predictions</span>()</div><div class='output co'>#&gt; [[1]]
-#&gt; &lt;PredictionSurv&gt; for 150 observations:
-#&gt;     row_id time status crank                distr
-#&gt;          1  101  FALSE   104 &lt;VectorDistribution&gt;
-#&gt;          4   91  FALSE   104 &lt;VectorDistribution&gt;
-#&gt;          5  104  FALSE   104 &lt;VectorDistribution&gt;
-#&gt; ---                                              
-#&gt;        294   64  FALSE   104 &lt;VectorDistribution&gt;
-#&gt;        295  104  FALSE   103 &lt;VectorDistribution&gt;
-#&gt;        296  104  FALSE   104 &lt;VectorDistribution&gt;
+<span class='fu'><a href='https://mlr3.mlr-org.com/reference/resample.html'>resample</a></span>(<span class='no'>task</span>, <span class='no'>ranger.crank</span>, <span class='fu'><a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>rsmp</a></span>(<span class='st'>"cv"</span>, <span class='kw'>folds</span> <span class='kw'>=</span> <span class='fl'>2</span>))$<span class='fu'>predictions</span>()</div><div class='output co'>#&gt; [[1]]
+#&gt; &lt;PredictionSurv&gt; for 10 observations:
+#&gt;     row_id      time status    crank                distr        lp
+#&gt;          2 0.3707709   TRUE 5.000000 &lt;VectorDistribution&gt; -3.088300
+#&gt;          7 5.0000000  FALSE 5.000000 &lt;VectorDistribution&gt; -1.302434
+#&gt;          8 2.4830070   TRUE 4.023879 &lt;VectorDistribution&gt;  2.052353
+#&gt; ---                                                                
+#&gt;         17 1.9768585   TRUE 4.382142 &lt;VectorDistribution&gt;  1.509337
+#&gt;         18 2.4669239   TRUE 5.000000 &lt;VectorDistribution&gt; -2.515227
+#&gt;         20 5.0000000  FALSE 5.000000 &lt;VectorDistribution&gt; -1.806704
 #&gt; 
 #&gt; [[2]]
-#&gt; &lt;PredictionSurv&gt; for 150 observations:
-#&gt;     row_id time status crank                distr
-#&gt;          2   49   TRUE   104 &lt;VectorDistribution&gt;
-#&gt;          3  104  FALSE   104 &lt;VectorDistribution&gt;
-#&gt;          7  104  FALSE   104 &lt;VectorDistribution&gt;
-#&gt; ---                                              
-#&gt;        298   92  FALSE   104 &lt;VectorDistribution&gt;
-#&gt;        299  104  FALSE   104 &lt;VectorDistribution&gt;
-#&gt;        300  102  FALSE   104 &lt;VectorDistribution&gt;
+#&gt; &lt;PredictionSurv&gt; for 10 observations:
+#&gt;     row_id     time status    crank                distr          lp
+#&gt;          1 5.000000  FALSE 2.483007 &lt;VectorDistribution&gt;  0.25443229
+#&gt;          3 5.000000  FALSE 5.000000 &lt;VectorDistribution&gt; -0.24281955
+#&gt;          4 5.000000  FALSE 5.000000 &lt;VectorDistribution&gt; -0.04420689
+#&gt; ---                                                                 
+#&gt;         13 4.023879   TRUE 5.000000 &lt;VectorDistribution&gt;  0.02793521
+#&gt;         16 5.000000  FALSE 2.466924 &lt;VectorDistribution&gt;  0.56127953
+#&gt;         19 4.382142   TRUE 5.000000 &lt;VectorDistribution&gt; -0.21990905
 #&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

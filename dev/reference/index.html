@@ -44,6 +44,8 @@
 
 
 <meta property="og:title" content="Function reference" />
+<meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
+<meta name="twitter:card" content="summary" />
 
 
 <meta name="robots" content="noindex">
@@ -73,20 +75,31 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">mlr3proba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Version">0.1.0.9001</span>
-      </span>
-    </div>
 
+      <div class="navbar-brand-container">
+        <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org" /></a>
+        <a class="navbar-brand" href="../index.html">mlr3proba <small>v0.1.3.9001</small></a>
+      </div>
+    </div>
     <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li>
-  <a href="../reference/index.html">
-    <span class="fa fa fa fa-file-alt"></span>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Vignettes
      
-    Reference
+    <span class="caret"></span>
   </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/survival.html">Survival Analysis</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
 <li>
   <a href="https://mlr3book.mlr-org.com">
@@ -95,8 +108,6 @@
     mlr3book
   </a>
 </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/mlr-org/mlr3proba">
     <span class="fab fa fab fa-github fa-lg"></span>
@@ -148,17 +159,57 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+          <h2 id="section-package" class="hasAnchor"><a href="#section-package" class="anchor"></a>Package</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
       <tr>
         
         <td>
+          <p><code><a href="mlr3proba-package.html">mlr3proba-package</a></code> </p>
+        </td>
+        <td><p>mlr3proba: Probabilistic Supervised Learning for 'mlr3'</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-building-blocks" class="hasAnchor"><a href="#section-building-blocks" class="anchor"></a>Building Blocks</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="TaskSurv.html">TaskSurv</a></code> </p>
+        </td>
+        <td><p>Survival Task</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="LearnerSurv.html">LearnerSurv</a></code> </p>
         </td>
         <td><p>Survival Learner</p></td>
       </tr><tr>
+        
+        <td>
+          <p><code><a href="PredictionSurv.html">PredictionSurv</a></code> </p>
+        </td>
+        <td><p>Prediction Object for Survival</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="MeasureSurv.html">MeasureSurv</a></code> </p>
+        </td>
+        <td><p>Survival Measure</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-survival-learners" class="hasAnchor"><a href="#section-survival-learners" class="anchor"></a>Survival Learners</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
         
         <td>
           <p><code><a href="LearnerSurvBlackboost.html">LearnerSurvBlackboost</a></code> </p>
@@ -185,15 +236,15 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="LearnerSurvGamboost.html">LearnerSurvGamboost</a></code> </p>
+          <p><code><a href="LearnerSurvGBM.html">LearnerSurvGBM</a></code> </p>
         </td>
-        <td><p>Gradient Boosting for Additive Models Survival Learner</p></td>
+        <td><p>Generalized Boosting Regression Modeling Survival Learner</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="LearnerSurvGbm.html">LearnerSurvGbm</a></code> </p>
+          <p><code><a href="LearnerSurvGamboost.html">LearnerSurvGamboost</a></code> </p>
         </td>
-        <td><p>Generalized Boosting Regression Modeling Survival Learner</p></td>
+        <td><p>Gradient Boosting for Additive Models Survival Learner</p></td>
       </tr><tr>
         
         <td>
@@ -211,7 +262,7 @@
         <td>
           <p><code><a href="LearnerSurvKaplan.html">LearnerSurvKaplan</a></code> </p>
         </td>
-        <td><p>Kaplan Meier Estimator Survival Learner</p></td>
+        <td><p>Kaplan-Meier Estimator Survival Learner</p></td>
       </tr><tr>
         
         <td>
@@ -223,7 +274,13 @@
         <td>
           <p><code><a href="LearnerSurvNelson.html">LearnerSurvNelson</a></code> </p>
         </td>
-        <td><p>Nelson Aalen Estimator Survival Learner</p></td>
+        <td><p>Nelson-Aalen Estimator Survival Learner</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="LearnerSurvObliqueRSF.html">LearnerSurvObliqueRSF</a></code> </p>
+        </td>
+        <td><p>Oblique Random Survival Forest Survival Learner</p></td>
       </tr><tr>
         
         <td>
@@ -260,13 +317,15 @@
           <p><code><a href="LearnerSurvSVM.html">LearnerSurvSVM</a></code> </p>
         </td>
         <td><p>Regression, Ranking and Hybrid Support Vector Machines Survival Learner</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="MeasureSurv.html">MeasureSurv</a></code> </p>
-        </td>
-        <td><p>Survival Measure</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-survival-measures" class="hasAnchor"><a href="#section-survival-measures" class="anchor"></a>Survival Measures</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
         
         <td>
           <p><code><a href="MeasureSurvBeggC.html">MeasureSurvBeggC</a></code> </p>
@@ -320,12 +379,6 @@
           <p><code><a href="MeasureSurvIntLoglossSE.html">MeasureSurvIntLoglossSE</a></code> </p>
         </td>
         <td><p>Standard Error of Integrated Log loss Survival Measure</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="MeasureSurvIntegrated.html">MeasureSurvIntegrated</a></code> </p>
-        </td>
-        <td><p>Abstract Class for Integrated Survival Measures</p></td>
       </tr><tr>
         
         <td>
@@ -398,55 +451,15 @@
           <p><code><a href="MeasureSurvXuR2.html">MeasureSurvXuR2</a></code> </p>
         </td>
         <td><p>Xu and O'Quigley's R2 Survival Measure</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="PredictionSurv.html">PredictionSurv</a></code> </p>
-        </td>
-        <td><p>Prediction Object for Survival</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="TaskGeneratorSimsurv.html">TaskGeneratorSimsurv</a></code> </p>
-        </td>
-        <td><p>Survival Task Generator for Package 'simsurv'</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="TaskSurv.html">TaskSurv</a></code> </p>
-        </td>
-        <td><p>Survival Task</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="crankcompositor.html">crankcompositor()</a></code> </p>
-        </td>
-        <td><p>Compose a Crank Predict Type for Survival Learners</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="distrcompositor.html">distrcompositor()</a></code> </p>
-        </td>
-        <td><p>Compose a Distr Predict Type for Survival Learners</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="mlr3proba-package.html">mlr3proba-package</a></code> </p>
-        </td>
-        <td><p>mlr3proba: Probabilistic Supervised Learning for mlr3</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="mlr_pipeops_crankcompose.html">mlr_pipeops_crankcompose</a></code> </p>
-        </td>
-        <td><p>PipeOpCrankCompositor</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="mlr_pipeops_distrcompose.html">mlr_pipeops_distrcompose</a></code> </p>
-        </td>
-        <td><p>PipeOpDistrCompositor</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-survival-tasks" class="hasAnchor"><a href="#section-survival-tasks" class="anchor"></a>Survival Tasks</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
         
         <td>
           <p><code><a href="mlr_tasks_lung.html">mlr_tasks_lung</a></code> </p>
@@ -464,6 +477,44 @@
           <p><code><a href="mlr_tasks_unemployment.html">mlr_tasks_unemployment</a></code> </p>
         </td>
         <td><p>Unemployment Duration Task</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="TaskGeneratorSimsurv.html">TaskGeneratorSimsurv</a></code> </p>
+        </td>
+        <td><p>Survival Task Generator for Package 'simsurv'</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-survival-pipeops" class="hasAnchor"><a href="#section-survival-pipeops" class="anchor"></a>Survival PipeOps</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="PipeOpCrankCompositor.html">PipeOpCrankCompositor</a></code> </p>
+        </td>
+        <td><p>PipeOpCrankCompositor</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="PipeOpDistrCompositor.html">PipeOpDistrCompositor</a></code> </p>
+        </td>
+        <td><p>PipeOpDistrCompositor</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="crankcompositor.html">crankcompositor()</a></code> </p>
+        </td>
+        <td><p>Compose a Crank Predict Type for Survival Learners</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="distrcompositor.html">distrcompositor()</a></code> </p>
+        </td>
+        <td><p>Compose a Distr Predict Type for Survival Learners</p></td>
       </tr>
     </tbody>
     </table>
@@ -472,7 +523,12 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-package">Package</a></li>
+      <li><a href="#section-building-blocks">Building Blocks</a></li>
+      <li><a href="#section-survival-learners">Survival Learners</a></li>
+      <li><a href="#section-survival-measures">Survival Measures</a></li>
+      <li><a href="#section-survival-tasks">Survival Tasks</a></li>
+      <li><a href="#section-survival-pipeops">Survival PipeOps</a></li>
     </ul>
   </div>
 </div>

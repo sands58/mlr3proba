@@ -6,15 +6,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MIT License • mlr3proba</title>
+<title>Changelog • mlr3proba</title>
 
 <!-- favicons -->
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png" />
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png" />
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png" />
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -36,14 +36,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="pkgdown.css" rel="stylesheet">
-<link href="extra.css" rel="stylesheet">
-<script src="pkgdown.js"></script>
+<link href="../pkgdown.css" rel="stylesheet">
+<link href="../extra.css" rel="stylesheet">
+<script src="../pkgdown.js"></script>
 
 
 
 
-<meta property="og:title" content="MIT License" />
+<meta property="og:title" content="Changelog" />
 <meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -64,7 +64,7 @@
   </head>
 
   <body>
-    <div class="container template-title-body">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -78,7 +78,7 @@
 
       <div class="navbar-brand-container">
         <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org" /></a>
-        <a class="navbar-brand" href="index.html">mlr3proba <small>v0.1.3.9001</small></a>
+        <a class="navbar-brand" href="../index.html">mlr3proba <small>v0.1.3.9001</small></a>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -91,15 +91,15 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="articles/survival.html">Survival Analysis</a>
+      <a href="../articles/survival.html">Survival Analysis</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="news/index.html">Changelog</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
 <li>
   <a href="https://mlr3book.mlr-org.com">
@@ -143,23 +143,71 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>MIT License</h1>
+      <h1>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/mlr-org/mlr3proba/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-<div id="mit-license" class="section level1">
-
-<p>Copyright (c) 2019 Raphael Sonabend, Dr Franz Kiraly</p>
-<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
-<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
-<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+    <div id="mlr3proba-013" class="section level1">
+<h1 class="page-header">
+<a href="#mlr3proba-013" class="anchor"></a>mlr3proba 0.1.3<small> Unreleased </small>
+</h1>
+<ul>
+<li>Changed <code>lp</code> in <code>surv.parametric</code> to include the intercept, which is in line with <code><a href="https://rdrr.io/pkg/survival/man/survreg.html">survival::survreg</a></code>. Now <code><a href="https://rdrr.io/r/base/Log.html">exp(pred$lp)</a></code> is equal to the predicted survival time for AFTs</li>
+<li>Moved <code>mboost</code> to <code>suggests</code>
+</li>
+</ul>
 </div>
+    <div id="mlr3proba-012" class="section level1">
+<h1 class="page-header">
+<a href="#mlr3proba-012" class="anchor"></a>mlr3proba 0.1.2<small> 2020-01-31 </small>
+</h1>
+<ul>
+<li>Fixed error in r-patched-solaris</li>
+<li>Added <code>mode</code> option to <code>crankcompositor</code>
+</li>
+<li>Fixes bug resulting from <code>R62S3</code> incompatibility</li>
+</ul>
+</div>
+    <div id="mlr3proba-011" class="section level1">
+<h1 class="page-header">
+<a href="#mlr3proba-011" class="anchor"></a>mlr3proba 0.1.1<small> 2020-01-08 </small>
+</h1>
+<ul>
+<li>Added <code>method</code> argument to integrated scores and added weighting by bin-width</li>
+<li>Added notes to IGS documentation regarding default methods and comparison to other packages</li>
+<li>Added <code>method</code> to <code>MeasureSurvIntegrated</code> constructor and fields</li>
+<li>Fixed mistake in documentation of: <code>TaskSurv</code>, <code>MeasureSurvUnoC</code>
+</li>
+<li>Added missing <code>LearnerSurvRpart</code> parameter <code>parms</code> and <code>cost</code>
+</li>
+<li>Fixed errors in r-patched-solaris and r-devel debian-clang</li>
+</ul>
+</div>
+    <div id="mlr3proba-010" class="section level1">
+<h1 class="page-header">
+<a href="#mlr3proba-010" class="anchor"></a>mlr3proba 0.1.0<small> 2019-12-22 </small>
+</h1>
+<ul>
+<li>Initial upload to CRAN.</li>
+</ul>
+</div>
+  </div>
 
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <div id="tocnav">
+      <h2>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+        <li><a href="#mlr3proba-013">0.1.3</a></li>
+        <li><a href="#mlr3proba-012">0.1.2</a></li>
+        <li><a href="#mlr3proba-011">0.1.1</a></li>
+        <li><a href="#mlr3proba-010">0.1.0</a></li>
+      </ul>
+    </div>
   </div>
 
 </div>
-
 
 
       <footer>

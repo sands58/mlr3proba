@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generalized Boosting Regression Modeling Survival Learner — LearnerSurvGbm • mlr3proba</title>
+<title>Generalized Boosting Regression Modeling Survival Learner — LearnerSurvGBM • mlr3proba</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -43,14 +43,15 @@
 
 
 
-<meta property="og:title" content="Generalized Boosting Regression Modeling Survival Learner — LearnerSurvGbm" />
+<meta property="og:title" content="Generalized Boosting Regression Modeling Survival Learner — LearnerSurvGBM" />
 <meta property="og:description" content="Calls gbm::gbm().
 lp is predicted by gbm::predict.gbm()
-crank is identical to lp.
+crank is identical to lp
 
 
 Parameter distribution is set to coxph as this is the only distribution implemented
 in gbm::gbm() for survival analysis; parameter keep.data is set to FALSE for efficiency." />
+<meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -81,20 +82,31 @@ in gbm::gbm() for survival analysis; parameter keep.data is set to FALSE for eff
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">mlr3proba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Version">0.1.0.9001</span>
-      </span>
-    </div>
 
+      <div class="navbar-brand-container">
+        <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org" /></a>
+        <a class="navbar-brand" href="../index.html">mlr3proba <small>v0.1.3.9001</small></a>
+      </div>
+    </div>
     <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li>
-  <a href="../reference/index.html">
-    <span class="fa fa fa fa-file-alt"></span>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Vignettes
      
-    Reference
+    <span class="caret"></span>
   </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/survival.html">Survival Analysis</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
 <li>
   <a href="https://mlr3book.mlr-org.com">
@@ -103,8 +115,6 @@ in gbm::gbm() for survival analysis; parameter keep.data is set to FALSE for eff
     mlr3book
   </a>
 </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/mlr-org/mlr3proba">
     <span class="fab fa fab fa-github fa-lg"></span>
@@ -143,14 +153,14 @@ in gbm::gbm() for survival analysis; parameter keep.data is set to FALSE for eff
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Generalized Boosting Regression Modeling Survival Learner</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3proba/blob/master/R/LearnerSurvGbm.R'><code>R/LearnerSurvGbm.R</code></a></small>
-    <div class="hidden name"><code>LearnerSurvGbm.Rd</code></div>
+    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3proba/blob/master/R/LearnerSurvGBM.R'><code>R/LearnerSurvGBM.R</code></a></small>
+    <div class="hidden name"><code>LearnerSurvGBM.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Calls <code><a href='https://rdrr.io/pkg/gbm/man/gbm.html'>gbm::gbm()</a></code>.</p><ul>
 <li><p>lp is predicted by <code><a href='https://rdrr.io/pkg/gbm/man/predict.gbm.html'>gbm::predict.gbm()</a></code></p></li>
-<li><p><code>crank</code> is identical to <code>lp</code>.</p></li>
+<li><p><code>crank</code> is identical to <code>lp</code></p></li>
 </ul>
 
 <p>Parameter <code>distribution</code> is set to <code>coxph</code> as this is the only distribution implemented
@@ -165,7 +175,7 @@ in <code><a href='https://rdrr.io/pkg/gbm/man/gbm.html'>gbm::gbm()</a></code> fo
     <h2 class="hasAnchor" id="construction"><a class="anchor" href="#construction"></a>Construction</h2>
 
     
-<pre>LearnerSurvGbm$new()
+<pre>LearnerSurvGBM$new()
 mlr_learners$get("surv.gbm")
 lrn("surv.gbm")
 </pre>
@@ -183,22 +193,40 @@ lrn("surv.gbm")
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Y. Freund and R.E. Schapire (1997)
-A decision-theoretic generalization of on-line learning and an application to boosting.
-Journal of Computer and System Sciences, 55(1):119-139.</p>
-<p>G. Ridgeway (1999). The state of boosting. Computing Science and Statistics 31:172-181.</p>
-<p>J.H. Friedman, T. Hastie, R. Tibshirani (2000).
-Additive Logistic Regression: a Statistical View of Boosting. Annals of Statistics 28(2):337-374.</p>
-<p>J.H. Friedman (2001).
-Greedy Function Approximation: A Gradient Boosting Machine. Annals of Statistics 29(5):1189-1232.</p>
-<p>J.H. Friedman (2002).
-Stochastic Gradient Boosting. Computational Statistics and Data Analysis 38(4):367-378.</p>
-<p>B. Kriegler (2007).
-Cost-Sensitive Stochastic Gradient Boosting Within a Quantitative Regression Framework.
-Ph.D. Dissertation. University of California at Los Angeles, Los Angeles, CA, USA. Advisor(s) Richard A. Berk. urlhttps://dl.acm.org/citation.cfm?id=1354603.</p>
-<p>C. Burges (2010).
-From RankNet to LambdaRank to LambdaMART: An Overview.
-Microsoft Research Technical Report MSR-TR-2010-82.</p>
+    <p>Freund Y, Schapire RE (1997).
+&#8220;A Decision-Theoretic Generalization of On-Line Learning and an Application to Boosting.&#8221;
+<em>Journal of Computer and System Sciences</em>, <b>55</b>(1), 119--139.
+doi: <a href='https://doi.org/10.1006/jcss.1997.1504'>10.1006/jcss.1997.1504</a>
+.</p>
+<p>Ridgeway G (1999).
+&#8220;The state of boosting.&#8221;
+<em>Computing Science and Statistics</em>, 172--181.</p>
+<p>Friedman J, Hastie T, Tibshirani R (2000).
+&#8220;Additive logistic regression: a statistical view of boosting (With discussion and a rejoinder by the authors).&#8221;
+<em>The Annals of Statistics</em>, <b>28</b>(2), 337--407.
+doi: <a href='https://doi.org/10.1214/aos/1016218223'>10.1214/aos/1016218223</a>
+.</p>
+<p>Friedman JH (2001).
+&#8220;Greedy Function Approximation: A Gradient Boosting Machine.&#8221;
+<em>The Annals of Statistics</em>, <b>29</b>(5), 1189--1232.
+<a href='http://www.jstor.org/stable/2699986'>http://www.jstor.org/stable/2699986</a>.</p>
+<p>Friedman JH (2001).
+&#8220;Greedy Function Approximation: A Gradient Boosting Machine.&#8221;
+<em>The Annals of Statistics</em>, <b>29</b>(5), 1189--1232.
+<a href='http://www.jstor.org/stable/2699986'>http://www.jstor.org/stable/2699986</a>.</p>
+<p>Friedman JH (2002).
+&#8220;Stochastic gradient boosting.&#8221;
+<em>Computational Statistics &amp; Data Analysis</em>, <b>38</b>(4), 367--378.
+doi: <a href='https://doi.org/10.1016/s0167-9473(01)00065-2'>10.1016/s0167-9473(01)00065-2</a>
+.</p>
+<p>Kriegler B (2007).
+<em>Cost-Sensitive Stochastic Gradient Boosting Within a Quantitative Regression Framework</em>.
+Ph.D. thesis, University of California at Los Angeles.
+<a href='https://dl.acm.org/citation.cfm?id=1354603'>https://dl.acm.org/citation.cfm?id=1354603</a>.</p>
+<p>Burges CJ (2010).
+&#8220;From RankNet to LambdaRank to LambdaMART: An Overview.&#8221;
+Technical Report MSR-TR-2010-82, Microsoft Research.
+<a href='https://www.microsoft.com/en-us/research/publication/from-ranknet-to-lambdarank-to-lambdamart-an-overview/'>https://www.microsoft.com/en-us/research/publication/from-ranknet-to-lambdarank-to-lambdamart-an-overview/</a>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other survival learners: 
@@ -212,6 +240,7 @@ Microsoft Research Technical Report MSR-TR-2010-82.</p>
 <code><a href='LearnerSurvKaplan.html'>LearnerSurvKaplan</a></code>,
 <code><a href='LearnerSurvMboost.html'>LearnerSurvMboost</a></code>,
 <code><a href='LearnerSurvNelson.html'>LearnerSurvNelson</a></code>,
+<code><a href='LearnerSurvObliqueRSF.html'>LearnerSurvObliqueRSF</a></code>,
 <code><a href='LearnerSurvParametric.html'>LearnerSurvParametric</a></code>,
 <code><a href='LearnerSurvPenalized.html'>LearnerSurvPenalized</a></code>,
 <code><a href='LearnerSurvRandomForestSRC.html'>LearnerSurvRandomForestSRC</a></code>,

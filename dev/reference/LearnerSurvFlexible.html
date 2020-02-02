@@ -47,7 +47,7 @@
 <meta property="og:description" content="Calls flexsurv::flexsurvspline().
 lp is predicted by using an internally defined predict method, see details
 distr is predicted by using an internally defined predict method, see details
-crank is identical to lp.
+crank is identical to lp
 
 
 Parameter k is changed to 1 and scale is changed to odds, as these are more in line with
@@ -55,6 +55,7 @@ the Royston/Parmar proposed models, and the package defaults are equivalent to f
 parametric model and therefore surv.parametric should be used instead.
 If fitting a model with k = 0 then consider using surv.parametric as
 this is likely to have more optimal results, and has more options for tuning." />
+<meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -85,20 +86,31 @@ this is likely to have more optimal results, and has more options for tuning." /
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">mlr3proba</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Version">0.1.0.9001</span>
-      </span>
-    </div>
 
+      <div class="navbar-brand-container">
+        <a href="https://mlr-org.com"><img src="https://raw.githubusercontent.com/mlr-org/mlr3/master/man/figures/logo.png" id="hexlogo" alt="mlr-org" /></a>
+        <a class="navbar-brand" href="../index.html">mlr3proba <small>v0.1.3.9001</small></a>
+      </div>
+    </div>
     <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li>
-  <a href="../reference/index.html">
-    <span class="fa fa fa fa-file-alt"></span>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Vignettes
      
-    Reference
+    <span class="caret"></span>
   </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/survival.html">Survival Analysis</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
 <li>
   <a href="https://mlr3book.mlr-org.com">
@@ -107,8 +119,6 @@ this is likely to have more optimal results, and has more options for tuning." /
     mlr3book
   </a>
 </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/mlr-org/mlr3proba">
     <span class="fab fa fab fa-github fa-lg"></span>
@@ -155,7 +165,7 @@ this is likely to have more optimal results, and has more options for tuning." /
     <p>Calls <code><a href='https://rdrr.io/pkg/flexsurv/man/flexsurvspline.html'>flexsurv::flexsurvspline()</a></code>.</p><ul>
 <li><p>lp is predicted by using an internally defined <code>predict</code> method, see details</p></li>
 <li><p>distr is predicted by using an internally defined <code>predict</code> method, see details</p></li>
-<li><p><code>crank</code> is identical to <code>lp</code>.</p></li>
+<li><p><code>crank</code> is identical to <code>lp</code></p></li>
 </ul>
 
 <p>Parameter <code>k</code> is changed to <code>1</code> and <code>scale</code> is changed to <code>odds</code>, as these are more in line with
@@ -172,11 +182,13 @@ this is likely to have more optimal results, and has more options for tuning.</p
     <p><code><a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6::R6Class()</a></code> inheriting from <a href='LearnerSurv.html'>LearnerSurv</a>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The <code>distr</code> prediction is estimated using the fitted custom distributions from <code><a href='https://rdrr.io/pkg/flexsurv/man/flexsurvspline.html'>flexsurv::flexsurvspline()</a></code>
-and the estimated coefficients.</p>
-<p>As flexible spline models estimate the hazard as the intercept, the linear predictor, <code>lp</code>, can be
-calculated as in the classical setting. i.e. For fitted coefficients, \(\beta = (\beta0,...,\betaP)\),
-and covariates \(X^T = (X0,...,XP)^T\), where \(X0\) is a column of \(1\)s: \(lp = \betaX\).</p>
+    <p>The <code>distr</code> prediction is estimated using the fitted custom distributions
+from <code><a href='https://rdrr.io/pkg/flexsurv/man/flexsurvspline.html'>flexsurv::flexsurvspline()</a></code> and the estimated coefficients.</p>
+<p>As flexible spline models estimate the baseline hazard as the intercept, the linear predictor,
+<code>lp</code>, can be calculated as in the classical setting. i.e. For fitted coefficients,
+\(\beta = (\beta_0,...,\beta_P)\),
+and covariates \(X^T = (X_0,...,X_P)^T\), where \(X_0\) is a column
+of \(1\)s: \(lp = \beta X\).</p>
     <h2 class="hasAnchor" id="construction"><a class="anchor" href="#construction"></a>Construction</h2>
 
     
@@ -198,10 +210,9 @@ lrn("surv.flexible")
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Royston, P. and Parmar, M. (2002).
-Flexible parametric proportional-hazards and proportional-odds models for censored survival data,
-with application to prognostic modelling and estimation of treatment effects.
-Statistics in Medicine, 21(15), 2175-2197.
+    <p>Royston P, Parmar MKB (2002).
+&#8220;Flexible parametric proportional-hazards and proportional-odds models for censored survival data,  with application to prognostic modelling and estimation of treatment effects.&#8221;
+<em>Statistics in Medicine</em>, <b>21</b>(15), 2175--2197.
 doi: <a href='https://doi.org/10.1002/sim.1203'>10.1002/sim.1203</a>
 .</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -211,13 +222,14 @@ doi: <a href='https://doi.org/10.1002/sim.1203'>10.1002/sim.1203</a>
 <code><a href='LearnerSurvBlackboost.html'>LearnerSurvBlackboost</a></code>,
 <code><a href='LearnerSurvCVGlmnet.html'>LearnerSurvCVGlmnet</a></code>,
 <code><a href='LearnerSurvCoxPH.html'>LearnerSurvCoxPH</a></code>,
+<code><a href='LearnerSurvGBM.html'>LearnerSurvGBM</a></code>,
 <code><a href='LearnerSurvGamboost.html'>LearnerSurvGamboost</a></code>,
-<code><a href='LearnerSurvGbm.html'>LearnerSurvGbm</a></code>,
 <code><a href='LearnerSurvGlmboost.html'>LearnerSurvGlmboost</a></code>,
 <code><a href='LearnerSurvGlmnet.html'>LearnerSurvGlmnet</a></code>,
 <code><a href='LearnerSurvKaplan.html'>LearnerSurvKaplan</a></code>,
 <code><a href='LearnerSurvMboost.html'>LearnerSurvMboost</a></code>,
 <code><a href='LearnerSurvNelson.html'>LearnerSurvNelson</a></code>,
+<code><a href='LearnerSurvObliqueRSF.html'>LearnerSurvObliqueRSF</a></code>,
 <code><a href='LearnerSurvParametric.html'>LearnerSurvParametric</a></code>,
 <code><a href='LearnerSurvPenalized.html'>LearnerSurvPenalized</a></code>,
 <code><a href='LearnerSurvRandomForestSRC.html'>LearnerSurvRandomForestSRC</a></code>,
