@@ -17,13 +17,14 @@ LearnerDensKDE$set("public", "train_internal", function(task){
   pdf <- function(x1){}
   #x1 is new data
   body(pdf) <- substitute({
+
     x1 <- matrix(x1, nrow = length(x1), ncol = rows)
     tru_mat <- matrix(truth, nrow = nrow(x1), ncol = rows, byrow = TRUE)
-    #tru_mat data from task
     if(nrow(x1) == 1)
       return(1/(rows * bw) * sum(kernel$pdf((x1 - tru_mat)/bw)))
     else
       return(1/(rows * bw) * colSums(apply((x1 - tru_mat)/bw,1,kernel$pdf)))
+
   }, list(rows = task$nrow,
           bw = self$param_set$values$bandwidth,
           kernel = get(as.character(subset(distr6::listKernels(),
@@ -31,13 +32,12 @@ LearnerDensKDE$set("public", "train_internal", function(task){
                                            ClassName)))$new(),
           truth = task$truth()))
 
-  distribution = distr6::Distribution$new(name = paste("Kernel", self$param_set$values$kernel),
-                                          short_name = paste0("KDE",self$param_set$values$kernel), pdf = pdf)
-
+  list(distr = distr6::Distribution$new(name = paste("Kernel", self$param_set$values$kernel),
+                                          short_name = paste0("KDE",self$param_set$values$kernel), pdf = pdf))
 
 })
 LearnerDensKDE$set("public", "predict_internal", function(task){
   newdata = task$truth()
-  prob = self$model$distribution$pdf(newdata)
-  PredictionDens$new(task = task, prob = prob)
+  prob = self$model$distr$pdf(newdata)
+  PredictionDens$new(task = task, pdf = prob)
 })
