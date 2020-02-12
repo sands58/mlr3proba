@@ -30,13 +30,7 @@ generate_tasks.LearnerDens = function(learner, N = 30L) {
 registerS3method("generate_tasks", "LearnerDens", generate_tasks.LearnerDens)
 
 sanity_check.PredictionDens = function(prediction) {
-  if (!is.null(prediction$pdf)) {
-    prediction$pdf >= 0
-  }
-  if (!is.null(prediction$cdf)) {
-    prediction$cdf >= 0
-    prediction$cdf <= 1
-  }
+  prediction$score() >= -50 & prediction$score() <= 50
 }
 registerS3method("sanity_check", "PredictionDens", sanity_check.PredictionDens)
 
