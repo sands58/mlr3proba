@@ -44,8 +44,7 @@
 #' head(as.data.table(p))
 PredictionDens = R6Class("PredictionDens", inherit = Prediction,
   public = list(
-    initialize = function(task = NULL, row_ids = task$row_ids, truth = task$truth(),
-                          pdf = NULL, cdf = NULL) {
+    initialize = function(task = NULL, row_ids = task$row_ids, truth = task$truth(), pdf = NULL, cdf = NULL) {
       assert_row_ids(row_ids)
       n = length(row_ids)
 

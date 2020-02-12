@@ -4,6 +4,7 @@
 #' @import mlr3
 #' @import mlr3misc
 #' @import mlr3pipelines
+#' @import distr6
 #' @importFrom R6 R6Class
 #' @importFrom utils data head tail
 #' @importFrom stats reformulate model.matrix model.frame
