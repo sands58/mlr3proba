@@ -32,7 +32,7 @@ LearnerDensKDE$set("public", "train_internal", function(task){
                                            ClassName)))$new(),
           truth = task$truth()))
 
-  list(distr = distr6::Distribution$new(name = paste("Kernel", self$param_set$values$kernel),
+  list(distr = distr6::Distribution$new(name = paste("KDE", self$param_set$values$kernel),
                                           short_name = paste0("KDE",self$param_set$values$kernel), pdf = pdf))
 
 })

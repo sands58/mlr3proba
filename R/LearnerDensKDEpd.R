@@ -26,7 +26,8 @@ LearnerDensKDEpd <- R6::R6Class("LearnerDensKDEpd", inherit = LearnerDens,
 
                     list(distr = distr6::Distribution$new(name = paste("Gaussian KDE"),
                                                           short_name = paste0("GausKDE"),
-                                                          pdf = pdf))
+                                                          pdf = pdf$y,
+                                                          bw = pdf$bw))
                                   },
 
                       predict_internal = function(task){
