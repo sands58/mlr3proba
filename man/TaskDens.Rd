@@ -3,9 +3,9 @@
 \name{TaskDens}
 \alias{TaskDens}
 \title{Density Task}
-\format{\link[R6:R6Class]{R6::R6Class} object inheriting from \link{Task}/\link{TaskSupervised}.}
+\format{\link[R6:R6Class]{R6::R6Class} object inheriting from \link{Task}.}
 \description{
-This task specializes \link{Task} and \link{TaskSupervised} for density estimation problems.
+This task specializes \link{Task} for density estimation problems.
 The target column is assumed to be numeric.
 The \code{task_type} is set to \code{"density"}.
 
@@ -27,12 +27,17 @@ Name of the target column.
 
 \section{Fields}{
 
-See \link{TaskSupervised}.
+See \link{Task}.
 }
 
 \section{Methods}{
 
-See \link{TaskSupervised}.
+All methods from \link{Task}, and additionally:
+\itemize{
+\item \code{truth(rows = NULL)} :: \code{any}\cr
+True response for specified \code{row_ids}. Format depends on the task type.
+Defaults to all rows with role "use".
+}
 }
 
 \examples{

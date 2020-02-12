@@ -3,7 +3,6 @@ context("TaskDens")
 test_that("Basic ops on BostonHousing task", {
   task = tsk("precip")
   expect_task(task)
-  expect_task_supervised(task)
   expect_task_dens(task)
   expect_equal(task$target_names, "precip")
 
@@ -19,7 +18,6 @@ test_that("TaskDens: 0 feature task", {
   b = task$backend
   expect_backend(b)
   expect_task(task)
-  expect_task_supervised(task)
   expect_task_dens(task)
   expect_data_table(task$data(), ncols = 1L)
 })

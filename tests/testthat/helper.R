@@ -3,7 +3,6 @@ lapply(list.files(system.file("testthat", package = "mlr3"), pattern = "^helper.
 expect_task_dens = function(task) {
   expect_is(task, "TaskDens")
   expect_task(task)
-  expect_task_supervised(task)
   expect_is(task$truth(), "numeric")
 
   f = task$formula()

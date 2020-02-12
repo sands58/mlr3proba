@@ -1,10 +1,10 @@
 #' @title Density Task
 #'
 #' @usage NULL
-#' @format [R6::R6Class] object inheriting from [Task]/[TaskSupervised].
+#' @format [R6::R6Class] object inheriting from [Task].
 #'
 #' @description
-#' This task specializes [Task] and [TaskSupervised] for density estimation problems.
+#' This task specializes [Task] for density estimation problems.
 #' The target column is assumed to be numeric.
 #' The `task_type` is set to `"density"`.
 #'
@@ -26,10 +26,14 @@
 #'   Name of the target column.
 #'
 #' @section Fields:
-#' See [TaskSupervised].
+#' See [Task].
 #'
 #' @section Methods:
-#' See [TaskSupervised].
+#' All methods from [Task], and additionally:
+#'
+#' * `truth(rows = NULL)` :: `any`\cr
+#'   True response for specified `row_ids`. Format depends on the task type.
+#'   Defaults to all rows with role "use".
 #'
 #' @family Task
 #' @export
@@ -37,20 +41,22 @@
 #' task = TaskDens$new("precip", backend = data.frame(target = precip), target = "target")
 #' task$task_type
 #' task$truth()
-TaskDens <- R6::R6Class("TaskDens", inherit = TaskSupervised)
-TaskDens$set("public","initialize", function(id, backend, target) {
-                       #libraray::function_name()
-                       checkmate::assert_string(target)
-                       super$initialize(id = id, task_type = "dens", backend = backend, target = target)
-                       type = subset(self$col_info, id == target, "type")
-                       if (!(type %in% c("integer", "numeric"))) {
-                         stop("Target column '%s' must be numeric", target)
-                       }
-                     })
+TaskDens <- R6::R6Class("TaskDens", inherit = Task,
+  public = list(
+    initialize = function(id, backend, target) {
+      super$initialize(id = id, task_type = "dens", backend = backend)
+      assert_subset(target, self$col_roles$feature)
+      self$col_roles$target = target
+      self$col_roles$feature = setdiff(self$col_roles$feature, target)
 
-TaskDens$set("public","truth",function(rows = NULL) {
-                                          #row: input_name
-                       super$truth(rows)[[1L]]
-                     })
-                        #1L === 1
-                        #[[1L]] == [[1]]
+
+      type = subset(self$col_info, id == target, "type")
+      if (!(type %in% c("integer", "numeric"))) {
+        stop("Target column '%s' must be numeric", target)
+      }
+    },
+    truth = function(rows = NULL) {
+      self$data(rows, cols = self$target_names)[[1]]
+    }
+  )
+)
