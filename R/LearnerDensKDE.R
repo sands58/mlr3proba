@@ -1,5 +1,5 @@
 LearnerDensKDE = R6::R6Class("LearnerDensKDE", inherit = LearnerDens)
-LearnerDensKDE$set("public", "initialize", function(id = "dens.KDE") {
+LearnerDensKDE$set("public", "initialize", function(id = "dens.kde") {
   ps = ParamSet$new(list(ParamFct$new("kernel",
                                       levels = subset(listKernels(),
                                                       select="ShortName")[[1]],

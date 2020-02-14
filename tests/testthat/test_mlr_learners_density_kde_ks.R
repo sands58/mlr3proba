@@ -1,8 +1,8 @@
-context("dens.KDE.ks")
+context("dens.kdeKS")
 
 test_that("autotest", {
   set.seed(1)
-  learner = lrn("dens.KDE.ks")
+  learner = lrn("dens.kdeKS")
   expect_learner(learner)
   result = run_autotest(learner)
   expect_true(result, info = result$error)

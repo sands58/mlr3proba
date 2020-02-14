@@ -1,5 +1,5 @@
 LearnerDensKDEks <- R6::R6Class("LearnerDensKDEks", inherit = LearnerDens,
-        public = list(initialize = function(id = "dens.KDE.ks"){
+        public = list(initialize = function(id = "dens.kdeKS"){
         super$initialize(
         id = id,
         param_set = ParamSet$new(
@@ -9,7 +9,7 @@ LearnerDensKDEks <- R6::R6Class("LearnerDensKDEks", inherit = LearnerDens,
         ParamDbl$new(id = "xmin", tags = "train"),
         ParamDbl$new(id = "xmax", tags = "train"))),
         feature_types =  c("logical", "integer", "numeric", "character", "factor", "ordered"),
-        predict_types = c("pdf", "cdf"),
+        predict_types = "pdf",
         packages = c("ks", "distr6")
         )},
 
@@ -28,24 +28,16 @@ LearnerDensKDEks <- R6::R6Class("LearnerDensKDEks", inherit = LearnerDens,
 
         })
 
-        cdf <- function(x1){}
-
-        body(cdf) <- substitute({
-
-                1
-        })
-
-         list(distr = distr6::Distribution$new(name = "Gaussian KDe",
-                                                      short_name = "GausKDE",
-                                                      pdf = pdf,
-                                                      cdf = cdf))
+        Distribution$new(name = "Gaussian KDE",
+                         short_name = "GausKDE",
+                         pdf = pdf)
         },
 
         predict_internal = function(task){
 
         newdata = as.numeric(unlist(task$data(cols = task$target_names)))
 
-        PredictionDens$new(task = task, pdf = self$model$distr$pdf(newdata), cdf = self$model$distr$cdf(newdata))
+        PredictionDens$new(task = task, pdf = self$model$pdf(newdata))
 
         }
         ))
