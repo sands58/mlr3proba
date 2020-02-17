@@ -1,5 +1,5 @@
 ---
-title: 'mlr3proba: Probabilistic Supervised Learning for 'mlr3''
+title: 'mlr3proba: Probabilistic Supervised Learning for "mlr3"'
 tags:
   - R
   - statistics
