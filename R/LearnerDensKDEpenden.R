@@ -1,11 +1,18 @@
-LearnerDensKDEnp <- R6::R6Class("LearnerDensKDEnp", inherit = LearnerDens,
-                    public = list(initialize = function(id = "dens.kdeNP"){
+LearnerDensPenPD <- R6::R6Class("LearnerDensPenPD", inherit = LearnerDens,
+                    public = list(initialize = function(id = "dens.penPD"){
                     super$initialize(
                     id = id,
                     param_set = ParamSet$new(
                     params = list(
-                    ParamDbl$new(id = "bws",  lower = 0, tags = "train"),
-                    ParamFct$new("ckertype", levels = c("gaussian", "epanechnikov", "uniform"),
+                    ParamDbl$new(id = "no.base",  default= 41, tags = "train"),
+                    ParamDbl$new(id = "max.iter", default = 20, tags = "train"),
+                    ParamDbl$new(id = "lambda0", default = 500, tags = "train"),
+                    ParamDbl$new(id = "q", default = 3, tags = "train"),
+                    ParamUty$new(id = "sort", default = TRUE, tags = "train"),
+                    ParamDbl$new(id = "with.border", default = NULL, tags = "train"),
+                    ParamDbl$new(id = "m", default = q, tags = "train"),
+                    ParamDbl$new(id = "eps", default = 0.01, tags = "train"),
+                    ParamFct$new("basee", levels = c("gaussian", "bspline"),
                                  default = "gaussian", tags = "train"))),
                     feature_types =  c("logical", "integer", "numeric", "character", "factor", "ordered"),
                     predict_types = "pdf",
@@ -15,6 +22,8 @@ LearnerDensKDEnp <- R6::R6Class("LearnerDensKDEnp", inherit = LearnerDens,
                     train_internal = function(task){
 
                     pars = self$param_set$get_values(tag="train")
+                    family = switch(pars$ckertype,
+                                        Normal = gaussian)
 
                     data = as.data.frame(unlist(task$data(cols = task$target_names)))
 
@@ -22,13 +31,12 @@ LearnerDensKDEnp <- R6::R6Class("LearnerDensKDEnp", inherit = LearnerDens,
 
                     body(pdf) <- substitute({
 
-
                     invoke(np::npudens, tdat = data, edat = x1, .args = pars)$dens
 
                     })
 
                     Distribution$new(name = paste("KDE", self$param_set$values$ckertype),
-                                                          pdf = pdf)
+                                                     pdf = pdf)
                     },
 
                     predict_internal = function(task){
