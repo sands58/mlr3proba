@@ -37,7 +37,7 @@ Key features of `mlr3proba` are
 
 `mlr3proba`  makes use of `distr6` [@packagedistr6] in order to predict probability distributions that represent survival curves. This has a key advantage over other survival packages as it unifies the return type into a single object. 
 
-Related software includes the original `mlr` [@packagemlr] package, which includes functionality for some survival learners. Additionally the `survival` [@packagesurvival] implements some classical survival models. Otherwise support for survival analysis is limited to packages that implement particular models or model classes.
+Related software includes the original `mlr` [@packagemlr] package, which includes functionality for some survival learners. Additionally the `survival` [@packagesurvival] library implements some classical survival models. Otherwise support for survival analysis is limited to packages that implement particular models or model classes.
 
 # Key Use-Cases
 
