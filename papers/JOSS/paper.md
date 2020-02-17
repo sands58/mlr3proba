@@ -26,14 +26,14 @@ bibliography: paper.bib
 
 `mlr3proba` is a machine learning toolkit for making probabilistic predictions within the `mlr3` [@packagemlr3] ecosystem. Currently `mlr3proba` only implements survival analysis through the `Surv` task, however future updates will introduce probabilistic supervised regression, as well as unconditional distribution estimation.
 
-Key features of **mlr3proba** are
+Key features of `mlr3proba` are
 
 * A unified fit/predict model interface to any probabilistic predictive model (frequentist, Bayesian, or other)
 * Pipeline/model composition
 * Task reduction strategies
 * Domain-agnostic evaluation workflows using task specific algorithmic performance measures.
 
-`mlr3proba` is an `R` [@packageR] that implements survival models in a machine learning framework using the `mlr3` [@packagemlr3] family of packages. `mlr3` is the official upgrade to `mlr` [@packagemlr], which makes use of the state-of-the-art R6 [@packageR6] object-oriented paradigm. `mlr3proba` builds on `mlr3` by introducing survival models and measures with a distributional predict type.
+`mlr3proba` is an `R` [@packageR] package that implements survival models in a machine learning framework using the `mlr3` [@packagemlr3] family of packages. `mlr3` is the official upgrade to `mlr` [@packagemlr], which makes use of the state-of-the-art `R6` [@packageR6] object-oriented paradigm. `mlr3proba` builds on `mlr3` by introducing survival models and measures with a distributional predict type.
 
 `mlr3proba`  makes use of `distr6` [@packagedistr6] in order to predict probability distributions that represent survival curves. This has a key advantage over other survival packages as it unifies the return type into a single object. 
 
