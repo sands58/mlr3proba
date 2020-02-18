@@ -157,6 +157,10 @@
 <li>Changed <code>lp</code> in <code>surv.parametric</code> to include the intercept, which is in line with <code><a href="https://rdrr.io/pkg/survival/man/survreg.html">survival::survreg</a></code>. Now <code><a href="https://rdrr.io/r/base/Log.html">exp(pred$lp)</a></code> is equal to the predicted survival time for AFTs</li>
 <li>Moved <code>mboost</code> to <code>suggests</code>
 </li>
+<li>Added <code>response</code> predict type, which predicts the time until event. Currently only supported for AFT models in <code>surv.parametric</code>
+</li>
+<li>Added measures for <code>response</code> predict type: <code>MeasureSurvMAE, MeasureSurvMAESE, MeasureSurvMSE, MeasureSurvMSESE, MeasureSurvRMSE, MeasureSurvRMSESE</code>
+</li>
 </ul>
 </div>
     <div id="mlr3proba-012" class="section level1">
