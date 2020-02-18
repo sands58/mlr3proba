@@ -4,9 +4,10 @@ LearnerDensKDEgk <- R6::R6Class("LearnerDensKDEgk", inherit = LearnerDens,
                     id = id,
                     param_set = ParamSet$new(
                     params = list(
-                    ParamDbl$new(id = "xbandwidth", tags = "train")
+                    ParamDbl$new(id = "xbandwidth", default = 1,  tags = "train"),
+                    ParamDbl$new(id = "xgridsize", default = 100, tags = "train")
                     )),
-                    feature_types =  c("logical", "integer", "numeric", "character", "factor", "ordered"),
+                    feature_types =  c("integer", "numeric", "character", "factor", "ordered"),
                     predict_types = "pdf",
                     packages = c("GenKern", "distr6")
                     )},
@@ -19,12 +20,9 @@ LearnerDensKDEgk <- R6::R6Class("LearnerDensKDEgk", inherit = LearnerDens,
                     pdf = function(x1){}
                     body(pdf) = substitute({
 
-                    # sapply(x1, function(y) GenKern::KernSec(x = data,
-                    #                                         xbandwidth = bw,
-                    #                                         range.x = y)$yden/length(data))
                     invoke(.DensGenKern, x = data, range.x = x1, .args = pars)
 
-                    }) #, list(bw = self$param_set$values$xbandwidth))
+                    })
 
                     Distribution$new(name = "Gaussian KDe",
                                      short_name = "GausKDE",

@@ -22,8 +22,6 @@ LearnerDensPenPD <- R6::R6Class("LearnerDensPenPD", inherit = LearnerDens,
                     train_internal = function(task){
 
                     pars = self$param_set$get_values(tag="train")
-                    family = switch(pars$ckertype,
-                                        Normal = gaussian)
 
                     data = as.data.frame(unlist(task$data(cols = task$target_names)))
 

@@ -6,7 +6,11 @@ LearnerDensKDEnp <- R6::R6Class("LearnerDensKDEnp", inherit = LearnerDens,
                     params = list(
                     ParamDbl$new(id = "bws",  lower = 0, tags = "train"),
                     ParamFct$new("ckertype", levels = c("gaussian", "epanechnikov", "uniform"),
-                                 default = "gaussian", tags = "train"))),
+                                 default = "gaussian", tags = "train"),
+                    ParamDbl$new(id = "ckorder", default = 2, tags = "train"),
+                    ParamFct$new(id = "bwmethod", default= "cv.ml",
+                                 levels = c("cv.ml", "cv.ls"," normal-reference"), tags = "train")
+                    )),
                     feature_types =  c("logical", "integer", "numeric", "character", "factor", "ordered"),
                     predict_types = "pdf",
                     packages = c("np", "distr6")
@@ -23,7 +27,7 @@ LearnerDensKDEnp <- R6::R6Class("LearnerDensKDEnp", inherit = LearnerDens,
                     body(pdf) <- substitute({
 
 
-                    invoke(np::npudens, tdat = data, edat = x1, .args = pars)$dens
+                    invoke(.DensNp, tdat = data, edat = x1,  .args = pars)$dens
 
                     })
 
