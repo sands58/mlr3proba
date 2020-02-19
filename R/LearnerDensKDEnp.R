@@ -1,52 +1,50 @@
 LearnerDensKDEnp <- R6::R6Class("LearnerDensKDEnp", inherit = LearnerDens,
-                                public = list(initialize = function(id = "dens.kdeNP"){
-                                  super$initialize(
-                                    id = id,
-                                    param_set = ParamSet$new(
-                                      params = list(
-                                        ParamFct$new(id = "ckertype", default = "gaussian",
-                                                     levels = c("gaussian", "epanechnikov"),
-                                                     tags = c("train", "predict")),
-                                        ParamDbl$new(id = "bws", tags = c("train","predict"))
-                                      )),
-                                    feature_types =  c("logical", "integer", "numeric", "character", "factor", "ordered"),
-                                    predict_types = "pdf",
-                                    packages = c("np", "distr6")
-                                  )},
-                                  train_internal = function(task){
+                    public = list(initialize = function(id = "dens.kdeNP"){
+                     ps = ParamSet$new(list(
+                          ParamDbl$new(id = "bws", default= 0.1, lower = 0, tags = "train"),
+                          ParamFct$new(id = "ckertype", default = "gaussian",
+                                       levels = c("gaussian", "epanechnikov", "uniform"),
+                                                 tags = "train"),
+                          ParamDbl$new(id = "ckerorder", default= 2, tags = "train")
+                     ))
 
-                                    pars = self$param_set$get_values(tag="train")
+                    ps$values = list(bws = 0.1, ckertype = "gaussian", ckerorder = 2)
+                    super$initialize(
+                    id = id,
+                    param_set = ps,
+                    feature_types =  c("logical", "integer", "numeric", "character", "factor", "ordered"),
+                    predict_types = "pdf",
+                    packages = c("np", "distr6")
+                    )},
 
-                                    data = as.data.frame(unlist(task$data(cols = task$target_names)))
+                    train_internal = function(task){
 
-                                    # pdf <- function(x1){}
-                                    #
-                                    # body(pdf) <- substitute({
+                    data = as.numeric(unlist(task$data(cols = task$target_names)))
+
+                    pdf <- function(x1){}
+
+                    body(pdf) <- substitute({
+
+                    np::npudens(tdat = data, edat = x1, bws = bw, ckertype = ctype, ckeroder = corder)$dens
+
+                    }, list(bw = self$param_set$values$bws,
+                            ctype = self$param_set$values$ckertype,
+                            corder = self$param_set$values$ckertype)
+                    )
 
 
-                                    target = task$truth()
+                    Distribution$new(name = paste("KDE", self$param_set$values$ckertype),
+                    short_name = paste0("KDE",self$param_set$values$ckertype),
+                    pdf= pdf)
+                    },
 
-                                    invoke(np::npudens, dat = data, edat = target, .args = pars)
+                    predict_internal = function(task){
 
-                                    # })
-                                    #
-                                    #
-                                    # Distribution$new(name = paste("Gaussian KDE"),
-                                    #                  short_name = paste0("GausKDE"),
-                                    #                  pdf= pdf)
-                                  },
+                    newdata = as.numeric(unlist(task$data(cols = task$target_names)))
 
-                                  predict_internal = function(task){
+                    PredictionDens$new(task = task, pdf = self$model$pdf(newdata))
 
-                                    pars = self$param_set$get_values(tags = "predict")
+                    }
 
-                                    newdata = as.data.frame(unlist(task$data(cols = task$target_names)))
-
-                                    pdf = as.numeric(invoke(np::npudens,  bws = self$model, edat = newdata, .args = pars)$dens)
-
-                                    PredictionDens$new(task = task, pdf = pdf)
-
-                                  }
-
-                                ))
+                    ))
 
