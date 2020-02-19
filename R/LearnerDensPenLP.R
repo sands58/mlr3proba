@@ -2,8 +2,6 @@ LearnerDensPenLP <- R6::R6Class("LearnerDensPenLP", inherit = LearnerDens,
                     public = list(initialize = function(id = "dens.penLP"){
                     ps = ParamSet$new(
                     params = list(
-                    # ParamDbl$new(id = "lbound", tags = "train"),
-                    # ParamDbl$new(id = "ubound", tags = "train"),
                     ParamDbl$new(id = "maxknots", default = 0, tags = "train"),
                     ParamUty$new(id = "knots",  tags = "train"),
                     ParamDbl$new(id = "nknots", default = 0, tags = "train"),

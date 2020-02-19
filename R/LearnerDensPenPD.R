@@ -16,7 +16,7 @@ LearnerDensPenPD <- R6::R6Class("LearnerDensPenPD", inherit = LearnerDens,
                                  default = "gaussian", tags = "train"))),
                     feature_types =  c("logical", "integer", "numeric", "character", "factor", "ordered"),
                     predict_types = "pdf",
-                    packages = c("np", "distr6")
+                    packages = c("pendensity", "distr6")
                     )},
 
                     train_internal = function(task){
@@ -29,7 +29,7 @@ LearnerDensPenPD <- R6::R6Class("LearnerDensPenPD", inherit = LearnerDens,
 
                     body(pdf) <- substitute({
 
-                    invoke(np::npudens, tdat = data, edat = x1, .args = pars)$dens
+                    invoke(pendensity::pendensity, tdat = data, edat = x1, .args = pars)$dens
 
                     })
 

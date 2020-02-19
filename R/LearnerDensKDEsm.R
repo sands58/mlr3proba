@@ -15,7 +15,7 @@ LearnerDensKDEsm <- R6::R6Class("LearnerDensKDEsm", inherit = LearnerDens,
 
                     pars = self$param_set$get_values(tag="train")
 
-                    data = as.data.frame(unlist(task$data(cols = task$target_names)))
+                    data = as.numeric(unlist(task$data(cols = task$target_names)))
 
                     pdf <- function(x1){}
 
@@ -27,8 +27,8 @@ LearnerDensKDEsm <- R6::R6Class("LearnerDensKDEsm", inherit = LearnerDens,
 
 
                     Distribution$new(name = paste("Gaussian KDE"),
-                                                          short_name = paste0("GausKDE"),
-                                                          pdf = pdf)
+                                     short_name = paste0("GausKDE"),
+                                     pdf = pdf)
                     },
 
                     predict_internal = function(task){
