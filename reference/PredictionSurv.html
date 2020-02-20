@@ -166,7 +166,7 @@ The task_type is set to &quot;surv&quot;." />
 
     
 <pre>PredictionSurv$new(task = NULL, row_ids = task$row_ids, truth = task$truth(),
-                   crank = NULL, distr = NULL, lp = NULL)
+                   crank = NULL, distr = NULL, lp = NULL, response = NULL)
 </pre>
 <ul>
 <li><p><code>task</code> :: <a href='TaskSurv.html'>TaskSurv</a><br />
@@ -189,6 +189,9 @@ Used in measures like <a href='MeasureSurvGraf.html'>surv.graf</a>.</p></li>
 Vector of linear predictor scores. One element for each observation in the test set.
 \(lp = X\beta\) where \(X\) is a matrix of covariates and \(\beta\) is a vector of estimated coefficients.
 Used in discrimination measures like <a href='MeasureSurvHarrellC.html'>surv.harrellC</a>.</p></li>
+<li><p><code>response</code> :: <code><a href='https://rdrr.io/r/base/numeric.html'>numeric()</a></code><br />
+Vector of survival times. One element for each observation in the test set.
+Used in distance measures like <a href='MeasureSurvRMSE.html'>surv.rmse</a>.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="fields"><a class="anchor" href="#fields"></a>Fields</h2>

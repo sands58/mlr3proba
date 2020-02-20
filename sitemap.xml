@@ -40,6 +40,9 @@
     <loc>https://mlr3proba.mlr-org.com/reference/LearnerSurvNelson.html</loc>
   </url>
   <url>
+    <loc>https://mlr3proba.mlr-org.com/reference/LearnerSurvObliqueRSF.html</loc>
+  </url>
+  <url>
     <loc>https://mlr3proba.mlr-org.com/reference/LearnerSurvParametric.html</loc>
   </url>
   <url>
@@ -94,10 +97,28 @@
     <loc>https://mlr3proba.mlr-org.com/reference/MeasureSurvLoglossSE.html</loc>
   </url>
   <url>
+    <loc>https://mlr3proba.mlr-org.com/reference/MeasureSurvMAE.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3proba.mlr-org.com/reference/MeasureSurvMAESE.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3proba.mlr-org.com/reference/MeasureSurvMSE.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3proba.mlr-org.com/reference/MeasureSurvMSESE.html</loc>
+  </url>
+  <url>
     <loc>https://mlr3proba.mlr-org.com/reference/MeasureSurvNagelkR2.html</loc>
   </url>
   <url>
     <loc>https://mlr3proba.mlr-org.com/reference/MeasureSurvOQuigleyR2.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3proba.mlr-org.com/reference/MeasureSurvRMSE.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3proba.mlr-org.com/reference/MeasureSurvRMSESE.html</loc>
   </url>
   <url>
     <loc>https://mlr3proba.mlr-org.com/reference/MeasureSurvSongAUC.html</loc>

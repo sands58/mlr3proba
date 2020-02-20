@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generalized Boosting Regression Modeling Survival Learner — LearnerSurvGBM • mlr3proba</title>
+<title>Mean Absolute Error Survival Measure — MeasureSurvMAE • mlr3proba</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -43,14 +43,15 @@
 
 
 
-<meta property="og:title" content="Generalized Boosting Regression Modeling Survival Learner — LearnerSurvGBM" />
-<meta property="og:description" content="Calls gbm::gbm().
-lp is predicted by gbm::predict.gbm()
-crank is identical to lp
+<meta property="og:title" content="Mean Absolute Error Survival Measure — MeasureSurvMAE" />
+<meta property="og:description" content="
 
 
-Parameter distribution is set to coxph as this is the only distribution implemented
-in gbm::gbm() for survival analysis; parameter keep.data is set to FALSE for efficiency." />
+Calculates the mean absolute error (MAE).
+The MAE is defined by
+$$\frac{1}{n} \sum |t - \hat{t}|$$
+where \(t\) is the true value and \(\hat{t}\) is the prediction.
+Censored observations in the test set are ignored." />
 <meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -152,32 +153,33 @@ in gbm::gbm() for survival analysis; parameter keep.data is set to FALSE for eff
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generalized Boosting Regression Modeling Survival Learner</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3proba/blob/master/R/LearnerSurvGBM.R'><code>R/LearnerSurvGBM.R</code></a></small>
-    <div class="hidden name"><code>LearnerSurvGBM.Rd</code></div>
+    <h1>Mean Absolute Error Survival Measure</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3proba/blob/master/R/MeasureSurvMAE.R'><code>R/MeasureSurvMAE.R</code></a></small>
+    <div class="hidden name"><code>MeasureSurvMAE.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Calls <code><a href='https://rdrr.io/pkg/gbm/man/gbm.html'>gbm::gbm()</a></code>.</p><ul>
-<li><p>lp is predicted by <code><a href='https://rdrr.io/pkg/gbm/man/predict.gbm.html'>gbm::predict.gbm()</a></code></p></li>
-<li><p><code>crank</code> is identical to <code>lp</code></p></li>
-</ul>
+    
 
-<p>Parameter <code>distribution</code> is set to <code>coxph</code> as this is the only distribution implemented
-in <code><a href='https://rdrr.io/pkg/gbm/man/gbm.html'>gbm::gbm()</a></code> for survival analysis; parameter <code>keep.data</code> is set to <code>FALSE</code> for efficiency.</p>
+
+<p>Calculates the mean absolute error (MAE).</p>
+<p>The MAE is defined by
+$$\frac{1}{n} \sum |t - \hat{t}|$$
+where \(t\) is the true value and \(\hat{t}\) is the prediction.</p>
+<p>Censored observations in the test set are ignored.</p>
     </div>
 
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p><code><a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6::R6Class()</a></code> inheriting from <a href='LearnerSurv.html'>LearnerSurv</a>.</p>
+    <p><code><a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6::R6Class()</a></code> inheriting from <a href='MeasureSurv.html'>MeasureSurv</a>.</p>
     <h2 class="hasAnchor" id="construction"><a class="anchor" href="#construction"></a>Construction</h2>
 
     
-<pre>LearnerSurvGBM$new()
-mlr_learners$get("surv.gbm")
-lrn("surv.gbm")
+<pre>MeasureSurvMAE$new()
+mlr_measures$get("surv.mae")
+msr("surv.mae")
 </pre>
 
     <h2 class="hasAnchor" id="meta-information"><a class="anchor" href="#meta-information"></a>Meta Information</h2>
@@ -185,68 +187,52 @@ lrn("surv.gbm")
     
 
 <ul>
-<li><p>Type: "surv"</p></li>
-<li><p>Predict Types: <code>crank, lp</code></p></li>
-<li><p>Feature Types: <code>integer, numeric, factor, ordered</code></p></li>
-<li><p>Packages: <a href='https://CRAN.R-project.org/package=gbm'><span class="pkg">gbm</span></a></p></li>
+<li><p>Type: <code>"surv"</code></p></li>
+<li><p>Range: \([0, \infty)\)</p></li>
+<li><p>Minimize: <code>TRUE</code></p></li>
+<li><p>Required prediction: <code>response</code></p></li>
 </ul>
 
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+    <h2 class="hasAnchor" id="fields"><a class="anchor" href="#fields"></a>Fields</h2>
 
-    <p>Freund Y, Schapire RE (1997).
-&#8220;A Decision-Theoretic Generalization of On-Line Learning and an Application to Boosting.&#8221;
-<em>Journal of Computer and System Sciences</em>, <b>55</b>(1), 119--139.
-doi: <a href='https://doi.org/10.1006/jcss.1997.1504'>10.1006/jcss.1997.1504</a>
-.</p>
-<p>Ridgeway G (1999).
-&#8220;The state of boosting.&#8221;
-<em>Computing Science and Statistics</em>, 172--181.</p>
-<p>Friedman J, Hastie T, Tibshirani R (2000).
-&#8220;Additive logistic regression: a statistical view of boosting (With discussion and a rejoinder by the authors).&#8221;
-<em>The Annals of Statistics</em>, <b>28</b>(2), 337--407.
-doi: <a href='https://doi.org/10.1214/aos/1016218223'>10.1214/aos/1016218223</a>
-.</p>
-<p>Friedman JH (2001).
-&#8220;Greedy Function Approximation: A Gradient Boosting Machine.&#8221;
-<em>The Annals of Statistics</em>, <b>29</b>(5), 1189--1232.
-<a href='http://www.jstor.org/stable/2699986'>http://www.jstor.org/stable/2699986</a>.</p>
-<p>Friedman JH (2001).
-&#8220;Greedy Function Approximation: A Gradient Boosting Machine.&#8221;
-<em>The Annals of Statistics</em>, <b>29</b>(5), 1189--1232.
-<a href='http://www.jstor.org/stable/2699986'>http://www.jstor.org/stable/2699986</a>.</p>
-<p>Friedman JH (2002).
-&#8220;Stochastic gradient boosting.&#8221;
-<em>Computational Statistics &amp; Data Analysis</em>, <b>38</b>(4), 367--378.
-doi: <a href='https://doi.org/10.1016/s0167-9473(01)00065-2'>10.1016/s0167-9473(01)00065-2</a>
-.</p>
-<p>Kriegler B (2007).
-<em>Cost-Sensitive Stochastic Gradient Boosting Within a Quantitative Regression Framework</em>.
-Ph.D. thesis, University of California at Los Angeles.
-<a href='https://dl.acm.org/citation.cfm?id=1354603'>https://dl.acm.org/citation.cfm?id=1354603</a>.</p>
-<p>Burges CJ (2010).
-&#8220;From RankNet to LambdaRank to LambdaMART: An Overview.&#8221;
-Technical Report MSR-TR-2010-82, Microsoft Research.
-<a href='https://www.microsoft.com/en-us/research/publication/from-ranknet-to-lambdarank-to-lambdamart-an-overview/'>https://www.microsoft.com/en-us/research/publication/from-ranknet-to-lambdarank-to-lambdamart-an-overview/</a>.</p>
+    
+
+<p>See <a href='MeasureSurv.html'>MeasureSurv</a>, as well as all variables passed to the constructor.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other survival learners: 
-<code><a href='LearnerSurvBlackboost.html'>LearnerSurvBlackboost</a></code>,
-<code><a href='LearnerSurvCVGlmnet.html'>LearnerSurvCVGlmnet</a></code>,
-<code><a href='LearnerSurvCoxPH.html'>LearnerSurvCoxPH</a></code>,
-<code><a href='LearnerSurvFlexible.html'>LearnerSurvFlexible</a></code>,
-<code><a href='LearnerSurvGamboost.html'>LearnerSurvGamboost</a></code>,
-<code><a href='LearnerSurvGlmboost.html'>LearnerSurvGlmboost</a></code>,
-<code><a href='LearnerSurvGlmnet.html'>LearnerSurvGlmnet</a></code>,
-<code><a href='LearnerSurvKaplan.html'>LearnerSurvKaplan</a></code>,
-<code><a href='LearnerSurvMboost.html'>LearnerSurvMboost</a></code>,
-<code><a href='LearnerSurvNelson.html'>LearnerSurvNelson</a></code>,
-<code><a href='LearnerSurvObliqueRSF.html'>LearnerSurvObliqueRSF</a></code>,
-<code><a href='LearnerSurvParametric.html'>LearnerSurvParametric</a></code>,
-<code><a href='LearnerSurvPenalized.html'>LearnerSurvPenalized</a></code>,
-<code><a href='LearnerSurvRandomForestSRC.html'>LearnerSurvRandomForestSRC</a></code>,
-<code><a href='LearnerSurvRanger.html'>LearnerSurvRanger</a></code>,
-<code><a href='LearnerSurvRpart.html'>LearnerSurvRpart</a></code>,
-<code><a href='LearnerSurvSVM.html'>LearnerSurvSVM</a></code></p></div>
+    <div class='dont-index'><p>Other survival measures: 
+<code><a href='MeasureSurvBeggC.html'>MeasureSurvBeggC</a></code>,
+<code><a href='MeasureSurvChamblessAUC.html'>MeasureSurvChamblessAUC</a></code>,
+<code><a href='MeasureSurvGonenC.html'>MeasureSurvGonenC</a></code>,
+<code><a href='MeasureSurvGrafSE.html'>MeasureSurvGrafSE</a></code>,
+<code><a href='MeasureSurvGraf.html'>MeasureSurvGraf</a></code>,
+<code><a href='MeasureSurvHarrellC.html'>MeasureSurvHarrellC</a></code>,
+<code><a href='MeasureSurvHungAUC.html'>MeasureSurvHungAUC</a></code>,
+<code><a href='MeasureSurvIntLoglossSE.html'>MeasureSurvIntLoglossSE</a></code>,
+<code><a href='MeasureSurvIntLogloss.html'>MeasureSurvIntLogloss</a></code>,
+<code><a href='MeasureSurvLoglossSE.html'>MeasureSurvLoglossSE</a></code>,
+<code><a href='MeasureSurvLogloss.html'>MeasureSurvLogloss</a></code>,
+<code><a href='MeasureSurvMAESE.html'>MeasureSurvMAESE</a></code>,
+<code><a href='MeasureSurvMSESE.html'>MeasureSurvMSESE</a></code>,
+<code><a href='MeasureSurvMSE.html'>MeasureSurvMSE</a></code>,
+<code><a href='MeasureSurvNagelkR2.html'>MeasureSurvNagelkR2</a></code>,
+<code><a href='MeasureSurvOQuigleyR2.html'>MeasureSurvOQuigleyR2</a></code>,
+<code><a href='MeasureSurvRMSESE.html'>MeasureSurvRMSESE</a></code>,
+<code><a href='MeasureSurvRMSE.html'>MeasureSurvRMSE</a></code>,
+<code><a href='MeasureSurvSongAUC.html'>MeasureSurvSongAUC</a></code>,
+<code><a href='MeasureSurvSongTNR.html'>MeasureSurvSongTNR</a></code>,
+<code><a href='MeasureSurvSongTPR.html'>MeasureSurvSongTPR</a></code>,
+<code><a href='MeasureSurvUnoAUC.html'>MeasureSurvUnoAUC</a></code>,
+<code><a href='MeasureSurvUnoC.html'>MeasureSurvUnoC</a></code>,
+<code><a href='MeasureSurvUnoTNR.html'>MeasureSurvUnoTNR</a></code>,
+<code><a href='MeasureSurvUnoTPR.html'>MeasureSurvUnoTPR</a></code>,
+<code><a href='MeasureSurvXuR2.html'>MeasureSurvXuR2</a></code></p>
+<p>Other response survival measures: 
+<code><a href='MeasureSurvMAESE.html'>MeasureSurvMAESE</a></code>,
+<code><a href='MeasureSurvMSESE.html'>MeasureSurvMSESE</a></code>,
+<code><a href='MeasureSurvMSE.html'>MeasureSurvMSE</a></code>,
+<code><a href='MeasureSurvRMSESE.html'>MeasureSurvRMSESE</a></code>,
+<code><a href='MeasureSurvRMSE.html'>MeasureSurvRMSE</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -255,7 +241,7 @@ Technical Report MSR-TR-2010-82, Microsoft Research.
       <li><a href="#format">Format</a></li>
       <li><a href="#construction">Construction</a></li>
       <li><a href="#meta-information">Meta Information</a></li>
-      <li><a href="#references">References</a></li>
+      <li><a href="#fields">Fields</a></li>
       <li><a href="#see-also">See also</a></li>
     </ul>
 
