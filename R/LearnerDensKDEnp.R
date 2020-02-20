@@ -1,7 +1,7 @@
 LearnerDensKDEnp <- R6::R6Class("LearnerDensKDEnp", inherit = LearnerDens,
                     public = list(initialize = function(id = "dens.kdeNP"){
                      ps = ParamSet$new(list(
-                          ParamDbl$new(id = "bws", default= 0.1, lower = 0, tags = "train"),
+                          ParamDbl$new(id = "bws", default= 1, lower = 0, tags = "train"),
                           ParamFct$new(id = "ckertype", default = "gaussian",
                                        levels = c("gaussian", "epanechnikov", "uniform"),
                                                  tags = "train"),
