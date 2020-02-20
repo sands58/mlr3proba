@@ -27,7 +27,7 @@ LearnerDensKDEkd <- R6::R6Class("LearnerDensKDEkd", inherit = LearnerDens,
                     })
 
 
-                    Distribution$new(name = paste("KDE",self$param_set$values$kernel),
+                    Distribution$new(name = paste("KDE",self$param_set$values$type_kernel),
                     pdf = pdf)
                     },
 
