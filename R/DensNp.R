@@ -1,14 +1,21 @@
 .DensNp <- function(tdat, edat, bws, ckertype = "gaussian", ckeorder = 2, bwmethod = "cv.ml"){
 
-  library(np)
+  if(missing(bws)){
 
-  bw <- if(missing(bws)){
+    bws <- np::npudensbw(dat = tdat,  ckertype = ckertype, ckeorder =ckeorder,
+                          bwmethod=bwmethod)$bw
+    return(np::npudens(bws = bws, tdat = tdat, edat = edat, ckertype = ckertype, ckeorder =ckeorder)$dens)
 
-    np::npudensbw(dat = tdat, ckertype = ckertype, ckeorder =ckeorder,
-                          bwmethod=bwmethod, bandwidth.compute = TRUE)$bw
-  } else{bws}
+  } else{
 
-  return(np::npudens(bws = bw, tdat = tdat, edat = edat, ckertype = ckertype, ckeorder =ckeorder))
+    bws <- np::npudensbw(dat = tdat,  bws = bws,
+                         bandwidth.compute = FALSE)$bw
+    return(np::npudens(bws = bws, tdat = tdat, edat = edat, ckertype = ckertype, ckeorder =ckeorder)$dens)
+  }
+
+
+
+
 
 
 }

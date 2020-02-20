@@ -74,11 +74,9 @@ register_mlr3 = function() {
    x$add("dens.kdePD", LearnerDensKDEpd)
    x$add("dens.kdeKD", LearnerDensKDEkd)
    x$add("dens.kdeGK", LearnerDensKDEgk)
-   # x$add("dens.kdeKernSmooth", LearnerDensKDEKernSmooth) -- to be removed
    x$add("dens.penLP", LearnerDensPenLP)
    x$add("dens.penGSS", LearnerDensPenGss)
    x$add("dens.logLF", LearnerDensLogLocfit)
-   x$add("dens.kdeSTATS", LearnerDensKDEstats)
    # x$add("probreg.gaussian", LearnerProbregGaussian)
 
    x$add("surv.coxph", LearnerSurvCoxPH)
