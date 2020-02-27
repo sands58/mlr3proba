@@ -4,7 +4,9 @@ LearnerDensPenGss <- R6::R6Class("LearnerDensPenGss", inherit = LearnerDens,
       id = id,
       param_set = ParamSet$new(
         params = list(
-          ParamUty$new(id = "data", default =list(), tags = "train"),
+          ParamUty$new(id = "type", tags = "train"),
+          ParamUty$new(id = "subset", default = NULL,  tags = "train"),
+          ParamUty$new(id = "data", tags = "train"),
           ParamDbl$new(id = "alpha", default =1.4, tags = "train"),
           ParamUty$new(id = "weights", default =NULL, tags = "train"),
           ParamUty$new(id = "na.action", default =na.omit, tags = "train"),
@@ -16,9 +18,8 @@ LearnerDensPenGss <- R6::R6Class("LearnerDensPenGss", inherit = LearnerDens,
           ParamUty$new(id = "bias", default =NULL, tags = "train"),
           ParamDbl$new(id = "prec", default = 1e-7, tags = "train"),
           ParamDbl$new(id = "maxiter", default = 30, tags = "train"),
-          ParamLgl$new(id = "skip.iter", default = FALSE, tags = "train"),
-          ParamUty$new(id = "object", tags = "predict")
-        )),
+          ParamLgl$new(id = "skip.iter", default = FALSE, tags = "train")
+         )),
       feature_types =  c("logical", "integer", "numeric", "character", "factor", "ordered"),
       predict_types = "pdf",
       packages = c("gss", "distr6")
@@ -30,7 +31,19 @@ LearnerDensPenGss <- R6::R6Class("LearnerDensPenGss", inherit = LearnerDens,
 
       data = as.numeric(unlist(task$data(cols = task$target_names)))
 
-      invoke(gss::ssden, formula = ~data, .args = pars)
+      pdf <- function(x1){}
+      body(pdf) <- substitute({
+
+      invoke(.DensGss, dat = data, test = x1, .args = pars)
+
+      })
+
+
+      Distribution$new(name = "gss Penalized Density",
+                       short_name = "gssPenDens",
+                       pdf = pdf)
+
+
 
     },
 
@@ -38,11 +51,11 @@ LearnerDensPenGss <- R6::R6Class("LearnerDensPenGss", inherit = LearnerDens,
 
       newdata = as.numeric(unlist(task$data(cols = task$target_names)))
 
-      pars = self$param_set$get_values(tags = "predict")
+      # pars = self$param_set$get_values(tags = "predict")
 
-      pdf  = invoke(gss::dssden, x = newdata, object = self$model)
+      # pdf  = invoke(gss::dssden, x = newdata, object = self$model)
 
-      PredictionDens$new(task = task, pdf = pdf)
+      PredictionDens$new(task = task, pdf = self$model$pdf(newdata))
 
     }
   ))

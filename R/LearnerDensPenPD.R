@@ -5,15 +5,16 @@ LearnerDensPenPD <- R6::R6Class("LearnerDensPenPD", inherit = LearnerDens,
                     param_set = ParamSet$new(
                     params = list(
                     ParamDbl$new(id = "no.base",  default= 41, tags = "train"),
-                    ParamDbl$new(id = "max.iter", default = 20, tags = "train"),
+                    ParamDbl$new(id = "max.iter", default = 1, tags = "train"),
                     ParamDbl$new(id = "lambda0", default = 500, tags = "train"),
                     ParamDbl$new(id = "q", default = 3, tags = "train"),
-                    ParamUty$new(id = "sort", default = TRUE, tags = "train"),
-                    ParamDbl$new(id = "with.border", default = NULL, tags = "train"),
-                    ParamDbl$new(id = "m", default = q, tags = "train"),
+                    ParamLgl$new(id = "sort", default = TRUE, tags = "train"),
+                    ParamUty$new(id = "with.border", default = NULL, tags = "train"),
+                    ParamDbl$new(id = "m", default = 3, tags = "train"),
                     ParamDbl$new(id = "eps", default = 0.01, tags = "train"),
-                    ParamFct$new("basee", levels = c("gaussian", "bspline"),
-                                 default = "gaussian", tags = "train"))),
+                    ParamFct$new(id = "base", levels = c("gaussian", "bspline"),
+                                 default = "gaussian", tags = "train")
+                    )),
                     feature_types =  c("logical", "integer", "numeric", "character", "factor", "ordered"),
                     predict_types = "pdf",
                     packages = c("pendensity", "distr6")
@@ -23,18 +24,20 @@ LearnerDensPenPD <- R6::R6Class("LearnerDensPenPD", inherit = LearnerDens,
 
                     pars = self$param_set$get_values(tag="train")
 
-                    data = as.data.frame(unlist(task$data(cols = task$target_names)))
+                    # data = as.data.frame(unlist(task$data(cols = task$target_names)))
+                    data =  data = as.numeric(unlist(task$data(cols = task$target_names)))
 
                     pdf <- function(x1){}
 
                     body(pdf) <- substitute({
 
-                    invoke(pendensity::pendensity, tdat = data, edat = x1, .args = pars)$dens
+                    invoke(.PDDens, dat = data, test = x1, .args = pars)$dens
 
                     })
 
-                    Distribution$new(name = paste("KDE", self$param_set$values$ckertype),
-                                                     pdf = pdf)
+                    Distribution$new(name = paste("Pendensity Density", self$param_set$values$base),
+                                     short_name = paste0(self$param_set$values$base),
+                                     pdf = pdf)
                     },
 
                     predict_internal = function(task){

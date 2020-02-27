@@ -24,8 +24,8 @@ LearnerDensKDEgk <- R6::R6Class("LearnerDensKDEgk", inherit = LearnerDens,
 
       })
 
-      Distribution$new(name = "Gaussian KDe",
-                       short_name = "GausKDE",
+      Distribution$new(name = "GenKern KDE Gaussian",
+                       short_name = "GenKernKDEGaus",
                        pdf = pdf)
 
 

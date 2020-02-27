@@ -40,8 +40,8 @@ LearnerDensKDEks <- R6::R6Class("LearnerDensKDEks", inherit = LearnerDens,
 
         })
 
-        Distribution$new(name = "KS KDE Gaussian",
-                         short_name = "KsKDEGaus",
+        Distribution$new(name = "ks Density Gaussian",
+                         short_name = "ksDensGaus",
                          pdf = pdf)
         },
 

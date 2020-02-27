@@ -2,6 +2,11 @@ LearnerDensKDEpd <- R6::R6Class("LearnerDensKDEpd", inherit = LearnerDens,
   public = list(initialize = function(id = "dens.kdePD"){
     super$initialize(
       id = id,
+      param_set = ParamSet$new(
+        params = list(
+          ParamUty$new(id = "na.rm", default = FALSE, tags = "train"),
+          ParamDbl$new(id = "nout", default =201, tags = "train")
+        )),
       feature_types =  c("logical", "integer", "numeric", "character", "factor", "ordered"),
       predict_types = "pdf",
       packages = c("plugdensity", "distr6")
@@ -19,8 +24,8 @@ LearnerDensKDEpd <- R6::R6Class("LearnerDensKDEpd", inherit = LearnerDens,
       })
 
 
-      Distribution$new(name = paste("Gaussian KDE"),
-                       short_name = paste0("GausKDE"),
+      Distribution$new(name = "plugdensity KDE",
+                       short_name = "plugdensityKDE",
                        pdf = pdf)
     },
 

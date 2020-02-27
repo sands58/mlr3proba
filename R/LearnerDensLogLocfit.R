@@ -35,8 +35,8 @@ LearnerDensLogLocfit <- R6::R6Class("LearnerDensLogLocfit", inherit = LearnerDen
 
       })
 
-      Distribution$new(name = "Log Density",
-                       short_name = "LogDens",
+      Distribution$new(name = paste("LocFit Density", self$param_set$values$window),
+                       short_name = paste0("LocFitDens",self$param_set$values$window),
                        pdf = pdf)
     },
 
