@@ -42,7 +42,5 @@ LearnerDensKDE$set("public", "train_internal", function(task){
 
 })
 LearnerDensKDE$set("public", "predict_internal", function(task){
-  newdata = task$truth()
-  prob = self$model$pdf(newdata)
-  PredictionDens$new(task = task, pdf = prob)
+  PredictionDens$new(task = task, pdf = self$model$pdf(task$truth()))
 })

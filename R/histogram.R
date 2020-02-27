@@ -24,7 +24,7 @@
   list(distr = distr6::Distribution$new(name = "Histogram Estimator",
                            short_name = "Histogram",
                            pdf = pdf, cdf = cdf,
-                           support = distr6::Interval$new(min(fit$breaks), max(fit$breaks))),
+                           support = set6::Interval$new(min(fit$breaks), max(fit$breaks))),
        hist = fit)
 }
 
