@@ -9,8 +9,12 @@ LearnerDensLogLocfit <- R6::R6Class("LearnerDensLogLocfit", inherit = LearnerDen
                                                  "optcosine"),
                        default = "gaussian", tags = "train"),
           ParamDbl$new(id = "width", tags = "train"),
+          ParamDbl$new(id = "from", tags = "train"),
+          ParamDbl$new(id = "to", tags = "train"),
+          ParamUty$new(id = "cut", default = 0L, tags = "train"),
           ParamDbl$new(id = "deg", default = 0, tags = "train"),
-          ParamUty$new(id = "family", default = "density", tags = "train")
+          ParamUty$new(id = "family", default = "density", tags = "train"),
+          ParamUty$new(id = "link", default = "ident", tags = "train")
         )),
       feature_types =  c("logical", "integer", "numeric", "character", "factor", "ordered"),
       predict_types = "pdf",

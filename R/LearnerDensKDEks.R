@@ -4,10 +4,23 @@ LearnerDensKDEks <- R6::R6Class("LearnerDensKDEks", inherit = LearnerDens,
         id = id,
         param_set = ParamSet$new(
         params = list(
-        ParamDbl$new(id = "h",  tags = "train"),
+        ParamDbl$new(id = "h", lower = 0,   tags = "train"),
         ParamUty$new(id = "H", tags = "train"),
+        ParamDbl$new(id = "gridsize", tags = "train"),
+        ParamUty$new(id = "gridtype", tags = "train"),
         ParamDbl$new(id = "xmin", tags = "train"),
-        ParamDbl$new(id = "xmax", tags = "train"))),
+        ParamDbl$new(id = "xmax", tags = "train"),
+        ParamDbl$new(id = "supp", default =3.7, tags= "train"),
+        ParamDbl$new(id = "binned", tags = "train"),
+        ParamDbl$new(id = "bgridsize", tags = "train"),
+        ParamLgl$new(id = "positive", default = FALSE, tags = "train"),
+        ParamUty$new(id = "adj.positive", tags = "train"),
+        ParamDbl$new(id = "w", tags = "train"),
+        ParamLgl$new(id = "compute.cont", default =TRUE, tags= "train"),
+        ParamLgl$new(id = "approx.cont", default =TRUE, tags = "train"),
+        ParamLgl$new(id = "unit.interval", default=FALSE, tags = "train"),
+        ParamLgl$new(id = "verbose", default =FALSE, tags = "train")
+        )),
         feature_types =  c("logical", "integer", "numeric", "character", "factor", "ordered"),
         predict_types = "pdf",
         packages = c("ks", "distr6")
@@ -27,8 +40,8 @@ LearnerDensKDEks <- R6::R6Class("LearnerDensKDEks", inherit = LearnerDens,
 
         })
 
-        Distribution$new(name = "Gaussian KDE",
-                         short_name = "GausKDE",
+        Distribution$new(name = "KS KDE Gaussian",
+                         short_name = "KsKDEGaus",
                          pdf = pdf)
         },
 
