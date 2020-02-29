@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Survival Learner — LearnerSurv • mlr3proba</title>
+<title>Prediction Object for Density — PredictionDens • mlr3proba</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -43,9 +43,9 @@
 
 
 
-<meta property="og:title" content="Survival Learner — LearnerSurv" />
-<meta property="og:description" content="This Learner specializes mlr3::Learner for survival problems.
-Predefined learners can be found in the mlr3misc::Dictionary mlr3::mlr_learners." />
+<meta property="og:title" content="Prediction Object for Density — PredictionDens" />
+<meta property="og:description" content="This object stores the predictions returned by a learner of class LearnerDens.
+The task_type is set to &quot;dens&quot;." />
 <meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -147,66 +147,63 @@ Predefined learners can be found in the mlr3misc::Dictionary mlr3::mlr_learners.
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Survival Learner</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3proba/blob/master/R/LearnerSurv.R'><code>R/LearnerSurv.R</code></a></small>
-    <div class="hidden name"><code>LearnerSurv.Rd</code></div>
+    <h1>Prediction Object for Density</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3proba/blob/master/R/PredictionDens.R'><code>R/PredictionDens.R</code></a></small>
+    <div class="hidden name"><code>PredictionDens.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This Learner specializes <a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a> for survival problems.
-Predefined learners can be found in the <a href='https://mlr3misc.mlr-org.com/reference/Dictionary.html'>mlr3misc::Dictionary</a> <a href='https://mlr3.mlr-org.com/reference/mlr_learners.html'>mlr3::mlr_learners</a>.</p>
+    <p>This object stores the predictions returned by a learner of class <a href='LearnerDens.html'>LearnerDens</a>.</p>
+<p>The <code>task_type</code> is set to <code>"dens"</code>.</p>
     </div>
 
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p><a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6::R6Class</a> object inheriting from <a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a>.</p>
+    <p><a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6::R6Class</a> object inheriting from <a href='https://mlr3.mlr-org.com/reference/Prediction.html'>mlr3::Prediction</a>.</p>
     <h2 class="hasAnchor" id="construction"><a class="anchor" href="#construction"></a>Construction</h2>
 
     
-<pre>LearnerSurv$new(id, param_set = ParamSet$new(),
-     predict_types = character(),
-     feature_types = character(), properties = character(),
-     packages = character())
+<pre>p = PredictionDens$new(task = NULL, row_ids = task$row_ids, truth = task$truth(),
+pdf = pdf, cdf = cdf)
 </pre>
+<ul>
+<li><p><code>task</code> :: <a href='TaskDens.html'>TaskDens</a><br />
+Task, used to extract defaults for <code>row_ids</code> and <code>truth</code>.</p></li>
+<li><p><code>row_ids</code> :: (<code><a href='https://rdrr.io/r/base/integer.html'>integer()</a></code> | <code><a href='https://rdrr.io/r/base/character.html'>character()</a></code>)<br />
+Row ids of the task. Per default, these are extracted from the <code>task</code>.</p></li>
+<li><p><code>truth</code> :: <code><a href='https://rdrr.io/r/base/numeric.html'>numeric()</a></code><br />
+Observed sample. Per default, these are extracted from the <code>task</code>.</p></li>
+<li><p><code>pdf</code> :: <code><a href='https://rdrr.io/r/base/numeric.html'>numeric()</a></code><br />
+Probability density function evaluated at the given points in the test set.</p></li>
+<li><p><code>cdf</code> :: <code><a href='https://rdrr.io/r/base/numeric.html'>numeric()</a></code><br />
+Cumulative distribution function evaluated at the given points in the test set.</p></li>
+</ul>
 
-<p>For a description of the arguments, see <a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a>.
-<code>task_type</code> is set to <code>"surv"</code>.
-Possible values for <code>predict_type</code> are <code>"distr"</code>, <code>"lp"</code>, <code>"crank"</code>, and <code>"response"</code>.</p>
     <h2 class="hasAnchor" id="fields"><a class="anchor" href="#fields"></a>Fields</h2>
 
     
 
-<p>See <a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a>.</p>
-    <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
-
-    
-
-<p>See <a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a>.</p>
+<p>See <a href='https://mlr3.mlr-org.com/reference/Prediction.html'>mlr3::Prediction</a>.</p>
+<p>The field <code>task_type</code> is set to <code>"dens"</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other Learner: 
-<code><a href='LearnerDens.html'>LearnerDens</a></code></p></div>
+    <div class='dont-index'><p>Other Prediction: 
+<code><a href='PredictionSurv.html'>PredictionSurv</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mlr3</span>)
-<span class='no'>ids</span> <span class='kw'>=</span> <span class='no'>mlr_learners</span>$<span class='fu'>keys</span>(<span class='st'>"^surv"</span>)
-<span class='no'>ids</span></div><div class='output co'>#&gt;  [1] "surv.blackboost"      "surv.coxph"           "surv.cvglmnet"       
-#&gt;  [4] "surv.flexible"        "surv.gamboost"        "surv.gbm"            
-#&gt;  [7] "surv.glmboost"        "surv.glmnet"          "surv.kaplan"         
-#&gt; [10] "surv.mboost"          "surv.nelson"          "surv.obliqueRSF"     
-#&gt; [13] "surv.parametric"      "surv.penalized"       "surv.randomForestSRC"
-#&gt; [16] "surv.ranger"          "surv.rpart"           "surv.svm"            </div><div class='input'>
-<span class='co'># get a specific learner from mlr_learners:</span>
-<span class='no'>lrn</span> <span class='kw'>=</span> <span class='no'>mlr_learners</span>$<span class='fu'><a href='https://rdrr.io/r/base/get.html'>get</a></span>(<span class='st'>"surv.rpart"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>lrn</span>)</div><div class='output co'>#&gt; &lt;LearnerSurvRpart:surv.rpart&gt;
-#&gt; * Model: -
-#&gt; * Parameters: xval=0
-#&gt; * Packages: rpart, distr6, survival
-#&gt; * Predict Type: crank
-#&gt; * Feature types: logical, integer, numeric, character, factor, ordered
-#&gt; * Properties: importance, missings, selected_features, weights</div></pre>
+<span class='no'>task</span> <span class='kw'>=</span> <span class='no'>mlr_tasks</span>$<span class='fu'><a href='https://rdrr.io/r/base/get.html'>get</a></span>(<span class='st'>"precip"</span>)
+<span class='no'>learner</span> <span class='kw'>=</span> <span class='no'>mlr_learners</span>$<span class='fu'><a href='https://rdrr.io/r/base/get.html'>get</a></span>(<span class='st'>"dens.hist"</span>)
+<span class='no'>p</span> <span class='kw'>=</span> <span class='no'>learner</span>$<span class='fu'>train</span>(<span class='no'>task</span>)$<span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span>(<span class='no'>task</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'><a href='https://mlr3.mlr-org.com/reference/as.data.table.html'>as.data.table</a></span>(<span class='no'>p</span>))</div><div class='output co'>#&gt;    row_id truth         pdf       cdf
+#&gt; 1:      1  67.0 0.001428571 0.9957143
+#&gt; 2:      2  54.7 0.007142857 0.9478571
+#&gt; 3:      3   7.0 0.005714286 0.0400000
+#&gt; 4:      4  48.5 0.030000000 0.8692857
+#&gt; 5:      5  14.0 0.012857143 0.1085714
+#&gt; 6:      6  17.2 0.012857143 0.1497143</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -214,7 +211,6 @@ Possible values for <code>predict_type</code> are <code>"distr"</code>, <code>"l
       <li><a href="#format">Format</a></li>
       <li><a href="#construction">Construction</a></li>
       <li><a href="#fields">Fields</a></li>
-      <li><a href="#methods">Methods</a></li>
       <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>

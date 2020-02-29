@@ -4,6 +4,12 @@
     <loc>https://mlr3proba.mlr-org.com/index.html</loc>
   </url>
   <url>
+    <loc>https://mlr3proba.mlr-org.com/reference/LearnerDens.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3proba.mlr-org.com/reference/LearnerDensHistogram.html</loc>
+  </url>
+  <url>
     <loc>https://mlr3proba.mlr-org.com/reference/LearnerSurv.html</loc>
   </url>
   <url>
@@ -59,6 +65,12 @@
   </url>
   <url>
     <loc>https://mlr3proba.mlr-org.com/reference/LearnerSurvSVM.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3proba.mlr-org.com/reference/MeasureDens.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3proba.mlr-org.com/reference/MeasureDensLogloss.html</loc>
   </url>
   <url>
     <loc>https://mlr3proba.mlr-org.com/reference/MeasureSurv.html</loc>
@@ -151,7 +163,16 @@
     <loc>https://mlr3proba.mlr-org.com/reference/PipeOpDistrCompositor.html</loc>
   </url>
   <url>
+    <loc>https://mlr3proba.mlr-org.com/reference/PredictionDens.html</loc>
+  </url>
+  <url>
     <loc>https://mlr3proba.mlr-org.com/reference/PredictionSurv.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3proba.mlr-org.com/reference/TaskDens.html</loc>
+  </url>
+  <url>
+    <loc>https://mlr3proba.mlr-org.com/reference/TaskGeneratorSimdens.html</loc>
   </url>
   <url>
     <loc>https://mlr3proba.mlr-org.com/reference/TaskGeneratorSimsurv.html</loc>
