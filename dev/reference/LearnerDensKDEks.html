@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>mlr3proba: Probabilistic Supervised Learning for 'mlr3' — mlr3proba-package • mlr3proba</title>
+<title>KS Kernel Density Estimator — LearnerDensKDEks • mlr3proba</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -43,12 +43,8 @@
 
 
 
-<meta property="og:title" content="mlr3proba: Probabilistic Supervised Learning for 'mlr3' — mlr3proba-package" />
-<meta property="og:description" content="
-Provides extensions for probabilistic supervised
-    learning for 'mlr3'.  This includes extending the regression task to
-    probabilistic and interval regression, adding a survival task, and
-    other specialized models, predictions, and measures." />
+<meta property="og:title" content="KS Kernel Density Estimator — LearnerDensKDEks" />
+<meta property="og:description" content="Calls ks::kde() and the result is coerced to a distr6::Distribution." />
 <meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -150,50 +146,55 @@ Provides extensions for probabilistic supervised
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>mlr3proba: Probabilistic Supervised Learning for 'mlr3'</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3proba/blob/master/R/zzz.R'><code>R/zzz.R</code></a></small>
-    <div class="hidden name"><code>mlr3proba-package.Rd</code></div>
+    <h1>KS Kernel Density Estimator</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3proba/blob/master/R/LearnerDensKDEks.R'><code>R/LearnerDensKDEks.R</code></a></small>
+    <div class="hidden name"><code>LearnerDensKDEks.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><img src='figures/logo.png' align='right' alt='logo' width='120' /></p>
-<p>Provides extensions for probabilistic supervised
-    learning for 'mlr3'.  This includes extending the regression task to
-    probabilistic and interval regression, adding a survival task, and
-    other specialized models, predictions, and measures.</p>
+    <p>Calls <code><a href='https://rdrr.io/pkg/ks/man/kde.html'>ks::kde()</a></code> and the result is coerced to a <a href='https://alan-turing-institute.github.io/distr6/reference/Distribution.html'>distr6::Distribution</a>.</p>
     </div>
 
 
 
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <div class='dont-index'><p>Useful links:</p><ul>
-<li><p><a href='https://mlr3proba.mlr-org.com'>https://mlr3proba.mlr-org.com</a></p></li>
-<li><p><a href='https://github.com/mlr-org/mlr3proba'>https://github.com/mlr-org/mlr3proba</a></p></li>
-<li><p>Report bugs at <a href='https://github.com/mlr-org/mlr3proba/issues'>https://github.com/mlr-org/mlr3proba/issues</a></p></li>
+    <p><code><a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6::R6Class()</a></code> inheriting from <a href='LearnerDens.html'>LearnerDens</a>.</p>
+    <h2 class="hasAnchor" id="construction"><a class="anchor" href="#construction"></a>Construction</h2>
+
+    
+<pre>LearnerDensKDEks$new()
+mlr_learners$get("dens.kdeKS")
+lrn("dens.kdeKS")
+</pre>
+
+    <h2 class="hasAnchor" id="meta-information"><a class="anchor" href="#meta-information"></a>Meta Information</h2>
+
+    
+
+<ul>
+<li><p>Type: "dens"</p></li>
+<li><p>Predict Types: <code>pdf</code></p></li>
+<li><p>Feature Types: <code>logical, integer, numeric, character, factor, ordered</code></p></li>
+<li><p>Packages: <a href='https://CRAN.R-project.org/package=ks'><span class="pkg">ks</span></a> <a href='https://CRAN.R-project.org/package=distr6'><span class="pkg">distr6</span></a></p></li>
 </ul>
 
-</div>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other density estimators: 
+<code><a href='LearnerDensHistogram.html'>LearnerDensHistogram</a></code>,
+<code><a href='LearnerDensKDE.html'>LearnerDensKDE</a></code>,
+<code><a href='LearnerDensSpline.html'>LearnerDensSpline</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#format">Format</a></li>
+      <li><a href="#construction">Construction</a></li>
+      <li><a href="#meta-information">Meta Information</a></li>
       <li><a href="#see-also">See also</a></li>
     </ul>
-
-    <h2>Author</h2>
-    <p><strong>Maintainer</strong>: Raphael Sonabend <a href='mailto:raphael.sonabend.15@ucl.ac.uk'>raphael.sonabend.15@ucl.ac.uk</a> (<a href='https://orcid.org/0000-0001-9225-4654'>ORCID</a>)</p>
-<p>Authors:</p><ul>
-<li><p>Franz Kiraly <a href='mailto:f.kiraly@ucl.ac.uk'>f.kiraly@ucl.ac.uk</a></p></li>
-<li><p>Michel Lang <a href='mailto:michellang@gmail.com'>michellang@gmail.com</a> (<a href='https://orcid.org/0000-0001-9754-0393'>ORCID</a>)</p></li>
-</ul>
-
-<p>Other contributors:</p><ul>
-<li><p>Nurul Ain Toha <a href='mailto:nurul.toha.15@ucl.ac.uk'>nurul.toha.15@ucl.ac.uk</a> [contributor]</p></li>
-<li><p>Andreas Bender <a href='mailto:bender.at.R@gmail.com'>bender.at.R@gmail.com</a> (<a href='https://orcid.org/0000-0001-5628-8611'>ORCID</a>) [contributor]</p></li>
-</ul>
-
 
   </div>
 </div>
