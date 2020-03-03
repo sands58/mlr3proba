@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Histogram Density Estimator — LearnerDensHistogram • mlr3proba</title>
+<title>Kernel Density Estimator — LearnerDensKDE • mlr3proba</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -43,8 +43,8 @@
 
 
 
-<meta property="og:title" content="Histogram Density Estimator — LearnerDensHistogram" />
-<meta property="og:description" content="Calls graphics::hist() and the result is coerced to a distr6::Distribution." />
+<meta property="og:title" content="Kernel Density Estimator — LearnerDensKDE" />
+<meta property="og:description" content="Calls kernels implemented in distr6 and the result is coerced to a distr6::Distribution." />
 <meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -146,13 +146,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Histogram Density Estimator</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3proba/blob/master/R/LearnerDensHistogram.R'><code>R/LearnerDensHistogram.R</code></a></small>
-    <div class="hidden name"><code>LearnerDensHistogram.Rd</code></div>
+    <h1>Kernel Density Estimator</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3proba/blob/master/R/LearnerDensKDE.R'><code>R/LearnerDensKDE.R</code></a></small>
+    <div class="hidden name"><code>LearnerDensKDE.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Calls <code><a href='https://rdrr.io/r/graphics/hist.html'>graphics::hist()</a></code> and the result is coerced to a <a href='https://alan-turing-institute.github.io/distr6/reference/Distribution.html'>distr6::Distribution</a>.</p>
+    <p>Calls kernels implemented in <a href='https://CRAN.R-project.org/package=distr6'><span class="pkg">distr6</span></a> and the result is coerced to a <a href='https://alan-turing-institute.github.io/distr6/reference/Distribution.html'>distr6::Distribution</a>.</p>
     </div>
 
 
@@ -160,12 +160,17 @@
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
     <p><code><a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6::R6Class()</a></code> inheriting from <a href='LearnerDens.html'>LearnerDens</a>.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The default bandwidth uses Silverman's rule-of-thumb for Gaussian kernels, however for
+non-Gaussian kernels it is recommended to use <a href='https://CRAN.R-project.org/package=mlr3tuning'><span class="pkg">mlr3tuning</span></a> to tune the bandwidth with
+cross-validation. Other density learners can be used for automated bandwidth selection.</p>
     <h2 class="hasAnchor" id="construction"><a class="anchor" href="#construction"></a>Construction</h2>
 
     
-<pre>LearnerDensHistogram$new()
-mlr_learners$get("dens.hist")
-lrn("dens.hist")
+<pre>LearnerDensKDE$new()
+mlr_learners$get("dens.kde")
+lrn("dens.kde")
 </pre>
 
     <h2 class="hasAnchor" id="meta-information"><a class="anchor" href="#meta-information"></a>Meta Information</h2>
@@ -174,23 +179,30 @@ lrn("dens.hist")
 
 <ul>
 <li><p>Type: "dens"</p></li>
-<li><p>Predict Types: <code>pdf, cdf</code></p></li>
+<li><p>Predict Types: <code>pdf</code></p></li>
 <li><p>Feature Types: <code>logical, integer, numeric, character, factor, ordered</code></p></li>
-<li><p>Packages: <a href='https://CRAN.R-project.org/package=graphics'><span class="pkg">graphics</span></a> <a href='https://CRAN.R-project.org/package=distr6'><span class="pkg">distr6</span></a></p></li>
+<li><p>Packages: <a href='https://CRAN.R-project.org/package=distr6'><span class="pkg">distr6</span></a></p></li>
 </ul>
 
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Silverman BW (1986).
+<em>Density Estimation for Statistics and Data Analysis</em>.
+Chapman \&amp; Hall, London.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other density estimators: 
-<code><a href='LearnerDensKDE.html'>LearnerDensKDE</a></code></p></div>
+<code><a href='LearnerDensHistogram.html'>LearnerDensHistogram</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#format">Format</a></li>
+      <li><a href="#details">Details</a></li>
       <li><a href="#construction">Construction</a></li>
       <li><a href="#meta-information">Meta Information</a></li>
+      <li><a href="#references">References</a></li>
       <li><a href="#see-also">See also</a></li>
     </ul>
 
