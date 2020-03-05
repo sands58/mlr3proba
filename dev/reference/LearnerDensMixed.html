@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Kerdiest Kernel Density Estimator — LearnerDensKDEkd • mlr3proba</title>
+<title>Mixed Data Kernel Density Estimator — LearnerDensMixed • mlr3proba</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -43,8 +43,8 @@
 
 
 
-<meta property="og:title" content="Kerdiest Kernel Density Estimator — LearnerDensKDEkd" />
-<meta property="og:description" content="Calls kerdiest::kde() and the result is coerced to a distr6::Distribution." />
+<meta property="og:title" content="Mixed Data Kernel Density Estimator — LearnerDensMixed" />
+<meta property="og:description" content="Calls np::npudens() and the result is coerced to a distr6::Distribution." />
 <meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -146,13 +146,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Kerdiest Kernel Density Estimator</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3proba/blob/master/R/LearnerDensKDEkd.R'><code>R/LearnerDensKDEkd.R</code></a></small>
-    <div class="hidden name"><code>LearnerDensKDEkd.Rd</code></div>
+    <h1>Mixed Data Kernel Density Estimator</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3proba/blob/master/R/LearnerDensMixed.R'><code>R/LearnerDensMixed.R</code></a></small>
+    <div class="hidden name"><code>LearnerDensMixed.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Calls <code><a href='https://rdrr.io/pkg/kerdiest/man/kde.html'>kerdiest::kde()</a></code> and the result is coerced to a <a href='https://alan-turing-institute.github.io/distr6/reference/Distribution.html'>distr6::Distribution</a>.</p>
+    <p>Calls <code><a href='https://rdrr.io/pkg/np/man/np.density.html'>np::npudens()</a></code> and the result is coerced to a <a href='https://alan-turing-institute.github.io/distr6/reference/Distribution.html'>distr6::Distribution</a>.</p>
     </div>
 
 
@@ -163,9 +163,9 @@
     <h2 class="hasAnchor" id="construction"><a class="anchor" href="#construction"></a>Construction</h2>
 
     
-<pre>LearnerDensKDEkd$new()
-mlr_learners$get("dens.kdeKD")
-lrn("dens.kdeKD")
+<pre>LearnerDensMixed$new()
+mlr_learners$get("dens.mixed")
+lrn("dens.mixed")
 </pre>
 
     <h2 class="hasAnchor" id="meta-information"><a class="anchor" href="#meta-information"></a>Meta Information</h2>
@@ -176,18 +176,18 @@ lrn("dens.kdeKD")
 <li><p>Type: "dens"</p></li>
 <li><p>Predict Types: <code>pdf</code></p></li>
 <li><p>Feature Types: <code>logical, integer, numeric, character, factor, ordered</code></p></li>
-<li><p>Packages: <a href='https://CRAN.R-project.org/package=kerdiest'><span class="pkg">kerdiest</span></a> <a href='https://CRAN.R-project.org/package=distr6'><span class="pkg">distr6</span></a></p></li>
+<li><p>Packages: <a href='https://CRAN.R-project.org/package=np'><span class="pkg">np</span></a> <a href='https://CRAN.R-project.org/package=distr6'><span class="pkg">distr6</span></a></p></li>
 </ul>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other density estimators: 
 <code><a href='LearnerDensHistogram.html'>LearnerDensHistogram</a></code>,
+<code><a href='LearnerDensKDEkd.html'>LearnerDensKDEkd</a></code>,
 <code><a href='LearnerDensKDEks.html'>LearnerDensKDEks</a></code>,
 <code><a href='LearnerDensKDE.html'>LearnerDensKDE</a></code>,
 <code><a href='LearnerDensLocfit.html'>LearnerDensLocfit</a></code>,
 <code><a href='LearnerDensLogspline.html'>LearnerDensLogspline</a></code>,
-<code><a href='LearnerDensMixed.html'>LearnerDensMixed</a></code>,
 <code><a href='LearnerDensPenalized.html'>LearnerDensPenalized</a></code>,
 <code><a href='LearnerDensSpline.html'>LearnerDensSpline</a></code></p></div>
 
