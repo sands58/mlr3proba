@@ -274,7 +274,7 @@
 <table class="table">
 <thead><tr class="header">
 <th align="left">ID</th>
-<th align="left">Learner</th>
+<th align="left">Measure</th>
 <th align="left">Package</th>
 </tr></thead>
 <tbody>
@@ -387,11 +387,103 @@
 </table>
 </div>
 </div>
+<div id="density-estimation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#density-estimation" class="anchor"></a>Density Estimation</h2>
+<div id="density-learners" class="section level3">
+<h3 class="hasAnchor">
+<a href="#density-learners" class="anchor"></a>Density Learners</h3>
+<table class="table">
+<colgroup>
+<col width="40%">
+<col width="29%">
+<col width="29%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">ID</th>
+<th align="left">Learner</th>
+<th align="left">Package</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><a href="https://mlr3proba.mlr-org.com/reference/LearnerDensKDE.html">dens.hist</a></td>
+<td align="left">Univariate Histogram Density Estimator</td>
+<td align="left"><a href="https://CRAN.R-project.org/package=stats">stats</a></td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://mlr3proba.mlr-org.com/reference/LearnerDensKDE.html">dens.kde</a></td>
+<td align="left">Univariate KDE for Different Kernels</td>
+<td align="left"><a href="https://CRAN.R-project.org/package=distr6">distr6</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://mlr3proba.mlr-org.com/reference/LearnerDensKDEkd.html">dens.kdeKD</a></td>
+<td align="left">Nonparametric KDE Using Plug-in Method of Polansky and Baker</td>
+<td align="left"><a href="https://CRAN.R-project.org/package=kerdiest">kerdiest</a></td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://mlr3proba.mlr-org.com/reference/LearnerDensKDEks.html">dens.kdeKS</a></td>
+<td align="left">Nonparametric Gaussian KDE</td>
+<td align="left"><a href="https://CRAN.R-project.org/package=ks">ks</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://mlr3proba.mlr-org.com/reference/LearnerDensLocfit.html">dens.locfit</a></td>
+<td align="left">Nonparametric KDE Using Gaussian kernel</td>
+<td align="left"><a href="https://CRAN.R-project.org/package=locfit">locfit</a></td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://mlr3proba.mlr-org.com/reference/LearnerDensLogspline.html">dens.logspline</a></td>
+<td align="left">Logspline Method for Density Estimation</td>
+<td align="left"><a href="https://CRAN.R-project.org/package=logspline">logspline</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://mlr3proba.mlr-org.com/reference/LearnerDensMixed.html">dens.mixed</a></td>
+<td align="left">KDE Using Li and Racine Bandwidth Specification</td>
+<td align="left"><a href="https://CRAN.R-project.org/package=np">np</a></td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://mlr3proba.mlr-org.com/reference/LearnerDensNonparametric.html">dens.nonpar</a></td>
+<td align="left">Nonparametric KDE Using Normal Optimal Smoothing Parameter</td>
+<td align="left"><a href="https://CRAN.R-project.org/package=sm">sm</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://mlr3proba.mlr-org.com/reference/LearnerDensPenalized.html">dens.pen</a></td>
+<td align="left">Density Estimation with a Penalized Mixture</td>
+<td align="left"><a href="https://CRAN.R-project.org/package=pendensity">pendensity</a></td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://mlr3proba.mlr-org.com/reference/LearnerDensPlugin.html">dens.plug</a></td>
+<td align="left">Density Estimation with Iterative Plug-in Bandwidth Selection</td>
+<td align="left"><a href="https://CRAN.R-project.org/package=plugdensity">plugdensity</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://mlr3proba.mlr-org.com/reference/LearnerDensSpline.html">dens.spline</a></td>
+<td align="left">Density Estimation Using Smoothing Spline ANOVA</td>
+<td align="left"><a href="https://CRAN.R-project.org/package=gss">gss</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="density-measures" class="section level3">
+<h3 class="hasAnchor">
+<a href="#density-measures" class="anchor"></a>Density Measures</h3>
+<table class="table">
+<thead><tr class="header">
+<th align="left">ID</th>
+<th align="left">Measure</th>
+<th align="left">Package</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="left"><a href="https://mlr3proba.mlr-org.com/reference/MeasureDensLogloss.html">dens.logloss</a></td>
+<td align="left">Log Loss</td>
+<td align="left"><a href="https://CRAN.R-project.org/package=mlr3proba">mlr3proba</a></td>
+</tr></tbody>
+</table>
+</div>
+</div>
 <div id="near-future-plans" class="section level2">
 <h2 class="hasAnchor">
 <a href="#near-future-plans" class="anchor"></a>Near-Future Plans</h2>
 <ul>
-<li>Add <code>TaskDensity</code>, <code>PredictionDensity</code>, <code>LearnerDensity</code>, and associated learners/measures</li>
 <li>Add <code>prob</code> predict type to <code>TaskRegr</code>, and associated learners/measures</li>
 <li>Allow <code>MeasureSurv</code> to return measures at multiple time-points simultaneously</li>
 <li>Improve estimation of integrated scores, and re-implement <strong><a href="https://CRAN.R-project.org/package=survAUC">survAUC</a></strong> scores in <strong>mlr3proba</strong>
