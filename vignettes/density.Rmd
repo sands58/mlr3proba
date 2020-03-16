@@ -20,7 +20,7 @@ set.seed(1)
 lgr::get_logger("mlr3")$set_threshold("error")
 ```
 
-This vignette is an introduction to performing survival analysis in **mlr3proba**.
+This vignette is an introduction to performing density estimation in **mlr3proba**.
 
 ## A very quick introduction to density estimation
 
@@ -49,17 +49,17 @@ task$truth()[1:10]
 
 # create task and learner
 
-task_faithful = TaskDens$new(id = "eruptions", backend = datasets::faithful, target = "eruption")
+task_faithful = TaskDens$new(id = "eruptions", backend = datasets::faithful, target = "eruptions")
 learner = lrn("dens.kde")
 
 # train/test split 
 
-train_set = sample(task_cars$nrow, 0.8 * task_faithful$nrow)
+train_set = sample(task_faithful$nrow, 0.8 * task_faithful$nrow)
 test_set = setdiff(seq_len(task_faithful$nrow), train_set)
 
 # fit KDE and inspect model
 
-learner$train(task_cars, row_ids = train_set)
+learner$train(task_faithful, row_ids = train_set)
 learner$model
 
 # make predictions for new data
@@ -72,15 +72,12 @@ prediction
 
 Every `PredictionDens` object can predict:
 
-* `pdf` - point probability density estimation.
+* `pdf` - estimated probability density function.
 
 Some of the learners can predict: 
 
-* `cdf` - the cumulative density function
+* `cdf` - estimated cumulative density function
 
-Some of the learners model can output:
-
-* `quantile `- where the output is a random variable when taking probability as the input
 
 ```{r}
 
@@ -108,6 +105,33 @@ prediction$score()
 
 ```
 
+### Probability distributions with distr6
+
+Predicted distributions are implemented in **[distr6](https://CRAN.R-project.org/package=distr6)**, which
+contains functionality for plotting and further analysis of probability distributions. See [here](https://alan-turing-institute.github.io/distr6/) for full tutorials. Briefly we will go over the most important parts for **mlr3proba**.
+
+```{r,message=FALSE}
+task = tgen("simdens")$generate(20)
+learner = lrn("dens.logspline")
+learner$train(task)
+
+# The fitted model is a distr6 Distribution
+learner$model
+
+# This contains useful properties and methods
+x = seq.int(0,1,length.out = 10)
+learner$model$pdf(x)
+learner$model$cdf(x)
+learner$model$quantile(0.42)
+learner$model$rand(5)
+
+# decorators impute numerical results
+distr6::decorate(learner$model, "CoreStatistics")
+summary(learner$model)
+
+# Plotting is also available
+plot(learner$model)
+```
 
 
 
