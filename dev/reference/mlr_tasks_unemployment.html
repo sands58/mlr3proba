@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Unemployment Duration Task — mlr_tasks_unemployment • mlr3proba</title>
+<title>Unemployment Duration Survival Task — mlr_tasks_unemployment • mlr3proba</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -43,10 +43,8 @@
 
 
 
-<meta property="og:title" content="Unemployment Duration Task — mlr_tasks_unemployment" />
-<meta property="og:description" content="A survival task for the &quot;UnempDur&quot; data set in package Ecdat.
-Contains the following columns of the original data set:
-&quot;spell&quot; (time), &quot;censor1&quot; (status), &quot;age&quot;, &quot;ui&quot;, &quot;logwage&quot;, and &quot;tenure&quot;." />
+<meta property="og:title" content="Unemployment Duration Survival Task — mlr_tasks_unemployment" />
+<meta property="og:description" content="A survival task for the UnempDur data set." />
 <meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -148,15 +146,13 @@ Contains the following columns of the original data set:
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Unemployment Duration Task</h1>
+    <h1>Unemployment Duration Survival Task</h1>
     <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3proba/blob/master/R/TaskSurv_unemployment.R'><code>R/TaskSurv_unemployment.R</code></a></small>
     <div class="hidden name"><code>mlr_tasks_unemployment.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A survival task for the "UnempDur" data set in package <a href='https://CRAN.R-project.org/package=Ecdat'><span class="pkg">Ecdat</span></a>.
-Contains the following columns of the original data set:
-"spell" (time), "censor1" (status), "age", "ui", "logwage", and "tenure".</p>
+    <p>A survival task for the <code>UnempDur</code> data set.</p>
     </div>
 
 
@@ -164,6 +160,11 @@ Contains the following columns of the original data set:
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
     <p><a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6::R6Class</a> inheriting from <a href='TaskSurv.html'>TaskSurv</a>.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>A survival task for the "UnempDur" data set in package <a href='https://CRAN.R-project.org/package=Ecdat'><span class="pkg">Ecdat</span></a>.
+Contains the following columns of the original data set:
+"spell" (time), "censor1" (status), "age", "ui", "logwage", and "tenure".</p>
     <h2 class="hasAnchor" id="construction"><a class="anchor" href="#construction"></a>Construction</h2>
 
     
@@ -180,6 +181,7 @@ mlr3::tsk("unemployment")
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#format">Format</a></li>
+      <li><a href="#details">Details</a></li>
       <li><a href="#construction">Construction</a></li>
       <li><a href="#see-also">See also</a></li>
     </ul>

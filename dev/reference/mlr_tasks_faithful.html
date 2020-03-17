@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Density Task Generator for Package 'distr6' — TaskGeneratorSimdens • mlr3proba</title>
+<title>Old Faithful Eruptions Density Task — mlr_tasks_faithful • mlr3proba</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -43,9 +43,8 @@
 
 
 
-<meta property="og:title" content="Density Task Generator for Package 'distr6' — TaskGeneratorSimdens" />
-<meta property="og:description" content="A mlr3::TaskGenerator calling distr6::distrSimulate() from package simsurv.
-See distr6::distrSimulate() for an explanation of the hyperparameters." />
+<meta property="og:title" content="Old Faithful Eruptions Density Task — mlr_tasks_faithful" />
+<meta property="og:description" content="A density task for the faithful data set." />
 <meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -147,51 +146,38 @@ See distr6::distrSimulate() for an explanation of the hyperparameters." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Density Task Generator for Package 'distr6'</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3proba/blob/master/R/TaskGeneratorSimdens.R'><code>R/TaskGeneratorSimdens.R</code></a></small>
-    <div class="hidden name"><code>TaskGeneratorSimdens.Rd</code></div>
+    <h1>Old Faithful Eruptions Density Task</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3proba/blob/master/R/TaskDens_faithful.R'><code>R/TaskDens_faithful.R</code></a></small>
+    <div class="hidden name"><code>mlr_tasks_faithful.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A <a href='https://mlr3.mlr-org.com/reference/TaskGenerator.html'>mlr3::TaskGenerator</a> calling <code><a href='https://alan-turing-institute.github.io/distr6/reference/distrSimulate.html'>distr6::distrSimulate()</a></code> from package <a href='https://CRAN.R-project.org/package=simsurv'><span class="pkg">simsurv</span></a>.
-See <code><a href='https://alan-turing-institute.github.io/distr6/reference/distrSimulate.html'>distr6::distrSimulate()</a></code> for an explanation of the hyperparameters.</p>
+    <p>A density task for the <a href='https://rdrr.io/r/datasets/faithful.html'>faithful</a> data set.</p>
     </div>
 
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p><a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6::R6Class</a> inheriting from <a href='https://mlr3.mlr-org.com/reference/TaskGenerator.html'>mlr3::TaskGenerator</a>.</p>
+    <p><a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6::R6Class</a> inheriting from <a href='TaskDens.html'>TaskDens</a>.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Only the <code>eruptions</code> column is kept in this task.</p>
     <h2 class="hasAnchor" id="construction"><a class="anchor" href="#construction"></a>Construction</h2>
 
     
-<pre>TaskGeneratorSimdens$new()
-mlr_task_generators$get("simdens")
-tgen("simdens")
+<pre>mlr3::mlr_tasks$get("faithful")
+mlr3::tsk("faithful")
 </pre>
 
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='https://mlr3misc.mlr-org.com/reference/Dictionary.html'>Dictionary</a> of <a href='https://mlr3.mlr-org.com/reference/TaskGenerator.html'>TaskGenerators</a>: <a href='https://mlr3.mlr-org.com/reference/mlr_task_generators.html'>mlr3::mlr_task_generators</a></p></div>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>generator</span> <span class='kw'>=</span> <span class='kw pkg'>mlr3</span><span class='kw ns'>::</span><span class='no'><a href='https://mlr3.mlr-org.com/reference/mlr_task_generators.html'>mlr_task_generators</a></span>$<span class='fu'><a href='https://rdrr.io/r/base/get.html'>get</a></span>(<span class='st'>"simdens"</span>)
-<span class='no'>task</span> <span class='kw'>=</span> <span class='no'>generator</span>$<span class='fu'>generate</span>(<span class='fl'>20</span>)
-<span class='no'>task</span>$<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>()</div><div class='output co'>#&gt;             y unimportant
-#&gt; 1: -0.4199051   0.2536785
-#&gt; 2: -1.3060389   0.1828352
-#&gt; 3: -0.6630797   0.1801222
-#&gt; 4:  2.1176009   0.2197002
-#&gt; 5: -1.4763457   0.3839466
-#&gt; 6: -0.1893205   0.4312560</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#format">Format</a></li>
+      <li><a href="#details">Details</a></li>
       <li><a href="#construction">Construction</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

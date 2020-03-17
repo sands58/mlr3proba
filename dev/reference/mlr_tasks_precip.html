@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Kerdiest Kernel Density Estimator — LearnerDensKDEkd • mlr3proba</title>
+<title>Annual Precipitation Density Task — mlr_tasks_precip • mlr3proba</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -43,8 +43,8 @@
 
 
 
-<meta property="og:title" content="Kerdiest Kernel Density Estimator — LearnerDensKDEkd" />
-<meta property="og:description" content="Calls kerdiest::kde() and the result is coerced to a distr6::Distribution." />
+<meta property="og:title" content="Annual Precipitation Density Task — mlr_tasks_precip" />
+<meta property="og:description" content="A density task for the precip data set." />
 <meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -146,103 +146,34 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Kerdiest Kernel Density Estimator</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3proba/blob/master/R/LearnerDensKDEkd.R'><code>R/LearnerDensKDEkd.R</code></a></small>
-    <div class="hidden name"><code>LearnerDensKDEkd.Rd</code></div>
+    <h1>Annual Precipitation Density Task</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlr-org/mlr3proba/blob/master/R/TaskDens_precip.R'><code>R/TaskDens_precip.R</code></a></small>
+    <div class="hidden name"><code>mlr_tasks_precip.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Calls <code><a href='https://rdrr.io/pkg/kerdiest/man/kde.html'>kerdiest::kde()</a></code> and the result is coerced to a <a href='https://alan-turing-institute.github.io/distr6/reference/Distribution.html'>distr6::Distribution</a>.</p>
+    <p>A density task for the <a href='https://rdrr.io/r/datasets/precip.html'>precip</a> data set.</p>
     </div>
 
 
 
-    <h2 class="hasAnchor" id="dictionary"><a class="anchor" href="#dictionary"></a>Dictionary</h2>
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+
+    <p><a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6::R6Class</a> inheriting from <a href='TaskDens.html'>TaskDens</a>.</p>
+    <h2 class="hasAnchor" id="construction"><a class="anchor" href="#construction"></a>Construction</h2>
 
     
-
-<p>This <a href='https://mlr3.mlr-org.com/reference/Learner.html'>Learner</a> can be instantiated via the <a href='https://mlr3misc.mlr-org.com/reference/Dictionary.html'>dictionary</a>
-<a href='https://mlr3.mlr-org.com/reference/mlr_learners.html'>mlr_learners</a> or with the associated sugar function <a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>lrn()</a>:</p><pre>LearnerDensKDEkd$new()
-mlr_learners$get("dens.kdeKD")
-lrn("dens.kdeKD")
+<pre>mlr3::mlr_tasks$get("precip")
+mlr3::tsk("precip")
 </pre>
-
-    <h2 class="hasAnchor" id="meta-information"><a class="anchor" href="#meta-information"></a>Meta Information</h2>
-
-    
-
-<ul>
-<li><p>Type: "dens"</p></li>
-<li><p>Predict Types: <code>pdf</code></p></li>
-<li><p>Feature Types: <code>logical, integer, numeric, character, factor, ordered</code></p></li>
-<li><p>Properties: <code>-</code></p></li>
-<li><p>Packages: <a href='https://CRAN.R-project.org/package=kerdiest'><span class="pkg">kerdiest</span></a> <a href='https://CRAN.R-project.org/package=distr6'><span class="pkg">distr6</span></a></p></li>
-</ul>
-
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Other density estimators: 
-<code><a href='LearnerDensHistogram.html'>LearnerDensHistogram</a></code>,
-<code><a href='LearnerDensKDEks.html'>LearnerDensKDEks</a></code>,
-<code><a href='LearnerDensKDE.html'>LearnerDensKDE</a></code>,
-<code><a href='LearnerDensLocfit.html'>LearnerDensLocfit</a></code>,
-<code><a href='LearnerDensLogspline.html'>LearnerDensLogspline</a></code>,
-<code><a href='LearnerDensMixed.html'>LearnerDensMixed</a></code>,
-<code><a href='LearnerDensNonparametric.html'>LearnerDensNonparametric</a></code>,
-<code><a href='LearnerDensPenalized.html'>LearnerDensPenalized</a></code>,
-<code><a href='LearnerDensPlugin.html'>LearnerDensPlugin</a></code>,
-<code><a href='LearnerDensSpline.html'>LearnerDensSpline</a></code></p></div>
-    <h2 class="hasAnchor" id="super-classes"><a class="anchor" href="#super-classes"></a>Super classes</h2>
-
-    <p><code><a href='https://mlr3.mlr-org.com/reference/Learner.html'>mlr3::Learner</a></code> -&gt; <code><a href='LearnerDens.html'>mlr3proba::LearnerDens</a></code> -&gt; <code>LearnerDensKDEkd</code></p>
-    <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
-
-    
-<h3>Public methods</h3>
-
-<ul>
-<li><p><a href='#method-new'><code>LearnerDensKDEkd$new()</code></a></p></li>
-<li><p><a href='#method-clone'><code>LearnerDensKDEkd$clone()</code></a></p></li>
-</ul>
-<p><details ><summary>Inherited methods</summary>
-<ul>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="format"><a href='../../mlr3/html/Learner.html#method-format'><code>mlr3::Learner$format()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="help"><a href='../../mlr3/html/Learner.html#method-help'><code>mlr3::Learner$help()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict"><a href='../../mlr3/html/Learner.html#method-predict'><code>mlr3::Learner$predict()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="predict_newdata"><a href='../../mlr3/html/Learner.html#method-predict_newdata'><code>mlr3::Learner$predict_newdata()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="print"><a href='../../mlr3/html/Learner.html#method-print'><code>mlr3::Learner$print()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="reset"><a href='../../mlr3/html/Learner.html#method-reset'><code>mlr3::Learner$reset()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Learner" data-id="train"><a href='../../mlr3/html/Learner.html#method-train'><code>mlr3::Learner$train()</code></a></span></p></li>
-</ul>
-</details>
-
-<hr>
-<a id="method-new"></a></p><h3>Method <code>new()</code></h3>
-<p>Creates a new instance of this <a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6</a> class.</p><h3>Usage</h3>
-<p><div class="r"></p><pre>LearnerDensKDEkd$new()</pre><p></div></p>
-
-<p><hr>
-<a id="method-clone"></a></p><h3>Method <code>clone()</code></h3>
-<p>The objects of this class are cloneable with this method.</p><h3>Usage</h3>
-<p><div class="r"></p><pre>LearnerDensKDEkd$clone(deep = FALSE)</pre><p></div></p>
-
-<h3>Arguments</h3>
-<p><div class="arguments"></p><dl class='dl-horizontal'>
-<dt><code>deep</code></dt><dd><p>Whether to make a deep clone.</p></dd>
-
-</dl><p></div></p>
-
 
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#dictionary">Dictionary</a></li>
-      <li><a href="#meta-information">Meta Information</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#super-classes">Super classes</a></li>
-      <li><a href="#methods">Methods</a></li>
+      <li><a href="#format">Format</a></li>
+      <li><a href="#construction">Construction</a></li>
     </ul>
 
   </div>

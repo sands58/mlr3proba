@@ -159,38 +159,87 @@ The task_type is set to &quot;dens&quot;." />
 
 
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
-
-    <p><a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6::R6Class</a> object inheriting from <a href='https://mlr3.mlr-org.com/reference/Prediction.html'>mlr3::Prediction</a>.</p>
-    <h2 class="hasAnchor" id="construction"><a class="anchor" href="#construction"></a>Construction</h2>
-
-    
-<pre>p = PredictionDens$new(task = NULL, row_ids = task$row_ids, truth = task$truth(),
-pdf = pdf, cdf = cdf)
-</pre>
-<ul>
-<li><p><code>task</code> :: <a href='TaskDens.html'>TaskDens</a><br />
-Task, used to extract defaults for <code>row_ids</code> and <code>truth</code>.</p></li>
-<li><p><code>row_ids</code> :: (<code><a href='https://rdrr.io/r/base/integer.html'>integer()</a></code> | <code><a href='https://rdrr.io/r/base/character.html'>character()</a></code>)<br />
-Row ids of the task. Per default, these are extracted from the <code>task</code>.</p></li>
-<li><p><code>truth</code> :: <code><a href='https://rdrr.io/r/base/numeric.html'>numeric()</a></code><br />
-Observed sample. Per default, these are extracted from the <code>task</code>.</p></li>
-<li><p><code>pdf</code> :: <code><a href='https://rdrr.io/r/base/numeric.html'>numeric()</a></code><br />
-Probability density function evaluated at the given points in the test set.</p></li>
-<li><p><code>cdf</code> :: <code><a href='https://rdrr.io/r/base/numeric.html'>numeric()</a></code><br />
-Cumulative distribution function evaluated at the given points in the test set.</p></li>
-</ul>
-
-    <h2 class="hasAnchor" id="fields"><a class="anchor" href="#fields"></a>Fields</h2>
-
-    
-
-<p>See <a href='https://mlr3.mlr-org.com/reference/Prediction.html'>mlr3::Prediction</a>.</p>
-<p>The field <code>task_type</code> is set to <code>"dens"</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other Prediction: 
 <code><a href='PredictionSurv.html'>PredictionSurv</a></code></p></div>
+    <h2 class="hasAnchor" id="super-class"><a class="anchor" href="#super-class"></a>Super class</h2>
+
+    <p><code><a href='https://mlr3.mlr-org.com/reference/Prediction.html'>mlr3::Prediction</a></code> -&gt; <code>PredictionDens</code></p>
+    <h2 class="hasAnchor" id="active-bindings"><a class="anchor" href="#active-bindings"></a>Active bindings</h2>
+
+    <p><div class="r6-active-bindings"></p><dl class='dl-horizontal'>
+<dt><code>pdf</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/numeric.html'>numeric()</a></code>)<br />
+Access the stored predicted probability density function.</p></dd>
+
+<dt><code>cdf</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/numeric.html'>numeric()</a></code>)<br />
+Access the stored predicted cumulative distribution function.</p></dd>
+
+<dt><code>missing</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/integer.html'>integer()</a></code>)<br />
+Returns <code>row_ids</code> for which the predictions are missing or incomplete.</p></dd>
+
+</dl><p></div></p>
+    <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
+
+    
+<h3>Public methods</h3>
+
+<ul>
+<li><p><a href='#method-new'><code>PredictionDens$new()</code></a></p></li>
+<li><p><a href='#method-clone'><code>PredictionDens$clone()</code></a></p></li>
+</ul>
+<p><details open ><summary>Inherited methods</summary>
+<ul>
+<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Prediction" data-id="format"><a href='../../mlr3/html/Prediction.html#method-format'><code>mlr3::Prediction$format()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Prediction" data-id="help"><a href='../../mlr3/html/Prediction.html#method-help'><code>mlr3::Prediction$help()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Prediction" data-id="print"><a href='../../mlr3/html/Prediction.html#method-print'><code>mlr3::Prediction$print()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="mlr3" data-topic="Prediction" data-id="score"><a href='../../mlr3/html/Prediction.html#method-score'><code>mlr3::Prediction$score()</code></a></span></p></li>
+</ul>
+</details>
+
+<hr>
+<a id="method-new"></a></p><h3>Method <code>new()</code></h3>
+<p>Creates a new instance of this <a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6</a> class.</p><h3>Usage</h3>
+<p><div class="r"></p><pre>PredictionDens$new(
+  task = NULL,
+  row_ids = task$row_ids,
+  truth = task$truth(),
+  pdf = NULL,
+  cdf = NULL
+)</pre><p></div></p>
+
+<h3>Arguments</h3>
+<p><div class="arguments"></p><dl class='dl-horizontal'>
+<dt><code>task</code></dt><dd><p>(<a href='TaskSurv.html'>TaskSurv</a>)<br />
+Task, used to extract defaults for <code>row_ids</code> and <code>truth</code>.</p></dd>
+
+<dt><code>row_ids</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/integer.html'>integer()</a></code>)<br />
+Row ids of the predicted observations, i.e. the row ids of the test set.</p></dd>
+
+<dt><code>truth</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/numeric.html'>numeric()</a></code>)<br />
+True (observed) response.</p></dd>
+
+<dt><code>pdf</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/numeric.html'>numeric()</a></code>)<br />
+Numeric vector of estimated probability density function, evaluated at 'target' column of test set.
+One element for each observation in the test set.</p></dd>
+
+<dt><code>cdf</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/numeric.html'>numeric()</a></code>)<br />
+Numeric vector of estimated cumulative distribution function, evaluated at 'target' column of test set.
+One element for each observation in the test set.</p></dd>
+
+</dl><p></div></p>
+<p><hr>
+<a id="method-clone"></a></p><h3>Method <code>clone()</code></h3>
+<p>The objects of this class are cloneable with this method.</p><h3>Usage</h3>
+<p><div class="r"></p><pre>PredictionDens$clone(deep = FALSE)</pre><p></div></p>
+
+<h3>Arguments</h3>
+<p><div class="arguments"></p><dl class='dl-horizontal'>
+<dt><code>deep</code></dt><dd><p>Whether to make a deep clone.</p></dd>
+
+</dl><p></div></p>
+
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>mlr3</span>)
@@ -208,10 +257,10 @@ Cumulative distribution function evaluated at the given points in the test set.<
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#format">Format</a></li>
-      <li><a href="#construction">Construction</a></li>
-      <li><a href="#fields">Fields</a></li>
       <li><a href="#see-also">See also</a></li>
+      <li><a href="#super-class">Super class</a></li>
+      <li><a href="#active-bindings">Active bindings</a></li>
+      <li><a href="#methods">Methods</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
