@@ -62,7 +62,8 @@ task$truth()[1:10]
 # create task and learner
 
 veteran = mlr3misc::load_dataset("veteran", package = "survival")
-task_veteran = TaskSurv$new(id = "veteran", backend = veteran, time = "time", event = "status")
+task_veteran = TaskSurv$new(id = "veteran", backend = veteran, time = "time",
+                            event = "status")
 learner = lrn("surv.coxph")
 
 # train/test split 
@@ -81,7 +82,7 @@ prediction = learner$predict(task_veteran, row_ids = test_set)
 prediction
 ```
 
-## Evaluate - crank, lp, and distr
+## Predict Types - crank, lp, and distr
 
 Every `PredictionSurv` object can predict one or more of:
 
@@ -139,12 +140,12 @@ prediction$distr
 
 # These can be extracted and queried either invidually...
 
-prediction$distr[1]$survival(60:70)
+prediction$distr[1]$survival(seq.int(1,5,length.out=10))
 prediction$distr[1]$mean()
 
 # ...or together
 
-prediction$distr$cdf(60)[,1:10]
+prediction$distr$cdf(2)[,1:10]
 prediction$distr$mean()[,1:10]
 
 # As well as plotted
