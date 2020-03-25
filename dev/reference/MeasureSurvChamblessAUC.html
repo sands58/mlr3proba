@@ -46,7 +46,7 @@
 <meta property="og:title" content="Chambless and Diao's AUC Survival Measure — MeasureSurvChamblessAUC" />
 <meta property="og:description" content="Calls survAUC::AUC.cd().
 Assumes Cox PH model specification." />
-<meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.png" />
+<meta property="og:image" content="https://mlr3proba.mlr-org.com/logo.svg" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -65,7 +65,7 @@ Assumes Cox PH model specification." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -111,7 +111,7 @@ Assumes Cox PH model specification." />
   </a>
 </li>
         <li>
-  <a href="https://github.com/mlr-org/mlr3proba">
+  <a href="https://github.com/mlr-org/mlr3proba/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -169,10 +169,9 @@ measures will all be re-written and implemented directly in <code>mlr3proba</cod
     
 
 <p>This <a href='https://mlr3.mlr-org.com/reference/Measure.html'>Measure</a> can be instantiated via the <a href='https://mlr3misc.mlr-org.com/reference/Dictionary.html'>dictionary</a>
-<a href='https://mlr3.mlr-org.com/reference/mlr_measures.html'>mlr_measures</a> or with the associated sugar function <a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr()</a>:</p><pre>MeasureSurvChamblessAUC$new()
-mlr_measures$get("surv.chamblessAUC")
-msr("surv.chamblessAUC")
-</pre>
+<a href='https://mlr3.mlr-org.com/reference/mlr_measures.html'>mlr_measures</a> or with the associated sugar function <a href='https://mlr3.mlr-org.com/reference/mlr_sugar.html'>msr()</a>:</p><pre><span class='no'>MeasureSurvChamblessAUC</span>$<span class='fu'>new</span>()
+<span class='no'>mlr_measures</span>$<span class='fu'><a href='https://rdrr.io/r/base/get.html'>get</a></span>(<span class='st'>"surv.chamblessAUC"</span>)
+<span class='fu'>msr</span>(<span class='st'>"surv.chamblessAUC"</span>)</pre>
 
     <h2 class="hasAnchor" id="meta-information"><a class="anchor" href="#meta-information"></a>Meta Information</h2>
 
@@ -267,10 +266,10 @@ doi: <a href='https://doi.org/10.1002/sim.2299'>10.1002/sim.2299</a>
 <hr>
 <a id="method-new"></a></p><h3>Method <code>new()</code></h3>
 <p>Creates a new instance of this <a href='https://rdrr.io/pkg/R6/man/R6Class.html'>R6</a> class.</p><h3>Usage</h3>
-<p><div class="r"></p><pre>MeasureSurvChamblessAUC$new(integrated = TRUE, times)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='no'>MeasureSurvChamblessAUC</span>$<span class='fu'>new</span>(<span class='kw'>integrated</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>times</span>)</pre><p></div></p>
 
 <h3>Arguments</h3>
-<p><div class="arguments"></p><dl class='dl-horizontal'>
+<p><div class="arguments"></p><dl'>
 <dt><code>integrated</code></dt><dd><p>(<code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code>)<br />
 If <code>TRUE</code> (default), returns the integrated score; otherwise, not integrated.</p></dd>
 
@@ -282,10 +281,10 @@ If <code>integrate == FALSE</code> then a single time point at which to return t
 <p><hr>
 <a id="method-clone"></a></p><h3>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h3>Usage</h3>
-<p><div class="r"></p><pre>MeasureSurvChamblessAUC$clone(deep = FALSE)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='no'>MeasureSurvChamblessAUC</span>$<span class='fu'>clone</span>(<span class='kw'>deep</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre><p></div></p>
 
 <h3>Arguments</h3>
-<p><div class="arguments"></p><dl class='dl-horizontal'>
+<p><div class="arguments"></p><dl'>
 <dt><code>deep</code></dt><dd><p>Whether to make a deep clone.</p></dd>
 
 </dl><p></div></p>
@@ -293,18 +292,10 @@ If <code>integrate == FALSE</code> then a single time point at which to return t
 
 
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#details">Details</a></li>
-      <li><a href="#dictionary">Dictionary</a></li>
-      <li><a href="#meta-information">Meta Information</a></li>
-      <li><a href="#references">References</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#super-classes">Super classes</a></li>
-      <li><a href="#methods">Methods</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -315,7 +306,7 @@ If <code>integrate == FALSE</code> then a single time point at which to return t
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
 </div>
 
       </footer>
